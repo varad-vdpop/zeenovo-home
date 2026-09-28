@@ -1,0 +1,135 @@
+.navbar {
+  position: absolute;
+  z-index: 10;
+  top: 31px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(calc(100% - 66px), 1374px);
+  height: 78px;
+  padding: 15px 28px 15px 18px;
+  border: 1px solid #ececec;
+  border-radius: 20px;
+  background: #fff;
+  font-family: var(--font-manrope), Arial, sans-serif;
+}
+
+.leftGroup,
+.links,
+.actions,
+.pharmacyLogin,
+.register {
+  display: flex;
+  align-items: center;
+}
+
+.leftGroup { gap: 27px; }
+.logo { display: block; flex: none; width: 143px; height: 45px; }
+.logo img { display: block; }
+.links { gap: 4px; }
+.links a,
+.patientLogin {
+  color: #625b6d;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  white-space: nowrap;
+}
+.links a { padding: 8px 16px; border-radius: 8px; }
+.links a:hover,
+.patientLogin:hover { color: #2b108e; }
+
+.actions { gap: 12px; }
+.patientLogin { padding: 8px 12px; }
+.pharmacyLogin,
+.register {
+  position: relative;
+  flex: none;
+  height: 48px;
+  border-radius: 12px;
+  white-space: nowrap;
+  font-size: 14px;
+  line-height: 20px;
+}
+.pharmacyLogin {
+  width: 168px;
+  padding-left: 12px;
+  background: #e6e4ff;
+  color: #2b108e;
+  font-weight: 500;
+}
+.loginStroke {
+  position: absolute;
+  top: -0.5px;
+  left: -0.5px;
+  width: 169px;
+  height: 49px;
+  pointer-events: none;
+}
+.register {
+  justify-content: center;
+  width: 189px;
+  padding: 0 24px 0 21px;
+  background: #2b108e;
+  color: #fff;
+  font-weight: 600;
+}
+.arrowFrame {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 30.059px;
+  height: 30.059px;
+}
+.arrowIcon { display: block; transform: rotate(135deg); }
+.mobileMenu { display: none; }
+
+@media (max-width: 1190px) {
+  .navbar { padding-right: 18px; }
+  .leftGroup { gap: 9px; }
+  .links { gap: 0; }
+  .links a { padding-inline: 9px; }
+  .actions { gap: 6px; }
+  .patientLogin { padding-inline: 6px; }
+}
+
+@media (max-width: 1050px) {
+  .navbar { width: calc(100% - 40px); }
+  .links,
+  .actions { display: none; }
+  .mobileMenu { display: block; position: relative; }
+  .mobileMenu summary {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+    list-style: none;
+    color: #2b108e;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .mobileMenu summary::-webkit-details-marker { display: none; }
+  .mobileMenu nav {
+    position: absolute;
+    top: 48px;
+    right: -18px;
+    display: flex;
+    flex-direction: column;
+    min-width: 220px;
+    padding: 12px;
+    border: 1px solid #ececec;
+    border-radius: 14px;
+    background: #fff;
+    box-shadow: 0 16px 36px #2b108e24;
+  }
+  .mobileMenu nav a { padding: 10px 12px; border-radius: 8px; color: #625b6d; font-size: 14px; }
+  .mobileMenu nav a:hover { background: #e6e4ff; color: #2b108e; }
+}
+
+@media (max-width: 760px) {
+  .navbar { top: 20px; width: calc(100% - 36px); height: 65px; padding: 10px 16px; border-radius: 16px; }
+  .logo, .logo img { width: 117px; height: auto; }
+}

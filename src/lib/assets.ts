@@ -1,4 +1,8 @@
 export const asset = {
+  navbarLogo: "/assets/zeenovo-navbar-logo.svg",
+  navbarArrowOutline: "/assets/zeenovo-nav-arrow-outline.svg",
+  navbarArrowPrimary: "/assets/zeenovo-nav-arrow-primary.svg",
+  navbarLoginStroke: "/assets/zeenovo-nav-login-stroke.svg",
   heroNurse: "/assets/80558d82-153c-4dd0-9beb-d782674cbb30.png",
   heroAvatar1: "/assets/cac421ee-5d43-4240-b5c9-5a6ed59cfccb.png",
   heroAvatar2: "/assets/2cc2322b-896e-43a8-b375-aeed4dddb7c2.png",
