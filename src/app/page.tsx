@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { asset } from "@/lib/assets";
+import Navbar from "@/components/Navbar";
 
 function Arrow({ light = false }: { light?: boolean }) {
   return <span aria-hidden="true" className={light ? "arrow arrow-light" : "arrow"}>↗</span>;
@@ -38,38 +39,6 @@ function Cover({
   priority?: boolean;
 }) {
   return <Image src={src} alt={alt} fill priority={priority} unoptimized={src === asset.heroNurse} sizes="(max-width: 760px) 100vw, 50vw" className={className} />;
-}
-
-function Header() {
-  return (
-    <header className="site-header">
-      <a className="brand" href="#top" aria-label="ZeeNovo home">
-        <span className="brand-symbol" aria-hidden="true"><i /><i /><i /><i /></span>
-        <span>ZeeNovo</span>
-      </a>
-      <nav className="desktop-nav" aria-label="Main navigation">
-        <a href="#products">Products</a>
-        <a href="#why-zeenovo">Pricing</a>
-        <a href="#solutions">Resources</a>
-        <a href="#contact">Contact us</a>
-      </nav>
-      <div className="header-actions">
-        <a className="login" href="#contact">Have an account? <b>Log in</b></a>
-        <a className="header-outline" href="#contact"><span>↗</span> Partner Login</a>
-        <a className="header-primary" href="#contact"><span>↗</span> Register Pharmacy</a>
-      </div>
-      <details className="mobile-nav">
-        <summary aria-label="Open menu">☰</summary>
-        <div>
-          <a href="#products">Products</a>
-          <a href="#why-zeenovo">Pricing</a>
-          <a href="#solutions">Resources</a>
-          <a href="#contact">Contact us</a>
-          <a href="#contact">Register Pharmacy</a>
-        </div>
-      </details>
-    </header>
-  );
 }
 
 function Hero() {
@@ -232,5 +201,5 @@ function Footer() {
 }
 
 export default function Home() {
-  return <main><Header /><Hero /><Trust /><ProductCards /><Values /><Features /><Services /><Philosophy /><CareBanner /><ReportCards /><Testimonials /><FinalCta /><Footer /></main>;
+  return <main><Navbar /><Hero /><Trust /><ProductCards /><Values /><Features /><Services /><Philosophy /><CareBanner /><ReportCards /><Testimonials /><FinalCta /><Footer /></main>;
 }
