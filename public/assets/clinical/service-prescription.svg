@@ -1,0 +1,10 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="36" height="48" viewBox="0 0 36 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="fa6-solid:prescription-bottle-medical" clip-path="url(#clip0_0_18)">
+<path id="Vector" d="M0 3C0 1.34062 1.34062 0 3 0H33C34.6594 0 36 1.34062 36 3V6C36 7.65938 34.6594 9 33 9H3C1.34062 9 0 7.65938 0 6V3ZM3 12H33V42C33 45.3094 30.3094 48 27 48H9C5.69063 48 3 45.3094 3 42V12ZM15 22.5V27H10.5C9.675 27 9 27.675 9 28.5V31.5C9 32.325 9.675 33 10.5 33H15V37.5C15 38.325 15.675 39 16.5 39H19.5C20.325 39 21 38.325 21 37.5V33H25.5C26.325 33 27 32.325 27 31.5V28.5C27 27.675 26.325 27 25.5 27H21V22.5C21 21.675 20.325 21 19.5 21H16.5C15.675 21 15 21.675 15 22.5Z" fill="#3D2EA8"/>
+</g>
+<defs>
+<clipPath id="clip0_0_18">
+<rect width="36" height="48" fill="white"/>
+</clipPath>
+</defs>
+</svg>

@@ -170,9 +170,9 @@
   .mobileToggle {
     display: grid;
     place-items: center;
-    min-width: 58px;
+    width: 36px;
     height: 36px;
-    padding: 0 9px;
+    padding: 0;
     border: 0;
     border-radius: 8px;
     background: #e6e4ff;
@@ -180,6 +180,32 @@
     font: 600 13px var(--font-manrope), Arial, sans-serif;
     cursor: pointer;
   }
+  .hamburgerIcon,
+  .closeIcon {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+  }
+  .hamburgerIcon span {
+    width: 18px;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    box-shadow: 0 -6px 0 currentColor, 0 6px 0 currentColor;
+  }
+  .closeIcon::before,
+  .closeIcon::after {
+    position: absolute;
+    width: 19px;
+    height: 2px;
+    border-radius: 1px;
+    background: currentColor;
+    content: "";
+  }
+  .closeIcon::before { transform: rotate(45deg); }
+  .closeIcon::after { transform: rotate(-45deg); }
   .megaPanel { display: none; }
   .mobileOverlay {
     position: fixed;
@@ -200,7 +226,11 @@
   }
   .mobileHeader img { display: block; }
   .mobileHeader button {
-    padding: 9px 12px;
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
     border: 0;
     border-radius: 8px;
     background: #e6e4ff;

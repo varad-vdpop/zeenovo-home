@@ -138,9 +138,10 @@ export default function Navbar() {
         type="button"
         aria-label="Open navigation menu"
         aria-expanded={mobileOpen}
+        aria-controls="mobile-navigation"
         onClick={() => { setMobileOpen(true); setMobileMenu(null); setActiveMenu(null); }}
       >
-        Menu
+        <span className={styles.hamburgerIcon} aria-hidden="true"><span /></span>
       </button>
 
       {selectedMenu && (
@@ -161,10 +162,12 @@ export default function Navbar() {
       )}
 
       {mobileOpen && (
-        <div ref={mobileOverlayRef} className={styles.mobileOverlay} role="dialog" aria-modal="true" aria-label="Navigation menu">
+        <div ref={mobileOverlayRef} className={styles.mobileOverlay} id="mobile-navigation" role="dialog" aria-modal="true" aria-label="Navigation menu">
           <div className={styles.mobileHeader}>
             <Image src={asset.navbarLogo} alt="ZeeNovo" width={143} height={45} />
-            <button ref={closeRef} type="button" onClick={closeMobile}>Close</button>
+            <button ref={closeRef} className={styles.mobileClose} type="button" aria-label="Close navigation menu" onClick={closeMobile}>
+              <span className={styles.closeIcon} aria-hidden="true" />
+            </button>
           </div>
           <div className={styles.mobileContent}>
             {mobileMenu ? (
@@ -173,7 +176,6 @@ export default function Navbar() {
                   <FigmaArrow direction="left" /> Back
                 </button>
                 <h2>{mobileMenu.label}</h2>
-                <Link className={styles.mobileOverview} href={mobileMenu.href} onClick={closeMobile}>View all {mobileMenu.label}<FigmaArrow direction="right" /></Link>
                 {mobileMenu.sections.map((section) => (
                   <div className={styles.mobileSection} key={section.label}>
                     <h3>{section.label}</h3>
