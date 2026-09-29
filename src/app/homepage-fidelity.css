@@ -197,6 +197,8 @@
 .feature-flags .feature-copy { padding: 32px 42px; }
 .flags-ui { top: 177px; left: 78px; width: 326px; }
 
+.philosophy-band { width: 100%; margin-top: 108px; background: #3d319f; }
+.philosophy { margin-top: 0; }
 .philosophy > img.philosophy-wave {
   position: absolute;
   top: 0;
@@ -285,6 +287,7 @@
 }
 
 @media (max-width: 760px) {
+  .philosophy-band { margin-top: 80px; }
   .trusted { width: 100%; }
   .logo-strip {
     grid-template-columns: repeat(2, minmax(0, 1fr));
