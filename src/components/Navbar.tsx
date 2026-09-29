@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { asset } from "@/lib/assets";
 import { navigationMenus, type NavigationMenu } from "@/lib/navigation";
 import styles from "./Navbar.module.css";
@@ -150,7 +151,7 @@ export default function Navbar() {
                 <div className={styles.menuSection} key={section.label}>
                   <h2>{section.label}</h2>
                   <div className={styles.sectionLinks}>
-                    {section.links.map((link) => <span key={link.href}>{link.label}</span>)}
+                    {section.links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}
                   </div>
                 </div>
               ))}
@@ -172,10 +173,11 @@ export default function Navbar() {
                   <FigmaArrow direction="left" /> Back
                 </button>
                 <h2>{mobileMenu.label}</h2>
+                <Link className={styles.mobileOverview} href={mobileMenu.href} onClick={closeMobile}>View all {mobileMenu.label}<FigmaArrow direction="right" /></Link>
                 {mobileMenu.sections.map((section) => (
                   <div className={styles.mobileSection} key={section.label}>
                     <h3>{section.label}</h3>
-                    {section.links.map((link) => <span key={link.href}>{link.label}</span>)}
+                    {section.links.map((link) => <Link href={link.href} key={link.href} onClick={closeMobile}>{link.label}</Link>)}
                   </div>
                 ))}
               </div>

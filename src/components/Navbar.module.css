@@ -146,7 +146,7 @@
 }
 .sectionLinks { display: flex; flex-direction: column; align-items: flex-start; gap: 11px; }
 .singleSection .sectionLinks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 34px; }
-.sectionLinks span {
+.sectionLinks a {
   color: #24212b;
   font-size: 14px;
   font-weight: 500;
@@ -253,7 +253,7 @@
   .mobileSection { margin-top: 30px; }
   .mobilePage h2 + .mobileSection { margin-top: 0; }
   .mobileSection h3 { margin: 0 0 12px; }
-  .mobileSection > span { display: block; padding: 11px 0; border-bottom: 1px solid #ececec; color: #24212b; font-size: 16px; line-height: 1.4; }
+  .mobileSection > a { display: block; padding: 11px 0; border-bottom: 1px solid #ececec; color: #24212b; font-size: 16px; line-height: 1.4; }
 }
 
 @media (max-width: 760px) {

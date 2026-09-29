@@ -1,0 +1,115 @@
+.page { overflow: hidden; background: #fff; color: #0e0e12; }
+
+.hero { position: relative; height: 850px; overflow: hidden; }
+.heroBackdrop { position: absolute; top: 14px; right: 17px; bottom: 23px; left: 17px; overflow: hidden; border-radius: 26px; background: #f5f0fb; }
+.heroBackdrop::after { position: absolute; inset: 0; z-index: 1; background-image: radial-gradient(rgb(82 58 165 / 14%) 0.55px, transparent 0.7px); background-size: 3px 3px; content: ""; opacity: .5; pointer-events: none; }
+.heroArt { object-fit: cover; pointer-events: none; }
+.heroCopy { position: absolute; z-index: 4; top: 188px; left: max(47px, calc((100vw - 1440px) / 2 + 47px)); width: 518px; }
+.eyebrow { margin-bottom: 18px; color: #2b108e; font-size: 12px; font-weight: 600; }
+.hero h1 { font-size: 65px; font-weight: 400; letter-spacing: -2px; line-height: 1.17; }
+.heroDescription { margin-top: 18px; color: rgb(0 0 0 / 74%); font: 400 18px/1.35 var(--font-manrope), Arial, sans-serif; }
+.heroActions { display: flex; gap: 18px; margin-top: 18px; }
+.primaryButton,
+.secondaryButton { display: inline-flex; align-items: center; justify-content: center; gap: 12px; height: 52px; padding: 0 31px 0 20px; border-radius: 13px; background: #2b108e; color: #fff; font-size: 16px; font-weight: 600; }
+.primaryButton span,
+.secondaryButton span,
+.ctaHeading a span { font-size: 23px; line-height: 1; }
+.secondaryButton { border: 1px solid #2b108e; background: #fff; color: #2b108e; }
+.heroDashboard { position: absolute; z-index: 3; top: 196px; left: calc(50% - 37px); width: 723px; height: 529px; }
+
+.analytics { position: relative; width: min(calc(100% - 120px), 1320px); height: 972px; margin: 43px auto 0; }
+.splitHeading { display: flex; align-items: flex-end; justify-content: space-between; height: 136px; }
+.splitHeading > div > p,
+.sectionHeading > p { margin-bottom: 17px; color: #2b108e; font-size: 11px; font-weight: 600; line-height: 11px; text-transform: uppercase; }
+.splitHeading h2,
+.sectionHeading h2 { font-size: 42px; font-weight: 500; letter-spacing: -1.2px; line-height: 1.17; }
+.splitHeading > span { width: 535px; margin-bottom: 13px; color: #666474; font-size: 16px; line-height: 24px; }
+.analyticsCards { position: absolute; top: 176px; left: 0; width: 100%; height: auto; }
+
+.compliance { position: relative; height: 825px; margin-top: 80px; padding: 80px max(60px, calc((100vw - 1320px) / 2)); background: #f7f8fc; }
+.compliance .splitHeading { height: 84px; }
+.complianceBody { display: grid; grid-template-columns: 637px 611px; justify-content: space-between; align-items: end; width: min(1320px, 100%); height: 544px; margin: 56px auto 0; }
+.complianceBody img:first-child { width: 637px; height: 483px; }
+.complianceBody img:last-child { width: 611px; height: 544px; }
+
+.afterVisit { width: min(calc(100% - 120px), 1320px); height: 526px; margin: 56px auto 0; }
+.sectionHeading { height: 84px; }
+.visitCards { display: grid; grid-template-columns: repeat(2, 642px); justify-content: space-between; margin-top: 42px; }
+.visitCards img { width: 642px; height: 400px; }
+
+.process { position: relative; height: 496px; margin-top: 95px; }
+.processHeading { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.tag { display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 6px 13px; border: 1px solid #e0e0e0; border-radius: 51px; font-size: 12px; font-weight: 500; line-height: 19px; text-transform: uppercase; }
+.tag span { font-size: 15px; }
+.processHeading h2 { margin-top: 6px; font-size: 42px; font-weight: 500; letter-spacing: -1px; line-height: 1.15; }
+.processWave { position: absolute; top: 181px; left: 0; width: 100%; height: auto; }
+
+.cta { position: relative; width: min(calc(100% - 140px), 1290px); height: 632px; margin: 67px auto 84px; overflow: hidden; border-radius: 27px; background: linear-gradient(111deg, #fff0e1 0%, #eef1ff 48%, #dce4ff 100%); }
+.ctaWaves { position: absolute; right: 0; bottom: 0; left: 0; width: 100%; height: 369px; }
+.ctaHeading { position: relative; z-index: 4; display: flex; flex-direction: column; align-items: center; padding-top: 28px; text-align: center; }
+.ctaHeading h2 { margin: 6px 0 15px; font-size: 47px; font-weight: 500; letter-spacing: -2px; line-height: 1.16; }
+.ctaHeading a { display: inline-flex; align-items: center; gap: 8px; height: 43px; padding: 0 18px 0 14px; border-radius: 11px; background: #2b108e; color: #fff; font-size: 14px; font-weight: 600; }
+.reminders { position: absolute; z-index: 3; bottom: 45px; left: 16px; width: 415px; height: 290px; }
+.ctaPerson { position: absolute; z-index: 3; bottom: -1px; left: 50%; width: 319px; height: 382px; transform: translateX(-50%); }
+.metrics { position: absolute; z-index: 3; right: 229px; bottom: 31px; width: 231px; height: 278px; }
+
+@media (max-width: 1199px) {
+  .heroCopy { left: 42px; width: 45%; }
+  .hero h1 { font-size: clamp(48px, 5.4vw, 65px); }
+  .heroDashboard { left: 52%; width: 620px; height: auto; }
+  .analytics,
+  .afterVisit { width: calc(100% - 80px); }
+  .splitHeading > span { width: 42%; }
+  .compliance { padding-right: 40px; padding-left: 40px; }
+  .complianceBody { grid-template-columns: 49% 47%; }
+  .complianceBody img:first-child,
+  .complianceBody img:last-child { width: 100%; height: auto; }
+  .visitCards { grid-template-columns: repeat(2, calc(50% - 10px)); }
+  .visitCards img { width: 100%; height: auto; }
+  .reminders { left: 2%; width: 35%; height: auto; }
+  .metrics { right: 4%; }
+}
+
+@media (max-width: 760px) {
+  .hero { height: 850px; }
+  .heroBackdrop { inset: 8px 10px 12px; border-radius: 20px; }
+  .heroArt { object-position: 62% center; }
+  .heroCopy { top: 120px; right: 25px; left: 25px; width: auto; }
+  .eyebrow { margin-bottom: 12px; }
+  .hero h1 { font-size: clamp(39px, 11vw, 54px); line-height: 1.08; }
+  .heroDescription { width: 100%; max-width: 430px; font-size: 14px; line-height: 1.5; }
+  .heroActions { gap: 10px; }
+  .primaryButton,
+  .secondaryButton { height: 46px; padding: 0 14px; font-size: 13px; }
+  .heroDashboard { top: auto; right: -125px; bottom: 35px; left: auto; width: 500px; height: auto; }
+
+  .analytics { width: calc(100% - 40px); height: auto; margin-top: 58px; }
+  .splitHeading { display: block; height: auto; }
+  .splitHeading h2,
+  .sectionHeading h2 { font-size: 33px; }
+  .splitHeading > span { display: block; width: auto; margin-top: 15px; font-size: 14px; line-height: 1.5; }
+  .analyticsCards { position: relative; top: auto; width: 100%; height: auto; margin-top: 30px; }
+
+  .compliance { height: auto; margin-top: 60px; padding: 56px 20px; }
+  .compliance .splitHeading { height: auto; }
+  .complianceBody { display: flex; height: auto; margin-top: 35px; flex-direction: column; gap: 24px; }
+  .complianceBody img:first-child,
+  .complianceBody img:last-child { width: 100%; height: auto; }
+
+  .afterVisit { width: calc(100% - 40px); height: auto; margin-top: 60px; }
+  .sectionHeading { height: auto; }
+  .visitCards { grid-template-columns: 1fr; gap: 18px; margin-top: 32px; }
+  .visitCards img { width: 100%; height: auto; }
+
+  .process { height: 430px; margin-top: 70px; }
+  .processHeading h2 { padding: 0 20px; font-size: 31px; }
+  .processWave { top: 175px; left: 50%; width: 900px; max-width: none; height: 153px; transform: translateX(-50%); }
+
+  .cta { width: calc(100% - 40px); height: 670px; margin-top: 45px; margin-bottom: 50px; }
+  .ctaHeading { padding: 27px 18px 0; }
+  .ctaHeading h2 { font-size: 31px; letter-spacing: -1.2px; }
+  .ctaWaves { left: 50%; width: 860px; max-width: none; height: auto; transform: translateX(-50%); }
+  .reminders { bottom: 18px; left: 10px; width: 58%; height: auto; }
+  .ctaPerson { width: 250px; height: auto; }
+  .metrics { right: 8px; bottom: 25px; width: 38%; height: auto; }
+}
