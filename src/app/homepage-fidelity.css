@@ -1,0 +1,333 @@
+/* The illustrations below are complete Figma exports. Keep their aspect ratios intact. */
+.button { transition: none; }
+.button:hover,
+.small-button:hover { transform: none; background: var(--deep); }
+.button-light:hover { background: #fff; }
+
+.hero { background: #dce7ff; }
+.hero-background {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.hero-content { top: 242px; left: 41px; }
+.hero-content > p { margin: 18px 0; }
+.social-proof {
+  position: absolute;
+  z-index: 2;
+  top: 177px;
+  left: 41px;
+  visibility: hidden;
+  margin: 0;
+}
+.hero-menu,
+.hero-chart {
+  position: absolute;
+  z-index: 3;
+  display: block;
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.hero-menu { top: 341px; right: auto; left: 54.4%; width: 194px; }
+.hero-chart { top: 172px; right: 43px; width: 329px; }
+
+.product-grid { display: flex; flex-direction: column; gap: 36px; }
+.product-row { display: grid; gap: 36px; min-width: 0; }
+.product-row-top { grid-template-columns: minmax(0, 476fr) minmax(0, 811fr); }
+.product-row-bottom { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.product-card { min-width: 0; }
+.product-card .card-copy { padding: 28px 32px; }
+.clinical-lines,
+.assure-lines,
+.magistral-lines,
+.intelligence-lines {
+  position: absolute;
+  display: block;
+  max-width: none;
+  height: auto;
+}
+.clinical-lines { bottom: 0; left: 0; width: 476px; opacity: 1; }
+.clinical .button { position: absolute; top: 22px; right: 33px; margin: 0; }
+.clinical-doctor { top: 125px; bottom: auto; left: 64px; width: 336px; height: 335px; }
+.assure { background: #3b309d; }
+.assure-lines { top: 0; right: 0; width: 763px; }
+.assure .card-copy { padding: 20px 35px; }
+.assure-dashboard-frame {
+  position: absolute;
+  top: 159px;
+  left: 230px;
+  width: 582px;
+  height: auto;
+  max-width: none;
+}
+.assure-dashboard {
+  position: absolute;
+  top: 176px;
+  left: 247px;
+  display: block;
+  width: 564px;
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  transform: none;
+}
+.magistral,
+.intelligence { grid-column: auto; width: auto; height: 326px; margin: 0; }
+.magistral::before,
+.intelligence::before { content: none; }
+.magistral-lines-a { bottom: 0; left: 0; width: 628px; }
+.magistral-lines-b { top: 0; right: 0; width: 491px; }
+.magistral-doctor { top: 16px; right: 0; bottom: auto; width: 268px; height: 310px; }
+.magistral-doctor img { object-fit: cover; object-position: top; }
+.intelligence { background: #e5ecff; }
+.intelligence .card-copy { padding: 30px 27px; }
+.intelligence-lines { top: 0; right: 0; width: 465px; }
+.phone {
+  position: absolute;
+  top: auto;
+  right: 0;
+  bottom: 0;
+  display: block;
+  width: 363px;
+  height: auto;
+  transform: none;
+}
+
+.values { position: relative; height: 539px; min-height: 0; padding-top: 45px; }
+.values h2 { margin: 6px 0 0; }
+.values-track {
+  position: absolute;
+  top: 245px;
+  left: 50%;
+  width: 1440px;
+  height: 181px;
+  transform: translateX(-50%);
+}
+.values-track > img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 1440px;
+  height: 181px;
+  max-width: none;
+  opacity: 1;
+  transform: none;
+}
+.values-list { position: absolute; inset: 0; display: block; width: 1440px; height: 181px; }
+.values-list > div { position: absolute; top: 0; display: block; width: 20%; height: 181px; text-align: center; }
+.values-list > div:nth-child(1) { left: 0; }
+.values-list > div:nth-child(2) { left: 20%; }
+.values-list > div:nth-child(3) { left: 40%; }
+.values-list > div:nth-child(4) { left: 60%; }
+.values-list > div:nth-child(5) { left: 80%; }
+.values-list p { position: absolute; top: -64px; width: 100%; min-height: 0; font-size: 14px; }
+.values-list > div:nth-child(even) p { top: 192px; }
+.values-list img {
+  position: absolute;
+  top: 62px;
+  left: 50%;
+  display: block;
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  transform: translateX(-50%);
+}
+
+.features { max-width: 1308px; }
+.feature-grid { gap: 39px; }
+.feature-card { min-width: 0; }
+.feature-copy { padding: 32px 53px; }
+.feature-treatment { background: #3b309d; }
+.feature-circle {
+  position: absolute;
+  display: block;
+  width: 874px;
+  height: auto;
+  max-width: none;
+}
+.treatment-circle { top: 169px; left: -186px; }
+.flags-circle { top: 225px; left: -185px; }
+.treatment-ui,
+.appointment-ui,
+.flags-ui {
+  position: absolute;
+  display: block;
+  height: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+.treatment-ui { top: 171px; left: 73px; width: 337px; }
+.feature-provinces { background: linear-gradient(#e5ecff, #f9f8ff); }
+.feature-provinces ul { position: absolute; top: 152px; left: 53px; margin: 0; }
+.canada-map { top: 89px; right: auto; bottom: auto; left: 440px; width: 423px; height: 411px; opacity: 1; }
+.feature-appointments { background: #ffeedb; }
+.appointment-ui { top: 182px; left: 47px; width: 743px; }
+.feature-flags { background: linear-gradient(#d8f9fc, #99deec); }
+.feature-flags .feature-copy { padding: 32px 42px; }
+.flags-ui { top: 177px; left: 78px; width: 326px; }
+
+.philosophy > img.philosophy-wave {
+  position: absolute;
+  top: 0;
+  right: 80px;
+  display: block;
+  width: 181px;
+  height: 643px;
+  max-width: none;
+  overflow: visible;
+  opacity: 1;
+  object-fit: contain;
+}
+
+.care-banner > img.care-background {
+  top: 0;
+  left: 0;
+  width: min(93.33%, 1204px);
+  height: auto;
+  max-width: none;
+  object-fit: contain;
+}
+.care-label { display: flex; align-items: center; gap: 12px; }
+.care-label.bee { top: 246px; }
+.care-label-icon {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 61px;
+  height: 61px;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  background: rgb(255 255 255 / 58%);
+}
+.care-label-icon img { display: block; width: auto; height: auto; max-width: 32px; max-height: 32px; }
+
+.reporting { max-width: 1290px; }
+.report-grid { gap: 39px; }
+.report-card { min-width: 0; padding: 32px 42px; }
+.timer,
+.bars {
+  position: absolute;
+  display: block;
+  height: auto;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+}
+.timer { top: 226px; left: 121px; width: 212px; }
+.bars { top: 155px; bottom: auto; left: 72px; right: auto; width: 643px; }
+.team-photo { top: 98px; right: 23px; bottom: auto; width: 380px; height: 402px; }
+.team-wave { top: 245px; bottom: auto; left: 0; width: 787px; height: 181px; max-width: none; opacity: 1; }
+
+@media (min-width: 761px) {
+  .feature-grid { grid-template-columns: 482fr 266fr 481fr; }
+  .report-grid { grid-template-columns: 482fr 266fr 470fr; }
+  .feature-appointments,
+  .feature-flags,
+  .team,
+  .nidr { width: auto; margin: 0; }
+}
+
+@media (max-width: 1300px) {
+  .social-proof { visibility: visible; }
+}
+
+@media (max-width: 1100px) and (min-width: 761px) {
+  .hero-menu { left: 52%; }
+  .hero-chart { right: 25px; width: 280px; }
+  .product-row-top { grid-template-columns: minmax(0, 39fr) minmax(0, 61fr); }
+  .clinical-doctor { right: 0; left: auto; width: 80%; height: 335px; }
+  .assure-dashboard { top: 176px; left: 28%; width: 72%; }
+  .magistral-doctor { width: 43%; height: 95%; }
+  .phone { width: 55%; }
+  .feature-grid,
+  .report-grid { gap: 24px; }
+  .feature-copy { padding: 28px; }
+  .feature-provinces ul { left: 28px; }
+  .canada-map { left: 45%; width: 55%; height: auto; }
+  .treatment-ui { left: 12%; width: 76%; }
+  .appointment-ui { left: 6%; width: 94%; }
+  .flags-ui { left: 16%; width: 68%; }
+  .timer { left: 20%; width: 60%; }
+  .bars { left: 9%; width: 84%; }
+}
+
+@media (max-width: 760px) {
+  .hero-content { top: 180px; left: 22px; }
+  .social-proof { top: 102px; left: 22px; }
+  .hero-menu { display: none; }
+  .hero-chart { top: auto; right: 15px; bottom: 275px; width: 165px; }
+  .product-grid { gap: 15px; }
+  .product-row { display: flex; flex-direction: column; gap: 15px; }
+  .product-card,
+  .magistral,
+  .intelligence { width: 100%; height: 330px; margin: 0; }
+  .product-card .card-copy { padding: 21px; }
+  .clinical .button { top: 17px; right: 16px; }
+  .clinical-lines { width: 100%; }
+  .clinical-doctor { top: auto; right: 10px; bottom: -1px; left: auto; width: 235px; height: 240px; }
+  .assure-lines { width: 100%; }
+  .assure .card-copy { padding: 21px; }
+  .assure-dashboard-frame { top: 135px; left: 26%; width: 78%; }
+  .assure-dashboard { top: 150px; left: 29%; width: 72%; transform: none; }
+  .magistral-lines-a { width: 100%; }
+  .magistral-lines-b { width: 77%; }
+  .magistral-doctor { top: 60px; right: 0; bottom: auto; width: 230px; height: 270px; }
+  .intelligence-lines { width: 75%; }
+  .intelligence .card-copy { padding: 21px; }
+  .phone { top: auto; right: 0; bottom: 0; width: 63%; }
+  .values { height: 430px; min-height: 0; padding-top: 42px; }
+  .values h2 { margin: 14px 12px 0; }
+  .values-track {
+    position: relative;
+    top: 83px;
+    left: 0;
+    width: 100%;
+    height: 205px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    transform: none;
+  }
+  .values-track > img { top: 57px; left: 0; width: 900px; height: auto; }
+  .values-list { width: 900px; height: 205px; overflow: visible; padding: 0; }
+  .values-list > div { width: 180px; height: 205px; }
+  .values-list > div:nth-child(1) { left: 0; }
+  .values-list > div:nth-child(2) { left: 180px; }
+  .values-list > div:nth-child(3) { left: 360px; }
+  .values-list > div:nth-child(4) { left: 540px; }
+  .values-list > div:nth-child(5) { left: 720px; }
+  .values-list p { top: 0; padding: 0 8px; font-size: 11px; }
+  .values-list > div:nth-child(even) p { top: 174px; }
+  .values-list img { top: 94px; width: 35px; height: 35px; }
+  .feature-grid,
+  .report-grid { gap: 15px; }
+  .feature-copy { padding: 24px; }
+  .treatment-circle { top: 160px; }
+  .flags-circle { top: 210px; }
+  .treatment-ui { top: 150px; left: 12%; width: 76%; }
+  .feature-provinces ul { top: 146px; left: 24px; }
+  .canada-map { top: 155px; right: -15px; bottom: auto; left: auto; width: 55%; height: auto; }
+  .appointment-ui { top: 174px; left: 5%; width: 95%; }
+  .flags-ui { top: 163px; left: 16%; width: 68%; }
+  .philosophy > img.philosophy-wave { right: -45px; width: 140px; height: auto; opacity: .35; }
+  .care-banner > img.care-background { top: 0; left: -80px; width: 600px; height: auto; }
+  .report-card { padding: 24px; }
+  .timer { top: 155px; left: calc(50% - 80px); width: 160px; }
+  .bars { top: 150px; left: 8%; width: 84%; }
+  .team-photo { top: auto; right: -10px; bottom: 0; width: 240px; height: 250px; }
+  .team-wave { top: auto; bottom: 35px; width: 787px; height: 181px; }
+}
