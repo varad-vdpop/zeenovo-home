@@ -73,7 +73,7 @@ function Trust() {
       <section className="trusted" aria-label="Trusted pharmacies">
         <p>TRUSTED BY 50+ PHARMACIES</p>
         <div className="logo-strip">
-          {logos.map((src, index) => <div className="partner-logo" key={src}><Image src={src} alt={["aChoice", "Rexall", "OnPharm United", "Costco Pharmacy", "Whole Health", "Remedy’sRx", "Pharmacy"][index]} fill sizes="170px" /></div>)}
+          {logos.map((src, index) => <div className="partner-logo" key={src}><Image src={src} alt={["PharmaChoice", "Rexall", "OnPharm United", "Costco Pharmacy", "Whole Health", "Remedy’sRx", "IDA"][index]} fill sizes="(max-width: 760px) 45vw, 260px" /></div>)}
         </div>
       </section>
       <section className="stats" aria-label="ZeeNovo results">

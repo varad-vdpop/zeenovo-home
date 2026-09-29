@@ -6,18 +6,29 @@
 .button .arrow,
 .small-button .arrow { display: inline-flex; align-items: center; line-height: 1; transform: translateY(-2px); }
 
-.trusted { width: 100%; }
+.trusted { width: 100%; overflow: visible; }
 .logo-strip {
-  display: grid;
-  grid-template-columns: 258fr 176fr 268fr 176fr 176fr 176fr 140fr;
-  gap: clamp(12px, 1.8vw, 28px);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  column-gap: 60px;
+  row-gap: 24px;
   align-items: center;
-  width: min(calc(100% - 90px), 1400px);
+  width: min(calc(100% - 90px), 1300px);
   margin: 0 auto;
   transform: none;
 }
-.partner-logo { width: 100%; height: 51px; min-width: 0; }
+.partner-logo { flex: 0 0 auto; width: 125px; height: 52px; min-width: 0; }
+.partner-logo:nth-child(1) { width: 180px; }
+.partner-logo:nth-child(4),
+.partner-logo:nth-child(5),
+.partner-logo:nth-child(6) { width: 130px; }
+.partner-logo:nth-child(7) { width: 100px; }
 .partner-logo img { object-fit: contain; }
+.partner-logo:nth-child(1) img { transform: scale(1.4); }
+.partner-logo:nth-child(2) img { transform: scale(1.3); }
+.partner-logo:nth-child(3) img { transform: scale(1.25); }
+.partner-logo:nth-child(6) img { transform: scale(1.08); }
 
 .hero { background: #dce7ff; }
 .hero-background {
@@ -290,13 +301,15 @@
   .philosophy-band { margin-top: 80px; }
   .trusted { width: 100%; }
   .logo-strip {
+    display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px 18px;
     width: min(calc(100% - 44px), 440px);
     transform: none;
   }
-  .partner-logo { height: 48px; }
-  .partner-logo:last-child { grid-column: 1 / -1; width: 42%; justify-self: center; }
+  .logo-strip .partner-logo { width: 100%; height: 48px; }
+  .logo-strip .partner-logo img { transform: none; }
+  .logo-strip .partner-logo:last-child { grid-column: 1 / -1; width: 42%; justify-self: center; }
   .hero-content { top: 180px; left: 22px; }
   .social-proof { top: 102px; left: 22px; }
   .hero-menu { display: none; }
