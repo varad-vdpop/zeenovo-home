@@ -89,13 +89,13 @@
 }
 
 @media (max-width: 760px) {
-  .cta { width: calc(100% - 34px); height: 660px; margin-bottom: 40px; border-radius: 25px; }
+  .cta { width: calc(100% - 34px); height: 540px; margin-bottom: 40px; border-radius: 25px; }
   .heading { gap: 15px; padding: 28px 14px 0; }
   .heading h2 { max-width: 360px; font-size: clamp(27px, 7.4vw, 35px); line-height: 1.2; }
   .desktopBreak { display: none; }
   .action { height: 42px; font-size: 14px; }
   .lines { bottom: 0; width: 100%; height: auto; }
-  .reminders { top: 245px; left: 5%; width: 68%; }
-  .pharmacist { top: auto; bottom: 0; left: 39%; width: 53%; }
-  .stats { top: 412px; right: 3%; width: 34%; }
+  .reminders,
+  .stats { display: none; }
+  .pharmacist { top: auto; bottom: 0; left: 50%; width: min(65%, 270px); transform: translateX(-50%); }
 }

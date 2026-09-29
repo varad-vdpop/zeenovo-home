@@ -1,7 +1,5 @@
 <svg width="329" height="237" viewBox="0 0 329 237" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="329" height="237" fill="#E5E5E5"/>
 <g id="home page">
-<rect width="1440" height="9873" transform="translate(-1050 -186)" fill="white"/>
 <g id="AnalyticsRevenueChart">
 <mask id="path-1-inside-1_69_5452" fill="white">
 <path d="M0 30C0 13.4315 13.4315 0 30 0H299C315.569 0 329 13.4315 329 30V207C329 223.569 315.569 237 299 237H30C13.4315 237 0 223.569 0 207V30Z"/>

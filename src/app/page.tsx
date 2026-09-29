@@ -155,7 +155,7 @@ function Services() {
 }
 
 function Philosophy() {
-  return <section className="philosophy"><Tag dark>Our Philosophy</Tag><h2>We believe every pharmacy<br />should have the tools to deliver<br />better care, <strong>every day.</strong></h2><div className="philosophy-bottom"><p>World-class clinical tools, smart pharmacy<br />business solutions, and the support you need to<br />build your dream pharmacy practice</p><Button light href="#contact">Know about us</Button></div><Image className="philosophy-wave" src={asset.philosophyLines} alt="" width={181} height={643} /></section>;
+  return <section className="philosophy"><Tag dark>Our Philosophy</Tag><h2><span>We believe every pharmacy</span>{" "}<span>should have the tools to deliver</span>{" "}<span>better care, <strong>every day.</strong></span></h2><div className="philosophy-bottom"><p>World-class clinical tools, smart pharmacy<br />business solutions, and the support you need to<br />build your dream pharmacy practice</p><Button light href="#contact">Know about us</Button></div><Image className="philosophy-wave" src={asset.philosophyLines} alt="" width={181} height={643} /></section>;
 }
 
 function CareBanner() {

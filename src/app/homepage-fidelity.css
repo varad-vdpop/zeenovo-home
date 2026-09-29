@@ -3,6 +3,21 @@
 .button:hover,
 .small-button:hover { transform: none; background: var(--deep); }
 .button-light:hover { background: #fff; }
+.button .arrow,
+.small-button .arrow { display: inline-flex; align-items: center; line-height: 1; transform: translateY(-2px); }
+
+.trusted { width: 100%; }
+.logo-strip {
+  display: grid;
+  grid-template-columns: 258fr 176fr 268fr 176fr 176fr 176fr 140fr;
+  gap: clamp(12px, 1.8vw, 28px);
+  align-items: center;
+  width: min(calc(100% - 90px), 1400px);
+  margin: 0 auto;
+  transform: none;
+}
+.partner-logo { width: 100%; height: 51px; min-width: 0; }
+.partner-logo img { object-fit: contain; }
 
 .hero { background: #dce7ff; }
 .hero-background {
@@ -62,7 +77,8 @@
 .assure .card-copy { padding: 20px 35px; }
 .assure-dashboard-frame {
   position: absolute;
-  top: 159px;
+  top: auto;
+  bottom: 0;
   left: 230px;
   width: 582px;
   height: auto;
@@ -70,7 +86,8 @@
 }
 .assure-dashboard {
   position: absolute;
-  top: 176px;
+  top: auto;
+  bottom: 0;
   left: 247px;
   display: block;
   width: 564px;
@@ -192,6 +209,7 @@
   opacity: 1;
   object-fit: contain;
 }
+.philosophy h2 > span { display: block; }
 
 .care-banner > img.care-background {
   top: 0;
@@ -251,7 +269,7 @@
   .hero-chart { right: 25px; width: 280px; }
   .product-row-top { grid-template-columns: minmax(0, 39fr) minmax(0, 61fr); }
   .clinical-doctor { right: 0; left: auto; width: 80%; height: 335px; }
-  .assure-dashboard { top: 176px; left: 28%; width: 72%; }
+  .assure-dashboard { left: 28%; width: 72%; }
   .magistral-doctor { width: 43%; height: 95%; }
   .phone { width: 55%; }
   .feature-grid,
@@ -267,6 +285,15 @@
 }
 
 @media (max-width: 760px) {
+  .trusted { width: 100%; }
+  .logo-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 18px;
+    width: min(calc(100% - 44px), 440px);
+    transform: none;
+  }
+  .partner-logo { height: 48px; }
+  .partner-logo:last-child { grid-column: 1 / -1; width: 42%; justify-self: center; }
   .hero-content { top: 180px; left: 22px; }
   .social-proof { top: 102px; left: 22px; }
   .hero-menu { display: none; }
@@ -282,8 +309,8 @@
   .clinical-doctor { top: auto; right: 10px; bottom: -1px; left: auto; width: 235px; height: 240px; }
   .assure-lines { width: 100%; }
   .assure .card-copy { padding: 21px; }
-  .assure-dashboard-frame { top: 135px; left: 26%; width: 78%; }
-  .assure-dashboard { top: 150px; left: 29%; width: 72%; transform: none; }
+  .assure-dashboard-frame { top: auto; bottom: 0; left: 26%; width: 78%; }
+  .assure-dashboard { top: auto; bottom: 0; left: 29%; width: 72%; transform: none; }
   .magistral-lines-a { width: 100%; }
   .magistral-lines-b { width: 77%; }
   .magistral-doctor { top: 60px; right: 0; bottom: auto; width: 230px; height: 270px; }
@@ -321,13 +348,27 @@
   .treatment-ui { top: 150px; left: 12%; width: 76%; }
   .feature-provinces ul { top: 146px; left: 24px; }
   .canada-map { top: 155px; right: -15px; bottom: auto; left: auto; width: 55%; height: auto; }
-  .appointment-ui { top: 174px; left: 5%; width: 95%; }
-  .flags-ui { top: 163px; left: 16%; width: 68%; }
-  .philosophy > img.philosophy-wave { right: -45px; width: 140px; height: auto; opacity: .35; }
-  .care-banner > img.care-background { top: 0; left: -80px; width: 600px; height: auto; }
+  .feature-appointments,
+  .feature-flags { display: flex; flex-direction: column; align-items: flex-start; height: auto; min-height: 0; }
+  .feature-appointments .feature-copy,
+  .feature-flags .feature-copy { width: 100%; padding: 24px; }
+  .feature-appointments .small-button { position: relative; top: auto; right: auto; left: auto; z-index: 2; height: 42px; margin-left: 24px; font-size: 13px; }
+  .appointment-ui { position: relative; top: auto; left: auto; align-self: center; width: calc(100% - 48px); margin: 24px 0; }
+  .flags-ui { position: relative; top: auto; left: auto; align-self: center; width: min(calc(100% - 48px), 326px); margin: 20px 0 24px; }
+  .philosophy { height: auto; min-height: 0; padding: 35px 22px 44px; }
+  .philosophy h2 { max-width: 100%; font-size: clamp(30px, 7vw, 40px); line-height: 1.17; letter-spacing: -1.3px; }
+  .philosophy h2 > span { display: inline; }
+  .philosophy > img.philosophy-wave { right: -70px; width: 140px; height: auto; opacity: .12; }
+  .care-banner { height: auto; }
+  .care-banner > img.care-background { top: 0; left: 50%; width: 600px; height: 300px; object-fit: cover; transform: translateX(-50%); }
+  .care-label,
+  .care-overlay { display: none; }
+  .care-copy { position: relative; top: auto; left: auto; right: auto; width: 100%; margin-top: 300px; padding: 24px; background: #d9deec; }
   .report-card { padding: 24px; }
   .timer { top: 155px; left: calc(50% - 80px); width: 160px; }
   .bars { top: 150px; left: 8%; width: 84%; }
-  .team-photo { top: auto; right: -10px; bottom: 0; width: 240px; height: 250px; }
-  .team-wave { top: auto; bottom: 35px; width: 787px; height: 181px; }
+  .team { height: 400px; }
+  .team .button { position: relative; z-index: 2; }
+  .team-photo { top: auto; right: 0; bottom: 0; width: clamp(155px, 46%, 190px); height: 165px; }
+  .team-wave { top: auto; bottom: 0; left: 0; width: 100%; height: auto; }
 }
