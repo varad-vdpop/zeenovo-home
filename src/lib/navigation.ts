@@ -20,9 +20,18 @@ export const navigationMenus: readonly NavigationMenu[] = [
     href: "/products",
     sections: [
       {
-        label: "Clinical",
+        label: "Products",
         links: [
-          { label: "Clinical overview", href: "/products/clinical" },
+          { label: "Clinical", href: "/products/clinical" },
+          { label: "Assure", href: "/products/assure" },
+          { label: "Sites", href: "/products/sites" },
+          { label: "Patient Portal", href: "/products/patient-portal" },
+          { label: "Voice Based Appointment Booking", href: "/products/voice-based-appointment-booking" },
+        ],
+      },
+      {
+        label: "Clinical Modules",
+        links: [
           { label: "Minor Ailments", href: "/products/clinical/minor-ailments" },
           { label: "Vaccinations", href: "/products/clinical/vaccinations" },
           { label: "Medication Review", href: "/products/clinical/medication-review" },
@@ -33,20 +42,21 @@ export const navigationMenus: readonly NavigationMenu[] = [
         ],
       },
       {
-        label: "Assure",
+        label: "Assure Modules",
         links: [
-          { label: "Assure overview", href: "/products/assure" },
           { label: "Incident Reporting", href: "/products/assure/incident-reporting" },
           { label: "Self Assessment", href: "/products/assure/self-assessment" },
           { label: "Analytics", href: "/products/assure/analytics" },
         ],
       },
       {
-        label: "More products",
+        label: "Solutions",
         links: [
-          { label: "Sites", href: "/products/sites" },
-          { label: "Patient Portal", href: "/products/patient-portal" },
-          { label: "Voice Based Appointment Booking", href: "/products/voice-based-appointment-booking" },
+          { label: "Independent Pharmacies", href: "/solutions/independent-pharmacies" },
+          { label: "Multi Location Groups", href: "/solutions/multi-location-groups" },
+          { label: "Pharmacy Owners", href: "/solutions/pharmacy-owners" },
+          { label: "Pharmacists", href: "/solutions/pharmacists" },
+          { label: "Patients", href: "/solutions/patients" },
         ],
       },
     ],
@@ -88,12 +98,7 @@ export const navigationMenus: readonly NavigationMenu[] = [
   {
     label: "Pricing",
     href: "/pricing",
-    sections: [
-      {
-        label: "Pricing",
-        links: [{ label: "ROI Calculator", href: "/pricing/roi-calculator" }],
-      },
-    ],
+    sections: [],
   },
   {
     label: "Resources",

@@ -6,15 +6,6 @@ import { asset } from "@/lib/assets";
 import { navigationMenus, type NavigationMenu } from "@/lib/navigation";
 import styles from "./Navbar.module.css";
 
-const featured: Record<string, { label: string; image: string; alt: string; contain?: boolean }> = {
-  Products: { label: "ZeeNovo Clinical", image: asset.clinicalDoctor, alt: "Pharmacist" },
-  Solutions: { label: "Independent Pharmacies", image: asset.heroNurse, alt: "Pharmacist at a laptop", contain: true },
-  Provinces: { label: "Ontario", image: asset.mapIcon, alt: "Map of Canada", contain: true },
-  Pricing: { label: "ROI Calculator", image: asset.intelligencePhone, alt: "ZeeNovo mobile interface", contain: true },
-  Resources: { label: "Guides", image: asset.service1, alt: "Pharmacy care" },
-  Company: { label: "About ZeeNovo", image: asset.teamPhoto, alt: "Healthcare team" },
-};
-
 function FigmaArrow({ primary = false, direction = "up" }: { primary?: boolean; direction?: "up" | "right" | "left" }) {
   return (
     <span className={styles.arrowFrame} aria-hidden="true">
@@ -38,7 +29,7 @@ export default function Navbar() {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileMenu, setMobileMenu] = useState<NavigationMenu | null>(null);
-  const selectedMenu = navigationMenus.find((menu) => menu.label === activeMenu);
+  const selectedMenu = navigationMenus.find((menu) => menu.label === activeMenu && menu.sections.length > 0);
 
   useEffect(() => {
     function closeOnOutsideClick(event: PointerEvent) {
@@ -108,7 +99,9 @@ export default function Navbar() {
           <Image src={asset.navbarLogo} alt="ZeeNovo" width={143} height={45} priority />
         </span>
         <nav className={styles.links} aria-label="Main navigation">
-          {navigationMenus.map((menu) => (
+          {navigationMenus.map((menu) => menu.sections.length === 0 ? (
+            <span key={menu.label} className={styles.staticLink} onMouseEnter={() => setActiveMenu(null)}>{menu.label}</span>
+          ) : (
             <button
               key={menu.label}
               type="button"
@@ -152,11 +145,7 @@ export default function Navbar() {
       {selectedMenu && (
         <div className={styles.megaPanel} id="desktop-mega-menu">
           <div className={styles.menuContent}>
-            <div className={styles.menuIntro}>
-              <span>Explore {selectedMenu.label}</span>
-              <span>View all {selectedMenu.label}</span>
-            </div>
-            <div className={`${styles.menuColumns} ${selectedMenu.sections.length === 1 ? styles.singleSection : ""}`}>
+            <div className={`${styles.menuColumns} ${selectedMenu.sections.length === 1 ? styles.singleSection : ""} ${selectedMenu.label === "Products" ? styles.productColumns : ""}`}>
               {selectedMenu.sections.map((section) => (
                 <div className={styles.menuSection} key={section.label}>
                   <h2>{section.label}</h2>
@@ -166,14 +155,6 @@ export default function Navbar() {
                 </div>
               ))}
             </div>
-          </div>
-          <div className={styles.featureCard}>
-            <span className={styles.featureEyebrow}>Explore {selectedMenu.label}</span>
-            <strong>{featured[selectedMenu.label].label}</strong>
-            <span className={styles.featureAction}><FigmaArrow primary /></span>
-            <span className={`${styles.featureImage} ${featured[selectedMenu.label].contain ? styles.containImage : ""}`}>
-              <Image src={featured[selectedMenu.label].image} alt={featured[selectedMenu.label].alt} fill sizes="280px" />
-            </span>
           </div>
         </div>
       )}
@@ -191,7 +172,6 @@ export default function Navbar() {
                   <FigmaArrow direction="left" /> Back
                 </button>
                 <h2>{mobileMenu.label}</h2>
-                <span className={styles.mobileOverview}>View all {mobileMenu.label}<FigmaArrow direction="right" /></span>
                 {mobileMenu.sections.map((section) => (
                   <div className={styles.mobileSection} key={section.label}>
                     <h3>{section.label}</h3>
@@ -203,7 +183,9 @@ export default function Navbar() {
               <div className={styles.mobilePage}>
                 <p className={styles.mobileEyebrow}>Explore</p>
                 <span className={styles.mobileHome}>Home</span>
-                {navigationMenus.map((menu) => (
+                {navigationMenus.map((menu) => menu.sections.length === 0 ? (
+                  <span className={`${styles.mobileCategory} ${styles.staticCategory}`} key={menu.label}>{menu.label}</span>
+                ) : (
                   <button className={styles.mobileCategory} type="button" key={menu.label} onClick={() => setMobileMenu(menu)}>
                     {menu.label}<FigmaArrow direction="right" />
                   </button>

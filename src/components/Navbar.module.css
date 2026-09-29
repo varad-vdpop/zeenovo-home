@@ -37,6 +37,7 @@
 .logo img { display: block; }
 .links { gap: 4px; }
 .links button,
+.links .staticLink,
 .patientLogin {
   color: #625b6d;
   font-size: 14px;
@@ -44,7 +45,8 @@
   line-height: 20px;
   white-space: nowrap;
 }
-.links button {
+.links button,
+.links .staticLink {
   position: relative;
   padding: 8px 16px;
   border: 0;
@@ -55,6 +57,7 @@
 }
 .links button:hover,
 .links .activeLink { color: #2b108e; background: #f5f3ff; }
+.links .staticLink { cursor: default; }
 .links .activeLink::after {
   position: absolute;
   right: 16px;
@@ -118,9 +121,7 @@
   top: calc(100% - 1px);
   right: -1px;
   left: -1px;
-  display: flex;
-  gap: 38px;
-  min-height: 390px;
+  display: block;
   max-height: min(650px, calc(100dvh - 130px));
   padding: 34px 28px 36px;
   overflow-y: auto;
@@ -131,17 +132,9 @@
   box-shadow: 0 25px 60px #24165c21;
 }
 .menuContent { flex: 1; min-width: 0; }
-.menuIntro {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 20px;
-  padding-bottom: 25px;
-}
-.menuIntro span:first-child { color: #2b108e; font-size: 20px; font-weight: 600; }
-.menuIntro span:last-child { color: #625b6d; font-size: 12px; white-space: nowrap; }
-.menuColumns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 25px; }
+.menuColumns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px; }
 .menuColumns.singleSection { grid-template-columns: minmax(0, 1fr); }
+.menuColumns.productColumns { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .menuSection h2 {
   margin: 0 0 15px;
   color: #8b8592;
@@ -159,31 +152,12 @@
   font-weight: 500;
   line-height: 1.35;
 }
-.featureCard {
-  position: relative;
-  display: block;
-  flex: 0 0 280px;
-  min-height: 320px;
-  overflow: hidden;
-  border-radius: 14px;
-  background: #e6e4ff;
-}
-.featureEyebrow,
-.featureCard strong,
-.featureAction { position: absolute; z-index: 2; left: 20px; }
-.featureEyebrow { top: 20px; color: #625b6d; font-size: 11px; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; }
-.featureCard strong { top: 45px; max-width: 200px; color: #2b108e; font-size: 22px; font-weight: 600; line-height: 1.15; }
-.featureAction { bottom: 18px; display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: #2b108e; }
-.featureAction .arrowFrame { width: 27px; height: 27px; }
-.featureImage { position: absolute; inset: 98px 0 0; }
-.featureImage img { object-fit: cover; object-position: center 30%; }
-.containImage img { object-fit: contain; object-position: bottom right; }
-
 @media (max-width: 1350px) {
   .navbar { padding-right: 18px; }
   .leftGroup { gap: 12px; }
   .links { gap: 0; }
-  .links button { padding-inline: 6px; font-size: 13px; }
+  .links button,
+  .links .staticLink { padding-inline: 6px; font-size: 13px; }
   .links .activeLink::after { right: 6px; left: 6px; }
   .actions { gap: 6px; }
   .patientLogin { padding-inline: 6px; font-size: 13px; }
@@ -255,6 +229,7 @@
     text-align: left;
   }
   .mobileCategory { cursor: pointer; }
+  .staticCategory { cursor: default; }
   .mobileCategory .arrowFrame { width: 26px; height: 26px; }
   .mobileDemo {
     display: flex;
@@ -275,9 +250,8 @@
   .backButton .arrowFrame { width: 22px; height: 22px; }
   .backButton img { width: 17px; height: 17px; }
   .mobilePage h2 { margin: 25px 0 20px; color: #24212b; font-size: 35px; font-weight: 600; }
-  .mobileOverview { display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 10px 15px; border-radius: 11px; background: #e6e4ff; color: #2b108e; font-size: 16px; font-weight: 600; }
-  .mobileOverview .arrowFrame { width: 25px; height: 25px; }
   .mobileSection { margin-top: 30px; }
+  .mobilePage h2 + .mobileSection { margin-top: 0; }
   .mobileSection h3 { margin: 0 0 12px; }
   .mobileSection > span { display: block; padding: 11px 0; border-bottom: 1px solid #ececec; color: #24212b; font-size: 16px; line-height: 1.4; }
 }
