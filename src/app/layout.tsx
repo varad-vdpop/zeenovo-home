@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Navbar from "@/components/Navbar";
+import Footer from "@/components/Footer";
 import "./globals.css";
 
 const jakarta = localFont({
@@ -24,6 +26,13 @@ const manrope = localFont({
   display: "swap",
 });
 
+const geistFooter = localFont({
+  src: "../../public/fonts/geist-medium.woff2",
+  weight: "500",
+  variable: "--font-geist-footer",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "ZeeNovo — Better pharmacy care, every day",
   description:
@@ -33,7 +42,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${jakarta.variable} ${manrope.variable}`}>{children}</body>
+      <body className={`${jakarta.variable} ${manrope.variable} ${geistFooter.variable}`}>
+        <div className="site-shell">
+          <Navbar />
+          {children}
+          <Footer />
+        </div>
+      </body>
     </html>
   );
 }

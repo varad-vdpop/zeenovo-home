@@ -1,0 +1,180 @@
+.footer {
+  position: relative;
+  width: 100%;
+  height: 666px;
+  overflow: hidden;
+  color: #fff;
+  background: linear-gradient(180deg, #f9fafe 0%, #d7dffe 6.1712%, #acbcff 15.484%, #8b8ee6 28.585%, #260096 63.942%, #0c0030 100%);
+  font-family: var(--font-manrope), Arial, sans-serif;
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  width: min(1196px, calc(100% - 80px));
+  margin-inline: auto;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  gap: 129px;
+  padding-top: 164px;
+}
+
+.brand {
+  display: flex;
+  flex: 0 0 176.7865px;
+  align-items: center;
+  height: 55.6662px;
+  white-space: nowrap;
+  font-size: 30.728px;
+  font-family: var(--font-geist-footer), Arial, sans-serif;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -1.2px;
+}
+
+.markFrame {
+  display: grid;
+  flex: 0 0 56.7865px;
+  place-items: center;
+  height: 55.6662px;
+  margin-right: -6px;
+}
+
+.markFrame img { display: block; transform: rotate(31.69deg); }
+
+.groups {
+  display: grid;
+  grid-template-columns: 200px 150px 186px 138px;
+  column-gap: 62px;
+  width: 860px;
+}
+
+.group { position: relative; min-width: 0; }
+.group h2 {
+  margin: 0 0 19.879px;
+  color: #fff;
+  font-size: 19.879px;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: -0.219px;
+  white-space: nowrap;
+}
+
+.items { display: flex; flex-direction: column; gap: 9.939px; }
+.items span {
+  color: rgb(255 255 255 / 75%);
+  font-size: 14.909px;
+  font-weight: 500;
+  line-height: 20px;
+  letter-spacing: -0.164px;
+  white-space: nowrap;
+}
+
+.columnDivider {
+  position: absolute;
+  top: 84px;
+  right: -84px;
+  transform: rotate(-90deg);
+  transform-origin: center;
+}
+
+.dividerFrame {
+  position: absolute;
+  z-index: 1;
+  top: 361px;
+  left: 50%;
+  width: min(1195px, calc(100% - 80px));
+  height: 2px;
+  overflow: hidden;
+  transform: translateX(-50%);
+}
+
+.dividerFrame img { position: absolute; left: 50%; transform: translateX(-50%) rotate(180deg); }
+
+.wordmark {
+  position: absolute;
+  top: 294px;
+  left: 50%;
+  display: block;
+  width: max-content;
+  color: transparent;
+  background: linear-gradient(180deg, #fff 22.917%, rgb(255 255 255 / 0%) 72.772%);
+  background-clip: text;
+  font-size: clamp(80px, 20.77vw, 299px);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.011em;
+  opacity: 0.38;
+  transform: translateX(-50%);
+  user-select: none;
+  white-space: nowrap;
+}
+
+@media (min-width: 1600px) {
+  .wordmark { transform: translateX(-50%) scaleX(1.18); }
+}
+
+@media (min-width: 1800px) {
+  .wordmark { transform: translateX(-50%) scaleX(1.4); }
+}
+
+@media (min-width: 2200px) {
+  .wordmark { transform: translateX(-50%) scaleX(1.6); }
+}
+
+.copyright {
+  position: absolute;
+  z-index: 1;
+  top: 611px;
+  left: 50%;
+  width: max-content;
+  margin: 0;
+  color: #fff;
+  font-size: 14px;
+  line-height: 19px;
+  letter-spacing: -0.154px;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 1199px) {
+  .footer { height: 680px; }
+  .inner { width: min(860px, calc(100% - 64px)); }
+  .top { display: block; padding-top: 100px; }
+  .brand { width: max-content; height: 56px; margin-bottom: 52px; }
+  .groups { width: 100%; grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 24px; }
+  .columnDivider { display: none; }
+  .group:not(:last-child)::after {
+    position: absolute;
+    top: 0;
+    right: -12px;
+    width: 1px;
+    height: 169px;
+    background: rgb(255 255 255 / 15%);
+    content: "";
+  }
+  .group h2 { font-size: 17px; }
+  .items span { font-size: 13px; }
+  .dividerFrame { top: 390px; width: calc(100% - 64px); }
+  .wordmark { top: 350px; }
+  .copyright { top: 623px; }
+}
+
+@media (max-width: 760px) {
+  .footer { height: 830px; }
+  .inner { width: calc(100% - 40px); }
+  .top { padding-top: 115px; }
+  .brand { margin-bottom: 49px; font-size: 27px; }
+  .markFrame { flex-basis: 52px; }
+  .markFrame img { transform: rotate(31.69deg) scale(0.92); }
+  .groups { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 37px 20px; }
+  .group h2 { margin-bottom: 14px; font-size: 18px; }
+  .items { gap: 9px; }
+  .items span { font-size: 13px; line-height: 19px; white-space: normal; overflow-wrap: break-word; }
+  .group:not(:last-child)::after { display: none; }
+  .dividerFrame { top: 565px; width: calc(100% - 40px); }
+  .wordmark { top: 570px; font-size: 20.77vw; line-height: 1.5; }
+  .copyright { top: 773px; font-size: 11px; }
+}

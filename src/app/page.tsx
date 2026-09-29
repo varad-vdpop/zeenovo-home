@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { asset } from "@/lib/assets";
-import Navbar from "@/components/Navbar";
 
 function Arrow({ light = false }: { light?: boolean }) {
   return <span aria-hidden="true" className={light ? "arrow arrow-light" : "arrow"}>↗</span>;
@@ -196,10 +195,6 @@ function FinalCta() {
   return <section className="final-cta" id="contact"><Tag>You can trust us</Tag><h2>Handling a pharmacy has<br />never been easier</h2><Button>Sign Up now</Button><div className="reminder-card"><b>Dose Reminders</b><small>Upcoming medication schedules</small><span><i>◷</i><strong>Sarah Johnson</strong><small>Amoxicillin 500mg<br />Dosage: 1 tablet<br />Next due: Today at 2:00 PM</small></span><span><i>◉</i><strong>Emily Rodriguez</strong><small>Metformin 500mg<br />Dosage: 2 tablets<br />Next due: Tomorrow at 9:00 AM</small></span></div><div className="cta-doctor"><Cover src={asset.ctaDoctor} alt="Pharmacist using a tablet" /></div><div className="revenue-card"><small>Total Revenue</small><b>$285,640</b><span>↗ +12% &nbsp; vs last month</span></div><div className="patient-card"><small>Active Patients</small><b>1,243</b><span>↗ +8% &nbsp; this month</span></div></section>;
 }
 
-function Footer() {
-  return <footer className="footer"><div className="footer-top"><div className="brand footer-brand"><span className="brand-symbol" aria-hidden="true"><i /><i /><i /><i /></span><span>ZeeNovo</span></div><div><b>Our Products</b><a href="#products">Zeenovo Clinical</a><a href="#products">Zeenovo Assure</a><a href="#products">Zeenovo Magistral</a><a href="#products">Zeenovo Intelligence</a></div><div><b>Company</b><a href="#why-zeenovo">Why ZeeNovo</a><a href="#solutions">Solutions</a><a href="#contact">Contact us</a></div><div><b>Explore</b><a href="#services">Services</a><a href="#reporting">Incident Reporting</a><a href="#contact">Register Pharmacy</a></div><div><b>Legal</b><a href="#contact">Privacy Policy</a><a href="#contact">Terms &amp; Conditions</a></div></div><div className="footer-wordmark">ZeeNovo</div><p>Copyright © 2026 ZeeNovo Corporation.</p></footer>;
-}
-
 export default function Home() {
-  return <main><Navbar /><Hero /><Trust /><ProductCards /><Values /><Features /><Services /><Philosophy /><CareBanner /><ReportCards /><Testimonials /><FinalCta /><Footer /></main>;
+  return <main><Hero /><Trust /><ProductCards /><Values /><Features /><Services /><Philosophy /><CareBanner /><ReportCards /><Testimonials /><FinalCta /></main>;
 }
