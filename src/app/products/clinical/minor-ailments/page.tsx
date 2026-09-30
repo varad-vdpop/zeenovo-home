@@ -192,8 +192,18 @@ function AfterVisit() {
         <p>Physician communication and follow-up are prepared from the same consultation record.</p>
       </div>
       <div className={styles.afterVisitCards}>
-        <Image src={asset("physician-card.svg")} alt="Physician handoff with matched details and eFax status" width={636} height={584} />
-        <Image src={asset("followup-card.svg")} alt="Follow-up timeline with visit completion, patient check-in and pharmacist review" width={636} height={584} />
+        <article className={`${styles.afterVisitCard} ${styles.physicianCard}`} aria-labelledby="physician-card-title">
+          <p className={styles.eyebrow}>Family Physician</p>
+          <h3 id="physician-card-title">Keep the physician in the loop.</h3>
+          <p className={styles.afterVisitDescription}>Lookup once. Reuse the details across visits and eFax.</p>
+          <Image className={styles.afterVisitIllustration} src={asset("physician-handoff-illustration.svg")} alt="Matched physician details with a note ready for eFax" width={577} height={356} />
+        </article>
+        <article className={`${styles.afterVisitCard} ${styles.followupCard}`} aria-labelledby="followup-card-title">
+          <p className={styles.eyebrow}>Follow-up</p>
+          <h3 id="followup-card-title">Only return when care needs you.</h3>
+          <p className={styles.afterVisitDescription}>Automated questions track outcomes by condition.</p>
+          <Image className={styles.afterVisitIllustration} src={asset("followup-timeline-illustration.svg")} alt="Follow-up timeline with visit completion, patient check-in and pharmacist review" width={577} height={384} />
+        </article>
       </div>
     </div>
   </section>;

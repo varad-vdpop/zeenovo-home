@@ -81,9 +81,9 @@
   height: auto;
 }
 
-.reminders { z-index: 2; top: 270.77px; left: 86.48px; }
+.reminders { z-index: 2; top: 270.77px; left: 86.48px; width: 415px; container-type: inline-size; }
 .pharmacist { z-index: 3; top: 250.18px; left: 485.94px; }
-.stats { z-index: 2; top: 280.03px; left: 829.8px; }
+.stats { z-index: 2; top: 280.03px; left: 829.8px; width: 231px; container-type: inline-size; }
 
 @media (max-width: 1100px) {
   .cta { width: calc(100% - 60px); }

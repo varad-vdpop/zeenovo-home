@@ -1,0 +1,46 @@
+.menuPanel {
+  position: relative;
+  width: 194px;
+  height: 242px;
+  overflow: hidden;
+  border: 1px solid #d7d7d7;
+  border-radius: 16.906px;
+  background: #fff;
+  color: #09090b;
+  font-family: var(--font-manrope), Arial, sans-serif;
+  font-size: 12.214px;
+}
+
+.menuList { position: absolute; top: 9.51px; left: 17.62px; width: 157.032px; }
+.menuRows { position: relative; margin: 0; padding: 0; list-style: none; }
+.menuHighlight { position: absolute; z-index: 1; inset: 0 0 auto; height: 31.406px; overflow: hidden; border-radius: 6.979px; background: #312598; }
+.menuRow { position: relative; display: flex; height: 31.406px; align-items: center; gap: 5px; margin-bottom: 13.958px; padding: 0 6px; color: #09090b; }
+.menuActiveRows .menuRow { color: #fff; }
+.menuIcon { display: grid; width: 18px; height: 18px; flex: none; place-items: center; }
+.menuIcon img { filter: brightness(0); }
+.menuActiveRows .menuIcon img { filter: brightness(0) invert(1); }
+.menuRow p { margin: 0; line-height: 17.448px; white-space: nowrap; }
+
+.chartPanel { position: relative; width: 100%; aspect-ratio: 329 / 237; overflow: hidden; border: 0.423px solid #e4e4e7; border-radius: 30px; background: #fff; container-type: inline-size; color: #09090b; font-family: var(--font-manrope), Arial, sans-serif; }
+.revenueLabel { position: absolute; top: 8.68%; left: 6.38%; margin: 0; color: #71717a; font-size: 2.654cqw; font-weight: 500; line-height: 1.5; letter-spacing: -.0938px; }
+.revenueAmount { position: absolute; top: 17.35%; left: 6.38%; font-size: 9.1185cqw; font-weight: 500; line-height: 1.15; letter-spacing: -.7px; font-variant-numeric: tabular-nums; }
+.counterStatic { display: none; }
+.periodLabel { position: absolute; top: 8.68%; right: 7.39%; display: flex; width: 28.53%; height: 13.08%; align-items: center; justify-content: center; gap: 3%; border: .64px solid #e4e4e7; border-radius: 9.439px; color: #3950d3; font-size: 3.73cqw; font-weight: 500; line-height: 1.5; }
+.periodLabel p { margin: 0; }
+.periodLabel img { flex: none; }
+.chartPanel .chartSvg { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; pointer-events: none; }
+
+@media (max-width: 760px) {
+  .chartPanel { border-radius: 15px; }
+  .periodLabel { border-radius: 5px; }
+  .periodLabel img { margin-inline: -4px; transform: scale(.5); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .menuHighlight { transform: translateY(45.36486px) !important; }
+  .menuActiveRows { transform: translateY(-45.36486px) !important; }
+  .counterMotion { display: none; }
+  .counterStatic { display: block; }
+  .chartArea { clip-path: inset(0) !important; }
+  .chartLine { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
+}

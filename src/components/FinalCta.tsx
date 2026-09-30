@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { asset } from "@/lib/assets";
 import styles from "./FinalCta.module.css";
+import { DoseRemindersPreview, PharmacyMetricsPreview } from "./ProductUiPreviews";
 
 type FinalCtaProps = {
   id?: string;
@@ -27,9 +28,9 @@ export default function FinalCta({
         <h2 id={`${id}-heading`}>{heading}</h2>
         <a className={styles.action} href={actionHref}><Image className={styles.actionArrow} src="/assets/zeenovo-nav-arrow-primary.svg" alt="" aria-hidden="true" width={24} height={24} />{actionLabel}</a>
       </div>
-      <Image className={styles.reminders} src={asset.ctaDoseReminders} alt="Dose reminders for upcoming medications" width={415} height={290} />
+      <div className={styles.reminders}><DoseRemindersPreview /></div>
       <Image className={styles.pharmacist} src={asset.ctaDoctor} alt="Pharmacist using a tablet" width={319} height={382} />
-      <Image className={styles.stats} src={asset.ctaStatCards} alt="Total revenue and active patient metrics" width={231} height={278} />
+      <div className={styles.stats}><PharmacyMetricsPreview /></div>
     </section>
   );
 }

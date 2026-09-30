@@ -7,3 +7,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
 
 <!-- END:nextjs-agent-rules -->
+
+## Card content and Figma assets
+
+Build card badges, headings, descriptions, and backgrounds with native HTML and CSS. Export only the separate illustration, photo, or icon layers from Figma; never use a complete card export that embeds its marketing text or outer background. Let mobile card heights follow their content.
