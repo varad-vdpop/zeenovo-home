@@ -66,6 +66,7 @@ function Hero() {
 }
 
 const logos = [asset.logo1, asset.logo2, asset.logo3, asset.logo4, asset.logo5, asset.logo6, asset.logo7];
+const logoNames = ["PharmaChoice", "Rexall", "OnPharm United", "Costco Pharmacy", "Whole Health", "Remedy’sRx", "IDA"];
 
 function Trust() {
   return (
@@ -73,7 +74,17 @@ function Trust() {
       <section className="trusted" aria-label="Trusted pharmacies">
         <p>TRUSTED BY 50+ PHARMACIES</p>
         <div className="logo-strip">
-          {logos.map((src, index) => <div className="partner-logo" key={src}><Image src={src} alt={["PharmaChoice", "Rexall", "OnPharm United", "Costco Pharmacy", "Whole Health", "Remedy’sRx", "IDA"][index]} fill sizes="(max-width: 760px) 45vw, 260px" /></div>)}
+          <div className="logo-ticker-track">
+            {[false, true].map((duplicate) => (
+              <div className="logo-ticker-group" aria-hidden={duplicate || undefined} key={duplicate ? "duplicate" : "original"}>
+                {logos.map((src, index) => (
+                  <div className="partner-logo" key={src}>
+                    <Image src={src} alt={duplicate ? "" : logoNames[index]} fill sizes="(max-width: 760px) 220px, 260px" />
+                  </div>
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       </section>
       <section className="stats" aria-label="ZeeNovo results">

@@ -16,7 +16,7 @@ export const asset = {
   heroRevenueChart: "/assets/figma-hero-revenue-chart.svg",
   logo1: "/assets/e3d2a74b-d3fd-4af5-8d54-d80614422951.png",
   logo2: "/assets/380feb07-32d6-44fc-8ebf-065ba6074f19.png",
-  logo3: "/assets/33961684-171f-4354-8c9a-e45642666597.png",
+  logo3: "/assets/onpharm-united-logo.png",
   logo4: "/assets/c4040455-5475-4d5c-a07d-a828a93fd99d.png",
   logo5: "/assets/e3e45e29-b1f2-426c-8147-e4118b024399.png",
   logo6: "/assets/612bc268-3da9-4bdd-826e-5b5445c403d8.png",
