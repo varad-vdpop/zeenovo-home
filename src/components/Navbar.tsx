@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react";
 import { asset } from "@/lib/assets";
 import { navigationMenus, type NavigationMenu } from "@/lib/navigation";
 import styles from "./Navbar.module.css";
@@ -28,8 +29,17 @@ export default function Navbar() {
   const closeRef = useRef<HTMLButtonElement>(null);
   const backRef = useRef<HTMLButtonElement>(null);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [pointerNavigation, setPointerNavigation] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileMenu, setMobileMenu] = useState<NavigationMenu | null>(null);
+  const reduceMotion = useReducedMotion();
+  const animateDesktop = pointerNavigation && !reduceMotion;
+  const tabTransition = animateDesktop
+    ? { duration: 0.25, ease: [0.77, 0, 0.175, 1] as const }
+    : { duration: 0 };
+  const panelTransition = animateDesktop
+    ? { duration: 0.2, ease: [0.23, 1, 0.32, 1] as const }
+    : { duration: reduceMotion ? 0.1 : 0 };
   const selectedMenu = navigationMenus.find((menu) => menu.label === activeMenu && menu.sections.length > 0);
 
   useEffect(() => {
@@ -93,30 +103,43 @@ export default function Navbar() {
     <header
       ref={navbarRef}
       className={`${styles.navbar} ${selectedMenu ? styles.navbarOpen : ""}`}
-      onMouseLeave={() => setActiveMenu(null)}
+      onMouseLeave={() => {
+        if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) setActiveMenu(null);
+      }}
     >
       <div className={styles.leftGroup}>
-        <span className={styles.logo} aria-label="ZeeNovo">
+        <Link className={styles.logo} href="/" aria-label="ZeeNovo home">
           <Image src={asset.navbarLogo} alt="ZeeNovo" width={143} height={45} priority />
-        </span>
-        <nav className={styles.links} aria-label="Main navigation">
-          {navigationMenus.map((menu) => menu.sections.length === 0 ? (
-            <span key={menu.label} className={styles.staticLink} onMouseEnter={() => setActiveMenu(null)}>{menu.label}</span>
-          ) : (
-            <button
-              key={menu.label}
-              type="button"
-              className={activeMenu === menu.label ? styles.activeLink : ""}
-              aria-expanded={activeMenu === menu.label}
-              aria-controls={activeMenu === menu.label ? "desktop-mega-menu" : undefined}
-              onMouseEnter={() => setActiveMenu(menu.label)}
-              onFocus={() => setActiveMenu(menu.label)}
-              onClick={() => setActiveMenu(menu.label)}
-            >
-              {menu.label}
-            </button>
-          ))}
-        </nav>
+        </Link>
+        <LayoutGroup id="zeenovo-desktop-navigation">
+          <nav className={styles.links} aria-label="Main navigation">
+            {navigationMenus.map((menu) => (
+              <button
+                key={menu.label}
+                type="button"
+                className={activeMenu === menu.label ? styles.activeLink : ""}
+                aria-expanded={menu.sections.length > 0 ? activeMenu === menu.label : undefined}
+                aria-controls={menu.sections.length > 0 && activeMenu === menu.label ? "desktop-mega-menu" : undefined}
+                onMouseEnter={() => {
+                  if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+                    setPointerNavigation(true);
+                    setActiveMenu(menu.label);
+                  }
+                }}
+                onFocus={(event) => {
+                  if (event.currentTarget.matches(":focus-visible")) setPointerNavigation(false);
+                  setActiveMenu(menu.label);
+                }}
+                onClick={(event) => { setPointerNavigation(event.detail !== 0); setActiveMenu(menu.label); }}
+              >
+                {activeMenu === menu.label && (
+                  <motion.span className={styles.activePill} layoutId="active-tab" initial={false} style={{ borderRadius: 8 }} transition={tabTransition} aria-hidden="true" />
+                )}
+                <span className={styles.linkLabel}>{menu.label}</span>
+              </button>
+            ))}
+          </nav>
+        </LayoutGroup>
       </div>
 
       <div className={styles.actions} onMouseEnter={() => setActiveMenu(null)}>
@@ -144,27 +167,48 @@ export default function Navbar() {
         <span className={styles.hamburgerIcon} aria-hidden="true"><span /></span>
       </button>
 
-      {selectedMenu && (
-        <div className={styles.megaPanel} id="desktop-mega-menu">
-          <div className={styles.menuContent}>
-            <div className={`${styles.menuColumns} ${selectedMenu.sections.length === 1 ? styles.singleSection : ""} ${selectedMenu.label === "Products" ? styles.productColumns : ""}`}>
-              {selectedMenu.sections.map((section) => (
-                <div className={styles.menuSection} key={section.label}>
-                  <h2>{section.label}</h2>
-                  <div className={styles.sectionLinks}>
-                    {section.links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}
-                  </div>
+      <AnimatePresence initial={false}>
+        {selectedMenu && (
+          <motion.div
+            layout
+            className={styles.megaPanel}
+            id="desktop-mega-menu"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={panelTransition}
+          >
+            <AnimatePresence mode="popLayout" initial={false}>
+              <motion.div
+                key={selectedMenu.label}
+                className={styles.menuContent}
+                initial={{ opacity: 0, transform: animateDesktop ? "translateY(5px)" : "translateY(0px)" }}
+                animate={{ opacity: 1, transform: "translateY(0px)" }}
+                exit={{ opacity: 0, transform: animateDesktop ? "translateY(-5px)" : "translateY(0px)" }}
+                transition={panelTransition}
+              >
+                <div className={`${styles.menuColumns} ${selectedMenu.sections.length === 1 ? styles.singleSection : ""} ${selectedMenu.label === "Products" ? styles.productColumns : ""}`}>
+                  {selectedMenu.sections.map((section) => (
+                    <div className={styles.menuSection} key={section.label}>
+                      <h2>{section.label}</h2>
+                      <div className={styles.sectionLinks}>
+                        {section.links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}
+                      </div>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {mobileOpen && (
         <div ref={mobileOverlayRef} className={styles.mobileOverlay} id="mobile-navigation" role="dialog" aria-modal="true" aria-label="Navigation menu">
           <div className={styles.mobileHeader}>
-            <Image src={asset.navbarLogo} alt="ZeeNovo" width={143} height={45} />
+            <Link href="/" aria-label="ZeeNovo home" onClick={closeMobile}>
+              <Image src={asset.navbarLogo} alt="ZeeNovo" width={143} height={45} />
+            </Link>
             <button ref={closeRef} className={styles.mobileClose} type="button" aria-label="Close navigation menu" onClick={closeMobile}>
               <span className={styles.closeIcon} aria-hidden="true" />
             </button>

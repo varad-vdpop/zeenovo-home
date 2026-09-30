@@ -112,6 +112,7 @@
 }
 .magistral,
 .intelligence { grid-column: auto; width: auto; height: 326px; margin: 0; }
+.magistral { background: #ffeedd; }
 .magistral::before,
 .intelligence::before { content: none; }
 .magistral-lines-a { bottom: 0; left: 0; width: 628px; }
@@ -202,7 +203,7 @@
 .feature-provinces { background: linear-gradient(#e5ecff, #f9f8ff); }
 .feature-provinces ul { position: absolute; top: 152px; left: 53px; margin: 0; }
 .canada-map { top: 89px; right: auto; bottom: auto; left: 440px; width: 423px; height: 411px; opacity: 1; }
-.feature-appointments { background: #ffeedb; }
+.feature-appointments { background: #ffeedd; }
 .appointment-ui { top: 182px; left: 47px; width: 743px; }
 .feature-flags { background: linear-gradient(#d8f9fc, #99deec); }
 .feature-flags .feature-copy { padding: 32px 42px; }
@@ -249,6 +250,7 @@
 .reporting { max-width: 1290px; }
 .report-grid { gap: 39px; }
 .report-card { min-width: 0; padding: 32px 42px; }
+.analytics { background: #e5ecff; }
 .timer,
 .bars {
   position: absolute;
@@ -318,21 +320,26 @@
   .product-row { display: flex; flex-direction: column; gap: 15px; }
   .product-card,
   .magistral,
-  .intelligence { width: 100%; height: 330px; margin: 0; }
+  .intelligence { width: 100%; height: auto; min-height: 0; margin: 0; }
   .product-card .card-copy { padding: 21px; }
+  .clinical { padding-bottom: clamp(220px, 60vw, 280px); }
   .clinical .button { top: 17px; right: 16px; }
   .clinical-lines { width: 100%; }
-  .clinical-doctor { top: auto; right: 10px; bottom: -1px; left: auto; width: 235px; height: 240px; }
+  .clinical-doctor { top: auto; right: 10px; bottom: -1px; left: auto; width: min(68%, 280px); height: auto; aspect-ratio: 1; }
+  .assure { padding-bottom: clamp(138px, 37vw, 195px); }
   .assure-lines { width: 100%; }
   .assure .card-copy { padding: 21px; }
-  .assure-dashboard-frame { top: auto; bottom: 0; left: 26%; width: 78%; }
-  .assure-dashboard { top: auto; bottom: 0; left: 29%; width: 72%; transform: none; }
+  .assure-dashboard-frame { top: auto; bottom: 0; left: 24%; width: 76%; }
+  .assure-dashboard { top: auto; bottom: 0; left: 27%; width: 73%; transform: none; }
+  .magistral { padding-bottom: clamp(205px, 57vw, 260px); }
   .magistral-lines-a { width: 100%; }
   .magistral-lines-b { width: 77%; }
-  .magistral-doctor { top: 60px; right: 0; bottom: auto; width: 230px; height: 270px; }
+  .magistral-doctor { top: auto; right: 0; bottom: 0; width: clamp(220px, 62%, 265px); height: auto; aspect-ratio: 1200 / 1499; }
+  .magistral-doctor img { object-fit: contain; object-position: bottom; }
+  .intelligence { padding-bottom: clamp(190px, 55vw, 245px); }
   .intelligence-lines { width: 75%; }
   .intelligence .card-copy { padding: 21px; }
-  .phone { top: auto; right: 0; bottom: 0; width: 63%; }
+  .phone { top: auto; right: 0; bottom: 0; width: 63%; height: auto; }
   .values { height: 430px; min-height: 0; padding-top: 42px; }
   .values h2 { margin: 14px 12px 0; }
   .values-track {
@@ -366,11 +373,15 @@
   .canada-map { top: 155px; right: -15px; bottom: auto; left: auto; width: 55%; height: auto; }
   .feature-appointments,
   .feature-flags { display: flex; flex-direction: column; align-items: flex-start; height: auto; min-height: 0; }
+  .feature-treatment,
+  .feature-provinces { height: auto; min-height: 0; }
+  .feature-treatment .treatment-ui { position: relative; top: auto; left: auto; width: min(76%, 337px); height: auto; margin: 18px auto 0; }
+  .feature-provinces ul { position: relative; top: auto; left: auto; margin: 6px 24px 24px; }
   .feature-appointments .feature-copy,
   .feature-flags .feature-copy { width: 100%; padding: 24px; }
   .feature-appointments .small-button { position: relative; top: auto; right: auto; left: auto; z-index: 2; height: 42px; margin-left: 24px; font-size: 13px; }
-  .appointment-ui { position: relative; top: auto; left: auto; align-self: center; width: calc(100% - 48px); margin: 24px 0; }
-  .flags-ui { position: relative; top: auto; left: auto; align-self: center; width: min(calc(100% - 48px), 326px); margin: 20px 0 24px; }
+  .appointment-ui { position: relative; top: auto; left: auto; align-self: center; width: calc(100% - 48px); height: auto; margin: 20px 0 0; }
+  .flags-ui { position: relative; top: auto; left: auto; align-self: center; width: min(calc(100% - 48px), 326px); height: auto; margin: 16px 0 0; }
   .philosophy { height: auto; min-height: 0; padding: 35px 22px 44px; }
   .philosophy h2 { max-width: 100%; font-size: clamp(30px, 7vw, 40px); line-height: 1.17; letter-spacing: -1.3px; }
   .philosophy h2 > span { display: inline; }
@@ -380,11 +391,12 @@
   .care-label,
   .care-overlay { display: none; }
   .care-copy { position: relative; top: auto; left: auto; right: auto; width: 100%; margin-top: 300px; padding: 24px; background: #d9deec; }
-  .report-card { padding: 24px; }
-  .timer { top: 155px; left: calc(50% - 80px); width: 160px; }
-  .bars { top: 150px; left: 8%; width: 84%; }
-  .team { height: 400px; }
+  .report-card { height: auto; min-height: 0; padding: 24px; }
+  .timer { position: relative; top: auto; left: auto; width: 160px; height: auto; margin: 28px auto 0; }
+  .analytics { padding-bottom: 0; }
+  .bars { position: relative; top: auto; right: auto; bottom: auto; left: auto; width: 100%; height: auto; margin: 30px 0 0; }
+  .team { display: flex; flex-direction: column; align-items: flex-start; }
   .team .button { position: relative; z-index: 2; }
-  .team-photo { top: auto; right: 0; bottom: 0; width: clamp(155px, 46%, 190px); height: 165px; }
+  .team-photo { position: relative; top: auto; right: auto; bottom: auto; align-self: flex-end; width: min(52%, 200px); height: auto; aspect-ratio: 675 / 1000; margin: 16px 0 -24px; }
   .team-wave { top: auto; bottom: 0; left: 0; width: 100%; height: auto; }
 }
