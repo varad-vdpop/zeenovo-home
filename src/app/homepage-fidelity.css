@@ -10,7 +10,12 @@
 .logo-strip {
   display: block;
   width: 100%;
+  max-width: 1406px;
+  margin-inline: auto;
   overflow: hidden;
+  transform: none;
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
+  mask-image: linear-gradient(to right, transparent, #000 6%, #000 94%, transparent);
 }
 .logo-ticker-track {
   display: flex;
