@@ -1,98 +1,36 @@
 import Image from "next/image";
 import { useId, type CSSProperties } from "react";
 import styles from "./ProductUiPreviews.module.css";
+import RevealSequence from "./RevealSequence";
 
 function Icon({ name, className = "" }: { name: string; className?: string }) {
   return <Image className={`${styles.icon} ${className}`} src={`/assets/ui-previews/${name}.svg`} alt="" width={24} height={24} />;
 }
 
-const sopRows = [
-  ["Medication Dispensing", "Dispensing", "All Pharmacies", "v2"],
-  ["Controlled Substance Handling", "Compliance", "Ontario", "v1"],
-  ["Patient Counselling", "Clinical", "All Pharmacies", "v3"],
-  ["Compounding Safety Standards", "Safety", "Ontario", "v1"],
-];
-const sidebarRows = [
-  ["Pharmacies", "pharmacies"], ["SOP Templates", "document"],
-  ["Medicines", "medicines"], ["Drugs", "drugs"], ["Doctors", "doctor"],
-];
-
-// Native display previews: each row and field can be animated independently.
-export function AssureDashboardPreview() {
-  return <div className="assure-dashboard">
-    <div className={styles.sopPanel} role="img" aria-label="ZeeNovo Assure dashboard showing SOP templates by category, province, and version">
-      <div className={styles.sopHeader}>
-        <Image className={styles.sopLogo} src="/assets/ui-previews/assure-logo.png" alt="" width={119} height={36} />
-        <div className={styles.breadcrumb}>Home <span>›</span><b>SOP Templates</b></div>
-      </div>
-      <div className={styles.sopSidebar}>
-        {sidebarRows.map(([label, icon]) => <div key={label} className={`${styles.sopNavRow} ${label === "SOP Templates" ? styles.sopSelected : ""}`}>
-          <Image src={`/assets/hero-ui/${icon}.svg`} alt="" width={16} height={16} /><span>{label}</span>
-        </div>)}
-        <div className={styles.sopNavRow}><Icon name="analytics" /><span>Analytics</span></div>
-        <div className={styles.sopNavRow}><Icon name="clock" /><span>Pending Approvals</span></div>
-        <div className={styles.sopNavRow}><Icon name="settings" /><span>Category Settings</span></div>
-      </div>
-      <div className={styles.sopContent}>
-        <div className={styles.sopSearch}><Icon name="search" /><span>Search SOP templates...</span></div>
-        <div className={styles.sopFilters}>
-          <div className={styles.filterSelected}><Icon name="filter" />View Filters</div>
-          <div>Category - Dispensing</div><div>Province - Ontario</div>
-        </div>
-        <table className={styles.sopTable}>
-          <thead><tr>{["SOP title", "Category", "Province", "Latest version"].map(label => <th key={label}>{label}</th>)}</tr></thead>
-          <tbody>{sopRows.map(row => <tr key={row[0]}>{row.map((value, index) => <td key={index}>{value}</td>)}</tr>)}</tbody>
-        </table>
-        <div className={styles.sopPagination}>10 <span>50</span> 100</div>
-      </div>
-    </div>
-  </div>;
-}
-
-const measures = [
-  "Drink warm fluids to stay hydrated and soothe your throat.",
-  "Inhale steam to relieve nasal congestion.",
-  "Gargle with salt water to ease a sore throat.",
-  "Use paracetamol or decongestants as needed.",
-];
-
-export function TreatmentPreview() {
-  return <div className="treatment-ui">
-    <div className={styles.treatmentPanel} role="img" aria-label="Guided treatment selection with medicines and self care measures">
-      <div className={styles.treatmentTabs}>
-        <div className={styles.treatmentSelected}><Icon name="medicine-add" />Add medicines</div>
-        <div><Icon name="self-care" />Self care measures</div>
-      </div>
-      <div className={styles.measureList}>
-        <div className={styles.measureHeading}>Select a few<Icon name="chevron" /></div>
-        <div className={styles.measureSearch}><div><Icon name="find" />Find an item</div></div>
-        {measures.map((label, index) => <div key={label} className={`${styles.measureRow} ${index === 0 ? styles.measureSelected : ""}`}>
-          <div className={styles.checkbox}>{index === 0 && <Icon name="check" />}</div><div>{label}</div>
-        </div>)}
-      </div>
-    </div>
-  </div>;
-}
+export { AssureDashboardPreview, TreatmentPreview } from "./InteractiveProductUiPreviews";
 
 const profileSteps = [["Profile", "profile"], ["Patient screening", "screening"], ["Prescription", "prescription"], ["Family Physician", "physician"], ["Self care measures", "care"], ["Follow Up", "followup"]];
 
-export function AppointmentPreview() {
-  return <div className="appointment-ui">
-    <div className={styles.appointmentPanel} role="img" aria-label="Minor ailment appointment workflow showing profile details and personal information fields">
-      <div className={styles.profileSidebar}>
+export function AppointmentPreview({ animated = false }: { animated?: boolean }) {
+  const content = <>
+      <div className={styles.profileSidebar} data-reveal="fade">
         <div className={styles.stepsLabel}>Steps</div>
         {profileSteps.map(([label, icon], index) => <div className={`${styles.profileStep} ${index === 0 ? styles.profileActive : ""}`} key={label}>
           <div className={styles.stepIcon}><Icon name={icon} /></div><div>{label}</div>
         </div>)}
       </div>
       <div className={styles.profileContent}>
-        <div className={styles.profileHeading}>Profile details</div>
-        <div className={styles.personalLabel}>Personal Information</div>
+        <div className={styles.profileHeading} data-reveal="fade" style={{ "--sequence-delay": "50ms" } as CSSProperties}>Profile details</div>
+        <div className={styles.personalLabel} data-reveal="fade" style={{ "--sequence-delay": "100ms" } as CSSProperties}>Personal Information</div>
         <div className={styles.profileFields}>
-          {["First Name *", "Last Name *", "Gender *", "", "Email *", "Phone Number *"].map((label, index) => <div className={`${styles.profileField} ${index === 2 || index === 4 ? styles.dropdownField : ""}`} key={index}>{label}{(index === 2 || index === 4) && <Icon name="select" />}</div>)}
+          {["First Name *", "Last Name *", "Gender *", "", "Email *", "Phone Number *"].map((label, index) => <div className={`${styles.profileField} ${index === 2 || index === 4 ? styles.dropdownField : ""}`} data-reveal="fade" style={{ "--sequence-delay": `${150 + Math.floor(index / 2) * 50}ms` } as CSSProperties} key={index}>{label}{(index === 2 || index === 4) && <Icon name="select" />}</div>)}
         </div>
       </div>
-    </div>
+  </>;
+  const label = "Minor ailment appointment workflow showing profile details and personal information fields";
+  return <div className="appointment-ui">{animated
+    ? <RevealSequence as="div" duration={300} className={styles.appointmentPanel} role="img" aria-label={label}>{content}</RevealSequence>
+    : <div className={styles.appointmentPanel} role="img" aria-label={label}>{content}</div>}
   </div>;
 }
 
@@ -100,9 +38,9 @@ const patientFlags = [["Differential diagnosis", "diagnosis"], ["Breastfeeding",
 
 export function PatientFlagsPreview() {
   return <div className="flags-ui">
-    <div className={styles.flagsPanel} role="img" aria-label="Patient flags: differential diagnosis, breastfeeding, red flag, and pregnant">
+    <div className={styles.flagsPanel} role="group" aria-label="Patient flags: differential diagnosis, breastfeeding, red flag, and pregnant">
       <div className={styles.flagsHeading}>Patient Flags</div>
-      <div className={styles.flagRows}>{patientFlags.map(([label, icon]) => <div className={styles.flagRow} key={label}>
+      <div className={styles.flagRows}>{patientFlags.map(([label, icon]) => <div className={styles.flagRow} key={label} tabIndex={0}>
         <div className={styles.flagIcon}><Icon name={icon} /></div><div>{label}</div>
       </div>)}</div>
     </div>
@@ -125,11 +63,11 @@ export function ReportingTimerPreview() {
 
 const analyticsHeights = [96.124, 192.589, 90.245, 120.195, 150.427, 251.801, 344.722, 251.801, 197.047, 306.439];
 
-export function AnalyticsPreview() {
-  return <div className="bars">
-    <div className={styles.analyticsPanel} role="img" aria-label="Incident reporting analytics bar chart">
-      {analyticsHeights.map((height, index) => <div key={index} className={styles.analyticsBar} style={{ "--bar-height": `${height / 344.722 * 100}%` } as CSSProperties} />)}
-    </div>
+export function AnalyticsPreview({ animated = false }: { animated?: boolean }) {
+  const bars = analyticsHeights.map((height, index) => <div key={index} className={styles.analyticsBar} data-reveal="bar" style={{ "--bar-height": `${height / 344.722 * 100}%`, "--sequence-delay": `${index * 30}ms` } as CSSProperties} />);
+  return <div className="bars">{animated
+    ? <RevealSequence as="div" duration={600} className={styles.analyticsPanel} role="img" aria-label="Incident reporting analytics bar chart">{bars}</RevealSequence>
+    : <div className={styles.analyticsPanel} role="img" aria-label="Incident reporting analytics bar chart">{bars}</div>}
   </div>;
 }
 

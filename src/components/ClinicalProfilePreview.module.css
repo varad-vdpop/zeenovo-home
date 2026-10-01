@@ -1,0 +1,27 @@
+/* Container units preserve the Figma form's proportions as the illustration shrinks. */
+.panel { container-type: inline-size; width: 100%; aspect-ratio: 617.04 / 473.04; overflow: hidden; border: 1px solid #e2e8f0; border-radius: 1.867cqw; background: #fff; color: #0f172a; box-shadow: 0 .72px 2.16px rgb(0 0 0 / 10%), 0 .72px 1.44px rgb(0 0 0 / 10%); }
+.layout { display: grid; height: 100%; grid-template-columns: 26.14% minmax(0, 1fr); }
+.sidebar { padding: 2.334cqw; border-right: .117cqw solid #e2e8f0; background: #f8fafc; }
+.stepsLabel { color: #94a3b8; font-size: 1.4cqw; font-weight: 600; line-height: 1.867cqw; letter-spacing: .097cqw; text-transform: uppercase; }
+.steps { display: grid; gap: .934cqw; margin-top: 2.334cqw; }
+.step { display: flex; align-items: center; gap: 1.4cqw; color: #94a3b8; font-size: 1.634cqw; font-weight: 500; line-height: 2.042cqw; white-space: nowrap; }
+.stepIcon { display: grid; width: 4.201cqw; height: 4.201cqw; flex: none; place-items: center; border: .233cqw solid #e2e8f0; border-radius: 50%; background: #fff; }
+.stepIcon img { width: 1.867cqw; height: 1.867cqw; }
+.active { color: #3b309d; }
+.active .stepIcon { border-color: #3b309d; background: #3b309d; }
+.content { min-width: 0; padding: 3.734cqw; }
+.heading { padding-bottom: 1.867cqw; border-bottom: .117cqw solid #f1f5f9; font-family: var(--font-jakarta), sans-serif; font-size: 2.1cqw; font-weight: 700; line-height: 3.267cqw; }
+.personal { padding-top: 2.8cqw; }
+.label { color: #94a3b8; font-family: var(--font-jakarta), sans-serif; font-size: 1.4cqw; font-weight: 600; line-height: 1.867cqw; letter-spacing: .097cqw; text-transform: uppercase; }
+.fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.4cqw; margin-top: 1.867cqw; }
+.field { display: flex; height: 4.901cqw; align-items: center; justify-content: space-between; padding-inline: 1.634cqw; border: .117cqw solid #e2e8f0; border-radius: 1.4cqw; color: #94a3b8; font-size: 1.634cqw; font-weight: 400; line-height: 2.1cqw; white-space: nowrap; }
+.dropdown { color: #0f172a; }
+.dropdown img { width: 1.634cqw; height: 1.634cqw; flex: none; }
+.section { padding-top: 3.734cqw; }
+.healthHeading { display: flex; align-items: center; justify-content: space-between; }
+.checkboxLabel { display: flex; align-items: center; gap: .7cqw; color: #475569; font-size: 1.4cqw; line-height: 1.867cqw; white-space: nowrap; }
+.checkbox { width: 1.867cqw; height: 1.867cqw; border: .233cqw solid #cbd5e1; border-radius: .467cqw; }
+.actions { display: flex; justify-content: flex-end; gap: 1.4cqw; padding-top: 3.734cqw; font-family: var(--font-jakarta), sans-serif; font-size: 1.634cqw; font-weight: 600; line-height: 2.334cqw; }
+.back,.continue { display: grid; height: 4.901cqw; place-items: center; border-radius: 1.4cqw; }
+.back { padding-inline: 2.334cqw; border: .117cqw solid #e2e8f0; color: #475569; }
+.continue { padding-inline: 2.8cqw; color: #fff; background: #21058f; }

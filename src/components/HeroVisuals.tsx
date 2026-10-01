@@ -21,7 +21,8 @@ const currency = new Intl.NumberFormat("en-US", {
   currency: "USD",
   maximumFractionDigits: 0,
 });
-const chartTransition = { ...counterTransition, delay: 0.3 };
+// Draw during the panel fade, which begins alongside the left-side content.
+const chartTransition = { ...counterTransition, delay: 0.4 };
 // The original Figma curve, kept as a live SVG path so it can draw itself.
 const revenueCurve = "M18.1973 147.808C34.2421 143.742 50.2863 139.676 66.3311 135.61C82.3758 131.543 98.4201 123.411 114.465 123.411C130.51 123.411 146.554 126.461 162.599 126.461C178.643 126.461 194.688 115.787 210.732 111.212C226.777 106.638 242.821 102.064 258.866 99.0139C274.911 95.9642 290.955 94.4389 307 92.9144";
 

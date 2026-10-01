@@ -4,6 +4,8 @@ import FinalCta from "@/components/FinalCta";
 import ResultsCounters from "@/components/ResultsCounters";
 import HeroPattern from "@/components/HeroPattern";
 import ScrollFade from "@/components/ScrollFade";
+import RevealSequence from "@/components/RevealSequence";
+import type { CSSProperties } from "react";
 import { HeroMenuPreview, HeroRevenuePreview } from "@/components/HeroVisuals";
 import { AssureDashboardPreview, TreatmentPreview, AppointmentPreview, PatientFlagsPreview, ReportingTimerPreview, AnalyticsPreview } from "@/components/ProductUiPreviews";
 
@@ -111,7 +113,7 @@ function ProductCards() {
             <div className="card-copy"><h3>Zeenovo <b>Clinical</b></h3><p>Clinical Modules + Appointment<br />Management</p><Button light href="#solutions">Explore</Button></div>
             <div className="clinical-doctor"><Cover src={asset.clinicalDoctor} alt="Smiling pharmacist" /></div>
           </ScrollFade>
-          <ScrollFade as="article" className="product-card assure">
+          <ScrollFade as="article" className="product-card assure" delay={60} responsiveDelay>
             <Image className="assure-lines" src={asset.assureCardLines} alt="" width={763} height={430} />
             <div className="card-copy"><h3>Zeenovo <b>Assure</b></h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p><Button light href="#reporting">Explore</Button></div>
             <Image className="assure-dashboard-frame" src={asset.assureGlassFrame} alt="" width={582} height={272} />
@@ -125,7 +127,7 @@ function ProductCards() {
             <div className="card-copy"><h3>Zeenovo <b>Magistral</b></h3><p>Clinical Modules + Appointment Management</p><Button light href="#solutions">Explore</Button></div>
             <div className="magistral-doctor"><Cover src={asset.magistralDoctor} alt="Pharmacy professional" /></div>
           </ScrollFade>
-          <ScrollFade as="article" className="product-card intelligence">
+          <ScrollFade as="article" className="product-card intelligence" delay={60} responsiveDelay>
             <Image className="intelligence-lines" src={asset.intelligenceCardLines} alt="" width={465} height={326} />
             <div className="card-copy"><h3>Zeenovo <b>Intelligence</b></h3><p>Clinical Modules + Appointment<br />Management</p><Button light href="#solutions">Explore</Button></div>
             <Image className="phone" src={asset.intelligencePhoneIllustration} alt="ZeeNovo Intelligence mobile interface" width={363} height={301} />
@@ -145,15 +147,15 @@ const values = [
 ] as const;
 
 function Values() {
-  return <section className="values" id="why-zeenovo"><Tag>You can trust us</Tag><h2>Your pharmacy is in good hands.</h2><div className="values-track"><Image src={asset.valuesCompleteWave} alt="" width={1440} height={181} /><div className="values-list">{values.map(([label, icon])=><div key={label}><p>{label}</p><Image src={icon} alt="" width={50} height={50} /></div>)}</div></div></section>;
+  return <section className="values" id="why-zeenovo"><Tag>You can trust us</Tag><h2>Your pharmacy is in good hands.</h2><div className="values-track"><Image src={asset.valuesCompleteWave} alt="" width={1440} height={181} /><div className="values-list">{values.map(([label, icon], index)=><ScrollFade as="div" key={label} distance={12} duration={450} delay={index * 60} responsiveDelay><p>{label}</p><Image src={icon} alt="" width={50} height={50} /></ScrollFade>)}</div></div></section>;
 }
 
 function Features() {
-  return <section className="section features" id="solutions"><Tag>Zeenovo Clinical</Tag><h2>Innovative Solutions<br />for Modern Pharmacies.</h2><div className="feature-grid">
-    <article className="feature-card feature-treatment"><Image className="feature-circle treatment-circle" src={asset.featureCircle} alt="" width={874} height={760} /><div className="feature-copy"><h3>Guided Treatment Paths</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p></div><TreatmentPreview /></article>
-    <article className="feature-card feature-provinces"><div className="feature-copy"><h3>Province Wise Service Modules</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p></div><ul>{["Ontario","Quebec","British Columbia","Alberta","Nova Scotia","Saskatchewan"].map(x=><li key={x}><Arrow />{x}</li>)}</ul><Image className="canada-map" src={asset.mapIcon} alt="" width={423} height={411} /></article>
-    <article className="feature-card feature-appointments"><div className="feature-copy"><h3>Minor Ailments easy appointment flow</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p></div><a className="small-button" href="#contact"><Arrow /> Explore</a><AppointmentPreview /></article>
-    <article className="feature-card feature-flags"><Image className="feature-circle flags-circle" src={asset.featureCircle} alt="" width={874} height={760} /><div className="feature-copy"><h3>Red Flags</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p></div><PatientFlagsPreview /></article>
+  return <section className="section features" id="solutions"><Tag>Zeenovo Clinical</Tag><ScrollFade as="h2">Innovative Solutions<br />for Modern Pharmacies.</ScrollFade><div className="feature-grid">
+    <ScrollFade as="article" className="feature-card feature-treatment"><Image className="feature-circle treatment-circle" src={asset.featureCircle} alt="" width={874} height={760} /><div className="feature-copy"><h3>Guided Treatment Paths</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p></div><TreatmentPreview /></ScrollFade>
+    <ScrollFade as="article" className="feature-card feature-provinces"><div className="feature-copy"><h3>Province Wise Service Modules</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p></div><ul>{["Ontario","Quebec","British Columbia","Alberta","Nova Scotia","Saskatchewan"].map(x=><li key={x}><Arrow />{x}</li>)}</ul><Image className="canada-map" src={asset.mapIcon} alt="" width={423} height={411} /></ScrollFade>
+    <ScrollFade as="article" className="feature-card feature-appointments"><div className="feature-copy"><h3>Minor Ailments easy appointment flow</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p></div><a className="small-button" href="#contact"><Arrow /> Explore</a><AppointmentPreview animated /></ScrollFade>
+    <ScrollFade as="article" className="feature-card feature-flags"><Image className="feature-circle flags-circle" src={asset.featureCircle} alt="" width={874} height={760} /><div className="feature-copy"><h3>Red Flags</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p></div><PatientFlagsPreview /></ScrollFade>
   </div></section>;
 }
 
@@ -165,30 +167,30 @@ const services = [
 ] as const;
 
 function Services() {
-  return <section className="section services" id="services"><Tag>Zeenovo Clinical</Tag><h2>Services we offer</h2><div className="service-grid">{services.map(([title,src])=><a href="#contact" key={title}><div className="service-photo"><Cover src={src} alt={title} /></div><b>{title} <span>↗</span></b></a>)}</div></section>;
+  return <section className="section services" id="services"><Tag>Zeenovo Clinical</Tag><ScrollFade as="h2">Services we offer</ScrollFade><div className="service-grid">{services.map(([title,src])=><ScrollFade as="a" href="#contact" key={title}><div className="service-photo"><Cover src={src} alt={title} /></div><b>{title} <span>↗</span></b></ScrollFade>)}</div></section>;
 }
 
 function Philosophy() {
-  return <section className="philosophy-band"><div className="philosophy"><Tag dark>Our Philosophy</Tag><h2><span>We believe every pharmacy</span>{" "}<span>should have the tools to deliver</span>{" "}<span>better care, <strong>every day.</strong></span></h2><div className="philosophy-bottom"><p>World-class clinical tools, smart pharmacy<br />business solutions, and the support you need to<br />build your dream pharmacy practice</p><Button light href="#contact">Know about us</Button></div><Image className="philosophy-wave" src={asset.philosophyLines} alt="" width={181} height={643} /></div></section>;
+  return <section className="philosophy-band"><div className="philosophy"><Tag dark>Our Philosophy</Tag><RevealSequence as="h2"><span data-reveal="rise">We believe every pharmacy</span>{" "}<span data-reveal="rise" style={{ "--sequence-delay": "80ms" } as CSSProperties}>should have the tools to deliver</span>{" "}<span data-reveal="rise" style={{ "--sequence-delay": "160ms" } as CSSProperties}>better care, <strong>every day.</strong></span></RevealSequence><ScrollFade as="div" className="philosophy-bottom" distance={12} duration={450} delay={240}><p>World-class clinical tools, smart pharmacy<br />business solutions, and the support you need to<br />build your dream pharmacy practice</p><Button light href="#contact">Know about us</Button></ScrollFade><Image className="philosophy-wave" src={asset.philosophyLines} alt="" width={181} height={643} /></div></section>;
 }
 
 function CareBanner() {
-  return <section className="care-banner"><Image className="care-background" src={asset.carePhoto} alt="Pharmacist preparing care" width={1204} height={602} /><Image className="care-overlay" src={asset.careOverlay} alt="" width={875} height={708} /><div className="care-label eye"><span className="care-label-icon"><Image src={asset.careEyeIcon} alt="" width={27} height={20} /></span>Conjunctivitis</div><div className="care-label bee"><span className="care-label-icon"><Image src={asset.careBeeIcon} alt="" width={23} height={23} /></span>Bee Sting</div><div className="care-copy"><h2>Making minor ailment care<br />quicker, simpler and more<br />accessible.</h2><p>World-class clinical tools, smart pharmacy business solutions, and the support you need to build your dream pharmacy practice</p><Button>Sign Up</Button></div></section>;
+  return <ScrollFade as="section" className="care-banner"><Image className="care-background" src={asset.carePhoto} alt="Pharmacist preparing care" width={1204} height={602} /><Image className="care-overlay" src={asset.careOverlay} alt="" width={875} height={708} /><div className="care-label eye"><span className="care-label-icon"><Image src={asset.careEyeIcon} alt="" width={27} height={20} /></span>Conjunctivitis</div><div className="care-label bee"><span className="care-label-icon"><Image src={asset.careBeeIcon} alt="" width={23} height={23} /></span>Bee Sting</div><div className="care-copy"><h2>Making minor ailment care<br />quicker, simpler and more<br />accessible.</h2><p>World-class clinical tools, smart pharmacy business solutions, and the support you need to build your dream pharmacy practice</p><Button>Sign Up</Button></div></ScrollFade>;
 }
 
 function ReportCards() {
-  return <section className="section reporting" id="reporting"><Tag>Zeenovo Assure</Tag><h2>Why Pharmacies Choose<br />ZeeNovo for Incident Reporting</h2><div className="report-grid">
-    <article className="report-card fast"><h3>Fast &amp; Guided Reporting<br />Workflow</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p><ReportingTimerPreview /></article>
-    <article className="report-card analytics"><h3>Advanced Analytics &amp; Insights</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p><AnalyticsPreview /></article>
-    <article className="report-card team"><h3>Multi-Pharmacy &amp; Team Support</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p><Button href="#contact">Explore</Button><Image className="team-wave" src={asset.reportingWave} alt="" width={787} height={181} /><div className="team-photo"><Cover src={asset.teamPhoto} alt="Healthcare team" /></div></article>
-    <article className="report-card nidr"><h3>NIDR-Aligned Reporting</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p><div className="nidr-logo"><Image src={asset.reportingLogo} alt="ISMP Canada" width={320} height={190} /></div></article>
+  return <section className="section reporting" id="reporting"><Tag>Zeenovo Assure</Tag><ScrollFade as="h2">Why Pharmacies Choose<br />ZeeNovo for Incident Reporting</ScrollFade><div className="report-grid">
+    <ScrollFade as="article" className="report-card fast"><h3>Fast &amp; Guided Reporting<br />Workflow</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p><ReportingTimerPreview /></ScrollFade>
+    <ScrollFade as="article" className="report-card analytics"><h3>Advanced Analytics &amp; Insights</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p><AnalyticsPreview animated /></ScrollFade>
+    <ScrollFade as="article" className="report-card team"><h3>Multi-Pharmacy &amp; Team Support</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p><Button href="#contact">Explore</Button><Image className="team-wave" src={asset.reportingWave} alt="" width={787} height={181} /><div className="team-photo"><Cover src={asset.teamPhoto} alt="Healthcare team" /></div></ScrollFade>
+    <ScrollFade as="article" className="report-card nidr"><h3>NIDR-Aligned Reporting</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p><div className="nidr-logo"><Image src={asset.reportingLogo} alt="ISMP Canada" width={320} height={190} /></div></ScrollFade>
   </div></section>;
 }
 
 function Testimonials() {
-  return <section className="testimonials"><div className="section"><Tag>Zeenovo Assure</Tag><h2>Why Pharmacies Choose<br />ZeeNovo for Incident Reporting</h2><div className="testimonial-grid">{[asset.testimonial1,asset.testimonial2].map((src,i)=><article key={src} className={i===1?"testimonial purple":"testimonial"}><div><span>★★★★★</span><p>Lorem ipsum dolor sit amet consectetur. Consequat auctor consectetur nunc vitae dolor blandit. Elit enim massa etiam neque laoreet lorem sed.</p><b>Anthony Babringer</b><small>Senior Research Manager</small></div><div className="testimonial-photo"><Cover src={src} alt={i===0?"Smiling customer":"Smiling customer wearing glasses"} /></div></article>)}</div></div></section>;
+  return <section className="testimonials"><div className="section"><Tag>Zeenovo Assure</Tag><ScrollFade as="h2">Why Pharmacies Choose<br />ZeeNovo for Incident Reporting</ScrollFade><div className="testimonial-grid">{[asset.testimonial1,asset.testimonial2].map((src,i)=><ScrollFade as="article" key={src} className={i===1?"testimonial purple":"testimonial"}><div><span>★★★★★</span><p>Lorem ipsum dolor sit amet consectetur. Consequat auctor consectetur nunc vitae dolor blandit. Elit enim massa etiam neque laoreet lorem sed.</p><b>Anthony Babringer</b><small>Senior Research Manager</small></div><div className="testimonial-photo"><Cover src={src} alt={i===0?"Smiling customer":"Smiling customer wearing glasses"} /></div></ScrollFade>)}</div></div></section>;
 }
 
 export default function Home() {
-  return <main><Hero /><Trust /><ProductCards /><Values /><Features /><Services /><Philosophy /><CareBanner /><ReportCards /><Testimonials /><FinalCta /></main>;
+  return <main><Hero /><Trust /><ProductCards /><Values /><Features /><Services /><Philosophy /><CareBanner /><ReportCards /><Testimonials /><FinalCta animated /></main>;
 }
