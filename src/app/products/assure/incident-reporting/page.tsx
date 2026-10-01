@@ -3,6 +3,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { asset } from "@/lib/assets";
 import styles from "./page.module.css";
+import IncidentAnalyticsPanels from "./IncidentAnalyticsPanels";
+import AfterVisitPanels from "./AfterVisitPanels";
+import IncidentDashboard from "./IncidentDashboard";
 
 const pageAsset = asset.incidentReporting;
 
@@ -35,7 +38,9 @@ function Hero() {
           <Link className={styles.secondaryButton} href="/book-a-demo"><Arrow />Book a Demo</Link>
         </div>
       </div>
-      <Image className={styles.heroDashboard} src={pageAsset.dashboard} alt="ZeeNovo Assure analytics dashboard" width={723} height={529} priority />
+      <div className={styles.heroDashboardShell}>
+        <IncidentDashboard />
+      </div>
     </section>
   );
 }
@@ -47,7 +52,7 @@ function Analytics() {
         <div><p>Analytics</p><h2 id="analytics-title">Four ways analytics works<br />harder for you.</h2></div>
         <span>Choose a capability, then move through one consistent intake, assessment and documentation flow.</span>
       </div>
-      <Image className={styles.analyticsCards} src={pageAsset.analyticsCards} alt="Trend dashboards, insight surfacing, pharmacy metrics and scheduled reports" width={1321} height={797} />
+      <IncidentAnalyticsPanels />
     </section>
   );
 }
@@ -71,22 +76,33 @@ function AfterVisit() {
   return (
     <section className={styles.afterVisit} aria-labelledby="after-visit-title">
       <div className={styles.sectionHeading}><p>After the visit</p><h2 id="after-visit-title">Keep care moving after the visit.</h2></div>
-      <div className={styles.visitCards}>
-        <Image src={pageAsset.crossProduct} alt="Cross-product incident reporting insight" width={642} height={400} />
-        <Image src={pageAsset.exports} alt="Exportable comprehensive patient information report" width={642} height={400} />
-      </div>
+      <AfterVisitPanels />
     </section>
   );
 }
 
 function Process() {
+  const steps = ["Collect", "Detect", "Compare", "Report", "Act"];
+
   return (
     <section className={styles.process} aria-labelledby="process-title">
       <div className={styles.processHeading}>
         <Tag>From data to decision</Tag>
         <h2 id="process-title">Collect, detect, compare, report<br />and act, without a spreadsheet.</h2>
+        <p>Support common, province-backed conditions through a guided flow that keeps questions</p>
       </div>
-      <Image className={styles.processWave} src={pageAsset.processWave} alt="Collect, detect, compare, report and act workflow" width={1440} height={245} />
+      <div className={styles.processTrack}>
+        <Image className={styles.processWave} src={pageAsset.processWave} alt="" width={1440} height={181} />
+        <Image className={`${styles.processWave} ${styles.processWaveTrace}`} src={pageAsset.processWave} alt="" aria-hidden="true" width={1440} height={181} />
+        <div className={styles.processSteps}>
+          {steps.map((step, index) => (
+            <article className={styles.processStep} key={step}>
+              <Image src={pageAsset.processIcons[index]} alt="" width={44} height={44} />
+              <h3>{step}</h3>
+            </article>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

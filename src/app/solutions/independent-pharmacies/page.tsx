@@ -32,8 +32,8 @@ const realityCards = [
 
 const changes = [
   { label: "Automation as staff", icon: pageAsset.automation },
-  { label: "A storefront that competes", icon: pageAsset.storefront },
-  { label: "Clinical revenue that compounds", icon: pageAsset.revenue },
+  { label: "Competing storefront", icon: pageAsset.storefront },
+  { label: "Clinical revenue growth", icon: pageAsset.revenue },
   { label: "No IT project", icon: pageAsset.noIt },
 ] as const;
 
@@ -116,18 +116,20 @@ function Hero() {
 function Reality() {
   return (
     <section className={styles.reality} aria-labelledby="reality-title">
-      <div className={styles.realityHeading}>
-        <div><p>Minor ailments</p><h2 id="reality-title">The week-to-week reality</h2></div>
-        <p>Independent pharmacy work rarely arrives one role at a time.</p>
-      </div>
-      <div className={styles.realityCards}>
-        {realityCards.map((card) => (
-          <article key={card.number}>
-            <span>{card.number}</span>
-            <Image src={pageAsset.quote} alt="" width={79} height={64} />
-            <div><h3>{card.title}</h3><p>{card.body}</p></div>
-          </article>
-        ))}
+      <div className={styles.sectionRail}>
+        <div className={styles.realityHeading}>
+          <div><p>Minor ailments</p><h2 id="reality-title">The week-to-week reality</h2></div>
+          <p>Independent pharmacy work rarely arrives one role at a time.</p>
+        </div>
+        <div className={styles.realityCards}>
+          {realityCards.map((card) => (
+            <article key={card.number}>
+              <span>{card.number}</span>
+              <Image src={pageAsset.quote} alt="" width={79} height={64} />
+              <div><h3>{card.title}</h3><p>{card.body}</p></div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -139,12 +141,14 @@ function PictureChanges() {
       <div className={styles.changesHeading}>
         <span><Image src={pageAsset.star} alt="" width={20} height={20} />With ZeeNovo</span>
         <h2 id="changes-title">How the picture changes</h2>
+        <p>Support common, province-backed conditions through a guided flow that keeps questions</p>
       </div>
       <div className={styles.changeTrack}>
         <Image className={styles.changeArt} src={pageAsset.changeArt} alt="" width={1440} height={240} />
-        {changes.map((item, index) => (
-          <article key={item.label} className={index % 2 ? styles.changeLow : styles.changeHigh}>
-            <Image className={styles.mobileChangeIcon} src={item.icon} alt="" width={69} height={69} />
+        <Image className={`${styles.changeArt} ${styles.changeArtTrace}`} src={pageAsset.changeArt} alt="" aria-hidden="true" width={1440} height={240} />
+        {changes.map((item) => (
+          <article key={item.label}>
+            <Image className={styles.changeIcon} src={item.icon} alt="" width={50} height={50} />
             <h3>{item.label}</h3>
           </article>
         ))}
@@ -156,18 +160,20 @@ function PictureChanges() {
 function BetterWeek() {
   return (
     <section className={styles.betterWeek} aria-labelledby="better-week-title">
-      <div className={styles.weekHeading}>
-        <div><p>A better week</p><h2 id="better-week-title">Less admin around the care.</h2></div>
-        <p>ZeeNovo runs quietly around the pharmacy’s real work.</p>
-      </div>
-      <div className={styles.weekCards}>
-        {week.map((day, index) => (
-          <article key={day.number}>
-            <span>{day.number}</span>
-            <div className={styles.weekIcon}><Image src={pageAsset.days[index]} alt="" width={50} height={50} /></div>
-            <div><h3>{day.title}</h3><p>{day.body}</p></div>
-          </article>
-        ))}
+      <div className={styles.sectionRail}>
+        <div className={styles.weekHeading}>
+          <div><p>A better week</p><h2 id="better-week-title">Less admin around the care.</h2></div>
+          <p>ZeeNovo runs quietly around the pharmacy’s real work.</p>
+        </div>
+        <div className={styles.weekCards}>
+          {week.map((day, index) => (
+            <article key={day.number}>
+              <span>{day.number}</span>
+              <div className={styles.weekIcon}><Image src={pageAsset.days[index]} alt="" width={50} height={50} /></div>
+              <div><h3>{day.title}</h3><p>{day.body}</p></div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );

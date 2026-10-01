@@ -15,7 +15,50 @@
 .secondaryButton span,
 .ctaHeading a span { font-size: 23px; line-height: 1; }
 .secondaryButton { border: 1px solid #2b108e; background: #fff; color: #2b108e; }
-.heroDashboard { position: absolute; z-index: 3; top: 196px; left: calc(50% - 37px); width: 723px; height: 529px; }
+.heroDashboardShell { position: absolute; z-index: 3; top: 196px; left: calc(50% - 37px); width: 723px; overflow: hidden; border-radius: 20px; animation: dashboardDrift 6.8s ease-in-out infinite; }
+.dashboardFrame { width: 723px; height: 529px; padding: 12px; overflow: hidden; border: 1px solid rgb(255 255 255 / 70%); border-radius: 27px; background: linear-gradient(123deg, rgb(255 255 255 / 47%), rgb(255 255 255 / 0%)); }
+.dashboardWindow { position: relative; width: 791px; height: 501px; overflow: hidden; border: 1px solid #9185ff; border-radius: 14px; background: #fff; color: #0a0a0a; font-family: Inter, Arial, sans-serif; }
+.dashboardHeader { position: absolute; top: 0; right: 0; left: 0; display: flex; align-items: center; gap: 36px; height: 35px; padding: 0 15px; border-bottom: 1px solid #e5e5e5; font-size: 8px; }
+.dashboardHeader > strong { color: #4735cb; font-size: 10px; }
+.dashboardHeader sup { font-size: 5px; }
+.dashboardHeader > span { color: #737373; }
+.dashboardNav { position: absolute; top: 35px; bottom: 0; left: 0; display: flex; width: 141px; padding: 13px 9px; border-right: 1px solid #e5e5e5; flex-direction: column; gap: 3px; }
+.dashboardNav span { display: flex; align-items: center; height: 22px; padding: 0 9px; border-radius: 4px; font-size: 8px; }
+.dashboardNav span::before { width: 7px; height: 7px; margin-right: 6px; border: 1px solid currentcolor; border-radius: 2px; content: ""; opacity: .75; }
+.dashboardNav .activeNav { background: #3950d3; color: #eff6ff; animation: activeNavGlow 5.8s ease-in-out infinite; }
+.dashboardMain { position: absolute; top: 35px; left: 141px; width: 632px; padding: 13px; }
+.overviewLabel { display: block; font-size: 9px; line-height: 16px; }
+.dashboardStats { display: grid; grid-template-columns: repeat(5, 116px); gap: 7px; margin-top: 11px; }
+.dashboardStats > div { display: flex; height: 44px; padding: 7px 9px; border: 1px solid #a9b2ff; border-radius: 8px; background: #eff1ff; flex-direction: column; }
+.dashboardStats span { color: #3950d3; font-size: 6px; }
+.dashboardStats strong { margin-top: 2px; font-size: 14px; line-height: 18px; white-space: nowrap; }
+.dashboardLineCard { width: 606px; height: 190px; margin-top: 11px; overflow: hidden; border: 1px solid #e5e5e5; border-radius: 6px; background: #fff; }
+.dashboardChartTitle { display: flex; justify-content: space-between; height: 34px; padding: 12px 13px 5px; font-size: 7px; }
+.dashboardChartTitle span { color: #737373; }
+.dashboardPlot { position: relative; width: 566px; height: 137px; margin: 0 auto; overflow: hidden; }
+.dashboardGrid { position: absolute; inset: 0 0 16px; background: repeating-linear-gradient(to bottom, #e8e8e8 0 1px, transparent 1px 30px); }
+.dashboardAreaNode { position: absolute; top: 24px; left: 0; width: 549px; height: 97px; opacity: .75; transform-origin: bottom left; animation: dashboardAreaLoop 6s ease-in-out infinite; }
+.dashboardLineNode { position: absolute; top: 24px; left: 0; width: 556px; height: 2px; transform: rotate(8.65deg); transform-origin: left center; clip-path: inset(0 100% 0 0); animation: dashboardLineReveal 6s ease-in-out infinite; }
+.dashboardPoint { position: absolute; z-index: 3; animation: pointPulse 3.4s ease-in-out infinite; }
+.dashboardPointStart { top: 21px; left: 0; }
+.dashboardPointEnd { top: 105px; left: 547px; animation-delay: -1.7s; }
+.dashboardXAxis { position: absolute; right: 0; bottom: 1px; left: 0; color: #888; font-size: 6px; white-space: pre; }
+.dashboardBottom { display: grid; grid-template-columns: repeat(3, 195px); gap: 11px; margin-top: 11px; }
+.dashboardBottom article { position: relative; height: 161px; padding: 13px; border: 1px solid #e5e5e5; border-radius: 6px; background: #fff; }
+.dashboardBottom article > strong { font-size: 8px; }
+.dashboardBottom small { position: absolute; right: 12px; bottom: 10px; left: 12px; color: #737373; font-size: 6px; text-align: center; }
+.dashboardBottom i { display: inline-block; width: 4px; height: 4px; margin-right: 3px; border-radius: 50%; background: #49c7c8; }
+.statusChart { position: relative; width: 88px; height: 88px; margin: 8px auto 0; }
+.statusChart img:first-child { position: absolute; inset: 6px 4px auto auto; width: 79px; height: 74px; }
+.statusChart img:last-child { position: absolute; top: 5px; left: 24px; width: 58px; height: 40px; }
+.harmDonut { position: relative; display: grid; width: 88px; height: 88px; margin: 8px auto 0; border-radius: 50%; background: conic-gradient(#3950d3 0 50%, #e4e7fa 50% 100%); place-items: center; }
+.harmDonut::after { width: 56px; height: 56px; border-radius: 50%; background: #fff; content: ""; }
+.harmDonut span { position: absolute; inset: 0; z-index: 1; display: grid; font-size: 13px; font-weight: 600; place-items: center; }
+.learningChart { position: relative; width: 62px; height: 62px; margin: 12px auto 0; }
+.learningChart img { width: 62px; height: 62px; }
+.learningChart span { position: absolute; inset: 0; display: grid; font-size: 12px; font-weight: 600; place-items: center; }
+.heroDashboardShell::after,
+.visitUiCard::after { position: absolute; inset: 0; background: linear-gradient(105deg, transparent 42%, rgb(255 255 255 / 24%) 49%, rgb(255 255 255 / 8%) 53%, transparent 60%); content: ""; pointer-events: none; transform: translate3d(-135%, 0, 0); animation: interfaceSweep 9s cubic-bezier(.45, 0, .25, 1) infinite; }
 
 .analytics { position: relative; width: min(calc(100% - 120px), 1320px); height: 972px; margin: 43px auto 0; }
 .splitHeading { display: flex; align-items: flex-end; justify-content: space-between; height: 136px; }
@@ -24,25 +67,172 @@
 .splitHeading h2,
 .sectionHeading h2 { font-size: 42px; font-weight: 500; letter-spacing: -1.2px; line-height: 1.17; }
 .splitHeading > span { width: 535px; margin-bottom: 13px; color: #666474; font-size: 16px; line-height: 24px; }
-.analyticsCards { position: absolute; top: 176px; left: 0; width: 100%; height: auto; }
+.analyticsGrid { position: absolute; top: 176px; left: 0; display: grid; grid-template-columns: 476px 133px 1fr; grid-template-rows: 433px 326px; gap: 37px 33px; width: 100%; }
+.analyticsPanel { position: relative; overflow: hidden; border-radius: 25px; }
+.panelCopy { position: absolute; z-index: 4; top: 27px; left: 31px; }
+.panelCopy h3 { font-size: 24px; font-weight: 500; letter-spacing: -.48px; line-height: 1.2; }
+.panelCopy p { margin-top: 2px; color: rgb(0 0 0 / 60%); font-size: 16px; line-height: 1.4; letter-spacing: -.32px; }
+
+.trendPanel { background: #d8f9fc; }
+.trendPanel { grid-column: 1; }
+.trendChart { position: absolute; top: 133px; left: 47px; width: 517px; height: 283px; overflow: hidden; border: 1px solid #889aff; border-radius: 14px; background: #fff; }
+.chartToolbar { display: flex; align-items: center; justify-content: space-between; height: 50px; padding: 13px 19px 8px; }
+.chartToolbar strong { font: 600 11px/1.2 Inter, sans-serif; }
+.chartTabs { display: flex; gap: 3px; padding: 2px; border-radius: 8px; background: #f5f5f5; color: #737373; font: 500 9px/1.2 Inter, sans-serif; white-space: nowrap; }
+.chartTabs span { padding: 4px 9px; border-radius: 7px; }
+.chartTabs span:first-child { background: #fff; color: #111; box-shadow: 0 1px 2px rgb(0 0 0 / 5%); }
+.lineChart { display: grid; grid-template-columns: 20px 1fr; height: 232px; padding: 0 15px 13px 22px; }
+.yAxis { display: flex; flex-direction: column; justify-content: space-between; padding-bottom: 19px; color: #999; font: 500 9px/1 Inter, sans-serif; }
+.linePlot { position: relative; height: 212px; overflow: hidden; }
+.gridLines { position: absolute; top: 0; right: 0; bottom: 30px; left: 0; background: repeating-linear-gradient(to bottom, #e8e8e8 0 1px, transparent 1px 44px); }
+.lineAreaNode { position: absolute; top: 34px; left: -1px; width: 814px; height: 143px; opacity: .72; }
+.lineAreaNode img { display: block; width: 814px; height: 143px; }
+.lineStrokeNode { position: absolute; top: 34px; left: -1px; width: 814px; height: 143px; clip-path: inset(0 100% 0 0); animation: lineReveal 6s cubic-bezier(.4, 0, .2, 1) infinite; }
+.lineStrokeNode img { display: block; width: 814px; height: 143px; }
+.chartDot { position: absolute; z-index: 3; animation: pointPulse 3.4s ease-in-out infinite; }
+.chartDotOne { top: 31px; left: 0; }
+.chartDotTwo { top: 93px; left: 203px; animation-delay: -1.1s; }
+.chartDotThree { top: 37px; left: 421px; animation-delay: -2.2s; }
+.xAxis { position: absolute; right: 0; bottom: 0; left: 0; display: flex; justify-content: space-between; color: #888; font: 500 9px/1 Inter, sans-serif; }
+
+.insightPanel { background: #3b309d; }
+.insightPanel { grid-column: 2 / span 2; }
+.insightPanel .panelCopy h3 { color: #fff; }
+.insightPanel .panelCopy p { color: rgb(255 255 255 / 60%); }
+.insightLines { position: absolute; top: -108px; left: 49px; width: 940px; max-width: none; height: 758px; opacity: .28; }
+.discoveryShell { position: absolute; top: 114px; left: 90px; width: 653px; height: 356px; padding: 12px; overflow: hidden; border-radius: 20px; background: linear-gradient(128deg, rgb(255 255 255 / 47%), rgb(255 255 255 / 0%)); }
+.discoveryChart { height: 332px; padding: 27px 28px; border: 1px solid #e5e5e5; border-radius: 12px; background: #fff; }
+.discoveryChart > strong { display: block; text-align: center; font: 600 20px/1.2 Inter, sans-serif; }
+.discoveryPlot { position: relative; margin-top: 20px; }
+.discoveryGrid { position: absolute; top: 0; right: 0; bottom: 28px; left: 95px; background: repeating-linear-gradient(to right, #e5e5e5 0 1px, transparent 1px 25%); }
+.discoveryRow { position: relative; z-index: 2; display: grid; grid-template-columns: 84px 1fr; align-items: center; gap: 10px; margin-bottom: 25px; color: #737373; font: 400 13px/1 Inter, sans-serif; }
+.discoveryRow > span { text-align: right; }
+.barTrack { height: 28px; overflow: hidden; border-radius: 5px; }
+.barNode { width: 100%; height: 28px; transform-origin: left center; animation: barGrow 5.8s cubic-bezier(.4, 0, .2, 1) var(--bar-delay) infinite; }
+.barNode img { display: block; width: 100%; height: 28px; }
+.discoveryAxis { display: flex; justify-content: space-between; margin: -6px 0 0 95px; color: #737373; font: 400 12px/1 Inter, sans-serif; }
+
+.trackPanel { background: #fff0de; }
+.trackPanel { grid-column: 1 / span 2; }
+.trackLines { position: absolute; top: -295px; left: 313px; width: 1052px; max-width: none; height: 758px; opacity: .32; }
+.metricShell { position: absolute; top: 132px; left: 30px; display: grid; grid-template-columns: 1fr 1fr; width: 535px; height: 282px; padding: 29px 42px; overflow: hidden; border: 1px solid #ffc86d; border-radius: 16px; background: #fff; }
+.donutMetric { display: flex; align-items: center; flex-direction: column; gap: 6px; }
+.donutMetric > p { font-size: 14px; letter-spacing: -.17px; }
+.donut { position: relative; width: 120px; height: 120px; }
+.donutTrack { position: absolute; top: 9px; left: 10px; width: 100px; height: 101px; }
+.donutProgress { position: absolute; top: 9px; left: 9px; width: 49px; height: 51px; }
+.donut strong { position: absolute; inset: 0; display: grid; place-items: center; color: #3b309d; font-size: 22px; }
+.safetyRing { width: 120px; height: 120px; }
+.safetyDonut strong { color: #3e3e3e; font-size: 20px; }
+
+.reportPanel { border: 1px solid #e5ecff; background: #e5ecff; }
+.reportPanel { grid-column: 3; }
+.cardOrbit { position: absolute; top: -659px; left: 370px; width: 1165px; max-width: none; height: 1025px; opacity: .28; }
+.reportForm { position: absolute; top: 146px; left: 43px; width: 534px; overflow: hidden; border: 1px solid #889aff; border-radius: 18px; background: #fff; }
+.reportFormTitle { padding: 12px 14px; border-bottom: 1px solid #e5e5e5; color: #3950d3; font-size: 14px; line-height: 20px; }
+.reportFormBody { padding: 14px; color: #575757; font-size: 14px; line-height: 20px; }
+.reportTextArea { display: flex; height: 140px; margin-top: 12px; padding: 12px; border: 1px solid #e5e5e5; border-radius: 14px; flex-direction: column; justify-content: space-between; color: #737373; box-shadow: 0 1px 2px rgb(0 0 0 / 5%); }
+.typedReportText { display: inline-block; width: 0; max-width: 100%; overflow: hidden; white-space: nowrap; border-right: 1px solid transparent; animation: reportTyping 8s steps(45, end) infinite, typingCaret 8s step-end infinite; }
+.reportTextArea small { font: 500 12px/16px Inter, sans-serif; }
 
 .compliance { position: relative; height: 825px; margin-top: 80px; padding: 80px max(60px, calc((100vw - 1320px) / 2)); background: #f7f8fc; }
 .compliance .splitHeading { height: 84px; }
 .complianceBody { display: grid; grid-template-columns: 637px 611px; justify-content: space-between; align-items: end; width: min(1320px, 100%); height: 544px; margin: 56px auto 0; }
 .complianceBody img:first-child { width: 637px; height: 483px; }
 .complianceBody img:last-child { width: 611px; height: 544px; }
+.complianceBody img:first-child { animation: uiFloat 7.5s ease-in-out infinite; }
+.complianceBody img:last-child { animation: uiFloat 8s ease-in-out -3s infinite reverse; }
 
 .afterVisit { width: min(calc(100% - 120px), 1320px); height: 526px; margin: 56px auto 0; }
 .sectionHeading { height: 84px; }
 .visitCards { display: grid; grid-template-columns: repeat(2, 642px); justify-content: space-between; margin-top: 42px; }
-.visitCards img { width: 642px; height: 400px; }
+.visitUiCard { position: relative; width: 642px; height: 400px; overflow: hidden; border-radius: 24px; }
+.visitUiCard:nth-child(2)::after { animation-delay: -5.5s; }
+.visitPanelCopy { position: absolute; z-index: 3; top: 23px; left: 24px; }
+.visitPanelCopy h3 { font-size: 24px; font-weight: 500; line-height: 1.2; letter-spacing: -.48px; }
+.visitPanelCopy p { margin-top: 4px; color: rgb(0 0 0 / 60%); font-size: 16px; line-height: 1.4; letter-spacing: -.32px; }
+.crossProductCard { background: #fff0de; }
+.afterOrbit { position: absolute; top: -301px; left: 469px; width: 638px; max-width: none; height: 524px; }
+.incidentList { position: absolute; top: 115px; left: 75px; width: 492px; min-height: 377px; padding: 24px; border: 1px solid #e4e4e7; border-radius: 21px; background: #fff; }
+.incidentListHeader { display: flex; align-items: flex-start; justify-content: space-between; }
+.incidentListHeader > div { display: flex; flex-direction: column; gap: 4px; }
+.incidentListHeader strong { font-size: 20px; line-height: 20px; }
+.incidentListHeader span { color: #a1a1aa; font-size: 12px; line-height: 15px; }
+.incidentListHeader button { display: inline-flex; align-items: center; gap: 6px; height: 31px; padding: 0 12px; border: 1px solid #3950d3; border-radius: 10px; background: #fff; color: #3950d3; font: inherit; font-size: 12px; }
+.incidentRows { display: flex; margin-top: 20px; flex-direction: column; gap: 8px; }
+.incidentRow { display: flex; align-items: center; justify-content: space-between; height: 61px; padding: 12px 16px; border: 1px solid #e4e4e7; border-radius: 10px; animation: uiRowReveal 9s cubic-bezier(.22, 1, .36, 1) var(--row-delay) infinite; }
+.incidentIdentity { display: flex; align-items: center; gap: 12px; }
+.statusIcon { display: grid; width: 30px; height: 30px; border-radius: 50%; background: #f0fdf4; place-items: center; }
+.incidentIdentity > div { display: flex; flex-direction: column; gap: 2px; }
+.incidentIdentity strong { color: #09090b; font-size: 14px; font-weight: 500; line-height: 18px; }
+.incidentIdentity small { color: #a1a1aa; font-size: 10.5px; line-height: 15px; }
+.statusPill { padding: 4px 10px; border-radius: 999px; background: #f0fdf4; color: #15803d; font-size: 10.5px; line-height: 15px; }
+.exportCard { background: #d8f9fc; }
+.exportStage { position: absolute; top: 90px; left: 24px; width: 594px; height: 310px; overflow: hidden; }
+.exportOrbit { position: absolute; top: 117px; left: 50%; width: 638px; max-width: none; height: 638px; transform: translateX(-50%); }
+.exportReport { position: absolute; top: 16px; left: 50%; width: 384px; height: 362px; padding: 23px 20px; border: 1px solid #eee; border-radius: 22px; background: #fff; transform: translateX(-50%); }
+.exportReport > p { color: #3950d3; font-size: 12px; font-weight: 500; letter-spacing: -.24px; }
+.reportItems { display: flex; margin-top: 13px; flex-direction: column; gap: 4px; }
+.reportItem { display: flex; align-items: center; gap: 8px; height: 37px; animation: uiRowReveal 9s cubic-bezier(.22, 1, .36, 1) var(--item-delay) infinite; }
+.reportItem > span { display: grid; width: 28px; height: 28px; border-radius: 4px; place-items: center; }
+.reportItem .risk { background: #ffe2e2; }
+.reportItem .strength { background: #dcfce7; }
+.reportItem .action { background: #dbeafe; }
+.reportItem strong { color: #101828; font: 500 16px/1.2 Inter, sans-serif; letter-spacing: -.56px; }
+.exportReport button { position: absolute; right: 20px; bottom: 84px; left: 20px; display: grid; height: 46px; border: 0; border-radius: 9px; background: #3b309d; color: #eff6ff; font: inherit; font-size: 16px; font-weight: 600; place-items: center; animation: exportButtonPress 9s ease-in-out infinite; }
+.exportDefault, .exportDone { grid-area: 1 / 1; display: inline-flex; align-items: center; gap: 4px; }
+.exportDefault { animation: exportDefaultState 9s ease-in-out infinite; }
+.exportDone { opacity: 0; animation: exportSuccessState 9s ease-in-out infinite; }
+.exportReport button:hover { box-shadow: 0 8px 22px rgb(59 48 157 / 24%); }
+.exportReport button.manualSuccess { background: #238454; animation: none; }
+.manualSuccess .exportDefault { opacity: 0; animation: none; }
+.manualSuccess .exportDone { opacity: 1; animation: none; }
 
-.process { position: relative; height: 496px; margin-top: 95px; }
+.process { position: relative; height: 423px; margin-top: 95px; overflow: hidden; }
 .processHeading { display: flex; flex-direction: column; align-items: center; text-align: center; }
 .tag { display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 6px 13px; border: 1px solid #e0e0e0; border-radius: 51px; font-size: 12px; font-weight: 500; line-height: 19px; text-transform: uppercase; }
 .tag span { font-size: 15px; }
 .processHeading h2 { margin-top: 6px; font-size: 42px; font-weight: 500; letter-spacing: -1px; line-height: 1.15; }
-.processWave { position: absolute; top: 181px; left: 0; width: 100%; height: auto; }
+.processHeading > p:last-child { width: 550px; margin-top: 8px; color: #535353; font-size: 16px; line-height: 28px; }
+.processTrack { position: absolute; top: 242px; left: 50%; width: 1440px; height: 181px; transform: translateX(-50%); }
+.processWave { position: absolute; inset: 0; width: 1440px; height: 181px; }
+.processWaveTrace {
+  opacity: 0;
+  pointer-events: none;
+  filter: saturate(1.55) contrast(1.1);
+  mix-blend-mode: multiply;
+  -webkit-mask-image: linear-gradient(90deg, transparent 43%, #000 49%, #000 51%, transparent 57%);
+  mask-image: linear-gradient(90deg, transparent 43%, #000 49%, #000 51%, transparent 57%);
+  -webkit-mask-size: 300% 100%;
+  mask-size: 300% 100%;
+  animation: processLineTrace 11s ease-in-out infinite;
+}
+
+@keyframes processLineTrace {
+  0%, 8% { opacity: 0; -webkit-mask-position: 100% 0; mask-position: 100% 0; }
+  17%, 72% { opacity: .48; }
+  82%, 100% { opacity: 0; -webkit-mask-position: 0 0; mask-position: 0 0; }
+}
+.processSteps { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(5, 1fr); padding: 0 12px; }
+.processStep { display: flex; align-items: center; padding-top: 51px; flex-direction: column; animation: stepPulse 4.8s ease-in-out infinite; }
+.processStep:nth-child(2) { animation-delay: -.96s; }
+.processStep:nth-child(3) { animation-delay: -1.92s; }
+.processStep:nth-child(4) { animation-delay: -2.88s; }
+.processStep:nth-child(5) { animation-delay: -3.84s; }
+.processStep img { width: 44px; height: 44px; object-fit: contain; }
+.processStep:first-child img,
+.processStep:nth-child(3) img,
+.processStep:last-child img { width: 37px; height: 37px; margin-top: 3px; margin-bottom: 4px; }
+.processStep:nth-child(4) img { width: 40px; height: 40px; margin-bottom: 1px; }
+.processStep:last-child img { margin-top: 6px; margin-bottom: 1px; }
+.processStep h3 { margin-top: 6px; font-size: 16px; font-weight: 500; line-height: 28px; }
+
+@media (min-width: 1441px) {
+  .processWave {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 8%, #000 92%, transparent 100%);
+  }
+}
 
 .cta { position: relative; width: min(calc(100% - 140px), 1290px); height: 632px; margin: 67px auto 84px; overflow: hidden; border-radius: 27px; background: linear-gradient(111deg, #fff0e1 0%, #eef1ff 48%, #dce4ff 100%); }
 .ctaWaves { position: absolute; right: 0; bottom: 0; left: 0; width: 100%; height: 369px; }
@@ -52,11 +242,119 @@
 .reminders { position: absolute; z-index: 3; bottom: 45px; left: 16px; width: 415px; height: 290px; }
 .ctaPerson { position: absolute; z-index: 3; bottom: -1px; left: 50%; width: 319px; height: 382px; transform: translateX(-50%); }
 .metrics { position: absolute; z-index: 3; right: 229px; bottom: 31px; width: 231px; height: 278px; }
+.reminders { animation: uiFloat 7s ease-in-out infinite; }
+.metrics { animation: uiFloat 6.5s ease-in-out -3s infinite reverse; }
+
+@keyframes dashboardDrift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -8px, 0) scale(1.004); }
+}
+
+@keyframes uiBreath {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(0, -6px, 0) scale(1.003); }
+}
+
+@keyframes uiFloat {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -7px, 0); }
+}
+
+@keyframes interfaceSweep {
+  0%, 34% { opacity: 0; transform: translate3d(-135%, 0, 0); }
+  42% { opacity: .58; }
+  72% { opacity: .2; transform: translate3d(135%, 0, 0); }
+  73%, 100% { opacity: 0; transform: translate3d(135%, 0, 0); }
+}
+
+@keyframes stepPulse {
+  0%, 100% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(0, -4px, 0); }
+}
+
+@keyframes graphicFocus {
+  0%, 100% { filter: saturate(1) contrast(1); }
+  50% { filter: saturate(1.08) contrast(1.015); }
+}
+
+@keyframes graphPing {
+  0%, 35%, 100% { box-shadow: 0 0 0 0 rgb(91 77 219 / 0%); transform: scale(.9); }
+  52% { box-shadow: 0 0 0 9px rgb(91 77 219 / 13%); transform: scale(1.12); }
+  70% { box-shadow: 0 0 0 15px rgb(91 77 219 / 0%); transform: scale(1); }
+}
+
+@keyframes lineReveal {
+  0%, 12% { clip-path: inset(0 100% 0 0); opacity: .45; }
+  48%, 82% { clip-path: inset(0 0 0 0); opacity: 1; }
+  100% { clip-path: inset(0 0 0 0); opacity: .72; }
+}
+
+@keyframes pointPulse {
+  0%, 100% { filter: drop-shadow(0 0 0 rgb(57 80 211 / 0%)); transform: scale(.92); }
+  45% { filter: drop-shadow(0 0 5px rgb(57 80 211 / 45%)); transform: scale(1.22); }
+}
+
+@keyframes barGrow {
+  0%, 10% { opacity: .7; transform: scaleX(.12); }
+  48%, 80% { opacity: 1; transform: scaleX(1); }
+  100% { opacity: .8; transform: scaleX(.88); }
+}
+
+@keyframes uiRowReveal {
+  0% { opacity: 0; transform: translateY(8px); }
+  7%, 86% { opacity: 1; transform: translateY(0); }
+  95%, 100% { opacity: 0; transform: translateY(4px); }
+}
+
+@keyframes exportButtonPress {
+  0%, 57%, 63%, 100% { transform: scale(1); box-shadow: 0 3px 10px rgb(59 48 157 / 12%); }
+  60% { transform: scale(.975); box-shadow: 0 1px 3px rgb(59 48 157 / 18%); }
+  68%, 84% { background: #238454; box-shadow: 0 5px 15px rgb(35 132 84 / 15%); }
+}
+
+@keyframes exportDefaultState {
+  0%, 60% { opacity: 1; }
+  64%, 85% { opacity: 0; }
+  90%, 100% { opacity: 1; }
+}
+
+@keyframes exportSuccessState {
+  0%, 61% { opacity: 0; }
+  66%, 84% { opacity: 1; }
+  90%, 100% { opacity: 0; }
+}
+
+@keyframes reportTyping {
+  0%, 9% { width: 0; }
+  48%, 83% { width: 45ch; }
+  94%, 100% { width: 0; }
+}
+
+@keyframes typingCaret {
+  0%, 8%, 84%, 100% { border-color: transparent; }
+  9%, 83% { border-color: #3950d3; }
+}
+
+@keyframes dashboardLineReveal {
+  0%, 12% { clip-path: inset(0 100% 0 0); opacity: .45; }
+  48%, 82% { clip-path: inset(0 0 0 0); opacity: 1; }
+  100% { clip-path: inset(0 0 0 0); opacity: .72; }
+}
+
+@keyframes dashboardAreaLoop {
+  0%, 100% { opacity: .58; transform: scaleY(.96); }
+  50% { opacity: .82; transform: scaleY(1); }
+}
+
+@keyframes activeNavGlow {
+  0%, 100% { box-shadow: 0 0 0 rgb(57 80 211 / 0%); }
+  50% { box-shadow: 0 4px 10px rgb(57 80 211 / 22%); }
+}
 
 @media (max-width: 1199px) {
   .heroCopy { left: 42px; width: 45%; }
   .hero h1 { font-size: clamp(48px, 5.4vw, 65px); }
-  .heroDashboard { left: 52%; width: 620px; height: auto; }
+  .heroDashboardShell { left: 52%; width: 620px; }
   .analytics,
   .afterVisit { width: calc(100% - 80px); }
   .splitHeading > span { width: 42%; }
@@ -65,7 +363,7 @@
   .complianceBody img:first-child,
   .complianceBody img:last-child { width: 100%; height: auto; }
   .visitCards { grid-template-columns: repeat(2, calc(50% - 10px)); }
-  .visitCards img { width: 100%; height: auto; }
+  .visitUiCard { width: 100%; }
   .reminders { left: 2%; width: 35%; height: auto; }
   .metrics { right: 4%; }
 }
@@ -81,14 +379,23 @@
   .heroActions { gap: 10px; }
   .primaryButton,
   .secondaryButton { height: 46px; padding: 0 14px; font-size: 13px; }
-  .heroDashboard { top: auto; right: -125px; bottom: 35px; left: auto; width: 500px; height: auto; }
+  .heroDashboardShell { top: auto; right: -125px; bottom: 35px; left: auto; width: 500px; }
 
   .analytics { width: calc(100% - 40px); height: auto; margin-top: 58px; }
   .splitHeading { display: block; height: auto; }
   .splitHeading h2,
   .sectionHeading h2 { font-size: 33px; }
   .splitHeading > span { display: block; width: auto; margin-top: 15px; font-size: 14px; line-height: 1.5; }
-  .analyticsCards { position: relative; top: auto; width: 100%; height: auto; margin-top: 30px; }
+  .analyticsGrid { position: relative; top: auto; grid-template-columns: 1fr; grid-template-rows: repeat(4, min(82vw, 433px)); gap: 18px; margin-top: 30px; }
+  .trendPanel,
+  .insightPanel,
+  .trackPanel,
+  .reportPanel { grid-column: 1; }
+  .analyticsPanel { min-height: min(82vw, 433px); }
+  .trendChart { width: calc(100% - 47px); }
+  .discoveryShell { left: 9%; width: 82%; }
+  .metricShell { left: 5%; width: 90%; }
+  .reportForm { left: 7%; width: 86%; }
 
   .compliance { height: auto; margin-top: 60px; padding: 56px 20px; }
   .compliance .splitHeading { height: auto; }
@@ -99,11 +406,23 @@
   .afterVisit { width: calc(100% - 40px); height: auto; margin-top: 60px; }
   .sectionHeading { height: auto; }
   .visitCards { grid-template-columns: 1fr; gap: 18px; margin-top: 32px; }
-  .visitCards img { width: 100%; height: auto; }
+  .visitUiCard { width: 100%; }
+  .incidentList { left: 8%; width: 84%; }
+  .exportStage { left: 4%; width: 92%; }
 
   .process { height: 430px; margin-top: 70px; }
   .processHeading h2 { padding: 0 20px; font-size: 31px; }
-  .processWave { top: 175px; left: 50%; width: 900px; max-width: none; height: 153px; transform: translateX(-50%); }
+  .processHeading > p:last-child { width: auto; padding: 0 28px; font-size: 14px; line-height: 22px; }
+  .processTrack { top: 225px; width: 900px; height: 113px; }
+  .processWave { width: 900px; height: 113px; }
+  .processSteps { padding: 0 7px; }
+  .processStep { padding-top: 31px; }
+  .processStep img { width: 30px; height: 30px; }
+  .processStep:first-child img,
+  .processStep:nth-child(3) img,
+  .processStep:last-child img { width: 25px; height: 25px; margin-top: 2px; margin-bottom: 3px; }
+  .processStep:nth-child(4) img { width: 27px; height: 27px; }
+  .processStep h3 { margin-top: 3px; font-size: 11px; line-height: 18px; }
 
   .cta { width: calc(100% - 40px); height: 670px; margin-top: 45px; margin-bottom: 50px; }
   .ctaHeading { padding: 27px 18px 0; }
@@ -112,4 +431,42 @@
   .reminders { bottom: 18px; left: 10px; width: 58%; height: auto; }
   .ctaPerson { width: 250px; height: auto; }
   .metrics { right: 8px; bottom: 25px; width: 38%; height: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .heroDashboardShell,
+  .complianceBody img,
+  .visitUiCard::after,
+  .incidentRow,
+  .reportItem,
+  .exportReport button,
+  .exportDefault,
+  .exportDone,
+  .typedReportText,
+  .lineAreaNode,
+  .lineStrokeNode,
+  .chartDot,
+  .barNode,
+  .donutProgress,
+  .safetyRing,
+  .dashboardAreaNode,
+  .dashboardLineNode,
+  .dashboardPoint,
+  .dashboardNav .activeNav,
+  .statusChart img,
+  .harmDonut,
+  .learningChart img,
+  .processWave,
+  .processStep,
+  .reminders,
+  .metrics { animation: none; }
+
+  .processWaveTrace { opacity: 0; }
+
+  .typedReportText { width: auto; border-color: transparent; }
+  .exportDefault { opacity: 1; }
+  .exportDone { opacity: 0; }
+
+  .heroDashboardShell::after,
+  .visitUiCard::after { display: none; }
 }
