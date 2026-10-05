@@ -1,8 +1,4 @@
 /* The illustrations below are complete Figma exports. Keep their aspect ratios intact. */
-.button { transition: none; }
-.button:hover,
-.small-button:hover { transform: none; background: var(--deep); }
-.button-light:hover { background: #fff; }
 .button .arrow,
 .small-button .arrow { display: inline-flex; align-items: center; line-height: 1; transform: translateY(-2px); }
 

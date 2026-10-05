@@ -10,7 +10,7 @@ import { HeroMenuPreview, HeroRevenuePreview } from "@/components/HeroVisuals";
 import { AssureDashboardPreview, TreatmentPreview, AppointmentPreview, PatientFlagsPreview, ReportingTimerPreview, AnalyticsPreview } from "@/components/ProductUiPreviews";
 
 function Arrow({ light = false }: { light?: boolean }) {
-  return <span aria-hidden="true" className={light ? "arrow arrow-light" : "arrow"}>↗</span>;
+  return <span data-cta-icon aria-hidden="true" className={light ? "arrow arrow-light" : "arrow"}>↗</span>;
 }
 
 function Button({
@@ -25,7 +25,7 @@ function Button({
   className?: string;
 }) {
   return (
-    <a className={`${light ? "button button-light" : "button"} ${className}`} href={href}>
+    <a data-cta className={`${light ? "button button-light" : "button"} ${className}`} href={href}>
       <Arrow light={light} />
       <span>{children}</span>
     </a>
@@ -154,7 +154,7 @@ function Features() {
   return <section className="section features" id="solutions"><Tag>Zeenovo Clinical</Tag><ScrollFade as="h2">Innovative Solutions<br />for Modern Pharmacies.</ScrollFade><div className="feature-grid">
     <ScrollFade as="article" className="feature-card feature-treatment"><Image className="feature-circle treatment-circle" src={asset.featureCircle} alt="" width={874} height={760} /><div className="feature-copy"><h3>Guided Treatment Paths</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p></div><TreatmentPreview /></ScrollFade>
     <ScrollFade as="article" className="feature-card feature-provinces"><div className="feature-copy"><h3>Province Wise Service Modules</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p></div><ul>{["Ontario","Quebec","British Columbia","Alberta","Nova Scotia","Saskatchewan"].map(x=><li key={x}><Arrow />{x}</li>)}</ul><Image className="canada-map" src={asset.mapIcon} alt="" width={423} height={411} /></ScrollFade>
-    <ScrollFade as="article" className="feature-card feature-appointments"><div className="feature-copy"><h3>Minor Ailments easy appointment flow</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p></div><a className="small-button" href="#contact"><Arrow /> Explore</a><AppointmentPreview animated /></ScrollFade>
+    <ScrollFade as="article" className="feature-card feature-appointments"><div className="feature-copy"><h3>Minor Ailments easy appointment flow</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p></div><a data-cta className="small-button" href="#contact"><Arrow /> Explore</a><AppointmentPreview animated /></ScrollFade>
     <ScrollFade as="article" className="feature-card feature-flags"><Image className="feature-circle flags-circle" src={asset.featureCircle} alt="" width={874} height={760} /><div className="feature-copy"><h3>Red Flags</h3><p>Experience the future of pharmacy operations today.<br />Innovative Solutions for Modern Pharmacies.</p></div><PatientFlagsPreview /></ScrollFade>
   </div></section>;
 }

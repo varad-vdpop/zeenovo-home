@@ -1,0 +1,14 @@
+[data-cta][data-cta] {
+  transition: opacity 300ms ease-in-out;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  /* Override opacity retained by completed entrance keyframes. */
+  [data-cta][data-cta]:hover { opacity: 0.8 !important; }
+}
+
+a[data-cta]:focus-visible,
+button[data-cta]:focus-visible {
+  outline: 3px solid #8f7be0;
+  outline-offset: 4px;
+}

@@ -66,7 +66,7 @@ const week = [
 ] as const;
 
 function Arrow() {
-  return <span aria-hidden="true">↗</span>;
+  return <span data-cta-icon aria-hidden="true">↗</span>;
 }
 
 function Hero() {
@@ -80,7 +80,7 @@ function Hero() {
         <p className={styles.eyebrow}>Independent pharmacies</p>
         <h1 id="independent-pharmacies-title">Big pharmacy tools,<br />for a pharmacy with<br />one front door.</h1>
         <p className={styles.heroDescription}>Province-backed minor ailments workflows that keep intake, red flags, treatment and documentation connected.</p>
-        <Link className={styles.primaryButton} href="/book-a-demo"><Arrow />Get Started</Link>
+        <Link data-cta className={styles.primaryButton} href="/book-a-demo"><Arrow />Get Started</Link>
       </div>
 
       <Image
@@ -187,7 +187,7 @@ function Cta() {
         <p>Built for independent pharmacy</p>
         <h2 id="cta-title">Keep the independence.<br />Lose the operational drag.</h2>
         <span>Start with your services, your patients and the systems you already use.</span>
-        <div><Link href="/book-a-demo">Book a Demo <Arrow /></Link><Link href="/book-a-demo">Get Started <Arrow /></Link></div>
+        <div><Link data-cta href="/book-a-demo">Book a Demo <Arrow /></Link><Link data-cta href="/book-a-demo">Get Started <Arrow /></Link></div>
       </div>
       <div className={styles.ctaPhoto}>
         <Image src={pageAsset.cta} alt="Gloved pharmacist preparing a syringe" fill sizes="440px" />

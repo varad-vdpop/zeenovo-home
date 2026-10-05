@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "./globals.css";
 import "./homepage-fidelity.css";
+import "./cta-interactions.css";
 
 const jakarta = localFont({
   src: [

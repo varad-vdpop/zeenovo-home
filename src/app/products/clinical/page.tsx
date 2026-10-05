@@ -85,7 +85,7 @@ const connectedSteps = [
 
 function Arrow({ tone = "purple" }: { tone?: "purple" | "white" | "dark" }) {
   const src = tone === "white" ? "/assets/zeenovo-nav-arrow-primary.svg" : tone === "dark" ? "/assets/f8683db4-d9e8-40c7-bdd8-b73e078b4cb5.svg" : "/assets/zeenovo-nav-arrow-outline.svg";
-  return <Image src={src} alt="" aria-hidden="true" className={styles.arrow} width={24} height={24} />;
+  return <Image data-cta-icon src={src} alt="" aria-hidden="true" className={styles.arrow} width={24} height={24} />;
 }
 
 function Hero() {
@@ -96,8 +96,8 @@ function Hero() {
       <h1 className={styles.heroEnter} id="clinical-title">Innovative solutions<br /> for modern pharmacies.</h1>
       <p className={`${styles.heroEnter} ${styles.heroDescription}`}>Clinical tools designed to help pharmacy teams deliver services more efficiently.</p>
       <div className={`${styles.heroActions} ${styles.heroEnter}`}>
-        <a className={styles.primaryButton} href="#clinical-services"><Arrow tone="white" />Get Started</a>
-        <a className={styles.outlineButton} href="#clinical-cta"><Arrow />Book a Demo</a>
+        <a data-cta className={styles.primaryButton} href="#clinical-services"><Arrow tone="white" />Get Started</a>
+        <a data-cta className={styles.outlineButton} href="#clinical-cta"><Arrow />Book a Demo</a>
       </div>
     </div>
     <div className={styles.heroVisual}>
@@ -140,7 +140,7 @@ function MinorAilments() {
           <div className={styles.conditionGrid}>{conditions.map((condition) => <div className={styles.condition} key={condition.title}>
             <span className={styles.conditionIcon}><Image src={a(condition.icon)} alt="" width={34} height={34} /></span><span>{condition.title}</span>
           </div>)}</div>
-          <a className={styles.seeAll} href="#clinical-services"><Arrow />See all</a>
+          <a data-cta className={styles.seeAll} href="#clinical-services"><Arrow />See all</a>
         </ScrollFade>
       </div>
     </div>

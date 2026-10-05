@@ -30,7 +30,7 @@ export default function FinalCta({
       <div className={styles.heading} data-reveal="fade">
         <span className={styles.tag}><span aria-hidden="true">★</span> {eyebrow}</span>
         <h2 id={`${id}-heading`}>{heading}</h2>
-        <a className={styles.action} href={actionHref}><Image className={styles.actionArrow} src="/assets/zeenovo-nav-arrow-primary.svg" alt="" aria-hidden="true" width={24} height={24} />{actionLabel}</a>
+        <a data-cta className={styles.action} href={actionHref}><Image data-cta-icon className={styles.actionArrow} src="/assets/zeenovo-nav-arrow-primary.svg" alt="" aria-hidden="true" width={24} height={24} />{actionLabel}</a>
       </div>
       <div className={styles.reminders} data-reveal="rise" style={{ "--sequence-delay": "120ms" } as CSSProperties}><DoseRemindersPreview /></div>
       <Image className={styles.pharmacist} data-reveal="rise" style={{ "--sequence-delay": "60ms" } as CSSProperties} src={asset.ctaDoctor} alt="Pharmacist using a tablet" width={319} height={382} />

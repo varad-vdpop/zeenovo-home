@@ -29,7 +29,7 @@ export const metadata: Metadata = {
 };
 
 function Arrow() {
-  return <span aria-hidden="true">↗</span>;
+  return <span data-cta-icon aria-hidden="true">↗</span>;
 }
 
 function Tag({ children }: { children: React.ReactNode }) {
@@ -47,8 +47,8 @@ function Hero() {
         <h1 id="provinces-title">ZeeNovo for<br />Ontario pharmacies.</h1>
         <p className={styles.heroDescription}>Assessment flows, documentation and terminology for Ontario&apos;s pharmacist minor ailments program, MedsCheck reviews and publicly funded immunization, aligned with OCP documentation expectations.</p>
         <div className={styles.heroActions}>
-          <Link className={styles.primaryButton} href="/register-pharmacy"><Arrow />Register Pharmacy</Link>
-          <Link className={styles.secondaryButton} href="/book-a-demo"><Arrow />Book a Demo</Link>
+          <Link data-cta className={styles.primaryButton} href="/register-pharmacy"><Arrow />Register Pharmacy</Link>
+          <Link data-cta className={styles.secondaryButton} href="/book-a-demo"><Arrow />Book a Demo</Link>
         </div>
       </div>
       <div className={styles.heroSignal} data-reveal>
@@ -136,7 +136,7 @@ function Cta() {
       <div className={styles.ctaHeading}>
         <Tag>You can trust us</Tag>
         <h2 id="provinces-cta-title">Handling a pharmacy has<br />never been easier</h2>
-        <Link href="/register-pharmacy"><Arrow />Sign Up now</Link>
+        <Link data-cta href="/register-pharmacy"><Arrow />Sign Up now</Link>
       </div>
       <Image className={styles.reminders} src={pageAsset.doseReminders} alt="Dose reminders module" width={415} height={290} />
       <Image className={styles.ctaPerson} src={pageAsset.ctaPerson} alt="Pharmacist reviewing ZeeNovo on a tablet" width={319} height={402} />

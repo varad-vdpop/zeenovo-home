@@ -338,9 +338,9 @@
   .connected .sectionInner { padding-top: 57px; padding-bottom: 66px; }
   .connected h2 { margin-top: 16px; font-size: clamp(28px, 7.8vw, 37px); line-height: 1.2; }
   .connected h2 br { display: none; }
-  .connectedSteps { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 35px; }
+  .connectedSteps { grid-template-columns: minmax(0, 1fr); gap: 36px; margin-top: 35px; }
   .connectedStep { height: 110px; padding: 13px; }
   .connectedStep strong { font-size: 14px; white-space: normal; }
-  .stepArrow { display: none; }
+  .stepWrap > .stepArrow { display: block; top: auto; right: auto; bottom: -28px; left: 50%; transform: translateX(-50%) rotate(-90deg); }
   .ctaWrap { height: auto; margin-top: 0; padding-top: 50px; }
 }

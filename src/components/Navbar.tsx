@@ -10,7 +10,7 @@ import styles from "./Navbar.module.css";
 
 function FigmaArrow({ primary = false, direction = "up" }: { primary?: boolean; direction?: "up" | "right" | "left" }) {
   return (
-    <span className={styles.arrowFrame} aria-hidden="true">
+    <span data-cta-icon className={styles.arrowFrame} aria-hidden="true">
       <Image
         className={`${styles.arrowIcon} ${direction === "right" ? styles.arrowRight : direction === "left" ? styles.arrowLeft : ""}`}
         src={primary ? asset.navbarArrowPrimary : asset.navbarArrowOutline}
@@ -144,12 +144,12 @@ export default function Navbar() {
 
       <div className={styles.actions} onMouseEnter={() => setActiveMenu(null)}>
         <span className={styles.patientLogin}>Patient Login</span>
-        <span className={styles.pharmacyLogin}>
+        <span data-cta className={styles.pharmacyLogin}>
           <FigmaArrow />
           <span>Pharmacy Login</span>
           <Image className={styles.loginStroke} src={asset.navbarLoginStroke} alt="" width={169} height={49} />
         </span>
-        <span className={styles.register}>
+        <span data-cta className={styles.register}>
           <FigmaArrow primary />
           <span>Register Pharmacy</span>
         </span>
@@ -238,7 +238,7 @@ export default function Navbar() {
                     {menu.label}<FigmaArrow direction="right" />
                   </button>
                 ))}
-                <span className={styles.mobileDemo}>Book a Demo<FigmaArrow primary /></span>
+                <span data-cta className={styles.mobileDemo}>Book a Demo<FigmaArrow primary /></span>
                 <div className={styles.mobileActions}>
                   <span>Patient Login</span>
                   <span>Pharmacy Login</span>

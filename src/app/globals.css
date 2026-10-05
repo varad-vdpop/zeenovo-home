@@ -16,12 +16,10 @@ h1,h2,h3,p { margin:0; }
 .hero h1 { font-size:clamp(48px,4.51vw,65px); line-height:1.245; font-weight:400; letter-spacing:-2px; color:#111; }
 .hero h1 strong { font-weight:600; color:var(--deep); }
 .hero-content>p { font-family:var(--font-manrope),Arial,sans-serif; font-size:18px; line-height:1.62; max-width:543px; margin:16px 0 20px; color:#414349; }
-.button { display:inline-flex; align-items:center; justify-content:center; gap:12px; height:52px; min-width:137px; padding:0 23px; border-radius:13px; color:#fff; background:var(--deep); font-size:16px; font-weight:600; transition:transform .2s,background .2s; }
-.button:hover,.small-button:hover { transform:translateY(-2px); background:#4432b8; }
+.button { display:inline-flex; align-items:center; justify-content:center; gap:12px; height:52px; min-width:137px; padding:0 23px; border-radius:13px; color:#fff; background:var(--deep); font-size:16px; font-weight:600; }
 .arrow { font-size:27px; line-height:1; font-weight:400; }
 .arrow-light { color:#262626; }
 .button-light { background:white; color:#222; border:1px solid #ddd; height:43px; min-width:130px; font-size:14px; padding:0 18px; }
-.button-light:hover { background:#f1f0ff; }
 .hero-nurse { position:absolute; right:0; bottom:0; width:744px; height:462px; z-index:1; }
 .hero-nurse img { object-fit:contain; object-position:bottom right; }
 .hero-menu { position:absolute; z-index:3; right:393px; top:318px; width:143px; padding:13px 9px; display:flex; flex-direction:column; gap:4px; border-radius:13px; background:white; box-shadow:0 15px 45px #2f358128; font-size:10px; color:#58585c; }

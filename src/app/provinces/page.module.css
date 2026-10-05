@@ -123,7 +123,6 @@
   overflow: hidden;
   border-radius: 12px;
   font-weight: 650;
-  transition: transform .22s cubic-bezier(.22, 1, .36, 1), box-shadow .22s ease, background-color .22s ease;
 }
 
 .primaryButton,
@@ -145,17 +144,6 @@
   color: var(--purple);
 }
 
-.primaryButton:hover,
-.secondaryButton:hover,
-.ctaHeading a:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 14px 28px rgb(43 16 142 / 19%);
-}
-
-.primaryButton:active,
-.secondaryButton:active,
-.ctaHeading a:active { transform: translateY(0) scale(.985); }
-
 .primaryButton:focus-visible,
 .secondaryButton:focus-visible,
 .ctaHeading a:focus-visible {
@@ -165,10 +153,7 @@
 
 .primaryButton span,
 .secondaryButton span,
-.ctaHeading a span { font-size: 22px; line-height: 1; transition: transform .22s ease; }
-.primaryButton:hover span,
-.secondaryButton:hover span,
-.ctaHeading a:hover span { transform: translate(2px, -2px); }
+.ctaHeading a span { font-size: 22px; line-height: 1; }
 
 .heroSignal {
   position: absolute;
