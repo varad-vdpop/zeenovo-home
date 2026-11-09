@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import Script from "next/script";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "./globals.css";
@@ -50,6 +51,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {children}
           <Footer />
         </div>
+        {/* YBM feedback widget, for review comments on every page. */}
+        <Script src="https://feedback.ybmos.app/widget.js" data-project="zeenovo-v2" />
       </body>
     </html>
   );
