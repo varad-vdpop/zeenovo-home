@@ -6,6 +6,7 @@ const ctaDefault = { type: "cta", eyebrow: "Get started", title: "See ZeeNovo wi
 
 export const productPages: Record<string, PageContent> = {
   "/products": {
+    gutter: 58, // aligns with the home "Our Products" grid reused on this page
     meta: { title: "Products | ZeeNovo", description: "ZeeNovo Clinical, Assure, Magistral, Sites and Intelligence. Clinical care, compliance, your website and patient booking on one platform." },
     blocks: [
       { type: "hero", title: "One platform for / pharmacy operations.", description: "Start with the product you need. Every product shares the same patients, records and login.", primary: demo, secondary: { label: "See Pricing", href: "/pricing" }, person: "clinicalPharmacist", extras: ["badge"] },

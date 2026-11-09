@@ -186,5 +186,7 @@ export type PageContent = {
   meta: { title: string; description: string };
   /** Shown as a thin banner on review builds when the copy is placeholder. */
   dummy?: boolean;
+  /** Content edge in px, when the page reuses an approved section with its own edge. Defaults to 64. */
+  gutter?: number;
   blocks: Block[];
 };

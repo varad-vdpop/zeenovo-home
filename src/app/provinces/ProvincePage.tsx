@@ -37,7 +37,8 @@ export default function ProvincePage({ province }: { province: ProvinceContent }
   };
   const cta: CtaBlock = { type: "cta", eyebrow: "Get started", title: "See ZeeNovo with / your own services.", action: { label: "Book a Demo", href: "/book-a-demo" } };
 
-  return <main className={styles.page} data-ontario-page>
+  // The approved province hero and reality cards sit on a 77px edge; align the reused blocks to it.
+  return <main className={styles.page} data-ontario-page style={{ "--block-gutter": "77px" } as CSSProperties}>
     <OntarioMotion />
     <section className={styles.hero} aria-labelledby="province-title" data-parallax-zone>
       <div className={styles.heroBackdrop}>

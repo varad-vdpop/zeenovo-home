@@ -282,7 +282,8 @@ export default function ClinicalPage() {
     <AfterAssessment />
     <FollowUp />
     <ConnectedWorkflow />
-    <BlockList blocks={[clinicalFeatures]} />
+    {/* The Clinical page's own sections sit on a 56px edge; align the feature sections to it. */}
+    <div style={{ "--block-gutter": "56px" } as React.CSSProperties}><BlockList blocks={[clinicalFeatures]} /></div>
     <div className={styles.ctaWrap}><FinalCta animated id="clinical-cta" variant="clinical" eyebrow="Built for clinical care" heading={<>Deliver more clinical services<br />with less administrative work.</>} actionLabel="Book a Demo" actionHref="/book-a-demo" /></div>
   </main>;
 }

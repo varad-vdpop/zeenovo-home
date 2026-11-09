@@ -1,11 +1,24 @@
 /* Adjustments that let the approved sections take variable content.
    No new visual language: every value here is copied from an approved block
-   (capability cards, step cards, condition cards, Clinical workflow and its "Profile details" panel). */
+   (capability cards, step cards, condition cards, Clinical workflow and its "Profile details" panel).
+
+   Spacing system: approved blocks come from pages with different side margins (Clinical 56px, others 64px)
+   and fixed heights. Every block here sits on one content rail (--block-gutter, 64px by default; the Clinical
+   page sets 56px to match its own sections) and one vertical rhythm (80px above and below). */
+
+.rail { width: min(calc(100% - 2 * var(--block-gutter, 64px)), calc(1440px - 2 * var(--block-gutter, 64px))); margin-inline: auto; }
+.alignCopy { left: var(--block-gutter, 64px); }
 
 .heroEyebrow { margin-bottom: 18px; }
 
 /* Capability cards with variable content. Icon sits in the white circle used by the approved step cards. */
-.cardsSection { min-height: 0; padding-bottom: 90px; }
+.cardsSection { min-height: 0; padding: 80px 0; background: linear-gradient(to top, #f7f9fe 0 240px, #fff 0); }
+.stepsSection { height: auto; margin-top: 0; padding: 80px 0; }
+/* Step cards pin their text to the bottom of a fixed 275px card; let longer copy grow the card instead of
+   running into the icon circle. */
+.stepGrid { height: auto; align-items: start; }
+.stepGrid article { display: flex; height: auto; min-height: 275px; flex-direction: column; }
+.stepGrid article > div:last-child { position: static; margin-top: auto; padding-top: 136px; }
 .cardGrid { margin-top: 84px; }
 .cardAuto { height: auto; min-height: 255px; padding-top: 122px; }
 .cardAuto h3 { font-size: 22px; line-height: 27px; }
@@ -15,14 +28,14 @@ a.cardAuto { transition: transform .2s ease; }
 a.cardAuto:hover { transform: translateY(-3px); }
 
 /* Two-card section with content-led heights. */
-.twoCardSection { height: auto; padding-bottom: 90px; }
+.twoCardSection { height: auto; padding: 80px 0; }
 .twoCardSection .twoCardItem { height: auto; padding-bottom: 36px; }
 
 /* Wave and step tracks with four or five items. */
 .waveTrack { width: min(1380px, 100%); }
 
 /* Vaccinations / Prescriptions card pair used for grouped lists. Colours are the approved card colours. */
-.listSection { height: auto; padding-bottom: 90px; }
+.listSection { height: auto; margin-top: 0; padding: 80px 0; }
 .cardPair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .listCard { height: auto; }
 .toneLavender { background: #e8ebff; }
@@ -35,13 +48,13 @@ a.cardAuto:hover { transform: translateY(-3px); }
 .listRow small { margin-left: 0; color: #64748b; font-size: 13px; line-height: 19px; white-space: normal; }
 
 /* Follow-up section leading a feature list, with content-led height. */
-.leadFollowup { height: auto; }
+.leadFollowup { height: auto; margin-top: 0; }
 .leadCopy { padding-bottom: 79px; }
 
 /* Clinical workflow section holding a real form or calculator. */
 .panelSection { height: auto; min-height: 744px; }
 .panelInner { display: grid; grid-template-columns: 45.35% minmax(0, 1fr); }
-.panelCopy { position: static; width: auto; padding: 122px 56px 90px; }
+.panelCopy { position: static; width: auto; padding: 110px 56px 90px var(--block-gutter, 64px); }
 .panelArt { position: relative; inset: auto; padding: 110px 54px 90px; }
 .panelFrame { position: relative; top: auto; left: auto; width: 100%; }
 .panelArtCentre { display: flex; align-items: center; }
@@ -72,25 +85,34 @@ a.cardAuto:hover { transform: translateY(-3px); }
 .resultTotal dd { color: #21058f; font-size: 26px; }
 
 @media (max-width: 1199px) {
+  .rail { width: calc(100% - 72px); }
+  .alignCopy { left: 36px; }
   .panelInner { grid-template-columns: 1fr 1fr; }
   .panelCopy { padding-inline: 36px; }
   .panelArt { padding-inline: 20px; }
 }
 
 @media (max-width: 760px) {
+  .rail { width: calc(100% - 40px); }
+  .alignCopy { left: auto; }
+  .cardsSection, .stepsSection, .twoCardSection, .listSection { padding: 56px 0; }
+  .cardsSection { background: linear-gradient(to top, #f7f9fe 0 160px, #fff 0); }
   .cardGrid { grid-template-columns: 1fr !important; margin-top: 40px; }
   .cardAuto { min-height: 0; padding-top: 96px; }
   .cardIcon { top: 20px; left: 14px; width: 54px; height: 54px; }
   .cardIcon img { width: 32px; height: 32px; }
   .waveTrack { grid-template-columns: repeat(2, 1fr) !important; }
   .stepGrid { grid-template-columns: 1fr !important; }
+  .stepGrid article,
+  .stepGrid article:nth-child(n) { height: auto; min-height: 0; }
+  .stepGrid article > div:last-child { padding-top: 128px; }
   .cardPair { grid-template-columns: 1fr; }
   .cardFull { grid-column: auto; }
   .listRow strong { font-size: 14px; }
   .listRow small { display: block; font-size: 12px; line-height: 17px; }
   .leadCopy { padding-bottom: 60px; }
   .panelInner { display: flex; flex-direction: column; }
-  .panelCopy { padding: 62px 20px 40px; }
+  .panelCopy { padding: 56px 20px 40px; }
   /* The approved section paints its purple band as a fixed 450px strip on mobile; let it follow the form instead. */
   .panelSection::before,
   .panelSection > :first-child { display: none; }

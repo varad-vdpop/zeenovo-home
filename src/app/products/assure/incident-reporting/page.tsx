@@ -126,5 +126,5 @@ function Cta() {
 }
 
 export default function IncidentReportingPage() {
-  return <main className={styles.page}><Hero /><Analytics /><Compliance /><AfterVisit /><Process /><BlockList blocks={[incidentReportingFeatures]} /><Cta /></main>;
+  return <main className={styles.page}><Hero /><Analytics /><Compliance /><AfterVisit /><Process /><div style={{ "--block-gutter": "60px" } as React.CSSProperties}><BlockList blocks={[incidentReportingFeatures]} /></div><Cta /></main>;
 }

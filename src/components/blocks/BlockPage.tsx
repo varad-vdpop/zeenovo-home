@@ -90,7 +90,7 @@ type CardItem = { title: string; text: string; src: string; href?: string };
 function CardsView({ eyebrow, title, side, items }: { eyebrow: string; title: string; side?: string; items: CardItem[] }) {
   const columns = items.length === 4 ? 4 : items.length === 2 ? 2 : 3;
   return <section className={`${m.capabilities} ${b.cardsSection}`}>
-    <div className={m.sectionInner}>
+    <div className={`${m.sectionInner} ${b.rail}`}>
       <ScrollFade as="div" className={m.sectionHeading}>
         <div><p className={m.eyebrow}>{eyebrow}</p><h2>{lines(title)}</h2></div>
         {side && <p>{side}</p>}
@@ -118,7 +118,7 @@ function Cards({ block }: { block: T.CardsBlock }) {
 
 function Reality({ block }: { block: T.RealityBlock }) {
   return <section className={i.reality}>
-    <div className={i.sectionRail}>
+    <div className={`${i.sectionRail} ${b.rail}`}>
       <div className={i.realityHeading}>
         <div><p>{block.eyebrow}</p><h2>{lines(block.title)}</h2></div>
         <p>{block.side}</p>
@@ -144,7 +144,7 @@ function FeatureRows({ rows }: { rows: T.FeaturesBlock["rows"] }) {
 function Features({ block }: { block: T.FeaturesBlock }) {
   const visual = art[block.art];
   if (block.variant === "followup") {
-    return <section className={c.followup}>
+    return <section className={`${c.followup} ${b.leadFollowup}`}>
       <div className={c.followupInner}>
         <div className={c.followupVisual}><Image src={visual.src} alt={block.artAlt} width={visual.width} height={visual.height} /></div>
         <ScrollFade as="div" className={c.followupCopy} delay={60} responsiveDelay>
@@ -162,7 +162,7 @@ function Features({ block }: { block: T.FeaturesBlock }) {
       <Image className={c.workflowBottomLines} src="/assets/clinical/workflow-lines.svg" alt="" width={939.707} height={757.707} />
     </div>
     <div className={c.workflowInner}>
-      <ScrollFade as="div" className={c.workflowCopy}>
+      <ScrollFade as="div" className={`${c.workflowCopy} ${b.alignCopy}`}>
         <p className={c.eyebrow}>{block.eyebrow}</p>
         <h2>{lines(block.title)}</h2>
         <p className={c.workflowDescription}>{block.description}</p>
@@ -180,7 +180,7 @@ const documentChipIcons = ["chipDocument", "chipEfax", "chipStorage", "chipAudit
 
 function TwoCard({ block }: { block: T.TwoCardBlock }) {
   return <section className={`${c.afterAssessment} ${b.twoCardSection}`}>
-    <div className={c.sectionInner}>
+    <div className={`${c.sectionInner} ${b.rail}`}>
       <ScrollFade as="div"><p className={c.eyebrow}>{block.eyebrow}</p><h2>{lines(block.title)}</h2></ScrollFade>
       <div className={c.assessmentCards}>
         <ScrollFade as="article" className={`${c.patientCard} ${b.twoCardItem}`}>
@@ -216,8 +216,8 @@ function Wave({ block }: { block: T.WaveBlock }) {
 
 /** Approved step cards (Independent Pharmacies "A better week"). */
 function StepsView({ eyebrow, title, side, items }: { eyebrow: string; title: string; side?: string; items: CardItem[] }) {
-  return <section className={i.betterWeek}>
-    <div className={i.sectionRail}>
+  return <section className={`${i.betterWeek} ${b.stepsSection}`}>
+    <div className={`${i.sectionRail} ${b.rail}`}>
       <div className={i.weekHeading}>
         <div><p>{eyebrow}</p><h2>{lines(title)}</h2></div>
         {side && <p>{side}</p>}
@@ -259,7 +259,7 @@ type ListGroup = { title: string; text?: string; items: ListItem[] };
 function ListCards({ eyebrow, title, side, groups }: { eyebrow?: string; title?: string; side?: string; groups: ListGroup[] }) {
   const lastAlone = groups.length % 2 === 1;
   return <section className={`${c.moreServices} ${b.listSection}`}>
-    <div className={c.sectionInner}>
+    <div className={`${c.sectionInner} ${b.rail}`}>
       {title && <ScrollFade as="div" className={c.splitHeading}>
         <div><p className={c.eyebrow}>{eyebrow}</p><h2>{lines(title)}</h2></div>
         {side && <p>{side}</p>}
@@ -445,7 +445,7 @@ export function BlockList({ blocks }: { blocks: T.Block[] }) {
 }
 
 export default function BlockPage({ page }: { page: T.PageContent }) {
-  return <main className={`${c.page} ${m.page} ${i.page}`} style={{ "--section-max": "1312px" } as CSSProperties}>
+  return <main className={`${c.page} ${m.page} ${i.page}`} style={{ "--section-max": "1312px", ...(page.gutter ? { "--block-gutter": `${page.gutter}px` } : {}) } as CSSProperties}>
     {page.blocks.map(renderBlock)}
   </main>;
 }
