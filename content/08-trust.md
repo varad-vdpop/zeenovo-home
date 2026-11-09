@@ -8,30 +8,34 @@ Layout for all trust pages: a simple text page (H1, last-updated date, intro, th
 
 ## `/trust/security-and-compliance` Security and Compliance
 
-Source: staging. Every control listed is `[CONFIRM 11]`.
+Source: staging, plus ZeeNovo's stated compliance roadmap (HIPAA and SOC 2). Every control listed is `[CONFIRM 11]`.
+
+**Status wording.** HIPAA and SOC 2 are written as in progress until they are complete. When the SOC 2 report is issued, change "SOC 2 audit in progress" to "SOC 2 Type [I/II] compliant" in the three places marked `[SOC 2 STATUS]`. HIPAA has no certificate; keep "HIPAA-aligned" even after the work is done.
 
 **Meta title:** Security and Compliance | ZeeNovo
-**Meta description:** How ZeeNovo protects personal health information: Canadian data residency, encryption, role-based access and full audit trails, aligned with PHIPA and PIPEDA.
+**Meta description:** How ZeeNovo protects personal health information: aligned with PHIPA, PIPEDA and HIPAA, SOC 2 audit in progress, with Canadian data residency, encryption and full audit trails. `[SOC 2 STATUS]`
 
 **HERO-PRODUCT** (no visual)
 - Eyebrow: Trust
 - H1: Security built for / Canadian health data.
-- Description: ZeeNovo helps pharmacies meet their obligations under PHIPA and PIPEDA, with controls suited to personal health information.
+- Description: ZeeNovo helps pharmacies meet their obligations under PHIPA and PIPEDA, applies HIPAA-aligned safeguards, and is completing a SOC 2 audit. `[SOC 2 STATUS]`
 - Buttons: Contact Us · Book a Demo
 
 **WAVE-TRACK** (reuse the values wave)
 - Tag: At a glance
 - H2: Your data is in good hands.
-- Labels: PHIPA aligned · PIPEDA aligned · Canadian data residency · Full audit trails · Role-based access
+- Labels: PHIPA aligned · PIPEDA aligned · HIPAA-aligned safeguards · SOC 2 audit in progress `[SOC 2 STATUS]` · Canadian data residency
 
-**SPLIT-CARDS** (4)
+**SPLIT-CARDS** (6)
 - Eyebrow: How we protect data
-- H2: Four layers of protection.
+- H2: Six layers of protection.
 - Side: These apply to every ZeeNovo product.
   1. PHIPA: As an electronic service provider to pharmacies, ZeeNovo supports consent, access control, audit logging and secure handling of personal health information.
   2. PIPEDA: Our data practices follow PIPEDA's fair information principles, including accountability, limited collection and use, safeguards, openness and individual access.
   3. Safeguards: Encryption in transit and at rest, role-based access, least-privilege administration, Canadian hosting and continuous monitoring.
   4. Accountability: Every access and change is logged, supporting patient access, correction and breach notification requirements.
+  5. HIPAA: Our administrative, physical and technical safeguards are designed to HIPAA Security Rule standards, for pharmacies and partners that work with US health data.
+  6. SOC 2: We are completing an independent SOC 2 audit of our security, availability and confidentiality controls. The report will be available to customers under NDA once issued. `[SOC 2 STATUS]`
 
 **Enterprise reporting** (one paragraph)
 Enterprise and chain dashboards show aggregate, de-identified data only. Minimum cohort sizes, suppression and blocked filter combinations prevent any patient from being identified.

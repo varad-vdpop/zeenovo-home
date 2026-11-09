@@ -124,7 +124,8 @@ function ProductCards() {
           <ScrollFade as="article" className="product-card magistral">
             <Image className="magistral-lines magistral-lines-a" src={asset.magistralCardLinesA} alt="" width={628} height={262} />
             <Image className="magistral-lines magistral-lines-b" src={asset.magistralCardLinesB} alt="" width={491} height={326} />
-            <div className="card-copy"><h3>ZeeNovo <b>Sites</b></h3><p>Your pharmacy website, with live booking built in</p><Button light href="/products/sites">Explore</Button></div>
+            {/* Magistral copy is placeholder until ZeeNovo confirms the product scope: see content/README.md, open item 5. */}
+            <div className="card-copy"><h3>ZeeNovo <b>Magistral</b></h3><p>Compounding formulas and batch records</p><Button light href="/products/magistral">Explore</Button></div>
             <div className="magistral-doctor"><Cover src={asset.magistralDoctor} alt="Pharmacist" /></div>
           </ScrollFade>
           <ScrollFade as="article" className="product-card intelligence" delay={60} responsiveDelay>
@@ -139,7 +140,7 @@ function ProductCards() {
 }
 
 const values = [
-  ["Canadian data residency", asset.valueIcon1],
+  ["PHIPA, PIPEDA and HIPAA aligned", asset.valueIcon1],
   ["Designed with practising pharmacists", asset.valueIcon2],
   ["Province-specific clinical logic", asset.valueIcon3],
   ["Booking to follow-up in one record", asset.valueIcon4],

@@ -24,6 +24,7 @@ export const navigationMenus: readonly NavigationMenu[] = [
         links: [
           { label: "Clinical", href: "/products/clinical" },
           { label: "Assure", href: "/products/assure" },
+          { label: "Magistral", href: "/products/magistral" },
           { label: "Sites", href: "/products/sites" },
           { label: "Patient Portal", href: "/products/patient-portal" },
           { label: "Voice Based Appointment Booking", href: "/products/voice-based-appointment-booking" },

@@ -9,14 +9,14 @@ Inner pages use sentence case, a small uppercase eyebrow above each H2, and a on
 Status: not built. Assemble from existing blocks.
 
 **Meta title:** Products | ZeeNovo
-**Meta description:** ZeeNovo Clinical, Assure, Sites and Intelligence. Clinical care, compliance, your website and patient booking on one platform.
+**Meta description:** ZeeNovo Clinical, Assure, Magistral, Sites and Intelligence. Clinical care, compliance, your website and patient booking on one platform.
 
 **HERO-PRODUCT**
 - H1: One platform for / pharmacy operations.
 - Description: Start with the product you need. Every product shares the same patients, records and login.
 - Buttons: Book a Demo → `/book-a-demo` · See Pricing → `/pricing`
 
-**Products grid** (reuse the home "Our Products" cards as they are)
+**Products grid** (reuse the home "Our Products" cards: Clinical, Assure, Magistral, Intelligence), plus one row of SPLIT-CARDS below it for ZeeNovo Sites and ZeeNovo Patient Portal, linking to their pages
 
 **SPLIT-CARDS** Shared foundation
 - Eyebrow: Shared foundation
@@ -474,6 +474,54 @@ Status: not built. Reuse the Incident Reporting analytics panels.
 **CTA-MAIN**
 - Eyebrow: Built for pharmacy safety
 - H2: Bring numbers to / your next CQI meeting.
+- Button: Book a Demo
+
+---
+
+## `/products/magistral` ZeeNovo Magistral `[DUMMY]`
+
+Status: not built. **All copy in this section is placeholder.** It assumes Magistral covers pharmacy compounding (magistral preparations). Replace it once ZeeNovo confirms the product scope `[CONFIRM 5]`. Use the Clinical page structure.
+
+**Meta title:** ZeeNovo Magistral | Compounding software for pharmacies
+**Meta description:** Master formulas, batch records, beyond-use dates and compounding documentation for Canadian pharmacies.
+
+**HERO-PRODUCT**
+- Eyebrow: ZeeNovo Magistral
+- H1: Compounding, / documented as you prepare.
+- Description: Keep master formulas, record every batch and have compounding documentation ready when the inspector asks.
+- Buttons: Get Started · Book a Demo
+
+**SPLIT-CARDS** (4)
+- Eyebrow: Compounding
+- H2: Four records, / kept for you.
+- Side: Every preparation is traceable from the formula to the patient.
+- Cards:
+  1. Master formulas: One approved version of every formula, with change history.
+  2. Batch records: Ingredients, lot numbers, quantities and who prepared it.
+  3. Beyond-use dates: Calculated and printed on the label.
+  4. Patient link: Each preparation attached to the patient and prescription.
+
+**FEATURE-ROWS**
+- Eyebrow: Preparation
+- H2: The right steps, / in the right order.
+- Paragraph: Guided preparation steps follow the master formula, so each batch is made the same way.
+- Rows:
+  - Step-by-step preparation: Each step confirmed before the next.
+  - Second check: A second person verifies before release.
+  - Labels: Generated from the batch record.
+
+**FEATURE-ROWS** (mirrored)
+- Eyebrow: Readiness
+- H2: Inspection-ready / compounding records.
+- Paragraph: Records are structured to Canadian model standards for pharmacy compounding. `[CONFIRM]` standard and scope
+- Rows:
+  - Audit trail: Every change to a formula or batch is logged.
+  - Exports: Batch and formula reports on demand.
+  - Linked to Assure: Compounding incidents go straight to incident reporting.
+
+**CTA-MAIN**
+- Eyebrow: Built for compounding
+- H2: Every batch, / on the record.
 - Button: Book a Demo
 
 ---

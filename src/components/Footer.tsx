@@ -3,7 +3,7 @@ import { asset } from "@/lib/assets";
 import styles from "./Footer.module.css";
 
 const footerGroups = [
-  { heading: "Our Products", items: ["ZeeNovo Clinical", "ZeeNovo Assure", "ZeeNovo Sites", "ZeeNovo Intelligence"] },
+  { heading: "Our Products", items: ["ZeeNovo Clinical", "ZeeNovo Assure", "ZeeNovo Magistral", "ZeeNovo Sites", "ZeeNovo Intelligence"] },
   { heading: "Company", items: ["About", "Pricing", "Blog", "Contact Us"] },
   { heading: "Logins", items: ["Register Pharmacy", "Patient Login", "Assure Login", "Clinical Login"] },
   { heading: "Legal", items: ["Privacy Policy", "Terms & Conditions", "Security & Compliance", "Accessibility"] },

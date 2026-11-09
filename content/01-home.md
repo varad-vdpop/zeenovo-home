@@ -30,7 +30,7 @@ Status: **built**. Copy below is applied in `src/app/page.tsx`. Home uses Title 
 |---|---|---|---|
 | Clinical | ZeeNovo **Clinical** | Clinical services, appointments and follow-up | Explore → `/products/clinical` |
 | Assure | ZeeNovo **Assure** | Incident reporting, self-assessment and quality analytics for your pharmacy. | Explore → `/products/assure` |
-| Magistral card `[CONFIRM 5]` | ZeeNovo **Sites** | Your pharmacy website, with live booking built in | Explore → `/products/sites` |
+| Magistral `[DUMMY]` | ZeeNovo **Magistral** | Compounding formulas and batch records | Explore → `/products/magistral` |
 | Intelligence | ZeeNovo **Intelligence** | Voice-based appointment booking for your patients | Explore → `/products/voice-based-appointment-booking` |
 
 ## You can trust us (WAVE-TRACK)
@@ -38,7 +38,7 @@ Status: **built**. Copy below is applied in `src/app/page.tsx`. Home uses Title 
 - Tag: You can trust us (approved, kept)
 - H2: Your pharmacy is in good hands. (approved, kept)
 - Labels (replacing generic ones):
-  1. Canadian data residency
+  1. PHIPA, PIPEDA and HIPAA aligned (restores the security claim from the approved "Robust security and compliance" slot)
   2. Designed with practising pharmacists
   3. Province-specific clinical logic
   4. Booking to follow-up in one record
@@ -103,7 +103,7 @@ Status: **built**. Copy below is applied in `src/app/page.tsx`. Home uses Title 
 
 ## Footer
 
-- Our Products: ZeeNovo Clinical · ZeeNovo Assure · ZeeNovo Sites · ZeeNovo Intelligence
+- Our Products: ZeeNovo Clinical · ZeeNovo Assure · ZeeNovo Magistral · ZeeNovo Sites · ZeeNovo Intelligence
 - Company: About · Pricing · Blog · Contact Us
 - Logins: Register Pharmacy · Patient Login · Assure Login · Clinical Login
 - Legal: Privacy Policy · Terms & Conditions · Security & Compliance · Accessibility
