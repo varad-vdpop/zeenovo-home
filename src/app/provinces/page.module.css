@@ -101,7 +101,7 @@
 .heroDescription {
   width: min(100%, 580px);
   margin-top: 24px;
-  color: rgb(0 0 0 / 67%);
+  color: rgb(22 19 58 / 67%);
   font: 400 16px/1.58 var(--font-manrope), Arial, sans-serif;
 }
 
@@ -271,7 +271,7 @@
 .realityCard small { display: block; color: var(--purple); font-size: 10px; font-weight: 750; }
 .realityCard > span { display: block; height: 68px; color: #3d2ea8; font-family: Georgia, serif; font-size: 94px; font-weight: 700; line-height: 1; }
 .realityCard h3 { margin-top: 12px; font-size: 22px; letter-spacing: -.035em; line-height: 1.14; }
-.realityCard p { margin-top: 9px; color: rgb(0 0 0 / 58%); font: 400 13px/1.48 var(--font-manrope), Arial, sans-serif; }
+.realityCard p { margin-top: 9px; color: rgb(22 19 58 / 58%); font: 400 13px/1.48 var(--font-manrope), Arial, sans-serif; }
 
 .motionReady .realityCard[data-visible="true"]:hover {
   border-color: rgb(255 255 255 / 60%);

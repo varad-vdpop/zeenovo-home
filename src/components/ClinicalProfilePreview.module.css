@@ -1,5 +1,5 @@
 /* Container units preserve the Figma form's proportions as the illustration shrinks. */
-.panel { container-type: inline-size; width: 100%; aspect-ratio: 617.04 / 473.04; overflow: hidden; border: 1px solid #e2e8f0; border-radius: 1.867cqw; background: #fff; color: #0f172a; box-shadow: 0 .72px 2.16px rgb(0 0 0 / 10%), 0 .72px 1.44px rgb(0 0 0 / 10%); }
+.panel { container-type: inline-size; width: 100%; aspect-ratio: 617.04 / 473.04; overflow: hidden; border: 1px solid #e2e8f0; border-radius: 1.867cqw; background: #fff; color: #0f172a; box-shadow: 0 .72px 2.16px rgb(22 19 58 / 10%), 0 .72px 1.44px rgb(22 19 58 / 10%); }
 .layout { display: grid; height: 100%; grid-template-columns: 26.14% minmax(0, 1fr); }
 .sidebar { padding: 2.334cqw; border-right: .117cqw solid #e2e8f0; background: #f8fafc; }
 .stepsLabel { color: #94a3b8; font-size: 1.4cqw; font-weight: 600; line-height: 1.867cqw; letter-spacing: .097cqw; text-transform: uppercase; }

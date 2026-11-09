@@ -17,6 +17,14 @@ Sources used: current zeenovo.com, the client-coded staging build, the Enterpris
 | `07-company.md` | `/company`, about, contact, `/book-a-demo` |
 | `08-trust.md` | security and compliance, privacy, terms, accessibility, DPA, sub-processors |
 
+## Review build
+
+Every sitemap page now exists locally. Unbuilt pages are assembled from the approved blocks by `src/components/blocks/BlockPage.tsx`, with copy in `src/content/pages/*.ts` (transcribed from the files above). Province pages use `src/app/provinces/ProvincePage.tsx`, the Ontario layout with the Canada map.
+
+- Sections marked **"Draft layout · needs design approval"** on the page (FAQ, pricing table, forms, lists, legal text, ROI calculator) have no approved design. They use the existing type, colours and radii so the copy can be reviewed in place.
+- Magistral shows a "placeholder content" banner.
+- Forms validate and show the success message but send nothing.
+
 ## Voice
 
 Write the way the proposal reads. Plain, specific, operational.

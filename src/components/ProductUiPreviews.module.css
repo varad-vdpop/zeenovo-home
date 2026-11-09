@@ -11,7 +11,7 @@
 .sopIndicator { position: absolute; top: 1.19cqw; left: 2.5cqw; right: 2.5cqw; height: 4.29cqw; border-radius: .9cqw; background: #e5ecff; pointer-events: none; }
 .sopNavRow { position: relative; display: flex; align-items: center; gap: 1cqw; width: 100%; height: 4.29cqw; margin-bottom: 1.91cqw; padding: 0 1.01cqw; border: 0; background: transparent; color: inherit; font-family: inherit; text-align: left; cursor: pointer; border-radius: .9cqw; font-size: 1.667cqw; white-space: nowrap; }
 .sopNavRow img { width: 1.9cqw; height: 1.9cqw; object-fit: contain; filter: brightness(0); }
-.sopSelected { color: #000; }
+.sopSelected { color: #16133a; }
 .sopSelected img { filter: brightness(0); }
 .sopContent { position: absolute; top: 22.23%; left: 28.7%; width: 70.9%; }
 .sopSearch { display: flex; align-items: center; gap: 1.05cqw; height: 4.29cqw; padding: 0 1.43cqw; border: .095cqw solid #e4e4e7; border-radius: 1.08cqw; color: #71717a; font-size: 1.57cqw; white-space: nowrap; }
@@ -91,7 +91,7 @@
 .analyticsBar:nth-child(2), .analyticsBar:nth-child(6), .analyticsBar:nth-child(8), .analyticsBar:nth-child(9) { background: #a79afb; }
 .analyticsBar:nth-child(7), .analyticsBar:nth-child(10) { background: #3b309d; }
 
-.remindersPanel { aspect-ratio: 414.502 / 289.298; border-radius: 5.21cqw; background: #fff; color: #000; font-family: Arial, sans-serif; font-size: 2.283cqw; line-height: 1.333; overflow: hidden; }
+.remindersPanel { aspect-ratio: 414.502 / 289.298; border-radius: 5.21cqw; background: #fff; color: #16133a; font-family: Arial, sans-serif; font-size: 2.283cqw; line-height: 1.333; overflow: hidden; }
 .reminderHeader { position: absolute; top: 6.21%; left: 5.49%; right: 8.62%; display: flex; justify-content: space-between; align-items: flex-start; }
 .reminderHeading { font-size: 3.661cqw; line-height: 1.455; font-weight: 600; }
 .reminderSubtitle { margin-top: .915cqw; }
@@ -107,7 +107,7 @@
 .reminderDosage { margin-top: 2.283cqw; margin-bottom: .761cqw; }
 .reminderRow b { font-weight: 500; }
 
-.metricsPanel { aspect-ratio: 230.615 / 277.674; display: flex; flex-direction: column; gap: 4.464cqw; color: #000; font-family: Arial, sans-serif; }
+.metricsPanel { aspect-ratio: 230.615 / 277.674; display: flex; flex-direction: column; gap: 4.464cqw; color: #16133a; font-family: Arial, sans-serif; }
 .metricCard { height: 57.971cqw; padding: 8.696cqw 10.145cqw; border-radius: 8.366cqw; background: #fff; }
 .metricCard:first-child { background: #3b309d; color: #fff; }
 .metricLabel { display: flex; justify-content: space-between; align-items: center; font-size: 5.216cqw; line-height: 1.429; }

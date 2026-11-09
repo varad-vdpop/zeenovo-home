@@ -14,7 +14,7 @@
 .recordHeading img { width: 9.244cqw; height: 10.084cqw; flex: none; }
 .recordDescription { margin-top: .84cqw; margin-left: 14.706cqw; color: #c5b9ef; font-size: 4.202cqw; line-height: 6.3cqw; }
 
-.guided .surface { overflow: hidden; border-radius: 4.11cqw; background: #fff; color: #111; }
+.guided .surface { overflow: hidden; border-radius: 4.11cqw; background: #fff; color: #16133a; }
 .guidedLayout { display: grid; height: 100%; grid-template-columns: 29.315% minmax(0, 1fr); }
 .assessmentSidebar { padding: 3.5cqw 1.986cqw; background: #f1f3ff; }
 .assessmentEyebrow { margin: .5cqw 1.1cqw 4.1cqw; color: #2b0b91; font-size: 1.23cqw; line-height: 1.8cqw; font-weight: 600; text-transform: uppercase; }

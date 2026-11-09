@@ -1,4 +1,4 @@
-.page { overflow: hidden; background: #fff; color: #08090d; font-family: var(--font-jakarta), Arial, sans-serif; }
+.page { overflow: hidden; background: #fff; color: #16133a; font-family: var(--font-jakarta), Arial, sans-serif; }
 .page img { display: block; }
 .sectionInner { width: min(calc(100% - 112px), 1328px); margin-inline: auto; }
 .eyebrow { color: #2b108e; font-size: 12px; font-weight: 600; line-height: 16px; text-transform: uppercase; }
