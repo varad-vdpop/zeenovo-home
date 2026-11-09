@@ -21,16 +21,22 @@ a.cardAuto:hover { transform: translateY(-3px); }
 /* Wave and step tracks with four or five items. */
 .waveTrack { width: min(1380px, 100%); }
 
-/* Condition cards used as grouped lists: content-led heights, rows from the Clinical feature row. */
-.listSection { padding-bottom: 100px; }
-.listHeading { min-height: 0; padding-bottom: 56px; }
-.listHeading > p { font-size: 18px; line-height: 30px; }
-.listCard { min-height: 0 !important; }
-.listCard ul { align-items: start; }
-.listCard li { align-items: flex-start; min-height: 0; }
-.listCard li > span:last-child { display: flex; min-width: 0; flex-direction: column; gap: 5px; padding-top: 6px; }
-.listCard li strong { color: #2d2d2d; font-size: 16px; font-weight: 600; line-height: 22px; }
-.listCard li small { color: #64748b; font-size: 13px; font-weight: 400; line-height: 19px; }
+/* Vaccinations / Prescriptions card pair used for grouped lists. Colours are the approved card colours. */
+.listSection { height: auto; padding-bottom: 90px; }
+.cardPair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.listCard { height: auto; }
+.toneLavender { background: #e8ebff; }
+.tonePeach { background: #ffeedf; }
+.cardFull { grid-column: 1 / -1; }
+.listBox { margin-top: 28px; }
+.listRow { height: auto; align-items: flex-start; padding: 18px 0; }
+.rowText { display: flex; min-width: 0; flex-direction: column; gap: 4px; padding-top: 6px; }
+.listRow strong { font-weight: 500; white-space: normal; }
+.listRow small { margin-left: 0; color: #64748b; font-size: 13px; line-height: 19px; white-space: normal; }
+
+/* Follow-up section leading a feature list, with content-led height. */
+.leadFollowup { height: auto; }
+.leadCopy { padding-bottom: 79px; }
 
 /* Clinical workflow section holding a real form or calculator. */
 .panelSection { height: auto; min-height: 744px; }
@@ -38,6 +44,7 @@ a.cardAuto:hover { transform: translateY(-3px); }
 .panelCopy { position: static; width: auto; padding: 122px 56px 90px; }
 .panelArt { position: relative; inset: auto; padding: 110px 54px 90px; }
 .panelFrame { position: relative; top: auto; left: auto; width: 100%; }
+.panelArtCentre { display: flex; align-items: center; }
 
 /* "Profile details" panel, at full size (values from ClinicalProfilePreview). */
 .panel { border: 1px solid #e2e8f0; border-radius: 16px; background: #fff; color: #0f172a; padding: 26px; box-shadow: 0 1px 3px rgb(22 19 58 / 10%); }
@@ -77,10 +84,11 @@ a.cardAuto:hover { transform: translateY(-3px); }
   .cardIcon img { width: 32px; height: 32px; }
   .waveTrack { grid-template-columns: repeat(2, 1fr) !important; }
   .stepGrid { grid-template-columns: 1fr !important; }
-  .listHeading { padding-bottom: 28px; }
-  .listCard ul { grid-template-columns: 1fr !important; }
-  .listCard li strong { font-size: 14px; }
-  .listCard li small { font-size: 12px; }
+  .cardPair { grid-template-columns: 1fr; }
+  .cardFull { grid-column: auto; }
+  .listRow strong { font-size: 14px; }
+  .listRow small { display: block; font-size: 12px; line-height: 17px; }
+  .leadCopy { padding-bottom: 60px; }
   .panelInner { display: flex; flex-direction: column; }
   .panelCopy { padding: 62px 20px 40px; }
   /* The approved section paints its purple band as a fixed 450px strip on mobile; let it follow the form instead. */

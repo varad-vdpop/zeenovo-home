@@ -158,13 +158,18 @@ export type TableBlock = { type: "table"; eyebrow: string; title: Heading; colum
 
 export type RoiBlock = { type: "roi" };
 
-/** Feature tiles, drawn from src/content/features.json by id. Extends the approved documentation tiles with a description line. */
+/** Features from src/content/features.json, by id. The first group leads in the approved Follow-up ("followup")
+    or Workflow ("workflow") section beside `art`; the rest use the Vaccinations / Prescriptions card pair.
+    Keep each group to five features or fewer. */
 export type FeatureIndexBlock = {
   type: "featureIndex";
   eyebrow: string;
   title: Heading;
   side?: string;
-  groups: { title: string; ids: string[] }[];
+  lead: "followup" | "workflow";
+  art: ArtKey;
+  artAlt?: string;
+  groups: { title: string; text?: string; ids: string[] }[];
 };
 
 export type Block =

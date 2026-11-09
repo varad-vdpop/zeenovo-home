@@ -240,25 +240,27 @@ function CtaSplit({ block }: { block: T.CtaSplitBlock }) {
 }
 
 type ListItem = { title: string; text?: string; icon: TileIconKey };
-type ListGroup = { title: string; items: ListItem[] };
+type ListGroup = { title: string; text?: string; items: ListItem[] };
 
-/** The approved "Supported Conditions" section from Minor Ailments: grouped cards of icon rows.
-    Rows use the approved Clinical feature-row type (bold title, grey line). */
-function ListCards({ eyebrow, title, side, groups }: { eyebrow: string; title: string; side?: string; groups: ListGroup[] }) {
-  const wideFirst = groups.length % 2 === 1;
-  return <section className={`${m.conditions} ${b.listSection}`}>
-    <div className={m.conditionsInner}>
-      <ScrollFade as="div" className={`${m.conditionHeading} ${b.listHeading}`}>
-        <div><p className={m.mutedEyebrow}>{eyebrow}</p><h2>{lines(title)}</h2></div>
+/** The approved Vaccinations / Prescriptions card pair from the Clinical page: two soft cards side by side,
+    each holding a white list of rows (icon circle, name). Rows carry a one-line description under the name. */
+function ListCards({ eyebrow, title, side, groups }: { eyebrow?: string; title?: string; side?: string; groups: ListGroup[] }) {
+  const lastAlone = groups.length % 2 === 1;
+  return <section className={`${c.moreServices} ${b.listSection}`}>
+    <div className={c.sectionInner}>
+      {title && <ScrollFade as="div" className={c.splitHeading}>
+        <div><p className={c.eyebrow}>{eyebrow}</p><h2>{lines(title)}</h2></div>
         {side && <p>{side}</p>}
-      </ScrollFade>
-      <div className={m.conditionsGrid}>
-        {groups.map((group, index) => <ScrollFade as="article" className={`${m.conditionCard} ${index === 0 && wideFirst ? m.conditionCardWide : ""} ${b.listCard}`} delay={index === 0 ? 0 : ((index - 1) % 2) * 60} responsiveDelay key={group.title}>
+      </ScrollFade>}
+      <div className={`${c.moreCards} ${b.cardPair}`}>
+        {groups.map((group, index) => <ScrollFade as="article" key={group.title} delay={(index % 2) * 60} responsiveDelay
+          className={`${c.prescriptionCard} ${b.listCard} ${index % 2 ? b.tonePeach : b.toneLavender} ${lastAlone && index === groups.length - 1 ? b.cardFull : ""}`}>
           <h3>{group.title}</h3>
-          <ul>{group.items.map((item) => <li key={item.title} className={c.featureRow}>
-            <span className={m.conditionIcon}><Image src={tileIcons[item.icon]} alt="" width={34} height={34} /></span>
-            <span><strong>{item.title}</strong>{item.text && <small>{item.text}</small>}</span>
-          </li>)}</ul>
+          {group.text && <p>{group.text}</p>}
+          <div className={`${c.prescriptionList} ${b.listBox}`}>{group.items.map((item) => <div className={`${c.prescriptionRow} ${b.listRow}`} key={item.title}>
+            <span className={c.prescriptionIcon}><Image src={tileIcons[item.icon]} alt="" width={18} height={18} /></span>
+            <span className={b.rowText}><strong>{item.title}</strong>{item.text && <small>{item.text}</small>}</span>
+          </div>)}</div>
         </ScrollFade>)}
       </div>
     </div>
@@ -268,16 +270,49 @@ function ListCards({ eyebrow, title, side, groups }: { eyebrow: string; title: s
 type Feature = { title: string; text: string; icon: TileIconKey };
 const featureCatalogue = featureData.features as Record<string, Feature>;
 
+/** Feature lists: the first group leads in the approved Clinical Follow-up (or Workflow) section,
+    the rest follow in the Vaccinations / Prescriptions card pair. */
 function FeatureIndex({ block }: { block: T.FeatureIndexBlock }) {
-  const groups = block.groups.map((group) => ({
+  const groups: ListGroup[] = block.groups.map((group) => ({
     title: group.title,
+    text: group.text,
     items: group.ids.map((id) => {
       const feature = featureCatalogue[id];
       if (!feature) throw new Error(`Unknown feature id "${id}" in features.json`);
       return feature;
     }),
   }));
-  return <ListCards eyebrow={block.eyebrow} title={block.title} side={block.side} groups={groups} />;
+  const [lead, ...rest] = groups;
+  const visual = art[block.art];
+  const copy = <>
+    <p className={c.eyebrow}>{block.eyebrow} · {lead.title}</p>
+    <h2>{lines(block.title)}</h2>
+    {block.side && <p className={c.followupDescription}>{block.side}</p>}
+    <div className={c.followupFeatures}>{lead.items.map((feature) => <div className={c.featureRow} key={feature.title}>
+      <span className={c.featureIcon}><Image src={tileIcons[feature.icon]} alt="" width={39} height={39} /></span>
+      <span><strong>{feature.title}</strong><small>{feature.text}</small></span>
+    </div>)}</div>
+  </>;
+  const leadSection = block.lead === "followup"
+    ? <section className={`${c.followup} ${b.leadFollowup}`}>
+      <div className={c.followupInner}>
+        <div className={c.followupVisual}><Image src={visual.src} alt={block.artAlt ?? ""} width={visual.width} height={visual.height} /></div>
+        <ScrollFade as="div" className={`${c.followupCopy} ${b.leadCopy}`} delay={60} responsiveDelay>{copy}</ScrollFade>
+      </div>
+    </section>
+    : <section className={`${c.workflow} ${b.panelSection}`}>
+      <div className={c.workflowPatterns} aria-hidden="true">
+        <Image className={c.workflowLines} src="/assets/clinical/workflow-lines.svg" alt="" width={939.707} height={757.707} />
+        <Image className={c.workflowBottomLines} src="/assets/clinical/workflow-lines.svg" alt="" width={939.707} height={757.707} />
+      </div>
+      <div className={`${c.workflowInner} ${b.panelInner}`}>
+        <ScrollFade as="div" className={`${c.workflowCopy} ${b.panelCopy}`}>{copy}</ScrollFade>
+        <div className={`${c.workflowArt} ${b.panelArt} ${b.panelArtCentre}`}>
+          <div className={`${c.workflowForm} ${b.panelFrame}`}><Image src={visual.src} alt={block.artAlt ?? ""} width={visual.width} height={visual.height} style={{ width: "100%", height: "auto" }} /></div>
+        </div>
+      </div>
+    </section>;
+  return <>{leadSection}{rest.length > 0 && <ListCards groups={rest} />}</>;
 }
 
 function Faq({ block }: { block: T.FaqBlock }) {

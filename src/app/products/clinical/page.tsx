@@ -95,7 +95,7 @@ function Hero() {
     <Image className={styles.heroWave} src={a("hero-wave.svg")} alt="" width={480} height={819} priority />
     <Image className={styles.heroEllipse} src={a("hero-ellipse.svg")} alt="" width={619} height={619} priority />
     <div className={styles.heroCopy}>
-      <h1 className={styles.heroEnter} id="clinical-title">Clinical services,<br /> from booking to follow-up.</h1>
+      <h1 className={styles.heroEnter} id="clinical-title">Clinical services,<br /> booking to follow-up.</h1>
       <p className={`${styles.heroEnter} ${styles.heroDescription}`}>Minor ailments, vaccinations, injections, prescriptions and medication reviews in one guided workflow.</p>
       <div className={`${styles.heroActions} ${styles.heroEnter}`}>
         <a data-cta className={styles.primaryButton} href="#clinical-services"><Arrow tone="white" />Get Started</a>

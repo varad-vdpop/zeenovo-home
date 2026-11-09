@@ -41,7 +41,7 @@ Status: **built**. Approved copy kept unless listed.
 
 | Section | Field | Change |
 |---|---|---|
-| Hero | H1 | Clinical services, / from booking to follow-up. (approved "Innovative solutions for modern pharmacies." did not say what the product is) |
+| Hero | H1 | Clinical services, / booking to follow-up. (approved "Innovative solutions for modern pharmacies." did not say what the product is) |
 | Hero | Description | Minor ailments, vaccinations, injections, prescriptions and medication reviews in one guided workflow. |
 | Clinical services | H2 | Six ways to extend clinical care. (block shows six cards, not four) |
 | Clinical services | Side | Choose a service. Intake, assessment and documentation follow the same structure every time. |
