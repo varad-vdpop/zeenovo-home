@@ -9,7 +9,7 @@ import c from "@/app/products/clinical/page.module.css";
 import m from "@/app/products/clinical/minor-ailments/page.module.css";
 import i from "@/app/solutions/independent-pharmacies/page.module.css";
 import b from "./blocks.module.css";
-import { art, icons, people, tileIcons, type TileIconKey } from "./media";
+import { art, icons, people, tileIcons, type MediaItem, type TileIconKey } from "./media";
 import featureData from "@/content/features.json";
 import FormView from "./FormView";
 import RoiCalculator from "./RoiCalculator";
@@ -84,19 +84,22 @@ function SolutionHero({ block }: { block: T.SolutionHeroBlock }) {
 
 const tones = [m.intake, m.safety, m.treatment, m.record];
 
-function Cards({ block }: { block: T.CardsBlock }) {
-  const columns = block.items.length === 4 ? 4 : block.items.length === 2 ? 2 : 3;
+type CardItem = { title: string; text: string; src: string; href?: string };
+
+/** Approved capability cards (Minor Ailments "Four jobs handled"). */
+function CardsView({ eyebrow, title, side, items }: { eyebrow: string; title: string; side?: string; items: CardItem[] }) {
+  const columns = items.length === 4 ? 4 : items.length === 2 ? 2 : 3;
   return <section className={`${m.capabilities} ${b.cardsSection}`}>
     <div className={m.sectionInner}>
       <ScrollFade as="div" className={m.sectionHeading}>
-        <div><p className={m.eyebrow}>{block.eyebrow}</p><h2>{lines(block.title)}</h2></div>
-        {block.side && <p>{block.side}</p>}
+        <div><p className={m.eyebrow}>{eyebrow}</p><h2>{lines(title)}</h2></div>
+        {side && <p>{side}</p>}
       </ScrollFade>
       <div className={`${m.capabilityGrid} ${b.cardGrid}`} style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}>
-        {block.items.map((item, index) => {
+        {items.map((item, index) => {
           const content = <>
             <span className={m.capabilityNumber}>{String(index + 1).padStart(2, "0")}</span>
-            <span className={b.cardIcon}><Image src={icons[item.icon]} alt="" width={40} height={40} /></span>
+            <span className={b.cardIcon}><Image src={item.src} alt="" width={40} height={40} /></span>
             <div><h3>{item.title}</h3><p>{item.text}</p></div>
           </>;
           const className = `${m.capabilityCard} ${tones[index % tones.length]} ${b.cardAuto}`;
@@ -107,6 +110,10 @@ function Cards({ block }: { block: T.CardsBlock }) {
       </div>
     </div>
   </section>;
+}
+
+function Cards({ block }: { block: T.CardsBlock }) {
+  return <CardsView eyebrow={block.eyebrow} title={block.title} side={block.side} items={block.items.map((item) => ({ ...item, src: icons[item.icon] }))} />;
 }
 
 function Reality({ block }: { block: T.RealityBlock }) {
@@ -207,22 +214,27 @@ function Wave({ block }: { block: T.WaveBlock }) {
   </section>;
 }
 
-function Steps({ block }: { block: T.StepsBlock }) {
+/** Approved step cards (Independent Pharmacies "A better week"). */
+function StepsView({ eyebrow, title, side, items }: { eyebrow: string; title: string; side?: string; items: CardItem[] }) {
   return <section className={i.betterWeek}>
     <div className={i.sectionRail}>
       <div className={i.weekHeading}>
-        <div><p>{block.eyebrow}</p><h2>{lines(block.title)}</h2></div>
-        <p>{block.side}</p>
+        <div><p>{eyebrow}</p><h2>{lines(title)}</h2></div>
+        {side && <p>{side}</p>}
       </div>
-      <div className={`${i.weekCards} ${b.stepGrid}`} style={{ gridTemplateColumns: `repeat(${block.items.length}, 1fr)` }}>
-        {block.items.map((item, index) => <article key={item.title}>
+      <div className={`${i.weekCards} ${b.stepGrid}`} style={{ gridTemplateColumns: `repeat(${items.length}, 1fr)` }}>
+        {items.map((item, index) => <article key={item.title}>
           <span>{String(index + 1).padStart(2, "0")}</span>
-          <div className={i.weekIcon}><Image src={icons[item.icon]} alt="" width={50} height={50} /></div>
+          <div className={i.weekIcon}><Image src={item.src} alt="" width={50} height={50} /></div>
           <div><h3>{item.title}</h3><p>{item.text}</p></div>
         </article>)}
       </div>
     </div>
   </section>;
+}
+
+function Steps({ block }: { block: T.StepsBlock }) {
+  return <StepsView eyebrow={block.eyebrow} title={block.title} side={block.side} items={block.items.map((item) => ({ ...item, src: icons[item.icon] }))} />;
 }
 
 function CtaSplit({ block }: { block: T.CtaSplitBlock }) {
@@ -270,49 +282,63 @@ function ListCards({ eyebrow, title, side, groups }: { eyebrow?: string; title?:
 type Feature = { title: string; text: string; icon: TileIconKey };
 const featureCatalogue = featureData.features as Record<string, Feature>;
 
-/** Feature lists: the first group leads in the approved Clinical Follow-up (or Workflow) section,
-    the rest follow in the Vaccinations / Prescriptions card pair. */
-function FeatureIndex({ block }: { block: T.FeatureIndexBlock }) {
-  const groups: ListGroup[] = block.groups.map((group) => ({
-    title: group.title,
-    text: group.text,
-    items: group.ids.map((id) => {
-      const feature = featureCatalogue[id];
-      if (!feature) throw new Error(`Unknown feature id "${id}" in features.json`);
-      return feature;
-    }),
-  }));
-  const [lead, ...rest] = groups;
-  const visual = art[block.art];
+/** Rows beside a visual: the approved Clinical Follow-up section, or its mirror, the Workflow section. */
+function RowsView({ variant, eyebrow, title, side, items, visual, alt }: { variant: "followup" | "workflow"; eyebrow: string; title: string; side?: string; items: Feature[]; visual: MediaItem; alt: string }) {
   const copy = <>
-    <p className={c.eyebrow}>{block.eyebrow} · {lead.title}</p>
-    <h2>{lines(block.title)}</h2>
-    {block.side && <p className={c.followupDescription}>{block.side}</p>}
-    <div className={c.followupFeatures}>{lead.items.map((feature) => <div className={c.featureRow} key={feature.title}>
+    <p className={c.eyebrow}>{eyebrow}</p>
+    <h2>{lines(title)}</h2>
+    {side && <p className={c.followupDescription}>{side}</p>}
+    <div className={c.followupFeatures}>{items.map((feature) => <div className={c.featureRow} key={feature.title}>
       <span className={c.featureIcon}><Image src={tileIcons[feature.icon]} alt="" width={39} height={39} /></span>
       <span><strong>{feature.title}</strong><small>{feature.text}</small></span>
     </div>)}</div>
   </>;
-  const leadSection = block.lead === "followup"
-    ? <section className={`${c.followup} ${b.leadFollowup}`}>
+  if (variant === "followup") {
+    return <section className={`${c.followup} ${b.leadFollowup}`}>
       <div className={c.followupInner}>
-        <div className={c.followupVisual}><Image src={visual.src} alt={block.artAlt ?? ""} width={visual.width} height={visual.height} /></div>
+        <div className={c.followupVisual}><Image src={visual.src} alt={alt} width={visual.width} height={visual.height} /></div>
         <ScrollFade as="div" className={`${c.followupCopy} ${b.leadCopy}`} delay={60} responsiveDelay>{copy}</ScrollFade>
       </div>
-    </section>
-    : <section className={`${c.workflow} ${b.panelSection}`}>
-      <div className={c.workflowPatterns} aria-hidden="true">
-        <Image className={c.workflowLines} src="/assets/clinical/workflow-lines.svg" alt="" width={939.707} height={757.707} />
-        <Image className={c.workflowBottomLines} src="/assets/clinical/workflow-lines.svg" alt="" width={939.707} height={757.707} />
-      </div>
-      <div className={`${c.workflowInner} ${b.panelInner}`}>
-        <ScrollFade as="div" className={`${c.workflowCopy} ${b.panelCopy}`}>{copy}</ScrollFade>
-        <div className={`${c.workflowArt} ${b.panelArt} ${b.panelArtCentre}`}>
-          <div className={`${c.workflowForm} ${b.panelFrame}`}><Image src={visual.src} alt={block.artAlt ?? ""} width={visual.width} height={visual.height} style={{ width: "100%", height: "auto" }} /></div>
-        </div>
-      </div>
     </section>;
-  return <>{leadSection}{rest.length > 0 && <ListCards groups={rest} />}</>;
+  }
+  return <section className={`${c.workflow} ${b.panelSection}`}>
+    <div className={c.workflowPatterns} aria-hidden="true">
+      <Image className={c.workflowLines} src="/assets/clinical/workflow-lines.svg" alt="" width={939.707} height={757.707} />
+      <Image className={c.workflowBottomLines} src="/assets/clinical/workflow-lines.svg" alt="" width={939.707} height={757.707} />
+    </div>
+    <div className={`${c.workflowInner} ${b.panelInner}`}>
+      <ScrollFade as="div" className={`${c.workflowCopy} ${b.panelCopy}`}>{copy}</ScrollFade>
+      <div className={`${c.workflowArt} ${b.panelArt} ${b.panelArtCentre}`}>
+        <div className={`${c.workflowForm} ${b.panelFrame}`}><Image src={visual.src} alt={alt} width={visual.width} height={visual.height} style={{ width: "100%", height: "auto" }} /></div>
+      </div>
+    </div>
+  </section>;
+}
+
+/** Feature groups, each shown in the approved division named by `layout`. The first group carries the block heading. */
+function FeatureIndex({ block }: { block: T.FeatureIndexBlock }) {
+  return <>{block.groups.map((group, index) => {
+    const features = group.ids.map((id) => {
+      const feature = featureCatalogue[id];
+      if (!feature) throw new Error(`Unknown feature id "${id}" in features.json`);
+      return feature;
+    });
+    const first = index === 0;
+    const eyebrow = first ? `${block.eyebrow} · ${group.title}` : group.title;
+    const title = first ? block.title : group.text ?? group.title;
+    const side = first ? block.side : undefined;
+    const items = features.map((feature) => ({ title: feature.title, text: feature.text, src: tileIcons[feature.icon] }));
+    switch (group.layout) {
+      case "workflow":
+      case "followup": {
+        if (!group.art) throw new Error(`Feature group "${group.title}" needs art for the ${group.layout} layout`);
+        return <RowsView key={group.title} variant={group.layout} eyebrow={eyebrow} title={title} side={side} items={features} visual={art[group.art]} alt={group.artAlt ?? ""} />;
+      }
+      case "cards": return <CardsView key={group.title} eyebrow={eyebrow} title={title} side={side} items={items} />;
+      case "steps": return <StepsView key={group.title} eyebrow={eyebrow} title={title} side={side} items={items} />;
+      case "list": return <ListCards key={group.title} eyebrow={eyebrow} title={title} side={side} groups={[{ title: group.title, items: features }]} />;
+    }
+  })}</>;
 }
 
 function Faq({ block }: { block: T.FaqBlock }) {

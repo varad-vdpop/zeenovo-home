@@ -158,18 +158,24 @@ export type TableBlock = { type: "table"; eyebrow: string; title: Heading; colum
 
 export type RoiBlock = { type: "roi" };
 
-/** Features from src/content/features.json, by id. The first group leads in the approved Follow-up ("followup")
-    or Workflow ("workflow") section beside `art`; the rest use the Vaccinations / Prescriptions card pair.
-    Keep each group to five features or fewer. */
+/** Features from src/content/features.json, by id. Each group renders in an approved division:
+    "workflow" / "followup" (rows beside `art`), "cards" (capability cards, 2 to 4), "steps" (step cards, 3 to 5)
+    or "list" (Prescriptions-style card, at most once per page). Avoid the same layout twice in a row. */
+export type FeatureGroup = {
+  title: string;
+  /** Heading for this group's section (the first group uses the block title instead). */
+  text?: string;
+  ids: string[];
+  layout: "workflow" | "followup" | "cards" | "steps" | "list";
+  art?: ArtKey;
+  artAlt?: string;
+};
 export type FeatureIndexBlock = {
   type: "featureIndex";
   eyebrow: string;
   title: Heading;
   side?: string;
-  lead: "followup" | "workflow";
-  art: ArtKey;
-  artAlt?: string;
-  groups: { title: string; text?: string; ids: string[] }[];
+  groups: FeatureGroup[];
 };
 
 export type Block =
