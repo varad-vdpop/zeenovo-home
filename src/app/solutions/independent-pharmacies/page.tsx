@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { asset } from "@/lib/assets";
+import { BlockList } from "@/components/blocks/BlockPage";
+import { independentPharmaciesFeatures } from "@/content/featureSections";
 import styles from "./page.module.css";
 
 const pageAsset = asset.independentPharmacies;
@@ -198,5 +200,5 @@ function Cta() {
 }
 
 export default function IndependentPharmaciesPage() {
-  return <main className={styles.page}><Hero /><Reality /><PictureChanges /><BetterWeek /><Cta /></main>;
+  return <main className={styles.page}><Hero /><Reality /><PictureChanges /><BetterWeek /><BlockList blocks={[independentPharmaciesFeatures]} /><Cta /></main>;
 }

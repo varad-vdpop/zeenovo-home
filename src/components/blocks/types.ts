@@ -169,6 +169,9 @@ export type FeatureIndexBlock = {
   art?: ArtKey;
   artAlt?: string;
   groups: { title: string; text?: string; ids: string[] }[];
+  /** Description to show instead of the catalogue text, by feature id, when the page speaks to a different
+      audience (for example the Patients page says "your"). */
+  wording?: Record<string, string>;
 };
 
 export type Block =

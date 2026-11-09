@@ -70,6 +70,7 @@ export const solutionPages: Record<string, PageContent> = {
         { title: "Safety tracked", text: "Incidents and goals stay visible.", icon: "dayFollowups" },
         { title: "Results reviewed", text: "Volume and revenue by service.", icon: "dayRevenue" },
       ] },
+      {"type": "featureIndex", "eyebrow": "Features for owners", "title": "The numbers and controls / owners ask for.", "side": "Each one comes from the work your team already does in ZeeNovo.", "art": "analyticsChart", "artAlt": "Pharmacy performance chart", "groups": [{"title": "Visibility", "ids": ["performanceView", "bookingSource", "scheduledReports", "selfAssessment", "trendDashboards", "unlimitedUsers", "quickSetup"]}]},
       { type: "ctaSplit", eyebrow: "Built for pharmacy owners", title: "Know what your pharmacy / delivered this month.", text: "Start with the services you offer today.", primary: demo, secondary: { label: "See Pricing", href: "/pricing" }, note: { title: "Revenue visible", text: "Delivered services, tracked by service." } },
     ],
   },
@@ -108,11 +109,7 @@ export const solutionPages: Record<string, PageContent> = {
       { type: "solutionHero", eyebrow: "Patients", title: "Your pharmacy, / open for booking / any time.", description: "Book a minor ailment visit or vaccine, request a refill and get reminders, with the pharmacy you already trust.", primary: { label: "Patient Login", href: "https://patient.zeenovo.com/login" }, person: "minorPharmacist",
         liveCard: { label: "Booked", chip: "Confirmed", title: "Flu vaccine", itemTitle: "Thursday, 10:30 am", itemText: "Reminder the day before" },
         noteCard: { title: "Second dose due", text: "Book your time from the reminder link." } },
-      { type: "cards", eyebrow: "What you can do", title: "Less waiting. / Fewer phone calls.", side: "Everything happens with your own pharmacy and your own pharmacist.", items: [
-        { title: "Book a visit", text: "Choose the service and a time that suits you, or book by voice.", icon: "assessment" },
-        { title: "Request a prescription", text: "Ask for a refill, renewal or transfer online.", icon: "prescription" },
-        { title: "Stay on schedule", text: "Get reminders for your next dose or follow-up.", icon: "vaccination" },
-      ] },
+      {"type": "featureIndex", "eyebrow": "What you can do", "title": "Less waiting. / Fewer phone calls.", "side": "Everything happens with your own pharmacy and your own pharmacist.", "art": "voicePhone", "artAlt": "Voice booking on a phone", "groups": [{"title": "Booking", "ids": ["voiceBooking", "manageAppointments", "portalRx", "portalReminders", "groupBooking", "preVisitQuestionnaire"]}], "wording": {"voiceBooking": "Say what you need in plain language. ZeeNovo finds the service and an open time, and books it.", "manageAppointments": "Book, reschedule or cancel your own appointments, at any time.", "portalRx": "Ask for a refill, renewal or transfer without a phone call.", "portalReminders": "Dose reminders, follow-up questions and links to your next visit, in one place.", "groupBooking": "Book your whole family in one appointment.", "preVisitQuestionnaire": "Answer a few questions before your visit, so your pharmacist is ready when you arrive."}},
       { type: "features", variant: "followup", eyebrow: "Your information", title: "Your health information / stays protected.", description: "Your pharmacy controls your record. ZeeNovo stores it in Canada and logs every access.", rows: [
         { title: "Your own login", text: "Only you and your pharmacy see your bookings.", icon: "safeguards" },
         { title: "Your family doctor", text: "Saved once, so you do not repeat it at every visit.", icon: "progress" },

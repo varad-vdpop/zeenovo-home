@@ -18,6 +18,7 @@ built_routes = {
     "clinicalFeatures": "/products/clinical",
     "minorAilmentsFeatures": "/products/clinical/minor-ailments",
     "incidentReportingFeatures": "/products/assure/incident-reporting",
+    "independentPharmaciesFeatures": "/solutions/independent-pharmacies",
 }
 
 def record(route: str, text: str) -> None:

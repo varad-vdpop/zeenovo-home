@@ -317,7 +317,7 @@ function FeatureIndex({ block }: { block: T.FeatureIndexBlock }) {
     items: group.ids.map((id) => {
       const feature = featureCatalogue[id];
       if (!feature) throw new Error(`Unknown feature id "${id}" in features.json`);
-      return feature;
+      return block.wording?.[id] ? { ...feature, text: block.wording[id] } : feature;
     }),
   }));
   if (groups.length === 1) return <FeatureBento block={block} features={groups[0].items} />;
