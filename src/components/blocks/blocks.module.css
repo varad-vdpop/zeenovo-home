@@ -1,6 +1,7 @@
 /* Adjustments that let the approved sections take variable content.
    No new visual language: every value here is copied from an approved block
-   (capability cards, step cards, condition cards, Clinical workflow and its "Profile details" panel).
+   (capability cards, step cards, Clinical workflow and its "Profile details" panel).
+   Sections designed for new content live in sections.module.css.
 
    Spacing system: approved blocks come from pages with different side margins (Clinical 56px, others 64px)
    and fixed heights. Every block here sits on one content rail (--block-gutter, 64px by default; the Clinical
@@ -34,22 +35,9 @@ a.cardAuto:hover { transform: translateY(-3px); }
 /* Wave and step tracks with four or five items. */
 .waveTrack { width: min(1380px, 100%); }
 
-/* Vaccinations / Prescriptions card pair used for grouped lists. Colours are the approved card colours. */
-.listSection { height: auto; margin-top: 0; padding: 80px 0; }
-.cardPair { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.listCard { height: auto; }
-.toneLavender { background: #e8ebff; }
-.tonePeach { background: #ffeedf; }
-.cardFull { grid-column: 1 / -1; }
-.listBox { margin-top: 28px; }
-.listRow { height: auto; align-items: flex-start; padding: 18px 0; }
-.rowText { display: flex; min-width: 0; flex-direction: column; gap: 4px; padding-top: 6px; }
-.listRow strong { font-weight: 500; white-space: normal; }
-.listRow small { margin-left: 0; color: #64748b; font-size: 13px; line-height: 19px; white-space: normal; }
-
-/* Follow-up section leading a feature list, with content-led height. */
-.leadFollowup { height: auto; margin-top: 0; }
-.leadCopy { padding-bottom: 79px; }
+/* Follow-up section with content-led height: the copy needs its own bottom padding once the fixed height is gone. */
+.leadFollowup { height: auto; min-height: 646px; margin-top: 0; }
+.leadFollowup > div > div:last-child { padding-bottom: 79px; }
 
 /* Clinical workflow section holding a real form or calculator. */
 .panelSection { height: auto; min-height: 744px; }
@@ -57,7 +45,6 @@ a.cardAuto:hover { transform: translateY(-3px); }
 .panelCopy { position: static; width: auto; padding: 110px 56px 90px var(--block-gutter, 64px); }
 .panelArt { position: relative; inset: auto; padding: 110px 54px 90px; }
 .panelFrame { position: relative; top: auto; left: auto; width: 100%; }
-.panelArtCentre { display: flex; align-items: center; }
 
 /* "Profile details" panel, at full size (values from ClinicalProfilePreview). */
 .panel { border: 1px solid #e2e8f0; border-radius: 16px; background: #fff; color: #0f172a; padding: 26px; box-shadow: 0 1px 3px rgb(22 19 58 / 10%); }
@@ -93,6 +80,8 @@ a.cardAuto:hover { transform: translateY(-3px); }
 }
 
 @media (max-width: 760px) {
+  .leadFollowup { min-height: 0; }
+  .leadFollowup > div > div:last-child { padding-bottom: 60px; }
   .rail { width: calc(100% - 40px); }
   .alignCopy { left: auto; }
   .cardsSection, .stepsSection, .twoCardSection, .listSection { padding: 56px 0; }
@@ -101,16 +90,13 @@ a.cardAuto:hover { transform: translateY(-3px); }
   .cardAuto { min-height: 0; padding-top: 96px; }
   .cardIcon { top: 20px; left: 14px; width: 54px; height: 54px; }
   .cardIcon img { width: 32px; height: 32px; }
-  .waveTrack { grid-template-columns: repeat(2, 1fr) !important; }
+  /* The approved strip has a fixed 690px height for four labels; let it grow for five. */
+  .waveSection { height: auto; padding-bottom: 8px; }
+  .waveTrack { position: static; margin-top: 32px; grid-template-columns: repeat(2, 1fr) !important; }
   .stepGrid { grid-template-columns: 1fr !important; }
   .stepGrid article,
   .stepGrid article:nth-child(n) { height: auto; min-height: 0; }
   .stepGrid article > div:last-child { padding-top: 128px; }
-  .cardPair { grid-template-columns: 1fr; }
-  .cardFull { grid-column: auto; }
-  .listRow strong { font-size: 14px; }
-  .listRow small { display: block; font-size: 12px; line-height: 17px; }
-  .leadCopy { padding-bottom: 60px; }
   .panelInner { display: flex; flex-direction: column; }
   .panelCopy { padding: 56px 20px 40px; }
   /* The approved section paints its purple band as a fixed 450px strip on mobile; let it follow the form instead. */

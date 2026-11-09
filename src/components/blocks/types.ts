@@ -13,9 +13,9 @@ export type HeroBlock = {
   eyebrow?: string;
   title: Heading;
   description: string;
-  primary: Link;
+  primary?: Link;
   secondary?: Link;
-  /** Portrait from the approved photo set. A default portrait is used when omitted. */
+  /** Portrait from the approved photo set. Without one, the block renders as a short page header. */
   person?: PersonKey;
   /** Approved floating UI from the Clinical hero: patient flags, reporting timer, connected-workflow badge. */
   extras?: ("flags" | "timer" | "badge")[];
@@ -105,15 +105,15 @@ export type CtaSplitBlock = {
   note: { title: string; text: string };
 };
 
-// Blocks below reuse the approved "Supported Conditions" cards, capability cards, results counters,
-// wave strip and Clinical workflow panel.
+// Blocks below render with sections designed for them in the same visual language (sections.module.css):
+// FAQ accordion, pricing cards, article cards, legal text and tables. Facts reuse the home results counters.
 export type FaqBlock = { type: "faq"; eyebrow: string; title: Heading; items: { q: string; a: string }[] };
 
 export type PricingBlock = {
   type: "pricing";
-  plans: { name: string; price: string; annual: string; badge?: string; features: string[]; action: Link; featured?: boolean }[];
+  plans: { name: string; text: string; price: string; annual: string; badge?: string; features: string[]; action: Link; featured?: boolean }[];
   included: string;
-  addons: string[];
+  addons: { title: string; text: string; action: Link }[];
   facts: string[];
 };
 
@@ -147,7 +147,7 @@ export type ListBlock = {
 
 export type LegalBlock = {
   type: "legal";
-  updated: string;
+  updated?: string;
   intro: string;
   summary?: string[];
   sections: { title: string; body?: string }[];
@@ -158,24 +158,17 @@ export type TableBlock = { type: "table"; eyebrow: string; title: Heading; colum
 
 export type RoiBlock = { type: "roi" };
 
-/** Features from src/content/features.json, by id. Each group renders in an approved division:
-    "workflow" / "followup" (rows beside `art`), "cards" (capability cards, 2 to 4), "steps" (step cards, 3 to 5)
-    or "list" (Prescriptions-style card, at most once per page). Avoid the same layout twice in a row. */
-export type FeatureGroup = {
-  title: string;
-  /** Heading for this group's section (the first group uses the block title instead). */
-  text?: string;
-  ids: string[];
-  layout: "workflow" | "followup" | "cards" | "steps" | "list";
-  art?: ArtKey;
-  artAlt?: string;
-};
+/** Features from src/content/features.json, by id.
+    One group renders as a bento grid (3 to 7 features; `art` is the lead card's visual).
+    Several groups render as a tabbed explorer, one tab per group (`text` is the tab's one-line summary). */
 export type FeatureIndexBlock = {
   type: "featureIndex";
   eyebrow: string;
   title: Heading;
   side?: string;
-  groups: FeatureGroup[];
+  art?: ArtKey;
+  artAlt?: string;
+  groups: { title: string; text?: string; ids: string[] }[];
 };
 
 export type Block =

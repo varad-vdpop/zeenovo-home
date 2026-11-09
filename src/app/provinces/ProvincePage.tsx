@@ -45,7 +45,7 @@ export default function ProvincePage({ province }: { province: ProvinceContent }
         <Image className={styles.heroArt} src={asset.provinces.heroArt} alt="" width={574} height={816} priority />
       </div>
       <div className={styles.heroCopy} data-reveal>
-        <p className={styles.eyebrow}>{province.name} · Canada · {province.status}</p>
+        <p className={styles.eyebrow}>{province.name} · Canada</p>
         <h1 id="province-title">{lines(province.title)}</h1>
         <p className={styles.heroDescription}>{province.description}</p>
         <div className={styles.heroActions}>

@@ -38,7 +38,7 @@ Source: staging, plus ZeeNovo's stated compliance roadmap (HIPAA and SOC 2). Eve
   6. SOC 2: We are completing an independent SOC 2 audit of our security, availability and confidentiality controls. The report will be available to customers under NDA once issued. `[SOC 2 STATUS]`
 
 **Enterprise reporting** (one paragraph)
-Enterprise and chain dashboards show aggregate, de-identified data only. Minimum cohort sizes, suppression and blocked filter combinations prevent any patient from being identified.
+Enterprise and chain dashboards show aggregate, de-identified data only. Results appear only for groups large enough that no patient can be identified.
 
 **Links:** Privacy Policy · Data Processing Agreement · Sub-processors
 **Contact line:** Security questions or a vulnerability to report? Email security@zeenovo.com. `[CONFIRM 11]` address

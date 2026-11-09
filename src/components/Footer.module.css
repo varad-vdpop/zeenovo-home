@@ -1,7 +1,7 @@
 .footer {
   position: relative;
   width: 100%;
-  height: 666px;
+  min-height: 666px;
   overflow: hidden;
   color: #fff;
   background: linear-gradient(180deg, #f9fafe 0%, #d7dffe 6.1712%, #acbcff 15.484%, #8b8ee6 28.585%, #260096 63.942%, #0c0030 100%);
@@ -81,10 +81,14 @@
   transform-origin: center;
 }
 
+/* Lower block: sits 40px under the link columns. Offsets inside it match the original fixed layout
+   (divider at 361px, wordmark at 294px, copyright at 611px in a 666px footer). */
+.bottom { position: relative; height: 305px; margin-top: 40px; }
+
 .dividerFrame {
   position: absolute;
   z-index: 1;
-  top: 361px;
+  top: 0;
   left: 50%;
   width: min(1195px, calc(100% - 80px));
   height: 2px;
@@ -96,7 +100,7 @@
 
 .wordmark {
   position: absolute;
-  top: 294px;
+  top: -67px;
   left: 50%;
   display: block;
   width: max-content;
@@ -116,7 +120,7 @@
 .copyright {
   position: absolute;
   z-index: 1;
-  top: 611px;
+  top: 250px;
   left: 50%;
   width: max-content;
   margin: 0;
@@ -128,7 +132,8 @@
 }
 
 @media (max-width: 1199px) {
-  .footer { height: 680px; }
+  .footer { min-height: 680px; }
+  .bottom { height: 290px; margin-top: 25px; }
   .inner { width: min(860px, calc(100% - 64px)); }
   .top { display: block; padding-top: 100px; }
   .brand { width: max-content; height: 56px; margin-bottom: 52px; }
@@ -145,13 +150,14 @@
   }
   .group h2 { font-size: 17px; }
   .items span { font-size: 13px; }
-  .dividerFrame { top: 390px; width: calc(100% - 64px); }
-  .wordmark { top: 350px; }
-  .copyright { top: 623px; }
+  .dividerFrame { width: calc(100% - 64px); }
+  .wordmark { top: -40px; }
+  .copyright { top: 233px; }
 }
 
 @media (max-width: 760px) {
-  .footer { height: 830px; }
+  .footer { min-height: 830px; }
+  .bottom { height: 265px; margin-top: 48px; }
   .inner { width: calc(100% - 40px); }
   .top { padding-top: 115px; }
   .brand { margin-bottom: 49px; font-size: 27px; }
@@ -162,7 +168,7 @@
   .items { gap: 9px; }
   .items span { font-size: 13px; line-height: 19px; white-space: normal; overflow-wrap: break-word; }
   .group:not(:last-child)::after { display: none; }
-  .dividerFrame { top: 565px; width: calc(100% - 40px); }
-  .wordmark { top: 570px; font-size: 20.77vw; line-height: 1.5; }
-  .copyright { top: 773px; font-size: 11px; }
+  .dividerFrame { width: calc(100% - 40px); }
+  .wordmark { top: 5px; font-size: 20.77vw; line-height: 1.5; }
+  .copyright { top: 208px; font-size: 11px; }
 }

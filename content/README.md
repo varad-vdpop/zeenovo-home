@@ -20,12 +20,30 @@ Sources used: current zeenovo.com, the client-coded staging build, the Enterpris
 
 ## Review build
 
-Every sitemap page now exists locally. Unbuilt pages are assembled from the approved blocks by `src/components/blocks/BlockPage.tsx`, with copy in `src/content/pages/*.ts` (transcribed from the files above). Province pages use `src/app/provinces/ProvincePage.tsx`, the Ontario layout with the Canada map.
+Every sitemap page exists locally. Pages are assembled by `src/components/blocks/BlockPage.tsx` from copy in `src/content/pages/*.ts`. Province pages use `src/app/provinces/ProvincePage.tsx`. Where the page files and the `0x-*.md` drafts differ, the page files are current.
 
-- Every section uses a division that already exists in the repo. The full feature list appears only on the hub pages (Clinical, Assure, Sites, Patient Portal, Magistral, Multi-Location Groups), where each group uses a different approved division in turn: Follow-up or Workflow rows, capability cards, step cards, or the Prescriptions-style list (once per page), never the same one twice in a row. Module pages show one curated "Key features" section. FAQs, legal sections, pricing plans and sub-processors use the Vaccinations / Prescriptions card pair; lists use capability cards; About figures use the home results counters; forms sit in the Clinical workflow section in the "Profile details" panel style.
-- Magistral is marked "Placeholder copy" in its hero eyebrow.
+**Approved sections, reused as designed:** photo hero, solution hero, quote cards, numbered capability cards, step cards, wave strip, Workflow and Follow-up sections, two-card section, results counters, closing CTA.
+
+**Sections designed for content the approved pages do not cover** (`src/components/blocks/sections.module.css`). They use the approved palette, radii, type sizes, dotted texture, line art and glass frame, and need design sign-off:
+
+| Section | Used for |
+|---|---|
+| Feature explorer (tabs) | The complete feature list on hub pages: Clinical, Assure, Sites, Multi-Location Groups. One tab per feature area; every panel stays in the page markup. |
+| Bento grid | 4 to 7 key features on a module page: one lead card with a product visual, the rest as pastel cards. |
+| Page header | Utility pages (pricing, resources, company, trust). The hero panel without a portrait. |
+| Pricing cards | Three plans with the recommended plan highlighted, what every plan includes, and add-ons. |
+| FAQ accordion | Pricing and Patients. |
+| Article cards | Blog, case studies, guides, changelog, with a category filter. |
+| Legal layout | Long-form text with an "On this page" list. |
+| Table | Sub-processors. |
+
+Rules the pages follow:
+- A feature is described once per page. The full list lives on the hub page; module pages show their own key features.
+- No section type appears twice in a row.
+- No reviewer notes or bracketed placeholders appear on a page. Open questions live in the list at the end of this file. The only exception is `/blog/sample-article`, which is the article template.
+- **Feature descriptions** live in one place, `src/content/features.json`. After changing features, run `python3 -I scripts/check-features.py`: it fails if any feature is missing from the site, and regenerates `09-features.md`.
 - Forms validate and show the success message but send nothing.
-- **Feature descriptions** live in one place, `src/content/features.json`. Each product and service page has an "All features" section that pulls from it. After changing features, run `python3 -I scripts/check-features.py`: it fails if any feature is missing from the site, and regenerates `09-features.md`.
+- Magistral copy is placeholder until ZeeNovo confirms the product.
 
 ## Voice
 
@@ -79,7 +97,7 @@ These need an answer from ZeeNovo before launch. Copy is written so each one can
 7. **NIDR alignment.** Staging marks NIDR-aligned reporting as "soon". Confirm whether it is live.
 8. **Pricing.** Clinical C$29.99/mo, Assure C$19.99/mo, Combo C$44.99/mo, website free. Taken from staging. Confirm, and confirm whether prices are in CAD and exclude tax.
 9. **Legal entity.** Old site says "ZeeNovo Corporation"; staging says "ZeeNovo Health Inc." Confirm for the footer and legal pages.
-10. **Company facts.** Founding year (staging says 2024), leadership names and roles, head office address, phone number (staging shows 1-800-ZEENOVO, which looks like a placeholder).
+10. **Company facts.** The About page shows "2024 Founded", "4 Connected products", "50+ Pharmacies" and "100% Canadian data residency", taken from staging and the home page. Confirm each. The team section, phone number and office address are left off the site until ZeeNovo supplies them.
 11. **Security claims.** PHIPA, PIPEDA and HIPAA alignment, Canadian data residency, encryption at rest and in transit, audit logs. Confirm each, plus the hosting provider and region for the sub-processors page. HIPAA and SOC 2 are on ZeeNovo's roadmap and are worded as "HIPAA-aligned safeguards" and "SOC 2 audit in progress" until complete.
 15. **SOC 2.** Confirm Type I or Type II, the expected report date, and whether customers can request the report. When it is issued, update every line marked `[SOC 2 STATUS]` in `08-trust.md`.
 12. **Enterprise module.** The multi-location groups page describes the chain platform, chain dashboard, communication tab and ZeeNovo Central. Confirm launch timing, and whether the page should say "available" or "coming".

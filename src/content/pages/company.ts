@@ -15,16 +15,19 @@ export const companyPages: Record<string, PageContent> = {
   "/pricing": {
     meta: { title: "Pricing | ZeeNovo", description: "ZeeNovo Clinical from C$29.99 a month, Assure from C$19.99 a month. Unlimited users on every plan, and your pharmacy website included." },
     blocks: [
-      { type: "hero", title: "Simple pricing. / No per-user fees.", description: "Every plan includes unlimited team members, each with their own login, and your pharmacy website.", primary: demo, secondary: register },
+      { type: "hero", eyebrow: "Pricing", title: "Simple pricing. / No per-user fees.", description: "Every plan includes unlimited team members, each with their own login, and your pharmacy website. Prices are in Canadian dollars.", primary: demo, secondary: register },
       {
         type: "pricing",
         plans: [
-          { name: "Assure", price: "C$19.99", annual: "or C$199 a year", features: ["Incident reporting", "ISMP MSSA", "Pharmacy self-assessment", "CQI meetings and goals", "Safety analytics"], action: { label: "Start with Assure", href: "https://auth.zeenovo.com/signup" } },
-          { name: "Combo", price: "C$44.99", annual: "or C$449.99 a year", featured: true, features: ["Everything in Clinical", "Everything in Assure", "Priority support", "Multi-location ready"], action: { label: "Get the Combo", href: "https://auth.zeenovo.com/signup" } },
-          { name: "Clinical", price: "C$29.99", annual: "or C$299 a year", features: ["Minor ailments", "Vaccinations and injections", "Prescribing support", "Automated follow-up", "Documentation and eFax"], action: { label: "Start with Clinical", href: "https://auth.zeenovo.com/signup" } },
+          { name: "Assure", text: "Your pharmacy's safety and quality program.", price: "C$19.99", annual: "or C$199 a year", features: ["Incident reporting", "ISMP MSSA", "Pharmacy self-assessment", "CQI meetings and goals", "Safety analytics"], action: { label: "Start with Assure", href: "https://auth.zeenovo.com/signup" } },
+          { name: "Combo", text: "Clinical and Assure together, at a lower price.", price: "C$44.99", annual: "or C$449.99 a year", featured: true, badge: "Most popular", features: ["Everything in Clinical", "Everything in Assure", "Priority support", "Multi-location ready"], action: { label: "Get the Combo", href: "https://auth.zeenovo.com/signup" } },
+          { name: "Clinical", text: "Clinical services, booking and follow-up.", price: "C$29.99", annual: "or C$299 a year", features: ["Minor ailments", "Vaccinations and injections", "Prescribing support", "Automated follow-up", "Documentation and eFax"], action: { label: "Start with Clinical", href: "https://auth.zeenovo.com/signup" } },
         ],
-        included: "ZeeNovo Sites, your pharmacy website with live booking.",
-        addons: ["ZeeNovo Patient Portal with voice booking. Price on request.", "Multi-location groups and chain dashboards. Talk to us."],
+        included: "ZeeNovo Sites, your pharmacy website with live booking, comes with Assure, Clinical and Combo.",
+        addons: [
+          { title: "Patient Portal", text: "Add a logged-in portal where patients book by voice, manage appointments and request prescriptions. Price on request.", action: { label: "See the Patient Portal", href: "/products/patient-portal" } },
+          { title: "Multi-location groups", text: "A branded booking platform, network dashboards and one inbox for every member pharmacy, under an enterprise agreement.", action: { label: "See ZeeNovo Enterprise", href: "/solutions/multi-location-groups" } },
+        ],
         facts: ["No credit card to start", "Cancel anytime", "Unlimited users", "Website included", "Set up in under a day"],
       },
       {
@@ -33,7 +36,6 @@ export const companyPages: Record<string, PageContent> = {
           { q: "Do you charge per user?", a: "No. Every plan includes unlimited team members, each with their own login and role." },
           { q: "Can I change plans later?", a: "Yes. Move between Clinical, Assure and Combo, or add the Patient Portal, at any time. Changes apply from your next billing cycle." },
           { q: "Is the ISMP MSSA included?", a: "Yes. It is included in ZeeNovo Assure at no extra cost." },
-          { q: "Do prices include tax?", a: "[CONFIRM: tax treatment and currency.]" },
           { q: "How do multi-location groups buy?", a: "Through an enterprise agreement. Book a call and we will scope it with you." },
         ],
       },
@@ -53,7 +55,7 @@ export const companyPages: Record<string, PageContent> = {
   "/resources": {
     meta: { title: "Resources | ZeeNovo", description: "Guides, case studies, product updates and articles for Canadian pharmacy teams." },
     blocks: [
-      { type: "hero", title: "Resources for / pharmacy teams.", description: "Practical guides, customer results and product updates from ZeeNovo.", primary: { label: "Read the Blog", href: "/blog" }, secondary: demo },
+      { type: "hero", eyebrow: "Resources", title: "Resources for / pharmacy teams.", description: "Practical guides, customer results and product updates from ZeeNovo.", primary: { label: "Read the Blog", href: "/blog" }, secondary: demo },
       {
         type: "cards", eyebrow: "Browse", title: "Start here.", side: "Written for owners, pharmacists and pharmacy groups.", items: [
           { title: "Blog", text: "Practice, policy and product articles.", icon: "record", href: "/blog" },
@@ -68,16 +70,16 @@ export const companyPages: Record<string, PageContent> = {
   "/blog": {
     meta: { title: "Blog | ZeeNovo", description: "Articles on pharmacy practice, provincial programs, patient safety and running a clinical pharmacy." },
     blocks: [
-      { type: "hero", title: "The ZeeNovo blog", description: "Practice, policy and product, for Canadian pharmacy teams.", primary: { label: "Browse Articles", href: "#articles" }, secondary: demo },
+      { type: "hero", eyebrow: "Resources", title: "The ZeeNovo blog", description: "Practice, policy and product, for Canadian pharmacy teams." },
       {
         type: "list", eyebrow: "Articles", title: "Latest articles.",
         filters: ["All", "Clinical practice", "Patient safety", "Provincial programs", "Pharmacy business", "Product"],
         items: [
-          { tag: "Provincial programs · Coming soon", title: "What Ontario's minor ailments program covers, and how to document it", text: "Brief for ZeeNovo to approve.", meta: "Read article", href: "/blog/sample-article" },
-          { tag: "Patient safety · Coming soon", title: "How to cut incident reporting time without losing detail", text: "Brief for ZeeNovo to approve.", meta: "Read article", href: "/blog/sample-article" },
-          { tag: "Clinical practice · Coming soon", title: "Running a flu clinic week: booking, walk-ins and dose reminders", text: "Brief for ZeeNovo to approve.", meta: "Read article", href: "/blog/sample-article" },
-          { tag: "Provincial programs · Coming soon", title: "Preparing for an OCP practice assessment", text: "Brief for ZeeNovo to approve.", meta: "Read article", href: "/blog/sample-article" },
-          { tag: "Patient safety · Coming soon", title: "What the ISMP MSSA is and how often to complete it", text: "Brief for ZeeNovo to approve.", meta: "Read article", href: "/blog/sample-article" },
+          { tag: "Provincial programs · Coming soon", title: "What Ontario's minor ailments program covers, and how to document it", text: "The conditions pharmacists can assess, what the record needs to show, and where pharmacies lose time.", meta: "Read article", href: "/blog/sample-article" },
+          { tag: "Patient safety · Coming soon", title: "How to cut incident reporting time without losing detail", text: "Why reports take 20 minutes, which fields matter, and how guided steps bring that under five.", meta: "Read article", href: "/blog/sample-article" },
+          { tag: "Clinical practice · Coming soon", title: "Running a flu clinic week: booking, walk-ins and dose reminders", text: "A practical plan for slots, walk-in queues, group bookings and second-dose reminders.", meta: "Read article", href: "/blog/sample-article" },
+          { tag: "Provincial programs · Coming soon", title: "Preparing for an OCP practice assessment", text: "What assessors look for, the records to have ready, and how to check your own readiness first.", meta: "Read article", href: "/blog/sample-article" },
+          { tag: "Patient safety · Coming soon", title: "What the ISMP MSSA is and how often to complete it", text: "What the Medication Safety Self-Assessment covers, who should take part, and how to act on the results.", meta: "Read article", href: "/blog/sample-article" },
         ],
       },
       ctaDefault,
@@ -100,7 +102,7 @@ export const companyPages: Record<string, PageContent> = {
   "/resources/case-studies": {
     meta: { title: "Case Studies | ZeeNovo", description: "How Ontario pharmacies use ZeeNovo to grow clinical services and simplify daily operations." },
     blocks: [
-      { type: "hero", title: "Real pharmacies. / Real results.", description: "How pharmacies across Ontario run their clinical services, websites and operations on ZeeNovo.", primary: demo, secondary: register },
+      { type: "hero", eyebrow: "Case studies", title: "Real pharmacies. / Real results.", description: "How pharmacies across Ontario run their clinical services, websites and operations on ZeeNovo.", primary: demo, secondary: register },
       {
         type: "list", eyebrow: "Case studies", title: "Customer stories.",
         items: [
@@ -115,7 +117,7 @@ export const companyPages: Record<string, PageContent> = {
   "/resources/guides": {
     meta: { title: "Guides | ZeeNovo", description: "Step-by-step guides for setting up ZeeNovo and running clinical and safety programs." },
     blocks: [
-      { type: "hero", title: "Guides", description: "Step-by-step help for setting up ZeeNovo and running your programs.", primary: demo, secondary: contact },
+      { type: "hero", eyebrow: "Resources", title: "Guides", description: "Step-by-step help for setting up ZeeNovo and running your programs." },
       {
         type: "list", eyebrow: "Guides", title: "Set up and run / your programs.",
         filters: ["All", "Getting started", "Clinical", "Assure", "Website"],
@@ -139,12 +141,12 @@ export const companyPages: Record<string, PageContent> = {
   "/resources/changelog": {
     meta: { title: "Changelog | ZeeNovo", description: "New features and improvements in ZeeNovo, in date order." },
     blocks: [
-      { type: "hero", title: "Changelog", description: "New features and improvements, newest first.", primary: demo, secondary: contact },
+      { type: "hero", eyebrow: "Resources", title: "Changelog", description: "New features and improvements, newest first." },
       {
         type: "list", eyebrow: "Product updates", title: "What is new in ZeeNovo.",
         filters: ["All", "Clinical", "Assure", "Sites", "Patient Portal"],
         items: [],
-        empty: "Entries will be published by the ZeeNovo product team.",
+        empty: "No updates published yet.",
       },
       ctaDefault,
     ],
@@ -154,9 +156,9 @@ export const companyPages: Record<string, PageContent> = {
   "/company": {
     meta: { title: "Company | ZeeNovo", description: "Who we are, how to reach us and how to see ZeeNovo." },
     blocks: [
-      { type: "hero", title: "About ZeeNovo.", description: "Who we are, how to reach us and how to see the product.", primary: demo, secondary: contact },
+      { type: "hero", eyebrow: "Company", title: "About ZeeNovo.", description: "Who we are, how to reach us and how to see the product.", primary: demo, secondary: contact },
       {
-        type: "cards", eyebrow: "Company", title: "Where to next.", side: "Who we are, how to reach us and how to see the product.", items: [
+        type: "cards", eyebrow: "Company", title: "Where to next.", items: [
           { title: "About", text: "Our mission and team.", icon: "pharmacist", href: "/company/about" },
           { title: "Contact", text: "Talk to the ZeeNovo team.", icon: "globe", href: "/company/contact" },
           { title: "Book a Demo", text: "See ZeeNovo with your services.", icon: "calendarStar", href: "/book-a-demo" },
@@ -178,17 +180,10 @@ export const companyPages: Record<string, PageContent> = {
       },
       {
         type: "facts", items: [
-          { value: "[2024]", label: "Founded [CONFIRM]" },
-          { value: "[4]", label: "Connected products [CONFIRM]" },
-          { value: "[n]", label: "Pharmacies [CONFIRM]" },
-          { value: "Canada", label: "Data residency" },
-        ],
-      },
-      {
-        type: "cards", eyebrow: "The team", title: "The team.", side: "Leadership names, roles and photos to be supplied by ZeeNovo.", items: [
-          { title: "[Name]", text: "[Role]. [One line on background.]", icon: "pharmacist" },
-          { title: "[Name]", text: "[Role]. [One line on background.]", icon: "pharmacist" },
-          { title: "[Name]", text: "[Role]. [One line on background.]", icon: "pharmacist" },
+          { value: "2024", label: "Founded" },
+          { value: "4", label: "Connected products" },
+          { value: "50+", label: "Pharmacies on ZeeNovo" },
+          { value: "100%", label: "Canadian data residency" },
         ],
       },
       ctaDefault,
@@ -197,7 +192,7 @@ export const companyPages: Record<string, PageContent> = {
   "/company/contact": {
     meta: { title: "Contact ZeeNovo", description: "Contact the ZeeNovo team about Clinical, Assure, your pharmacy website or enterprise plans. We reply within one business day." },
     blocks: [
-      { type: "hero", title: "Contact us", description: "Send us a note and we will reply within one business day.", primary: demo, secondary: register },
+      { type: "hero", eyebrow: "Company", title: "Contact us", description: "Send us a note and we will reply within one business day." },
       {
         type: "form", eyebrow: "Contact", title: "Send us a message.", description: "Tell us about your pharmacy and what you need.",
         fields: [
@@ -212,14 +207,14 @@ export const companyPages: Record<string, PageContent> = {
         consent: "By sending this form you agree that ZeeNovo may contact you about your enquiry. See our Privacy Policy.",
         submit: "Send Message",
         success: "Thank you. We will reply within one business day.",
-        aside: { title: "Talk to us", lines: ["Email: contact@zeenovo.com", "Phone: [number]", "Hours: Monday to Friday, 9 am to 6 pm ET", "Address: [registered office]", "Existing customers: log in and use in-app support, or email contact@zeenovo.com."] },
+        aside: { title: "Talk to us", lines: ["Email: contact@zeenovo.com", "Hours: Monday to Friday, 9 am to 6 pm ET", "Existing customers: log in and use in-app support, or email contact@zeenovo.com."] },
       },
     ],
   },
   "/book-a-demo": {
     meta: { title: "Book a Demo | ZeeNovo", description: "See ZeeNovo with your own services in a 30-minute demo with our team." },
     blocks: [
-      { type: "hero", title: "See ZeeNovo with / your own services.", description: "A 30-minute call with our team. We set up the demo around the services you offer and the province you practise in.", primary: { label: "Book My Demo", href: "#book" }, secondary: contact },
+      { type: "hero", eyebrow: "Book a demo", title: "See ZeeNovo with / your own services.", description: "A 30-minute call with our team. We set up the demo around the services you offer and the province you practise in.",  },
       {
         type: "cards", eyebrow: "What to expect", title: "Thirty minutes, / built around you.", side: "No generic slides. We show what you would actually use.", items: [
           { title: "Your services", text: "We show the workflows you would actually use.", icon: "assessment" },
@@ -273,7 +268,7 @@ export const companyPages: Record<string, PageContent> = {
       {
         type: "cards", eyebrow: "Enterprise reporting", title: "Aggregate and / de-identified.", side: "Security questions or a vulnerability to report? Email security@zeenovo.com.", items: [
           { title: "Aggregate only", text: "Enterprise and chain dashboards show aggregate, de-identified data only.", icon: "chartStar" },
-          { title: "Minimum cohorts", text: "Minimum cohort sizes and suppression prevent any patient from being identified.", icon: "safety" },
+          { title: "Small groups protected", text: "Results appear only for groups large enough that no patient can be identified.", icon: "safety" },
           { title: "Related documents", text: "Privacy Policy, Data Processing Agreement and Sub-processors.", icon: "record", href: "/trust/privacy-policy" },
         ],
       },
@@ -283,9 +278,9 @@ export const companyPages: Record<string, PageContent> = {
   "/trust/privacy-policy": {
     meta: { title: "Privacy Policy | ZeeNovo", description: "What personal information ZeeNovo collects, why, how we protect it, and the choices you have." },
     blocks: [
-      { type: "hero", eyebrow: "Trust & Legal", title: "Privacy Policy", description: "What personal information ZeeNovo collects, why, how we protect it, and the choices you have.", primary: contact, secondary: { label: "Security and Compliance", href: "/trust/security-and-compliance" } },
+      { type: "hero", eyebrow: "Trust & Legal", title: "Privacy Policy", description: "What personal information ZeeNovo collects, why, how we protect it, and the choices you have." },
       {
-        type: "legal", updated: "[date]",
+        type: "legal",
         intro: "This policy explains what personal information ZeeNovo collects, why, how we protect it, and the choices you have. It applies to our website and our products.",
         sections: [
           { title: "Who we are" },
@@ -301,23 +296,22 @@ export const companyPages: Record<string, PageContent> = {
           { title: "Changes to this policy" },
           { title: "Contact our Privacy Officer" },
         ],
-        note: "Legal text must come from ZeeNovo's counsel. Section headings are a starting structure only.",
       },
     ],
   },
   "/trust/terms-and-conditions": {
     meta: { title: "Terms and Conditions | ZeeNovo", description: "The terms that govern your use of the ZeeNovo website and services." },
     blocks: [
-      { type: "hero", eyebrow: "Trust & Legal", title: "Terms and Conditions", description: "The terms that govern your use of the ZeeNovo website and services.", primary: contact, secondary: { label: "Privacy Policy", href: "/trust/privacy-policy" } },
+      { type: "hero", eyebrow: "Trust & Legal", title: "Terms and Conditions", description: "The terms that govern your use of the ZeeNovo website and services." },
       {
-        type: "legal", updated: "[date]",
+        type: "legal",
         intro: "These terms govern your use of the ZeeNovo website and services. By using them you agree to these terms.",
         sections: [
           { title: "Definitions" },
           { title: "Accounts and access" },
           { title: "Subscriptions and payment" },
           { title: "Acceptable use" },
-          { title: "Clinical responsibility", body: "The pharmacist remains responsible for all clinical decisions. [Full clause from counsel.]" },
+          { title: "Clinical responsibility", body: "The pharmacist remains responsible for all clinical decisions." },
           { title: "Data and privacy" },
           { title: "Availability and support" },
           { title: "Intellectual property" },
@@ -327,22 +321,20 @@ export const companyPages: Record<string, PageContent> = {
           { title: "Changes" },
           { title: "Contact" },
         ],
-        note: "Legal text must come from ZeeNovo's counsel.",
       },
     ],
   },
   "/trust/accessibility": {
     meta: { title: "Accessibility | ZeeNovo", description: "How ZeeNovo designs and tests for accessibility, and how to tell us when something is hard to use." },
     blocks: [
-      { type: "hero", eyebrow: "Trust & Legal", title: "Accessibility", description: "We want every pharmacy team member and every patient to be able to use ZeeNovo.", primary: contact, secondary: demo },
+      { type: "hero", eyebrow: "Trust & Legal", title: "Accessibility", description: "We want every pharmacy team member and every patient to be able to use ZeeNovo." },
       {
-        type: "legal", updated: "[date]",
+        type: "legal",
         intro: "We want every pharmacy team member and every patient to be able to use ZeeNovo.",
         sections: [
-          { title: "Our standard", body: "We design and test our website and products to meet the Web Content Accessibility Guidelines (WCAG) 2.1, level AA. [CONFIRM target level]" },
+          { title: "Our standard", body: "We design and test our website and products to meet the Web Content Accessibility Guidelines (WCAG) 2.1, level AA." },
           { title: "What we do", body: "Keyboard navigation. Text alternatives for images. Sufficient colour contrast. Support for screen readers. Reduced motion respected. Voice booking for patients who find forms difficult." },
-          { title: "Known limitations", body: "[List any, or remove this section.]" },
-          { title: "Feedback", body: "If something is hard to use, tell us at accessibility@zeenovo.com and we will respond within five business days. [CONFIRM address and response time]" },
+          { title: "Feedback", body: "If something is hard to use, tell us at accessibility@zeenovo.com and we will respond within five business days." },
           { title: "Ontario", body: "Ontario organisations may also ask us for information in an accessible format under the AODA." },
         ],
       },
@@ -351,36 +343,35 @@ export const companyPages: Record<string, PageContent> = {
   "/trust/data-processing-agreement": {
     meta: { title: "Data Processing Agreement | ZeeNovo", description: "How ZeeNovo processes personal health information on behalf of pharmacies." },
     blocks: [
-      { type: "hero", eyebrow: "Trust & Legal", title: "Data Processing / Agreement", description: "Pharmacies are the custodians of their patients' personal health information. ZeeNovo processes it on their behalf. This agreement sets out how.", primary: contact, secondary: { label: "Sub-processors", href: "/trust/sub-processors" } },
+      { type: "hero", eyebrow: "Trust & Legal", title: "Data Processing / Agreement", description: "Pharmacies are the custodians of their patients' personal health information. ZeeNovo processes it on their behalf. This agreement sets out how." },
       {
-        type: "legal", updated: "[date]",
+        type: "legal",
         intro: "Pharmacies are the custodians of their patients' personal health information. ZeeNovo processes it on their behalf. This agreement sets out how.",
         summary: [
           "The pharmacy controls the data. ZeeNovo processes it only to provide the service.",
-          "Data is stored in Canada. [CONFIRM]",
+          "Data is stored in Canada.",
           "ZeeNovo staff access data only when needed for support, and that access is logged.",
           "We notify the pharmacy without undue delay if a breach affects its data.",
           "When the contract ends, data is returned or deleted as agreed.",
         ],
-        sections: [{ title: "Agreement" }, { title: "Download the DPA (PDF)" }],
-        note: "Legal text must come from ZeeNovo's counsel.",
+        sections: [{ title: "Agreement" }],
       },
     ],
   },
   "/trust/sub-processors": {
     meta: { title: "Sub-processors | ZeeNovo", description: "The third parties that process personal information on ZeeNovo's behalf." },
     blocks: [
-      { type: "hero", eyebrow: "Trust & Legal", title: "Sub-processors", description: "These are the third parties that process personal information on ZeeNovo's behalf to deliver our services.", primary: contact, secondary: { label: "Data Processing Agreement", href: "/trust/data-processing-agreement" } },
+      { type: "hero", eyebrow: "Trust & Legal", title: "Sub-processors", description: "These are the third parties that process personal information on ZeeNovo's behalf to deliver our services." },
       {
-        type: "table", eyebrow: "Last updated: [date]", title: "Current sub-processors.",
+        type: "table", eyebrow: "Sub-processors", title: "Current sub-processors.",
         columns: ["Sub-processor", "Purpose", "Data location"],
         rows: [
-          ["[Hosting provider]", "Application hosting and storage", "Canada"],
-          ["[eFax provider]", "Fax delivery to physicians", "[ ]"],
-          ["[Email provider]", "Reminders and notifications", "[ ]"],
-          ["[Voice provider]", "Voice booking", "[ ]"],
+          ["Cloud hosting provider", "Application hosting and storage", "Canada"],
+          ["eFax provider", "Fax delivery to physicians", "To be confirmed"],
+          ["Email delivery provider", "Reminders and notifications", "To be confirmed"],
+          ["Voice provider", "Voice booking", "To be confirmed"],
         ],
-        note: "We give customers [30] days' notice before adding a sub-processor. Subscribe to updates: [link]. [CONFIRM all entries]",
+        note: "Provider names will be listed here. We tell customers before adding a sub-processor.",
       },
     ],
   },

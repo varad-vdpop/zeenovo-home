@@ -92,8 +92,8 @@ Status: not built. Source: ZeeNovo Enterprise Module scope. `[CONFIRM 12]` launc
 - H2: Aggregate and / de-identified. Always.
 - Paragraph: Enterprise users see counts, rates and trends. They do not see patients, records, notes or prescriptions.
 - Rows:
-  - Minimum cohort size: Small groups show "insufficient data" instead of a number.
-  - Suppression: A hidden figure cannot be worked back out from the totals around it.
+  - Small groups protected: Results appear only for groups large enough to keep every patient anonymous.
+  - Protected totals: Hidden figures cannot be worked out from other numbers on the screen.
   - Logged access: Role-based access, with access and export logs.
 
 **TWO-CARD**

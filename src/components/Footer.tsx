@@ -58,11 +58,14 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className={styles.dividerFrame} aria-hidden="true">
-        <Image src={asset.footerDivider} alt="" width={1195} height={1.24242} />
+      {/* The divider, wordmark and copyright follow the link columns, so longer columns never run into them. */}
+      <div className={styles.bottom}>
+        <div className={styles.dividerFrame} aria-hidden="true">
+          <Image src={asset.footerDivider} alt="" width={1195} height={1.24242} />
+        </div>
+        <span className={styles.wordmark} aria-hidden="true">ZeeNovo</span>
+        <p className={styles.copyright}>Copyright © 2026 ZeeNovo Health Inc.</p>
       </div>
-      <span className={styles.wordmark} aria-hidden="true">ZeeNovo</span>
-      <p className={styles.copyright}>Copyright © 2026 ZeeNovo Health Inc.</p>
     </footer>
   );
 }
