@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { BlockList } from "@/components/blocks/BlockPage";
+import { minorAilmentsFeatures } from "@/content/featureSections";
 import Image from "next/image";
 import ScrollFade from "@/components/ScrollFade";
 import { MinorHeroAssessment, MinorHeroRecord, MinorGuidedAssessment, MinorPhysicianHandoff, MinorFollowup } from "@/components/MinorAilmentsUi";
@@ -219,5 +221,6 @@ export default function MinorAilmentsPage() {
     <GuidedAssessment />
     <ConnectedCare />
     <AfterVisit />
+    <BlockList blocks={[minorAilmentsFeatures]} />
   </main>;
 }

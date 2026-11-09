@@ -8,7 +8,8 @@ import c from "@/app/products/clinical/page.module.css";
 import m from "@/app/products/clinical/minor-ailments/page.module.css";
 import i from "@/app/solutions/independent-pharmacies/page.module.css";
 import b from "./blocks.module.css";
-import { art, icons, people } from "./media";
+import { art, icons, people, tileIcons, type TileIconKey } from "./media";
+import featureData from "@/content/features.json";
 import FormView from "./FormView";
 import RoiCalculator from "./RoiCalculator";
 import type * as T from "./types";
@@ -318,6 +319,31 @@ function Table({ block }: { block: T.TableBlock }) {
   </section>;
 }
 
+type Feature = { title: string; text: string; icon: TileIconKey };
+const featureCatalogue = featureData.features as Record<string, Feature>;
+
+function FeatureIndex({ block }: { block: T.FeatureIndexBlock }) {
+  return <section className={b.featureSection}>
+    <div className={m.sectionInner}>
+      <ScrollFade as="div" className={m.sectionHeading}>
+        <div><p className={m.eyebrow}>{block.eyebrow}</p><h2>{lines(block.title)}</h2></div>
+        {block.side && <p>{block.side}</p>}
+      </ScrollFade>
+      {block.groups.map((group) => <div className={b.featureGroup} key={group.title}>
+        {block.groups.length > 1 && <h3 className={b.featureGroupTitle}>{group.title}</h3>}
+        <div className={b.featureGrid}>{group.ids.map((id) => {
+          const feature = featureCatalogue[id];
+          if (!feature) throw new Error(`Unknown feature id "${id}" in features.json`);
+          return <article className={b.featureTile} key={id}>
+            <i><Image src={tileIcons[feature.icon]} alt="" width={18} height={18} /></i>
+            <div><strong>{feature.title}</strong><p>{feature.text}</p></div>
+          </article>;
+        })}</div>
+      </div>)}
+    </div>
+  </section>;
+}
+
 function renderBlock(block: T.Block, index: number) {
   switch (block.type) {
     case "hero": return <Hero block={block} key={index} />;
@@ -338,6 +364,7 @@ function renderBlock(block: T.Block, index: number) {
     case "list": return <List block={block} key={index} />;
     case "legal": return <Legal block={block} key={index} />;
     case "table": return <Table block={block} key={index} />;
+    case "featureIndex": return <FeatureIndex block={block} key={index} />;
     case "roi": return <section className={b.draftSection} key={index}><DraftLabel /><RoiCalculator /></section>;
   }
 }

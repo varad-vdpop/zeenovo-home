@@ -53,6 +53,7 @@ export const solutionPages: Record<string, PageContent> = {
         { label: "Book directly", icon: "calendarStar" },
         { label: "Source tracked", icon: "chartStar" },
       ] },
+      {"type": "featureIndex", "eyebrow": "All features", "title": "Everything in / ZeeNovo Enterprise.", "side": "Every enterprise feature, in one or two lines.", "groups": [{"title": "Chain booking platform", "ids": ["chainPlatform", "serviceFirst", "central"]}, {"title": "Chain dashboard", "ids": ["execSummary", "reportingParameters", "drillDowns", "locationComparison", "periodComparison", "methodology", "networkQuality", "serviceValues"]}, {"title": "Privacy controls", "ids": ["minimumCohort", "suppression", "noPatientData", "accessLogs"]}, {"title": "Network management", "ids": ["communication", "messageAlerts", "onboarding", "roles", "primaryAdmin"]}]},
       { type: "ctaSplit", eyebrow: "Built for pharmacy groups", title: "One view of the network. / One voice to every store.", text: "Send us your member list. We handle the invitations.", primary: demo, secondary: { label: "Talk to Us", href: "/company/contact" }, note: { title: "Network onboarding", text: "Invitations sent from your member list." } },
     ],
   },

@@ -86,3 +86,31 @@ export const icons = {
 export type PersonKey = keyof typeof people;
 export type ArtKey = keyof typeof art;
 export type IconKey = keyof typeof icons;
+
+// Small icons for feature tiles. All are brand purple, so they read on the light icon circle.
+export const tileIcons = {
+  screening: "/assets/minor-ailments/ui-screening.svg",
+  shield: "/assets/minor-ailments/ui-shield.svg",
+  treatment: "/assets/minor-ailments/ui-treatment.svg",
+  profile: "/assets/minor-ailments/ui-profile.svg",
+  followup: "/assets/minor-ailments/ui-followup.svg",
+  clock: "/assets/minor-ailments/ui-clock.svg",
+  flag: "/assets/ui-previews/flag.svg",
+  pregnant: "/assets/ui-previews/pregnant.svg",
+  diagnosis: "/assets/ui-previews/diagnosis.svg",
+  filter: "/assets/ui-previews/filter.svg",
+  trend: "/assets/ui-previews/trend.svg",
+  calendar: "/assets/clinical/booking-calendar.svg",
+  intake: "/assets/clinical/booking-intake.svg",
+  waitlist: "/assets/clinical/booking-waitlist.svg",
+  group: "/assets/clinical/booking-group.svg",
+  rxNew: "/assets/clinical/prescription-new.svg",
+  rxRefill: "/assets/clinical/prescription-refill.svg",
+  rxRepeat: "/assets/clinical/prescription-repeat.svg",
+  rxTransfer: "/assets/clinical/prescription-transfer.svg",
+  docAuto: "/assets/clinical/document-auto.svg",
+  docEfax: "/assets/clinical/document-efax.svg",
+  docStorage: "/assets/clinical/document-storage.svg",
+  docAudit: "/assets/clinical/document-audit.svg",
+} as const;
+export type TileIconKey = keyof typeof tileIcons;

@@ -24,6 +24,18 @@
 a.cardAuto { transition: transform .2s ease; }
 a.cardAuto:hover { transform: translateY(-3px); }
 
+/* Feature tiles: the approved documentation tile (white, rounded, icon circle) with a description line */
+.featureSection { padding: 84px 0 90px; background: #f7f9fe; }
+.featureGroup { margin-top: 44px; }
+.featureGroup + .featureGroup { margin-top: 36px; }
+.featureGroupTitle { margin-bottom: 14px; color: #2b0b91; font-size: 12px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; }
+.featureGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+.featureTile { display: flex; gap: 14px; align-items: flex-start; padding: 20px; border-radius: 20px; background: #fff; }
+.featureTile i { display: grid; width: 38px; height: 38px; flex: none; place-items: center; border-radius: 50%; background: #e8eaff; font-style: normal; }
+.featureTile img { width: 18px; height: 18px; object-fit: contain; }
+.featureTile strong { display: block; font-size: 15px; font-weight: 600; line-height: 20px; }
+.featureTile p { margin-top: 5px; color: #666474; font-size: 13px; line-height: 19px; }
+
 /* Two-card */
 .twoCardSection { height: auto; padding-bottom: 90px; }
 .twoCardSection .twoCardItem { height: auto; padding-bottom: 36px; }
@@ -143,6 +155,7 @@ a.cardAuto:hover { transform: translateY(-3px); }
 .roiDisclaimer { margin-top: 18px; color: rgb(255 255 255 / 70%); font-size: 12px; line-height: 18px; }
 
 @media (max-width: 1199px) {
+  .featureGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .planGrid,
   .listGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .formLayout,
@@ -150,6 +163,9 @@ a.cardAuto:hover { transform: translateY(-3px); }
 }
 
 @media (max-width: 760px) {
+  .featureSection { padding: 56px 0 60px; }
+  .featureGrid { grid-template-columns: 1fr; gap: 10px; }
+  .featureTile { padding: 16px; }
   .compactHero { height: 560px; }
   .compactHero .compactCopy { top: 120px; }
   .heroCard { display: none; }

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { BlockList } from "@/components/blocks/BlockPage";
+import { clinicalFeatures } from "@/content/featureSections";
 import Image from "next/image";
 import FinalCta from "@/components/FinalCta";
 import ScrollFade from "@/components/ScrollFade";
@@ -280,6 +282,7 @@ export default function ClinicalPage() {
     <AfterAssessment />
     <FollowUp />
     <ConnectedWorkflow />
+    <BlockList blocks={[clinicalFeatures]} />
     <div className={styles.ctaWrap}><FinalCta animated id="clinical-cta" variant="clinical" eyebrow="Built for clinical care" heading={<>Deliver more clinical services<br />with less administrative work.</>} actionLabel="Book a Demo" actionHref="/book-a-demo" /></div>
   </main>;
 }

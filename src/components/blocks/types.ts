@@ -159,9 +159,18 @@ export type TableBlock = { type: "table"; eyebrow: string; title: Heading; colum
 
 export type RoiBlock = { type: "roi" };
 
+/** Feature tiles, drawn from src/content/features.json by id. Extends the approved documentation tiles with a description line. */
+export type FeatureIndexBlock = {
+  type: "featureIndex";
+  eyebrow: string;
+  title: Heading;
+  side?: string;
+  groups: { title: string; ids: string[] }[];
+};
+
 export type Block =
   | HeroBlock | SolutionHeroBlock | CardsBlock | RealityBlock | FeaturesBlock | TwoCardBlock | WaveBlock | StepsBlock
-  | ProductsGridBlock | CtaBlock | CtaSplitBlock | FaqBlock | PricingBlock | FactsBlock | FormBlock | ListBlock | LegalBlock | TableBlock | RoiBlock;
+  | ProductsGridBlock | CtaBlock | CtaSplitBlock | FaqBlock | PricingBlock | FactsBlock | FormBlock | ListBlock | LegalBlock | TableBlock | RoiBlock | FeatureIndexBlock;
 
 export type PageContent = {
   meta: { title: string; description: string };

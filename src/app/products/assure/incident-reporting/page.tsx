@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { BlockList } from "@/components/blocks/BlockPage";
+import { incidentReportingFeatures } from "@/content/featureSections";
 import Image from "next/image";
 import Link from "next/link";
 import { asset } from "@/lib/assets";
@@ -124,5 +126,5 @@ function Cta() {
 }
 
 export default function IncidentReportingPage() {
-  return <main className={styles.page}><Hero /><Analytics /><Compliance /><AfterVisit /><Process /><Cta /></main>;
+  return <main className={styles.page}><Hero /><Analytics /><Compliance /><AfterVisit /><Process /><BlockList blocks={[incidentReportingFeatures]} /><Cta /></main>;
 }
