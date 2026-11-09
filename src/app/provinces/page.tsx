@@ -117,7 +117,7 @@ function Outcomes() {
     <section className={styles.outcomes} aria-labelledby="outcomes-title">
       <div className={styles.outcomesHeading} data-reveal>
         <Tag>With ZeeNovo</Tag>
-        <h2 id="outcomes-title">What Ontario Pharmacies<br />run on Zeenovo</h2>
+        <h2 id="outcomes-title">What Ontario pharmacies<br />run on ZeeNovo</h2>
       </div>
       <div className={styles.outcomesViewport} data-reveal>
         <div className={styles.outcomesWaveLayer}>
@@ -134,9 +134,9 @@ function Cta() {
     <section className={styles.cta} aria-labelledby="provinces-cta-title" data-reveal>
       <Image className={styles.ctaWaves} src={pageAsset.ctaWaves} alt="" width={1290} height={369} />
       <div className={styles.ctaHeading}>
-        <Tag>You can trust us</Tag>
-        <h2 id="provinces-cta-title">Handling a pharmacy has<br />never been easier</h2>
-        <Link data-cta href="/register-pharmacy"><Arrow />Sign Up now</Link>
+        <Tag>Get started</Tag>
+        <h2 id="provinces-cta-title">See ZeeNovo with<br />your own services.</h2>
+        <Link data-cta href="/book-a-demo"><Arrow />Book a Demo</Link>
       </div>
       <Image className={styles.reminders} src={pageAsset.doseReminders} alt="Dose reminders module" width={415} height={290} />
       <Image className={styles.ctaPerson} src={pageAsset.ctaPerson} alt="Pharmacist reviewing ZeeNovo on a tablet" width={319} height={402} />

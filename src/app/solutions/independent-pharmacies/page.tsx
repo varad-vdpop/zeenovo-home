@@ -9,7 +9,7 @@ const pageAsset = asset.independentPharmacies;
 export const metadata: Metadata = {
   title: "Independent Pharmacies | ZeeNovo",
   description:
-    "Province-backed pharmacy workflows that keep intake, red flags, treatment, documentation, bookings, and follow-up connected.",
+    "Clinical workflows, incident reporting, a booking website and patient reminders for independent pharmacies. Set up in a day.",
 };
 
 const realityCards = [
@@ -20,7 +20,7 @@ const realityCards = [
   },
   {
     number: "02",
-    title: "Banners out market you",
+    title: "Banners out-market you",
     body: "Chains have booking apps and reminder systems. Patients notice.",
   },
   {
@@ -79,7 +79,7 @@ function Hero() {
       <div className={styles.heroCopy}>
         <p className={styles.eyebrow}>Independent pharmacies</p>
         <h1 id="independent-pharmacies-title">Big pharmacy tools,<br />for a pharmacy with<br />one front door.</h1>
-        <p className={styles.heroDescription}>Province-backed minor ailments workflows that keep intake, red flags, treatment and documentation connected.</p>
+        <p className={styles.heroDescription}>Clinical workflows, incident reporting, a booking website and patient reminders, sized for one location and set up in a day.</p>
         <Link data-cta className={styles.primaryButton} href="/book-a-demo"><Arrow />Get Started</Link>
       </div>
 
@@ -118,7 +118,7 @@ function Reality() {
     <section className={styles.reality} aria-labelledby="reality-title">
       <div className={styles.sectionRail}>
         <div className={styles.realityHeading}>
-          <div><p>Minor ailments</p><h2 id="reality-title">The week-to-week reality</h2></div>
+          <div><p>The reality</p><h2 id="reality-title">The week-to-week reality</h2></div>
           <p>Independent pharmacy work rarely arrives one role at a time.</p>
         </div>
         <div className={styles.realityCards}>
@@ -141,7 +141,7 @@ function PictureChanges() {
       <div className={styles.changesHeading}>
         <span><Image src={pageAsset.star} alt="" width={20} height={20} />With ZeeNovo</span>
         <h2 id="changes-title">How the picture changes</h2>
-        <p>Support common, province-backed conditions through a guided flow that keeps questions</p>
+        <p>ZeeNovo takes on the repeat work, so the team can focus on clinical services.</p>
       </div>
       <div className={styles.changeTrack}>
         <Image className={styles.changeArt} src={pageAsset.changeArt} alt="" width={1440} height={240} />

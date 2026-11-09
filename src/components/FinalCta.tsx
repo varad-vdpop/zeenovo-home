@@ -18,10 +18,10 @@ type FinalCtaProps = {
 
 export default function FinalCta({
   id = "contact",
-  actionHref = "#contact",
-  eyebrow = "You can trust us",
-  heading = <>Handling a pharmacy has<br className={styles.desktopBreak} /> never been easier</>,
-  actionLabel = "Sign Up now",
+  actionHref = "/book-a-demo",
+  eyebrow = "Get started",
+  heading = <>See ZeeNovo with<br className={styles.desktopBreak} /> your own services.</>,
+  actionLabel = "Book a Demo",
   variant = "default",
   animated = false,
 }: FinalCtaProps) {

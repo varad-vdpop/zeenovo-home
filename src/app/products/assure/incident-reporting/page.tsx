@@ -12,7 +12,7 @@ const pageAsset = asset.incidentReporting;
 export const metadata: Metadata = {
   title: "Incident Reporting | ZeeNovo Assure",
   description:
-    "Live pharmacy safety dashboards, trend detection and scheduled incident reporting with ZeeNovo Assure.",
+    "Guided incident and near-miss reporting, root cause analysis, action plans and live safety dashboards for Canadian pharmacies.",
 };
 
 function Arrow() {
@@ -32,7 +32,7 @@ function Hero() {
       <div className={styles.heroCopy}>
         <p className={styles.eyebrow}>ZeeNovo Assure</p>
         <h1 id="incident-title">Never miss an<br />important safety<br />insight.</h1>
-        <p className={styles.heroDescription}>Live dashboards, trend detection and scheduled reports across incidents, assessments and goals, with anonymized peer benchmarking that shows where you really stand.</p>
+        <p className={styles.heroDescription}>Guided incident and near-miss reporting, root cause analysis, action plans and live trend dashboards, with anonymised peer benchmarking.</p>
         <div className={styles.heroActions}>
           <Link data-cta className={styles.primaryButton} href="/book-a-demo"><Arrow />Get Started</Link>
           <Link data-cta className={styles.secondaryButton} href="/book-a-demo"><Arrow />Book a Demo</Link>
@@ -50,7 +50,7 @@ function Analytics() {
     <section className={styles.analytics} aria-labelledby="analytics-title">
       <div className={styles.splitHeading}>
         <div><p>Analytics</p><h2 id="analytics-title">Four ways analytics works<br />harder for you.</h2></div>
-        <span>Choose a capability, then move through one consistent intake, assessment and documentation flow.</span>
+        <span>Every report reaches the dashboard as soon as it is submitted. No spreadsheet in between.</span>
       </div>
       <IncidentAnalyticsPanels />
     </section>
@@ -75,7 +75,7 @@ function Compliance() {
 function AfterVisit() {
   return (
     <section className={styles.afterVisit} aria-labelledby="after-visit-title">
-      <div className={styles.sectionHeading}><p>After the visit</p><h2 id="after-visit-title">Keep care moving after the visit.</h2></div>
+      <div className={styles.sectionHeading}><p>Beyond the report</p><h2 id="after-visit-title">Share the results with the people who need them.</h2></div>
       <AfterVisitPanels />
     </section>
   );
@@ -89,7 +89,7 @@ function Process() {
       <div className={styles.processHeading}>
         <Tag>From data to decision</Tag>
         <h2 id="process-title">Collect, detect, compare, report<br />and act, without a spreadsheet.</h2>
-        <p>Support common, province-backed conditions through a guided flow that keeps questions</p>
+        <p>Each incident follows the same five steps, from the first report to the action that prevents a repeat.</p>
       </div>
       <div className={styles.processTrack}>
         <Image className={styles.processWave} src={pageAsset.processWave} alt="" width={1440} height={181} />
@@ -112,9 +112,9 @@ function Cta() {
     <section className={styles.cta} aria-labelledby="incident-cta-title">
       <Image className={styles.ctaWaves} src={pageAsset.ctaWaves} alt="" width={1290} height={369} />
       <div className={styles.ctaHeading}>
-        <Tag>You can trust us</Tag>
-        <h2 id="incident-cta-title">Handling a pharmacy has<br />never been easier</h2>
-        <Link data-cta href="/book-a-demo"><Arrow />Sign Up now</Link>
+        <Tag>Built for pharmacy safety</Tag>
+        <h2 id="incident-cta-title">Report in minutes.<br />Improve every month.</h2>
+        <Link data-cta href="/book-a-demo"><Arrow />Book a Demo</Link>
       </div>
       <Image className={styles.reminders} src={pageAsset.doseReminders} alt="Dose reminders module" width={415} height={290} />
       <Image className={styles.ctaPerson} src={pageAsset.ctaPerson} alt="Pharmacist reviewing ZeeNovo on a tablet" width={319} height={382} />

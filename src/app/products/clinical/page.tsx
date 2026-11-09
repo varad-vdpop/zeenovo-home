@@ -10,17 +10,17 @@ import styles from "./page.module.css";
 const a = (name: string) => `/assets/clinical/${name}`;
 
 export const metadata: Metadata = {
-  title: "ZeeNovo Clinical | Clinical tools for modern pharmacies",
-  description: "Guided clinical services, patient management, documentation and follow-up in one connected pharmacy workflow.",
+  title: "ZeeNovo Clinical | Clinical services software for pharmacies",
+  description: "Minor ailments, vaccinations, injections, prescriptions and medication reviews in one guided workflow, with documentation and follow-up built in.",
 };
 
 const services = [
   { title: "Minor Ailments", icon: "service-minor.svg", tone: "purple" },
   { title: "Vaccinations", icon: "service-vaccination.svg", tone: "lavender" },
-  { title: "Medicine Injections", icon: "service-injection.svg", tone: "peach" },
+  { title: "Injections", icon: "service-injection.svg", tone: "peach" },
   { title: "Prescriptions", icon: "service-prescription.svg", tone: "aqua" },
-  { title: "Medication Review.", icon: "service-review.svg", tone: "purple" },
-  { title: "Point of Care testing.", icon: "service-testing.svg", tone: "peach" },
+  { title: "Medication Review", icon: "service-review.svg", tone: "purple" },
+  { title: "Point of Care Testing", icon: "service-testing.svg", tone: "peach" },
 ] as const;
 
 const conditions = [
@@ -49,9 +49,9 @@ const bookingFeatures = [
 ] as const;
 
 const workflowFeatures = [
-  { title: "Adaptive assessment", description: "Assessment questionnaires, Province-specific logic.", icon: "workflow-assessment.svg" },
-  { title: "Clinical safeguards", description: "Patient health flags, Red flag identification.", icon: "workflow-safeguards.svg" },
-  { title: "Guided next steps", description: "Smart clinical questions, Guided treatment paths.", icon: "workflow-steps.svg" },
+  { title: "Adaptive assessment", description: "Questions adapt to each answer and to provincial rules.", icon: "workflow-assessment.svg" },
+  { title: "Clinical safeguards", description: "Health flags and red flags are raised during the assessment.", icon: "workflow-safeguards.svg" },
+  { title: "Guided next steps", description: "Treatment and self-care options are suggested by condition.", icon: "workflow-steps.svg" },
 ] as const;
 
 const patientFeatures = [
@@ -93,8 +93,8 @@ function Hero() {
     <Image className={styles.heroWave} src={a("hero-wave.svg")} alt="" width={480} height={819} priority />
     <Image className={styles.heroEllipse} src={a("hero-ellipse.svg")} alt="" width={619} height={619} priority />
     <div className={styles.heroCopy}>
-      <h1 className={styles.heroEnter} id="clinical-title">Innovative solutions<br /> for modern pharmacies.</h1>
-      <p className={`${styles.heroEnter} ${styles.heroDescription}`}>Clinical tools designed to help pharmacy teams deliver services more efficiently.</p>
+      <h1 className={styles.heroEnter} id="clinical-title">Clinical services,<br /> from booking to follow-up.</h1>
+      <p className={`${styles.heroEnter} ${styles.heroDescription}`}>Minor ailments, vaccinations, injections, prescriptions and medication reviews in one guided workflow.</p>
       <div className={`${styles.heroActions} ${styles.heroEnter}`}>
         <a data-cta className={styles.primaryButton} href="#clinical-services"><Arrow tone="white" />Get Started</a>
         <a data-cta className={styles.outlineButton} href="#clinical-cta"><Arrow />Book a Demo</a>
@@ -113,8 +113,8 @@ function ClinicalServices() {
   return <section className={styles.services} id="clinical-services" aria-labelledby="clinical-services-title">
     <div className={styles.sectionInner}>
       <ScrollFade as="div" className={styles.splitHeading}>
-        <div><p className={styles.eyebrow}>Clinical Services</p><h2 id="clinical-services-title">Four ways to extend clinical care.</h2></div>
-        <p>Choose a service, then move through one consistent intake, assessment and documentation flow.</p>
+        <div><p className={styles.eyebrow}>Clinical Services</p><h2 id="clinical-services-title">Six ways to extend clinical care.</h2></div>
+        <p>Choose a service. Intake, assessment and documentation follow the same structure every time.</p>
       </ScrollFade>
       <div className={styles.serviceGrid}>
         {services.map((service, index) => <ScrollFade as="article" className={`${styles.serviceCard} ${styles[service.tone]}`} delay={index * 60} responsiveDelay key={service.title}>
@@ -132,7 +132,7 @@ function MinorAilments() {
     <div className={styles.minorInner}>
       <ScrollFade as="div" className={styles.splitHeading}>
         <div><p className={styles.eyebrow}>Minor Ailments</p><h2 id="minor-title">Structured consultations,<br /> without the clinical guesswork.</h2></div>
-        <p>Support common, province-backed conditions through a guided flow that keeps questions, red flags and treatment paths connected.</p>
+        <p>Assessments follow your province&apos;s program, with questions, red flags and treatment paths in one record.</p>
       </ScrollFade>
       <div className={styles.minorBody}>
         <ScrollFade as="div" className={styles.minorPhoto}><Image src={a("minor-editorial.png")} alt="Medication and a glass of water during a clinical consultation" fill sizes="(max-width: 760px) 100vw, 444px" /></ScrollFade>
@@ -140,7 +140,7 @@ function MinorAilments() {
           <div className={styles.conditionGrid}>{conditions.map((condition) => <div className={styles.condition} key={condition.title}>
             <span className={styles.conditionIcon}><Image src={a(condition.icon)} alt="" width={34} height={34} /></span><span>{condition.title}</span>
           </div>)}</div>
-          <a data-cta className={styles.seeAll} href="#clinical-services"><Arrow />See all</a>
+          <a data-cta className={styles.seeAll} href="/products/clinical/minor-ailments"><Arrow />See all</a>
         </ScrollFade>
       </div>
     </div>
@@ -157,16 +157,16 @@ function MoreServices() {
       <div className={styles.moreCards}>
         <ScrollFade as="article" className={styles.vaccinationCard}>
           <Image className={styles.vaccinationEllipse} src={a("vaccination-ellipse.svg")} alt="" width={612} height={612} />
-          <h3>Vaccinations</h3><p>Covid, flu and other vaccine programs.</p>
+          <h3>Vaccinations</h3><p>COVID-19, flu and other publicly funded vaccine programs.</p>
           <div className={styles.vaccinePills}>
-            <span><i><Image src={a("vaccine-covid.svg")} alt="" width={24} height={24} /></i>Covid Vaccine<Arrow tone="dark" /></span>
+            <span><i><Image src={a("vaccine-covid.svg")} alt="" width={24} height={24} /></i>COVID-19 Vaccine<Arrow tone="dark" /></span>
             <span><i><Image src={a("vaccine-syringe.svg")} alt="" width={24} height={24} /></i>Flu Vaccine<Arrow tone="dark" /></span>
             <span><i><Image src={a("vaccine-syringe.svg")} alt="" width={24} height={24} /></i>Other Vaccines<Arrow tone="dark" /></span>
           </div>
           <Image className={styles.vaccinationPerson} src={a("vaccination-pharmacist.png")} alt="Pharmacist working on a laptop" width={310} height={413} />
         </ScrollFade>
         <ScrollFade as="article" className={styles.prescriptionCard} delay={60} responsiveDelay>
-          <h3>Prescriptions</h3><p>Every prescription request enters a clear, trackable path.</p>
+          <h3>Prescriptions</h3><p>Refill, new, repeat and transfer requests in one trackable queue.</p>
           <div className={styles.prescriptionList}>{prescriptions.map((item) => <div className={styles.prescriptionRow} key={item.title}>
             <span className={styles.prescriptionIcon}><Image src={a(item.icon)} alt="" width={18} height={18} /></span><strong>{item.title}</strong><Arrow tone="dark" /><small>{item.detail}</small>
           </div>)}</div>
@@ -175,7 +175,7 @@ function MoreServices() {
       <ScrollFade as="article" className={styles.bookingCard}>
         <Image className={styles.bookingWave} src={a("booking-wave.svg")} alt="" width={684} height={246} />
         <h3>Appointment booking that flexes with the day.</h3>
-        <p>Walk-ins and scheduled care belong in the same operational view.</p>
+        <p>Walk-ins, scheduled visits, waitlists and group bookings on one calendar.</p>
         <div className={styles.bookingFeatures}>{bookingFeatures.map((item, index) => <span className={index === 0 ? styles.bookingActive : ""} key={item.title}>
           <i><Image src={a(item.icon)} alt="" width={18} height={18} /></i>{item.title}
         </span>)}</div>
@@ -222,12 +222,12 @@ function AfterAssessment() {
       </ScrollFade>
       <div className={styles.assessmentCards}>
         <ScrollFade as="article" className={styles.patientCard}>
-          <h3>Patient Management</h3><p>Relationship context and timely follow-up remain part of the same record.</p>
+          <h3>Patient Management</h3><p>Patient history, follow-up dates and dose reminders stay on the same record.</p>
           <ul>{patientFeatures.map((item) => <li key={item.title}><i><Image src={a(item.icon)} alt="" width={17} height={17} /></i>{item.title}</li>)}</ul>
           <Image className={styles.remindersImage} src={a("patient-reminders.svg")} alt="Dose reminders for two patients" width={579} height={404} />
         </ScrollFade>
         <ScrollFade as="article" className={styles.documentationCard} delay={60} responsiveDelay>
-          <h3>Documentation</h3><p>Capture the clinical record while the work is happening.</p>
+          <h3>Documentation</h3><p>The clinical record is written as the consultation happens.</p>
           <div className={styles.documentFeatures}>{documentFeatures.map((item) => <div key={item.title}><i><Image src={a(item.icon)} alt="" width={17} height={17} /></i><strong>{item.title}</strong></div>)}</div>
           <Image className={styles.sopImage} src={a("documentation-sop.svg")} alt="ZeeNovo Assure SOP table" width={549} height={328} />
           <Image className={styles.efaxImage} src={a("documentation-efax-notice.svg")} alt="eFax sent; record updated" width={202} height={86} />
@@ -244,7 +244,7 @@ function FollowUp() {
       <ScrollFade as="div" className={styles.followupCopy} delay={60} responsiveDelay>
         <p className={styles.eyebrow}>Clinical Follow-up</p>
         <h2 id="followup-title">Follow-up care,<br /> without losing context.</h2>
-        <p className={styles.followupDescription}>Track patient progress, record treatment outcomes and schedule the next step from one clear workflow.</p>
+        <p className={styles.followupDescription}>Patients receive follow-up questions automatically. Only the cases that need a pharmacist are flagged.</p>
         <div className={styles.followupFeatures}>{followupFeatures.map((item) => <div className={styles.featureRow} key={item.title}>
           <span className={styles.featureIcon}><Image src={a(item.icon)} alt="" width={39} height={39} /></span>
           <span><strong>{item.title}</strong><small>{item.description}</small></span>

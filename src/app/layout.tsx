@@ -36,9 +36,9 @@ const geistFooter = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "ZeeNovo — Better pharmacy care, every day",
+  title: "ZeeNovo | Clinical, compliance and booking software for Canadian pharmacies",
   description:
-    "World-class clinical tools, smart pharmacy business solutions, and the support to build your dream pharmacy practice.",
+    "Guided clinical workflows, incident reporting, a booking website and patient self-service for Canadian pharmacies. One platform, one login.",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -3,10 +3,10 @@ import { asset } from "@/lib/assets";
 import styles from "./Footer.module.css";
 
 const footerGroups = [
-  { heading: "Our Products", items: ["ZeeNovo Assure", "ZeeNovo Clinical", "ZeeNovo Intelligence"] },
-  { heading: "Company", items: ["Blog", "Pricing", "Contact Us"] },
+  { heading: "Our Products", items: ["ZeeNovo Clinical", "ZeeNovo Assure", "ZeeNovo Sites", "ZeeNovo Intelligence"] },
+  { heading: "Company", items: ["About", "Pricing", "Blog", "Contact Us"] },
   { heading: "Logins", items: ["Register Pharmacy", "Patient Login", "Assure Login", "Clinical Login"] },
-  { heading: "Legal", items: ["Privacy Policy", "Terms & Conditions"] },
+  { heading: "Legal", items: ["Privacy Policy", "Terms & Conditions", "Security & Compliance", "Accessibility"] },
 ] as const;
 
 export default function Footer() {
@@ -41,7 +41,7 @@ export default function Footer() {
         <Image src={asset.footerDivider} alt="" width={1195} height={1.24242} />
       </div>
       <span className={styles.wordmark} aria-hidden="true">ZeeNovo</span>
-      <p className={styles.copyright}>Copyright © 2025 ZeeNovo Corporation</p>
+      <p className={styles.copyright}>Copyright © 2026 ZeeNovo Health Inc.</p>
     </footer>
   );
 }

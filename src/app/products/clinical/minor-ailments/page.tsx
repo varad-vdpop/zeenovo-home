@@ -8,7 +8,7 @@ const asset = (name: string) => `/assets/minor-ailments/${name}`;
 
 export const metadata: Metadata = {
   title: "Minor Ailments | ZeeNovo Clinical",
-  description: "Guided minor ailments consultations with connected intake, safety checks, treatment, documentation and follow-up.",
+  description: "Guided minor ailments assessments for Canadian pharmacists, with red flag checks, treatment options, documentation and automated follow-up.",
 };
 
 const capabilities = [
@@ -102,9 +102,9 @@ function Hero() {
     <Image className={styles.heroEllipse} src={asset("hero-ellipse.svg")} alt="" width={619} height={619} />
     <Image className={styles.heroSmallEllipse} src={asset("hero-small-ellipse.svg")} alt="" width={87} height={87} />
     <div className={styles.heroCopy}>
-      <p className={`${styles.heroEyebrow} ${styles.heroEnter}`}>ZeeNovo Assure</p>
+      <p className={`${styles.heroEyebrow} ${styles.heroEnter}`}>ZeeNovo Clinical</p>
       <h1 className={`${styles.heroHeading} ${styles.heroEnter}`} id="minor-title">Structured consultations,<br /> without the clinical guesswork.</h1>
-      <p className={`${styles.heroDescription} ${styles.heroEnter}`}>Province-backed minor ailments workflows that keep intake, red flags, treatment and documentation connected.</p>
+      <p className={`${styles.heroDescription} ${styles.heroEnter}`}>Province-specific minor ailments assessments that keep intake, red flags, treatment and documentation in one record.</p>
       <a data-cta className={`${styles.heroButton} ${styles.heroEnter}`} href="#minor-capabilities">
         <Image data-cta-icon src="/assets/zeenovo-nav-arrow-primary.svg" alt="" width={24} height={24} />Get Started
       </a>
@@ -143,7 +143,7 @@ function Conditions() {
     <div className={styles.conditionsInner}>
       <ScrollFade as="div" className={styles.conditionHeading}>
         <div><p className={styles.mutedEyebrow}>Supported Conditions</p><h2 id="conditions-title">Twenty-eight ailments,<br />one consistent way of working.</h2></div>
-        <p>Support common, province-backed conditions through a guided flow that keeps questions, red flags and treatment paths connected.</p>
+        <p>Each province authorises its own list. ZeeNovo shows the conditions your pharmacists can assess.</p>
       </ScrollFade>
       <div className={styles.conditionsGrid}>{conditionGroups.map((group, index) => <ConditionCard key={group.title} group={group} wide={index === 0} delay={index === 0 ? 0 : ((index - 1) % 2) * 60} />)}</div>
     </div>
@@ -173,9 +173,9 @@ function GuidedAssessment() {
 function ConnectedCare() {
   return <section className={styles.connectedCare} aria-labelledby="connected-care-title">
     <ScrollFade as="div" className={styles.connectedHeading}>
-      <p className={styles.trustTag}><Image src={asset("trust-star.svg")} alt="" width={20} height={20} />You can trust us</p>
-      <h2 id="connected-care-title">Your pharmacy is in good hands.</h2>
-      <p>Support common, province-backed conditions through a guided flow that keeps questions, red flags and treatment paths connected.</p>
+      <p className={styles.trustTag}><Image src={asset("trust-star.svg")} alt="" width={20} height={20} />One record</p>
+      <h2 id="connected-care-title">Every step on the same consultation record.</h2>
+      <p>Booking, assessment, documentation, physician communication and follow-up share one record. Nothing is entered twice.</p>
     </ScrollFade>
     <div className={styles.trustJourney}>
       <div className={styles.trustWaveMask} aria-hidden="true"><Image className={styles.trustWave} src={asset("trust-wave.svg")} alt="" width={1440} height={181} /></div>
@@ -197,7 +197,7 @@ function AfterVisit() {
         <ScrollFade as="article" className={`${styles.afterVisitCard} ${styles.physicianCard}`} aria-labelledby="physician-card-title">
           <p className={styles.eyebrow}>Family Physician</p>
           <h3 id="physician-card-title">Keep the physician in the loop.</h3>
-          <p className={styles.afterVisitDescription}>Lookup once. Reuse the details across visits and eFax.</p>
+          <p className={styles.afterVisitDescription}>Look up the family physician once. Reuse the details for every visit and fax.</p>
           <MinorPhysicianHandoff className={styles.afterVisitIllustration} />
         </ScrollFade>
         <ScrollFade as="article" className={`${styles.afterVisitCard} ${styles.followupCard}`} delay={60} responsiveDelay aria-labelledby="followup-card-title">
