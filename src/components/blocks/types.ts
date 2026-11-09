@@ -1,7 +1,7 @@
 import type { ArtKey, IconKey, PersonKey } from "./media";
 
-// Page content schema. Every block maps to an approved section from the built pages,
-// except those marked "draft", which render with a "needs design approval" label.
+// Page content schema. Every block renders with an approved section from the built pages.
+// No block introduces its own visual language: see BlockPage.tsx for the mapping.
 
 export type Link = { label: string; href: string };
 
@@ -15,12 +15,10 @@ export type HeroBlock = {
   description: string;
   primary: Link;
   secondary?: Link;
-  /** Portrait from the approved photo set. Omit for a compact hero with no visual. */
+  /** Portrait from the approved photo set. A default portrait is used when omitted. */
   person?: PersonKey;
-  /** Small floating card over the visual. */
-  card?: { title: string; text: string };
-  /** Pill under the visual. */
-  badge?: string;
+  /** Approved floating UI from the Clinical hero: patient flags, reporting timer, connected-workflow badge. */
+  extras?: ("flags" | "timer" | "badge")[];
 };
 
 export type SolutionHeroBlock = {
@@ -107,7 +105,8 @@ export type CtaSplitBlock = {
   note: { title: string; text: string };
 };
 
-// Draft blocks: no approved design exists yet.
+// Blocks below reuse the approved "Supported Conditions" cards, capability cards, results counters,
+// wave strip and Clinical workflow panel.
 export type FaqBlock = { type: "faq"; eyebrow: string; title: Heading; items: { q: string; a: string }[] };
 
 export type PricingBlock = {

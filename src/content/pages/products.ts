@@ -8,7 +8,7 @@ export const productPages: Record<string, PageContent> = {
   "/products": {
     meta: { title: "Products | ZeeNovo", description: "ZeeNovo Clinical, Assure, Magistral, Sites and Intelligence. Clinical care, compliance, your website and patient booking on one platform." },
     blocks: [
-      { type: "hero", title: "One platform for / pharmacy operations.", description: "Start with the product you need. Every product shares the same patients, records and login.", primary: demo, secondary: { label: "See Pricing", href: "/pricing" }, person: "clinicalPharmacist", badge: "One connected platform" },
+      { type: "hero", title: "One platform for / pharmacy operations.", description: "Start with the product you need. Every product shares the same patients, records and login.", primary: demo, secondary: { label: "See Pricing", href: "/pricing" }, person: "clinicalPharmacist", extras: ["badge"] },
       { type: "productsGrid", title: "Our Products" },
       { type: "cards", eyebrow: "Also included", title: "For your patients.", side: "Two products that bring patients to your pharmacy and keep them coming back.", items: [
         { title: "ZeeNovo Sites", text: "Your pharmacy website, with live booking for every service.", icon: "storefront", href: "/products/sites" },
@@ -27,7 +27,7 @@ export const productPages: Record<string, PageContent> = {
   "/products/clinical/vaccinations": {
     meta: { title: "Vaccinations | ZeeNovo Clinical", description: "Book, administer, document and remind for COVID-19, flu and other vaccines. Group booking, one-click auto-fill and dose reminders." },
     blocks: [
-      { type: "hero", eyebrow: "ZeeNovo Clinical", title: "Vaccination clinics, / without the paperwork.", description: "Book, screen, administer and document COVID-19, flu and other vaccines, with dose reminders sent automatically.", primary: start, secondary: demo, person: "vaccinationPharmacist", badge: "Dose 2 reminder sent" },
+      { type: "hero", eyebrow: "ZeeNovo Clinical", title: "Vaccination clinics, / without the paperwork.", description: "Book, screen, administer and document COVID-19, flu and other vaccines, with dose reminders sent automatically.", primary: start, secondary: demo, person: "vaccinationPharmacist", extras: ["flags", "badge"] },
       { type: "cards", eyebrow: "Vaccinations", title: "One flow from booking / to the next dose.", side: "Built for busy flu and COVID-19 seasons, and for the vaccines you give all year.", items: [
         { title: "Book", text: "Online, walk-in or group bookings for families and clinics.", icon: "assessment" },
         { title: "Screen", text: "Consent and screening questions before the needle.", icon: "safety" },
@@ -48,7 +48,7 @@ export const productPages: Record<string, PageContent> = {
   "/products/clinical/medication-review": {
     meta: { title: "Medication Review | ZeeNovo Clinical", description: "Structured medication reviews with issue tracking, pharmacist interventions, care plans, physician communication and follow-up." },
     blocks: [
-      { type: "hero", eyebrow: "ZeeNovo Clinical", title: "Medication reviews / that finish with a plan.", description: "Capture the medication list, identify issues, record interventions and send the care plan to the physician from one review.", primary: start, secondary: demo, person: "clinicalPharmacist", badge: "Care plan sent to physician" },
+      { type: "hero", eyebrow: "ZeeNovo Clinical", title: "Medication reviews / that finish with a plan.", description: "Capture the medication list, identify issues, record interventions and send the care plan to the physician from one review.", primary: start, secondary: demo, person: "clinicalPharmacist", extras: ["flags", "badge"] },
       { type: "cards", eyebrow: "Medication review", title: "One review. Four outputs.", side: "Each review produces the records your program and the patient's physician expect.", items: [
         { title: "Medication list", text: "A current list built with the patient.", icon: "record" },
         { title: "Issues identified", text: "Drug therapy problems recorded by category.", icon: "redFlag" },
@@ -73,7 +73,7 @@ export const productPages: Record<string, PageContent> = {
   "/products/clinical/point-of-care-testing": {
     meta: { title: "Point of Care Testing | ZeeNovo Clinical", description: "Book, record and act on point of care tests in the same workflow as the rest of your clinical services." },
     blocks: [
-      { type: "hero", eyebrow: "ZeeNovo Clinical", title: "Point of care testing, / recorded with the visit.", description: "Book the test, record the result and decide the next step inside the same consultation record.", primary: start, secondary: demo, person: "minorPharmacist", badge: "Result recorded" },
+      { type: "hero", eyebrow: "ZeeNovo Clinical", title: "Point of care testing, / recorded with the visit.", description: "Book the test, record the result and decide the next step inside the same consultation record.", primary: start, secondary: demo, person: "minorPharmacist", extras: ["flags", "badge"] },
       { type: "steps", eyebrow: "How it works", title: "From booking to result.", side: "The test is one step in the consultation, not a separate log.", items: [
         { title: "Booked", text: "Patients choose the test online or walk in.", icon: "dayBookings" },
         { title: "Screened", text: "Eligibility questions before the test.", icon: "dayVisits" },
@@ -89,7 +89,7 @@ export const productPages: Record<string, PageContent> = {
   "/products/clinical/prescriptions-and-injections": {
     meta: { title: "Prescriptions and Injections | ZeeNovo Clinical", description: "Refill, new, repeat and transfer requests in one queue. Condition-based medicine and SIG suggestions. Injection appointments with dose reminders." },
     blocks: [
-      { type: "hero", eyebrow: "ZeeNovo Clinical", title: "Every prescription request, / on one trackable path.", description: "Refills, new prescriptions, repeats, transfers and injections, with suggested medicine and SIG by condition.", primary: start, secondary: demo, person: "clinicalPharmacist", badge: "Refill request received" },
+      { type: "hero", eyebrow: "ZeeNovo Clinical", title: "Every prescription request, / on one trackable path.", description: "Refills, new prescriptions, repeats, transfers and injections, with suggested medicine and SIG by condition.", primary: start, secondary: demo, person: "clinicalPharmacist", extras: ["flags", "badge"] },
       { type: "cards", eyebrow: "Prescriptions", title: "Four request types. One queue.", side: "Patients request online or in the portal. The team sees every request and its status.", items: [
         { title: "Refill", text: "The most requested. Approved in a few clicks.", icon: "prescription" },
         { title: "New prescription", text: "Captured with the details the pharmacist needs.", icon: "record" },
@@ -114,7 +114,7 @@ export const productPages: Record<string, PageContent> = {
   "/products/clinical/appointments": {
     meta: { title: "Appointments | ZeeNovo Clinical", description: "A pharmacy calendar for clinical services. Time slots by pharmacist and service, walk-ins, waitlists, group bookings and per-service booking links." },
     blocks: [
-      { type: "hero", eyebrow: "ZeeNovo Clinical", title: "Appointment booking / that flexes with the day.", description: "Scheduled visits, walk-ins, waitlists and group bookings on one calendar, configured by pharmacist and by service.", primary: start, secondary: demo, person: "independentPharmacist", badge: "24 appointments today" },
+      { type: "hero", eyebrow: "ZeeNovo Clinical", title: "Appointment booking / that flexes with the day.", description: "Scheduled visits, walk-ins, waitlists and group bookings on one calendar, configured by pharmacist and by service.", primary: start, secondary: demo, person: "independentPharmacist", extras: ["flags", "badge"] },
       { type: "cards", eyebrow: "Calendar", title: "Set it up the way / your pharmacy runs.", side: "Configure once. Patients only see the times you can actually deliver.", items: [
         { title: "Walk-in intake", text: "Walk-ins join the same queue as bookings.", icon: "assessment" },
         { title: "Custom calendar", text: "Time slots per pharmacist and per service.", icon: "calendarStar" },
@@ -139,7 +139,7 @@ export const productPages: Record<string, PageContent> = {
   "/products/clinical/documentation-and-efax": {
     meta: { title: "Documentation and eFax | ZeeNovo Clinical", description: "Clinical documentation generated during the consultation. Fax to the physician, keep a copy, or download. Stored securely and audit-ready." },
     blocks: [
-      { type: "hero", eyebrow: "ZeeNovo Clinical", title: "The record is written / while care happens.", description: "Every assessment produces its documentation automatically. Fax it, store it or download it from the same screen.", primary: start, secondary: demo, person: "minorPharmacist", card: { title: "eFax sent", text: "Record updated" } },
+      { type: "hero", eyebrow: "ZeeNovo Clinical", title: "The record is written / while care happens.", description: "Every assessment produces its documentation automatically. Fax it, store it or download it from the same screen.", primary: start, secondary: demo, person: "minorPharmacist", extras: ["flags", "badge"] },
       { type: "cards", eyebrow: "Documentation", title: "Four things you no / longer do by hand.", side: "Documentation comes from the consultation, so it matches what happened.", items: [
         { title: "Automated documentation", text: "PDFs generated from the assessment.", icon: "record" },
         { title: "Built-in eFax", text: "Fax the physician without leaving ZeeNovo.", icon: "steps" },
@@ -159,7 +159,7 @@ export const productPages: Record<string, PageContent> = {
   "/products/assure": {
     meta: { title: "ZeeNovo Assure | Pharmacy quality and safety platform", description: "Incident reporting, root cause analysis, ISMP MSSA, pharmacy self-assessment, CQI meetings, goals and analytics in one platform." },
     blocks: [
-      { type: "hero", eyebrow: "ZeeNovo Assure", title: "Your whole safety / program, in one place.", description: "Incident reporting, self-assessment, CQI meetings, goals and analytics. Know where you stand before an inspection.", primary: start, secondary: demo, person: "clinicalPharmacist", badge: "Safety score: up this quarter" },
+      { type: "hero", eyebrow: "ZeeNovo Assure", title: "Your whole safety / program, in one place.", description: "Incident reporting, self-assessment, CQI meetings, goals and analytics. Know where you stand before an inspection.", primary: start, secondary: demo, person: "clinicalPharmacist", extras: ["timer"] },
       { type: "cards", eyebrow: "What is included", title: "Six parts of one / quality program.", side: "Each part feeds the next, so a report becomes an improvement you can show.", items: [
         { title: "Incident reporting", text: "Guided capture of incidents and near misses.", icon: "report", href: "/products/assure/incident-reporting" },
         { title: "Root cause analysis", text: "A structured 5 Whys and contributing factors.", icon: "detect" },
@@ -187,7 +187,7 @@ export const productPages: Record<string, PageContent> = {
   "/products/assure/self-assessment": {
     meta: { title: "Pharmacy Self-Assessment | ZeeNovo Assure", description: "A built-in pharmacy self-assessment and the ISMP Medication Safety Self-Assessment, with goals and corrective actions tracked to completion." },
     blocks: [
-      { type: "hero", eyebrow: "ZeeNovo Assure", title: "Know your safety score / before the inspector.", description: "Run the built-in pharmacy self-assessment and the ISMP MSSA inside ZeeNovo, then track every gap to a completed action.", primary: start, secondary: demo, person: "followupPharmacist", badge: "Self-assessment complete" },
+      { type: "hero", eyebrow: "ZeeNovo Assure", title: "Know your safety score / before the inspector.", description: "Run the built-in pharmacy self-assessment and the ISMP MSSA inside ZeeNovo, then track every gap to a completed action.", primary: start, secondary: demo, person: "followupPharmacist", extras: ["timer"] },
       { type: "twoCard", eyebrow: "Included", title: "Two assessments, / in the price.", left: { title: "Pharmacy self-assessment", text: "Check readiness against the standards your inspection covers.", chips: ["Safety score", "Strengths identified", "Gaps identified", "Action plan"] }, right: { title: "ISMP MSSA", text: "The Medication Safety Self-Assessment, completed every two years and tracked here.", chips: ["Guided sections", "Progress saved", "Results stored", "Next due date"] } },
       { type: "steps", eyebrow: "From gap to action", title: "Every gap gets an owner.", side: "Results turn into goals and corrective actions, not a PDF in a drawer.", items: [
         { title: "Assess", text: "Complete the assessment as a team.", icon: "dayServices" },
@@ -204,7 +204,7 @@ export const productPages: Record<string, PageContent> = {
   "/products/assure/analytics": {
     meta: { title: "Safety Analytics | ZeeNovo Assure", description: "Trend dashboards, insight alerts, anonymised peer benchmarking and scheduled reports across incidents, assessments and goals." },
     blocks: [
-      { type: "hero", eyebrow: "ZeeNovo Assure", title: "See the pattern / before it repeats.", description: "Live dashboards across incidents, assessments and goals, cut by store, staff member, medication and time of day.", primary: start, secondary: demo, person: "independentPharmacist", badge: "Spike flagged: evening shift" },
+      { type: "hero", eyebrow: "ZeeNovo Assure", title: "See the pattern / before it repeats.", description: "Live dashboards across incidents, assessments and goals, cut by store, staff member, medication and time of day.", primary: start, secondary: demo, person: "independentPharmacist", extras: ["timer"] },
       { type: "cards", eyebrow: "Analytics", title: "Four ways analytics / works harder for you.", side: "Dashboards update as reports come in.", items: [
         { title: "Trend dashboards", text: "Error patterns, timing and medications, visible in real time.", icon: "chartStar" },
         { title: "Insight surfacing", text: "Spikes, drops and emerging patterns are flagged for you.", icon: "detect" },
@@ -230,7 +230,7 @@ export const productPages: Record<string, PageContent> = {
     dummy: true,
     meta: { title: "ZeeNovo Magistral | Compounding software for pharmacies", description: "Master formulas, batch records, beyond-use dates and compounding documentation for Canadian pharmacies." },
     blocks: [
-      { type: "hero", eyebrow: "ZeeNovo Magistral", title: "Compounding, / documented as you prepare.", description: "Keep master formulas, record every batch and have compounding documentation ready when the inspector asks.", primary: start, secondary: demo, person: "clinicalPharmacist", badge: "Batch record complete" },
+      { type: "hero", eyebrow: "ZeeNovo Magistral · Placeholder copy", title: "Compounding, / documented as you prepare.", description: "Keep master formulas, record every batch and have compounding documentation ready when the inspector asks.", primary: start, secondary: demo, person: "clinicalPharmacist" },
       { type: "cards", eyebrow: "Compounding", title: "Four records, / kept for you.", side: "Every preparation is traceable from the formula to the patient.", items: [
         { title: "Master formulas", text: "One approved version of every formula, with change history.", icon: "record" },
         { title: "Batch records", text: "Ingredients, lot numbers, quantities and who prepared it.", icon: "treatment" },
@@ -255,7 +255,7 @@ export const productPages: Record<string, PageContent> = {
   "/products/sites": {
     meta: { title: "ZeeNovo Sites | Pharmacy websites with live booking", description: "A pharmacy website with live booking for every service you offer. Search-friendly, mobile-first and included with every plan." },
     blocks: [
-      { type: "hero", eyebrow: "ZeeNovo Sites", title: "A pharmacy website / that books patients.", description: "Show the services you offer, take bookings around the clock and turn services on or off yourself. Included with every plan.", primary: { label: "Get Your Website", href: "https://auth.zeenovo.com/signup" }, secondary: demo, person: "independentPharmacist", badge: "New booking: flu vaccine" },
+      { type: "hero", eyebrow: "ZeeNovo Sites", title: "A pharmacy website / that books patients.", description: "Show the services you offer, take bookings around the clock and turn services on or off yourself. Included with every plan.", primary: { label: "Get Your Website", href: "https://auth.zeenovo.com/signup" }, secondary: demo, person: "independentPharmacist" },
       { type: "cards", eyebrow: "What you get", title: "Built to fill your / clinical calendar.", side: "The website is connected to your ZeeNovo services and calendar, so it is never out of date.", items: [
         { title: "Live booking", text: "Patients book the services you offer, at times you have open.", icon: "calendarStar" },
         { title: "Service control", text: "Turn a service on or off from your dashboard.", icon: "grid" },
@@ -277,7 +277,7 @@ export const productPages: Record<string, PageContent> = {
   "/products/patient-portal": {
     meta: { title: "Patient Portal | ZeeNovo", description: "A logged-in portal where patients book and manage appointments, request prescriptions and receive reminders, including voice booking." },
     blocks: [
-      { type: "hero", eyebrow: "ZeeNovo Patient Portal", title: "Patients manage their / own care, online.", description: "A logged-in portal where your patients book, reschedule, request prescriptions and keep up with reminders. Fewer calls to the counter.", primary: start, secondary: demo, person: "followupPharmacist", badge: "Refill requested online" },
+      { type: "hero", eyebrow: "ZeeNovo Patient Portal", title: "Patients manage their / own care, online.", description: "A logged-in portal where your patients book, reschedule, request prescriptions and keep up with reminders. Fewer calls to the counter.", primary: start, secondary: demo, person: "followupPharmacist" },
       { type: "cards", eyebrow: "Self-service", title: "What patients can do / without calling.", side: "Every action lands in the pharmacy's queue with a clear status.", items: [
         { title: "Book by voice", text: "Speak to book, hands-free.", icon: "pharmacist", href: "/products/voice-based-appointment-booking" },
         { title: "Manage appointments", text: "Book, reschedule or cancel.", icon: "calendarStar" },
@@ -300,7 +300,7 @@ export const productPages: Record<string, PageContent> = {
   "/products/voice-based-appointment-booking": {
     meta: { title: "Voice-Based Appointment Booking | ZeeNovo Intelligence", description: "Patients book pharmacy appointments by speaking in plain language. Bookings land in your ZeeNovo calendar." },
     blocks: [
-      { type: "hero", eyebrow: "ZeeNovo Intelligence", title: "Patients book / by speaking.", description: "Patients say what they need in plain language. ZeeNovo finds the service and an open time, and books it into your calendar.", primary: { label: "Try It Now", href: "https://patient.zeenovo.com/login" }, secondary: demo, person: "minorPharmacist", card: { title: "“I need a flu shot this week.”", text: "Booked: Thursday, 10:30 am" } },
+      { type: "hero", eyebrow: "ZeeNovo Intelligence", title: "Patients book / by speaking.", description: "Patients say what they need in plain language. ZeeNovo finds the service and an open time, and books it into your calendar.", primary: { label: "Try It Now", href: "https://patient.zeenovo.com/login" }, secondary: demo, person: "minorPharmacist" },
       { type: "steps", eyebrow: "How it works", title: "From a sentence / to a booking.", side: "No menus to navigate and no forms to type.", items: [
         { title: "Speak", text: "“I need a flu shot this week.”", icon: "dayServices" },
         { title: "Match", text: "The right service is found.", icon: "dayVisits" },

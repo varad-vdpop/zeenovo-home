@@ -22,8 +22,8 @@ Sources used: current zeenovo.com, the client-coded staging build, the Enterpris
 
 Every sitemap page now exists locally. Unbuilt pages are assembled from the approved blocks by `src/components/blocks/BlockPage.tsx`, with copy in `src/content/pages/*.ts` (transcribed from the files above). Province pages use `src/app/provinces/ProvincePage.tsx`, the Ontario layout with the Canada map.
 
-- Sections marked **"Draft layout · needs design approval"** on the page (FAQ, pricing table, forms, lists, legal text, ROI calculator) have no approved design. They use the existing type, colours and radii so the copy can be reviewed in place.
-- Magistral shows a "placeholder content" banner.
+- Every section uses an approved block. Content that had no direct equivalent is mapped as follows: feature lists, FAQs, legal sections and sub-processors use the Minor Ailments "Supported Conditions" cards with Clinical feature rows; pricing plans use the same cards with the plan facts on the approved wave strip; blog, case study and guide lists use the capability cards; About figures use the home results counters; contact, demo and ROI forms sit in the Clinical workflow section in the "Profile details" panel style.
+- Magistral is marked "Placeholder copy" in its hero eyebrow.
 - Forms validate and show the success message but send nothing.
 - **Feature descriptions** live in one place, `src/content/features.json`. Each product and service page has an "All features" section that pulls from it. After changing features, run `python3 -I scripts/check-features.py`: it fails if any feature is missing from the site, and regenerates `09-features.md`.
 

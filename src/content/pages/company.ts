@@ -20,7 +20,7 @@ export const companyPages: Record<string, PageContent> = {
         type: "pricing",
         plans: [
           { name: "Assure", price: "C$19.99", annual: "or C$199 a year", features: ["Incident reporting", "ISMP MSSA", "Pharmacy self-assessment", "CQI meetings and goals", "Safety analytics"], action: { label: "Start with Assure", href: "https://auth.zeenovo.com/signup" } },
-          { name: "Combo", price: "C$44.99", annual: "or C$449.99 a year", badge: "Most popular", featured: true, features: ["Everything in Clinical", "Everything in Assure", "Priority support", "Multi-location ready"], action: { label: "Get the Combo", href: "https://auth.zeenovo.com/signup" } },
+          { name: "Combo", price: "C$44.99", annual: "or C$449.99 a year", featured: true, features: ["Everything in Clinical", "Everything in Assure", "Priority support", "Multi-location ready"], action: { label: "Get the Combo", href: "https://auth.zeenovo.com/signup" } },
           { name: "Clinical", price: "C$29.99", annual: "or C$299 a year", features: ["Minor ailments", "Vaccinations and injections", "Prescribing support", "Automated follow-up", "Documentation and eFax"], action: { label: "Start with Clinical", href: "https://auth.zeenovo.com/signup" } },
         ],
         included: "ZeeNovo Sites, your pharmacy website with live booking.",

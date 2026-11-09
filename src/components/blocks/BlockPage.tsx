@@ -4,6 +4,7 @@ import { Fragment, type CSSProperties, type ReactNode } from "react";
 import FinalCta from "@/components/FinalCta";
 import HomeProductCards from "@/components/HomeProductCards";
 import ScrollFade from "@/components/ScrollFade";
+import { ClinicalHeroFlags, ClinicalHeroTimer } from "@/components/ClinicalHeroVisuals";
 import c from "@/app/products/clinical/page.module.css";
 import m from "@/app/products/clinical/minor-ailments/page.module.css";
 import i from "@/app/solutions/independent-pharmacies/page.module.css";
@@ -26,16 +27,15 @@ function Arrow({ tone = "purple" }: { tone?: "purple" | "white" }) {
   return <Image data-cta-icon src={src} alt="" aria-hidden="true" className={c.arrow} width={24} height={24} />;
 }
 
-function DraftLabel() {
-  return <p className={b.draftLabel}>Draft layout · needs design approval</p>;
-}
+const portraitKeys = Object.keys(people) as (keyof typeof people)[];
 
 function Hero({ block }: { block: T.HeroBlock }) {
-  const person = block.person ? people[block.person] : undefined;
-  return <section className={`${c.hero} ${person ? "" : b.compactHero}`}>
+  const person = people[block.person ?? portraitKeys[block.title.length % portraitKeys.length]];
+  const extras = block.extras ?? [];
+  return <section className={c.hero}>
     <Image className={c.heroWave} src="/assets/clinical/hero-wave.svg" alt="" width={480} height={819} priority />
-    {person && <Image className={c.heroEllipse} src="/assets/clinical/hero-ellipse.svg" alt="" width={619} height={619} priority />}
-    <div className={`${c.heroCopy} ${person ? "" : b.compactCopy}`}>
+    <Image className={c.heroEllipse} src="/assets/clinical/hero-ellipse.svg" alt="" width={619} height={619} priority />
+    <div className={c.heroCopy}>
       {block.eyebrow && <p className={`${c.eyebrow} ${b.heroEyebrow} ${c.heroEnter}`}>{block.eyebrow}</p>}
       <h1 className={c.heroEnter}>{lines(block.title)}</h1>
       <p className={`${c.heroEnter} ${c.heroDescription}`}>{block.description}</p>
@@ -44,11 +44,12 @@ function Hero({ block }: { block: T.HeroBlock }) {
         {block.secondary && <Link data-cta className={c.outlineButton} href={block.secondary.href}><Arrow />{block.secondary.label}</Link>}
       </div>
     </div>
-    {person && <div className={c.heroVisual}>
+    <div className={c.heroVisual}>
+      {extras.includes("flags") && <ClinicalHeroFlags />}
       <Image className={c.heroPharmacist} src={person.src} alt="Pharmacist" width={person.width} height={person.height} sizes="(max-width: 760px) 245px, 424px" priority />
-      {block.card && <div className={b.heroCard}><strong>{block.card.title}</strong><span>{block.card.text}</span></div>}
-      {block.badge && <span className={b.heroBadge}>{block.badge}</span>}
-    </div>}
+      {extras.includes("timer") && <ClinicalHeroTimer />}
+      {extras.includes("badge") && <Image className={c.heroConnectedBadge} src="/assets/clinical/hero-connected-badge.svg" alt="One connected clinical workflow" width={240} height={36} priority />}
+    </div>
   </section>;
 }
 
@@ -238,84 +239,29 @@ function CtaSplit({ block }: { block: T.CtaSplitBlock }) {
   </section>;
 }
 
-function DraftHeading({ eyebrow, title, lede }: { eyebrow?: string; title?: string; lede?: string }) {
-  return <div className={b.draftHeading}>
-    {eyebrow && <p className={b.eyebrow}>{eyebrow}</p>}
-    {title && <h2>{lines(title)}</h2>}
-    {lede && <p className={b.lede}>{lede}</p>}
-  </div>;
-}
+type ListItem = { title: string; text?: string; icon: TileIconKey };
+type ListGroup = { title: string; items: ListItem[] };
 
-function Faq({ block }: { block: T.FaqBlock }) {
-  return <section className={b.draftSection}>
-    <DraftLabel />
-    <DraftHeading eyebrow={block.eyebrow} title={block.title} />
-    <div className={b.faqList}>{block.items.map((item) => <details key={item.q}><summary>{item.q}</summary><p>{item.a}</p></details>)}</div>
-  </section>;
-}
-
-function Pricing({ block }: { block: T.PricingBlock }) {
-  return <section className={b.draftSection}>
-    <DraftLabel />
-    <div className={b.planGrid}>
-      {block.plans.map((plan) => <article className={`${b.plan} ${plan.featured ? b.planFeatured : ""}`} key={plan.name}>
-        {plan.badge && <span className={b.planBadge}>{plan.badge}</span>}
-        <h3>{plan.name}</h3>
-        <p className={b.planPrice}>{plan.price}<small>/mo</small></p>
-        <p className={b.planAnnual}>{plan.annual}</p>
-        <ul>{plan.features.map((feature) => <li key={feature}>{feature}</li>)}</ul>
-        <Link className={b.planAction} href={plan.action.href}>{plan.action.label}</Link>
-      </article>)}
+/** The approved "Supported Conditions" section from Minor Ailments: grouped cards of icon rows.
+    Rows use the approved Clinical feature-row type (bold title, grey line). */
+function ListCards({ eyebrow, title, side, groups }: { eyebrow: string; title: string; side?: string; groups: ListGroup[] }) {
+  const wideFirst = groups.length % 2 === 1;
+  return <section className={`${m.conditions} ${b.listSection}`}>
+    <div className={m.conditionsInner}>
+      <ScrollFade as="div" className={`${m.conditionHeading} ${b.listHeading}`}>
+        <div><p className={m.mutedEyebrow}>{eyebrow}</p><h2>{lines(title)}</h2></div>
+        {side && <p>{side}</p>}
+      </ScrollFade>
+      <div className={m.conditionsGrid}>
+        {groups.map((group, index) => <ScrollFade as="article" className={`${m.conditionCard} ${index === 0 && wideFirst ? m.conditionCardWide : ""} ${b.listCard}`} delay={index === 0 ? 0 : ((index - 1) % 2) * 60} responsiveDelay key={group.title}>
+          <h3>{group.title}</h3>
+          <ul>{group.items.map((item) => <li key={item.title} className={c.featureRow}>
+            <span className={m.conditionIcon}><Image src={tileIcons[item.icon]} alt="" width={34} height={34} /></span>
+            <span><strong>{item.title}</strong>{item.text && <small>{item.text}</small>}</span>
+          </li>)}</ul>
+        </ScrollFade>)}
+      </div>
     </div>
-    <div className={b.pricingNotes}>
-      <div><strong>Included with every plan</strong>{block.included}</div>
-      <div><strong>Add-ons and enterprise</strong>{block.addons.map((addon) => <span key={addon} style={{ display: "block" }}>{addon}</span>)}</div>
-    </div>
-    <p className={b.factsStrip}>{block.facts.map((fact) => <span key={fact}>✓ {fact}</span>)}</p>
-  </section>;
-}
-
-function Facts({ block }: { block: T.FactsBlock }) {
-  return <section className={b.facts}>{block.items.map((item) => <div key={item.label}><b>{item.value}</b><span>{item.label}</span></div>)}</section>;
-}
-
-function List({ block }: { block: T.ListBlock }) {
-  return <section className={b.draftSection}>
-    <DraftLabel />
-    <DraftHeading eyebrow={block.eyebrow} title={block.title} />
-    {block.filters && <div className={b.filters}>{block.filters.map((filter) => <span key={filter}>{filter}</span>)}</div>}
-    {block.items.length > 0
-      ? <div className={b.listGrid}>{block.items.map((item) => {
-        const content = <><small>{item.tag}</small><h3>{item.title}</h3><p>{item.text}</p>{item.meta && <em>{item.meta}</em>}</>;
-        return item.href ? <Link className={b.listItem} href={item.href} key={item.title}>{content}</Link> : <article className={b.listItem} key={item.title}>{content}</article>;
-      })}</div>
-      : <p className={b.empty}>{block.empty}</p>}
-  </section>;
-}
-
-function Legal({ block }: { block: T.LegalBlock }) {
-  return <section className={b.legal}>
-    <DraftLabel />
-    <p className={b.updated}>Last updated: {block.updated}</p>
-    <p className={b.intro}>{block.intro}</p>
-    {block.summary && <div className={b.summary}><strong>In plain language</strong><ul>{block.summary.map((line) => <li key={line}>{line}</li>)}</ul></div>}
-    {block.sections.map((section, index) => <section key={section.title}>
-      <h2>{index + 1}. {section.title}</h2>
-      <p className={section.body ? "" : b.placeholder}>{section.body ?? "Legal text to be supplied by ZeeNovo's counsel."}</p>
-    </section>)}
-    {block.note && <p className={b.note}>{block.note}</p>}
-  </section>;
-}
-
-function Table({ block }: { block: T.TableBlock }) {
-  return <section className={b.draftSection}>
-    <DraftLabel />
-    <DraftHeading eyebrow={block.eyebrow} title={block.title} />
-    <table className={b.table}>
-      <thead><tr>{block.columns.map((column) => <th key={column}>{column}</th>)}</tr></thead>
-      <tbody>{block.rows.map((row) => <tr key={row.join("|")}>{row.map((cell, index) => <td key={index}>{cell}</td>)}</tr>)}</tbody>
-    </table>
-    {block.note && <p className={b.tableNote}>{block.note}</p>}
   </section>;
 }
 
@@ -323,23 +269,86 @@ type Feature = { title: string; text: string; icon: TileIconKey };
 const featureCatalogue = featureData.features as Record<string, Feature>;
 
 function FeatureIndex({ block }: { block: T.FeatureIndexBlock }) {
-  return <section className={b.featureSection}>
-    <div className={m.sectionInner}>
-      <ScrollFade as="div" className={m.sectionHeading}>
-        <div><p className={m.eyebrow}>{block.eyebrow}</p><h2>{lines(block.title)}</h2></div>
-        {block.side && <p>{block.side}</p>}
+  const groups = block.groups.map((group) => ({
+    title: group.title,
+    items: group.ids.map((id) => {
+      const feature = featureCatalogue[id];
+      if (!feature) throw new Error(`Unknown feature id "${id}" in features.json`);
+      return feature;
+    }),
+  }));
+  return <ListCards eyebrow={block.eyebrow} title={block.title} side={block.side} groups={groups} />;
+}
+
+function Faq({ block }: { block: T.FaqBlock }) {
+  return <ListCards eyebrow={block.eyebrow} title={block.title} groups={[{ title: "Questions", items: block.items.map((item) => ({ title: item.q, text: item.a, icon: "followup" })) }]} />;
+}
+
+function Pricing({ block }: { block: T.PricingBlock }) {
+  const plans: ListGroup[] = block.plans.map((plan) => ({
+    title: `${plan.name} · ${plan.price}/mo`,
+    items: [{ title: plan.annual, icon: "calendar" as const }, ...plan.features.map((feature) => ({ title: feature, icon: "shield" as const }))],
+  }));
+  const everyPlan: ListGroup = { title: "Every plan", items: [{ title: block.included, icon: "profile" }, ...block.addons.map((addon) => ({ title: addon, icon: "intake" as const }))] };
+  const facts: T.WaveBlock = { type: "wave", tag: "On every plan", title: "No surprises.", items: block.facts.map((fact, index) => ({ label: fact, icon: waveIcons[index % waveIcons.length] })) };
+  return <>
+    <ListCards eyebrow="Plans" title="Choose a plan." side="Prices in Canadian dollars. Start with one product and add the rest at any time." groups={[...plans, everyPlan]} />
+    <Wave block={facts} />
+  </>;
+}
+const waveIcons = ["shield", "calendarStar", "chartStar", "grid", "globe"] as const;
+
+/** The approved home results counters. */
+function Facts({ block }: { block: T.FactsBlock }) {
+  return <section className="stats" aria-label="ZeeNovo in numbers">{block.items.map((item) => <div key={item.label}><b>{item.value}</b><span>{item.label}</span></div>)}</section>;
+}
+
+const listIcons = ["record", "redFlag", "pharmacist", "safety", "treatment", "province"] as const;
+
+/** Blog, case study, guide and changelog lists use the approved capability cards. */
+function List({ block }: { block: T.ListBlock }) {
+  const cards: T.CardsBlock = {
+    type: "cards",
+    eyebrow: block.eyebrow,
+    title: block.title,
+    side: block.items.length === 0 ? block.empty : undefined,
+    items: block.items.map((item, index) => ({ title: item.title, text: [item.tag, item.text, item.meta].filter(Boolean).join(" · "), icon: listIcons[index % listIcons.length], href: item.href })),
+  };
+  return <Cards block={cards} />;
+}
+
+function Legal({ block }: { block: T.LegalBlock }) {
+  const groups: ListGroup[] = [];
+  if (block.summary) groups.push({ title: "In plain language", items: block.summary.map((line) => ({ title: line, icon: "shield" })) });
+  groups.push({ title: "Contents", items: block.sections.map((section, index) => ({ title: `${index + 1}. ${section.title}`, text: section.body ?? "Legal text to be supplied by ZeeNovo's counsel.", icon: "docAuto" })) });
+  return <ListCards eyebrow={`Last updated: ${block.updated}`} title="What this covers." side={[block.intro, block.note].filter(Boolean).join(" ")} groups={groups} />;
+}
+
+function Table({ block }: { block: T.TableBlock }) {
+  const items = block.rows.map((row) => ({ title: row[0], text: row.slice(1).map((cell, index) => `${block.columns[index + 1]}: ${cell}`).join(" · "), icon: "docStorage" as const }));
+  return <ListCards eyebrow={block.eyebrow} title={block.title} side={block.note} groups={[{ title: block.columns[0], items }]} />;
+}
+
+/** Forms sit in the approved Clinical workflow section: copy on the left, the purple panel with the glass frame on the right. */
+function FormSection({ block }: { block: T.FormBlock }) {
+  return <section className={`${c.workflow} ${b.panelSection}`}>
+    <div className={c.workflowPatterns} aria-hidden="true">
+      <Image className={c.workflowLines} src="/assets/clinical/workflow-lines.svg" alt="" width={939.707} height={757.707} />
+      <Image className={c.workflowBottomLines} src="/assets/clinical/workflow-lines.svg" alt="" width={939.707} height={757.707} />
+    </div>
+    <div className={`${c.workflowInner} ${b.panelInner}`}>
+      <ScrollFade as="div" className={`${c.workflowCopy} ${b.panelCopy}`}>
+        <p className={c.eyebrow}>{block.eyebrow}</p>
+        <h2>{lines(block.title)}</h2>
+        <p className={c.workflowDescription}>{block.description}</p>
+        {block.aside && <div className={c.workflowFeatures}>{block.aside.lines.map((line, index) => <div className={c.featureRow} key={line}>
+          <span className={c.featureIcon}><Image src={icons[(["progress", "outcomes", "plan", "steps"] as const)[index % 4]]} alt="" width={39} height={39} /></span>
+          <span><strong>{index === 0 ? block.aside!.title : ""}</strong><small>{line}</small></span>
+        </div>)}</div>}
       </ScrollFade>
-      {block.groups.map((group) => <div className={b.featureGroup} key={group.title}>
-        {block.groups.length > 1 && <h3 className={b.featureGroupTitle}>{group.title}</h3>}
-        <div className={b.featureGrid}>{group.ids.map((id) => {
-          const feature = featureCatalogue[id];
-          if (!feature) throw new Error(`Unknown feature id "${id}" in features.json`);
-          return <article className={b.featureTile} key={id}>
-            <i><Image src={tileIcons[feature.icon]} alt="" width={18} height={18} /></i>
-            <div><strong>{feature.title}</strong><p>{feature.text}</p></div>
-          </article>;
-        })}</div>
-      </div>)}
+      <div className={`${c.workflowArt} ${b.panelArt}`}>
+        <div className={`${c.workflowForm} ${b.panelFrame}`}><FormView block={block} /></div>
+      </div>
     </div>
   </section>;
 }
@@ -360,12 +369,12 @@ function renderBlock(block: T.Block, index: number) {
     case "faq": return <Faq block={block} key={index} />;
     case "pricing": return <Pricing block={block} key={index} />;
     case "facts": return <Facts block={block} key={index} />;
-    case "form": return <section className={b.draftSection} key={index}><DraftLabel /><DraftHeading eyebrow={block.eyebrow} title={block.title} lede={block.description} /><FormView block={block} /></section>;
+    case "form": return <FormSection block={block} key={index} />;
     case "list": return <List block={block} key={index} />;
     case "legal": return <Legal block={block} key={index} />;
     case "table": return <Table block={block} key={index} />;
     case "featureIndex": return <FeatureIndex block={block} key={index} />;
-    case "roi": return <section className={b.draftSection} key={index}><DraftLabel /><RoiCalculator /></section>;
+    case "roi": return <RoiCalculator key={index} />;
   }
 }
 
@@ -376,7 +385,6 @@ export function BlockList({ blocks }: { blocks: T.Block[] }) {
 
 export default function BlockPage({ page }: { page: T.PageContent }) {
   return <main className={`${c.page} ${m.page} ${i.page}`} style={{ "--section-max": "1312px" } as CSSProperties}>
-    {page.dummy && <p className={b.dummyBanner}>Placeholder content. This product&apos;s copy is dummy text until ZeeNovo confirms the scope.</p>}
     {page.blocks.map(renderBlock)}
   </main>;
 }

@@ -1,20 +1,10 @@
-/* Adjustments that let approved blocks take variable content, plus draft blocks
-   (FAQ, pricing, forms, lists, legal text, ROI) that have no approved design yet.
-   Draft blocks use the same type scale, colours and radii as the approved pages. */
+/* Adjustments that let the approved sections take variable content.
+   No new visual language: every value here is copied from an approved block
+   (capability cards, step cards, condition cards, Clinical workflow and its "Profile details" panel). */
 
-.dummyBanner { width: min(calc(100% - 34px), 1406px); margin: 10px auto 0; padding: 10px 16px; border: 1px dashed #c9b8ff; border-radius: 12px; background: #faf7ff; color: #2b108e; font-size: 13px; font-weight: 600; }
-.draftLabel { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 14px; padding: 4px 10px; border: 1px dashed #c9b8ff; border-radius: 999px; color: #6b5bb5; font-size: 11px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; }
-
-/* Hero */
-.compactHero { height: 560px; }
-.compactHero .compactCopy { top: 170px; }
-.heroBadge { position: absolute; z-index: 3; top: 77%; left: 54%; padding: 9px 16px; border-radius: 999px; background: #fff; color: #2b108e; font-size: 13px; font-weight: 600; white-space: nowrap; box-shadow: 0 8px 24px rgb(43 16 142 / 10%); }
-.heroCard { position: absolute; z-index: 3; top: 30%; left: 0; width: 230px; padding: 16px 18px; border-radius: 18px; background: #1c0868; color: #fff; }
-.heroCard strong { display: block; font-size: 14px; line-height: 18px; }
-.heroCard span { display: block; margin-top: 8px; color: #d4cdf5; font-size: 12px; line-height: 16px; }
 .heroEyebrow { margin-bottom: 18px; }
 
-/* Cards (approved capability cards with variable content) */
+/* Capability cards with variable content. Icon sits in the white circle used by the approved step cards. */
 .cardsSection { min-height: 0; padding-bottom: 90px; }
 .cardGrid { margin-top: 84px; }
 .cardAuto { height: auto; min-height: 255px; padding-top: 122px; }
@@ -24,171 +14,79 @@
 a.cardAuto { transition: transform .2s ease; }
 a.cardAuto:hover { transform: translateY(-3px); }
 
-/* Feature tiles: the approved documentation tile (white, rounded, icon circle) with a description line */
-.featureSection { padding: 84px 0 90px; background: #f7f9fe; }
-.featureGroup { margin-top: 44px; }
-.featureGroup + .featureGroup { margin-top: 36px; }
-.featureGroupTitle { margin-bottom: 14px; color: #2b0b91; font-size: 12px; font-weight: 600; letter-spacing: .02em; text-transform: uppercase; }
-.featureGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-.featureTile { display: flex; gap: 14px; align-items: flex-start; padding: 20px; border-radius: 20px; background: #fff; }
-.featureTile i { display: grid; width: 38px; height: 38px; flex: none; place-items: center; border-radius: 50%; background: #e8eaff; font-style: normal; }
-.featureTile img { width: 18px; height: 18px; object-fit: contain; }
-.featureTile strong { display: block; font-size: 15px; font-weight: 600; line-height: 20px; }
-.featureTile p { margin-top: 5px; color: #666474; font-size: 13px; line-height: 19px; }
-
-/* Two-card */
+/* Two-card section with content-led heights. */
 .twoCardSection { height: auto; padding-bottom: 90px; }
 .twoCardSection .twoCardItem { height: auto; padding-bottom: 36px; }
 
-/* Wave and steps with variable counts */
+/* Wave and step tracks with four or five items. */
 .waveTrack { width: min(1380px, 100%); }
 
-/* Section heading used by draft blocks */
-.draftSection { width: min(calc(100% - 128px), 1312px); margin: 0 auto; padding: 84px 0 20px; }
-.draftHeading h2 { margin-top: 18px; font-size: 42px; font-weight: 500; letter-spacing: -.84px; line-height: 52px; }
-.draftHeading > p.eyebrow { color: #2b0b91; font-size: 11px; font-weight: 600; text-transform: uppercase; }
-.draftHeading > p.lede { max-width: 640px; margin-top: 14px; color: #666474; font-size: 16px; line-height: 26px; }
+/* Condition cards used as grouped lists: content-led heights, rows from the Clinical feature row. */
+.listSection { padding-bottom: 100px; }
+.listHeading { min-height: 0; padding-bottom: 56px; }
+.listHeading > p { font-size: 18px; line-height: 30px; }
+.listCard { min-height: 0 !important; }
+.listCard ul { align-items: start; }
+.listCard li { align-items: flex-start; min-height: 0; }
+.listCard li > span:last-child { display: flex; min-width: 0; flex-direction: column; gap: 5px; padding-top: 6px; }
+.listCard li strong { color: #2d2d2d; font-size: 16px; font-weight: 600; line-height: 22px; }
+.listCard li small { color: #64748b; font-size: 13px; font-weight: 400; line-height: 19px; }
 
-/* FAQ */
-.faqList { display: grid; gap: 12px; margin-top: 40px; }
-.faqList details { padding: 22px 26px; border-radius: 22px; background: #f7f8fc; }
-.faqList summary { display: flex; justify-content: space-between; gap: 20px; cursor: pointer; font-size: 18px; font-weight: 600; list-style: none; }
-.faqList summary::-webkit-details-marker { display: none; }
-.faqList summary::after { content: "+"; color: #2b108e; font-size: 22px; line-height: 1; }
-.faqList details[open] summary::after { content: "−"; }
-.faqList details p { max-width: 860px; margin-top: 12px; color: #666474; font-size: 15px; line-height: 24px; }
+/* Clinical workflow section holding a real form or calculator. */
+.panelSection { height: auto; min-height: 744px; }
+.panelInner { display: grid; grid-template-columns: 45.35% minmax(0, 1fr); }
+.panelCopy { position: static; width: auto; padding: 122px 56px 90px; }
+.panelArt { position: relative; inset: auto; padding: 110px 54px 90px; }
+.panelFrame { position: relative; top: auto; left: auto; width: 100%; }
 
-/* Pricing */
-.planGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 30px; }
-.plan { position: relative; display: flex; flex-direction: column; padding: 32px 28px; border-radius: 28px; background: #f7f8fc; }
-.planFeatured { color: #fff; background: #3d2ea8; }
-.planBadge { position: absolute; top: 24px; right: 24px; padding: 6px 12px; border-radius: 999px; background: #ddf5ee; color: #1c0868; font-size: 11px; font-weight: 600; text-transform: uppercase; }
-.plan h3 { font-size: 22px; font-weight: 600; }
-.planPrice { margin-top: 18px; font-size: 44px; font-weight: 500; letter-spacing: -1px; }
-.planPrice small { font-size: 16px; font-weight: 500; }
-.planAnnual { margin-top: 4px; color: #666474; font-size: 14px; }
-.plan ul { display: grid; flex: 1; gap: 12px; margin: 26px 0 30px; padding: 0; list-style: none; }
-.plan li { padding-left: 26px; color: #263043; font-size: 15px; line-height: 21px; background: no-repeat left 3px / 16px url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='8' fill='%23ddf5ee'/%3E%3Cpath d='M4.5 8.2 7 10.5l4.5-5' stroke='%232b108e' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); }
-.planFeatured .planAnnual,
-.planFeatured li { color: rgb(255 255 255 / 80%); }
-.planAction { display: inline-flex; height: 50px; align-items: center; justify-content: center; border-radius: 13px; background: #2b108e; color: #fff; font-size: 15px; font-weight: 600; }
-.planFeatured .planAction { background: #fff; color: #2b108e; }
-.pricingNotes { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 24px; }
-.pricingNotes > div { padding: 24px 28px; border-radius: 22px; background: #e8ebff; font-size: 15px; line-height: 23px; }
-.pricingNotes strong { display: block; margin-bottom: 6px; }
-.factsStrip { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 28px; margin-top: 28px; color: #2b108e; font-size: 14px; font-weight: 600; }
-
-/* Facts */
-.facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; width: min(calc(100% - 128px), 1312px); margin: 70px auto 0; padding: 40px 0; border-block: 1px solid #ececf3; }
-.facts b { display: block; color: #2b108e; font-size: 54px; font-weight: 500; letter-spacing: -1.5px; line-height: 1; }
-.facts span { display: block; margin-top: 10px; color: #666474; font-size: 14px; }
-
-/* Forms */
-.formLayout { display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 40px; margin-top: 40px; }
-.form { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 32px; border-radius: 28px; background: #f7f8fc; }
-.form label { display: grid; gap: 8px; grid-column: span 2; color: #263043; font-size: 13px; font-weight: 600; }
-.form label.half { grid-column: span 1; }
-.form input,
-.form select,
-.form textarea { width: 100%; height: 50px; padding: 0 16px; border: 1px solid #dfe1ec; border-radius: 12px; background: #fff; color: #16133a; font: 400 15px var(--font-manrope), Arial, sans-serif; }
-.form textarea { height: 120px; padding: 14px 16px; resize: vertical; }
-.form fieldset { display: flex; flex-wrap: wrap; gap: 10px; grid-column: span 2; margin: 0; padding: 0; border: 0; }
-.form legend { width: 100%; margin-bottom: 8px; color: #263043; font-size: 13px; font-weight: 600; }
-.form fieldset label { display: inline-flex; grid-column: auto; align-items: center; gap: 8px; padding: 10px 14px; border: 1px solid #dfe1ec; border-radius: 999px; background: #fff; font-weight: 500; }
-.form fieldset input { width: auto; height: auto; }
-.optional { color: #8a8799; font-weight: 400; }
-.consent { grid-column: span 2; color: #666474; font-size: 12px; line-height: 18px; }
-.submit { grid-column: span 2; height: 52px; border: 0; border-radius: 13px; background: #2b108e; color: #fff; font-size: 16px; font-weight: 600; cursor: pointer; }
-.success { grid-column: span 2; padding: 16px; border-radius: 14px; background: #ddf5ee; color: #1c0868; font-weight: 600; }
-.aside { align-self: start; padding: 32px; border-radius: 28px; background: #3d2ea8; color: #fff; }
-.aside h3 { font-size: 22px; font-weight: 600; }
-.aside p { margin-top: 12px; color: rgb(255 255 255 / 82%); font-size: 15px; line-height: 23px; }
-
-/* Lists */
-.filters { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
-.filters span { padding: 9px 16px; border: 1px solid #e0e0e0; border-radius: 999px; font-size: 13px; font-weight: 500; }
-.filters span:first-child { border-color: #2b108e; background: #2b108e; color: #fff; }
-.listGrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; margin-top: 34px; }
-.listItem { display: flex; flex-direction: column; gap: 12px; min-height: 230px; padding: 28px; border-radius: 28px; background: #f7f8fc; color: inherit; }
-.listItem:nth-child(3n+2) { background: #e8ebff; }
-.listItem:nth-child(3n+3) { background: #fdf1e4; }
-.listItem small { color: #2b108e; font-size: 11px; font-weight: 600; text-transform: uppercase; }
-.listItem h3 { font-size: 21px; font-weight: 600; line-height: 27px; }
-.listItem p { color: #666474; font-size: 14px; line-height: 22px; }
-.listItem em { margin-top: auto; color: #2b108e; font-size: 13px; font-style: normal; font-weight: 600; }
-.empty { margin-top: 24px; color: #8a8799; font-size: 14px; }
-
-/* Legal */
-.legal { width: min(calc(100% - 128px), 860px); margin: 0 auto; padding: 50px 0 40px; }
-.legal .updated { color: #8a8799; font-size: 13px; }
-.legal .intro { margin-top: 16px; font-size: 18px; line-height: 30px; }
-.legal .summary { margin-top: 26px; padding: 24px 28px; border-radius: 22px; background: #e8ebff; }
-.legal .summary ul { display: grid; gap: 8px; margin: 10px 0 0; padding-left: 20px; font-size: 15px; line-height: 23px; }
-.legal section { padding: 24px 0; border-bottom: 1px solid #ececf3; }
-.legal h2 { font-size: 20px; font-weight: 600; }
-.legal section p { margin-top: 8px; color: #666474; font-size: 15px; line-height: 24px; }
-.legal .placeholder { color: #a39fb3; font-style: italic; }
-.legal .note { margin-top: 26px; padding: 16px 20px; border: 1px dashed #c9b8ff; border-radius: 14px; color: #6b5bb5; font-size: 13px; }
-
-/* Table */
-.table { width: 100%; margin-top: 34px; border-collapse: separate; border-spacing: 0; overflow: hidden; border-radius: 22px; background: #f7f8fc; font-size: 15px; }
-.table th,
-.table td { padding: 18px 22px; border-bottom: 1px solid #e6e7ef; text-align: left; }
-.table th { color: #2b108e; font-size: 12px; font-weight: 600; text-transform: uppercase; }
-.table tr:last-child td { border-bottom: 0; }
-.tableNote { margin-top: 14px; color: #666474; font-size: 14px; }
-
-/* ROI */
-.roi { display: grid; grid-template-columns: minmax(0, 1fr) 460px; gap: 32px; margin-top: 40px; }
-.roiInputs { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; padding: 32px; border-radius: 28px; background: #f7f8fc; }
-.roiInputs label { display: grid; gap: 6px; font-size: 13px; font-weight: 600; }
-.roiInputs label small { color: #8a8799; font-weight: 400; }
-.roiInputs input,
-.roiInputs select { height: 48px; padding: 0 14px; border: 1px solid #dfe1ec; border-radius: 12px; background: #fff; font: 400 15px var(--font-manrope), Arial, sans-serif; }
-.roiAssumptions { grid-column: span 2; padding-top: 10px; border-top: 1px solid #e3e4ee; color: #666474; font-size: 13px; line-height: 20px; }
-.roiResults { padding: 32px; border-radius: 28px; background: #3d2ea8; color: #fff; }
-.roiResults dl { display: grid; gap: 14px; margin: 0; }
-.roiResults div { display: flex; justify-content: space-between; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid rgb(255 255 255 / 16%); }
-.roiResults dt { color: rgb(255 255 255 / 76%); font-size: 14px; }
-.roiResults dd { margin: 0; font-size: 18px; font-weight: 600; }
-.roiTotal dd { font-size: 30px; }
-.roiDisclaimer { margin-top: 18px; color: rgb(255 255 255 / 70%); font-size: 12px; line-height: 18px; }
+/* "Profile details" panel, at full size (values from ClinicalProfilePreview). */
+.panel { border: 1px solid #e2e8f0; border-radius: 16px; background: #fff; color: #0f172a; padding: 26px; box-shadow: 0 1px 3px rgb(22 19 58 / 10%); }
+.panelSpaced { margin-top: 30px; }
+.panelHeading { padding-bottom: 14px; border-bottom: 1px solid #f1f5f9; font-size: 17px; font-weight: 700; line-height: 26px; }
+.fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+.fields label { display: grid; gap: 8px; min-width: 0; }
+.fields fieldset { margin: 0; padding: 0; border: 0; }
+.full { grid-column: 1 / -1; }
+.label { color: #94a3b8; font-size: 11px; font-weight: 600; letter-spacing: .8px; line-height: 15px; text-transform: uppercase; }
+.field { width: 100%; height: 44px; padding: 0 14px; border: 1px solid #e2e8f0; border-radius: 11px; background: #fff; color: #0f172a; font: 400 14px var(--font-jakarta), Arial, sans-serif; }
+.textarea { height: 96px; padding: 12px 14px; resize: vertical; }
+.checks { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+.check { display: inline-flex !important; align-items: center; gap: 8px !important; color: #475569; font-size: 13px; }
+.check input { width: 15px; height: 15px; accent-color: #21058f; }
+.consent { margin-top: 16px; color: #475569; font-size: 12px; line-height: 18px; }
+.actions { display: flex; justify-content: flex-end; margin-top: 20px; }
+.continue { height: 44px; padding: 0 22px; border: 0; border-radius: 11px; background: #21058f; color: #fff; font: 600 14px var(--font-jakarta), Arial, sans-serif; cursor: pointer; }
+.sent { padding: 12px 16px; border-radius: 11px; background: #ddf5ee; color: #1c0868; font-size: 14px; font-weight: 600; }
+.results { display: grid; margin: 8px 0 0; }
+.results > div { display: flex; justify-content: space-between; gap: 16px; padding: 13px 0; border-bottom: 1px solid #f1f5f9; }
+.results dt { color: #475569; font-size: 14px; }
+.results dd { margin: 0; font-size: 16px; font-weight: 600; }
+.resultTotal dt { color: #0f172a; font-weight: 600; }
+.resultTotal dd { color: #21058f; font-size: 26px; }
 
 @media (max-width: 1199px) {
-  .featureGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .planGrid,
-  .listGrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .formLayout,
-  .roi { grid-template-columns: 1fr; }
+  .panelInner { grid-template-columns: 1fr 1fr; }
+  .panelCopy { padding-inline: 36px; }
+  .panelArt { padding-inline: 20px; }
 }
 
 @media (max-width: 760px) {
-  .featureSection { padding: 56px 0 60px; }
-  .featureGrid { grid-template-columns: 1fr; gap: 10px; }
-  .featureTile { padding: 16px; }
-  .compactHero { height: 560px; }
-  .compactHero .compactCopy { top: 120px; }
-  .heroCard { display: none; }
-  .heroBadge { top: auto; bottom: 30px; left: 20px; font-size: 11px; }
   .cardGrid { grid-template-columns: 1fr !important; margin-top: 40px; }
   .cardAuto { min-height: 0; padding-top: 96px; }
   .cardIcon { top: 20px; left: 14px; width: 54px; height: 54px; }
   .cardIcon img { width: 32px; height: 32px; }
   .waveTrack { grid-template-columns: repeat(2, 1fr) !important; }
   .stepGrid { grid-template-columns: 1fr !important; }
-  .draftSection,
-  .facts,
-  .legal { width: calc(100% - 40px); }
-  .draftSection { padding-top: 56px; }
-  .draftHeading h2 { font-size: clamp(29px, 8vw, 37px); line-height: 1.2; }
-  .draftHeading h2 br { display: none; }
-  .planGrid,
-  .listGrid,
-  .pricingNotes,
-  .facts { grid-template-columns: 1fr; }
-  .form,
-  .roiInputs { grid-template-columns: 1fr; padding: 22px; }
-  .form label.half { grid-column: span 2; }
-  .roiAssumptions { grid-column: auto; }
-  .facts b { font-size: 42px; }
+  .listHeading { padding-bottom: 28px; }
+  .listCard ul { grid-template-columns: 1fr !important; }
+  .listCard li strong { font-size: 14px; }
+  .listCard li small { font-size: 12px; }
+  .panelInner { display: flex; flex-direction: column; }
+  .panelCopy { padding: 62px 20px 40px; }
+  /* The approved section paints its purple band as a fixed 450px strip on mobile; let it follow the form instead. */
+  .panelSection::before,
+  .panelSection > :first-child { display: none; }
+  .panelArt { height: auto; padding: 40px 12px 50px; background: #3b309d; }
+  .fields { grid-template-columns: 1fr; }
+  .full { grid-column: auto; }
 }

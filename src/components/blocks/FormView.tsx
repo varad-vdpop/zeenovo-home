@@ -4,6 +4,8 @@ import { useState, type FormEvent } from "react";
 import b from "./blocks.module.css";
 import type { FormBlock } from "./types";
 
+// Styled as the approved Clinical "Profile details" panel: white panel, uppercase field labels,
+// two-column fields, and the dark "Continue" button.
 // Review build only: the form validates and shows the success message, but sends nothing.
 // Wire it to ZeeNovo's CRM or email endpoint before launch.
 export default function FormView({ block }: { block: FormBlock }) {
@@ -14,26 +16,30 @@ export default function FormView({ block }: { block: FormBlock }) {
     setSent(true);
   }
 
-  const form = <form className={b.form} onSubmit={onSubmit}>
-    {block.fields.map((field) => {
-      if (field.kind === "checks") {
-        return <fieldset key={field.label}><legend>{field.label}</legend>{field.options.map((option) => <label key={option}><input type="checkbox" name={field.label} value={option} />{option}</label>)}</fieldset>;
-      }
-      if (field.kind === "select") {
-        return <label key={field.label} className={field.half ? b.half : ""}>{field.label}<select name={field.label} defaultValue=""><option value="" disabled>Select</option>{field.options.map((option) => <option key={option}>{option}</option>)}</select></label>;
-      }
-      if (field.kind === "textarea") {
-        return <label key={field.label}>{field.label}{field.optional && <span className={b.optional}> (optional)</span>}<textarea name={field.label} required={!field.optional} /></label>;
-      }
-      return <label key={field.label} className={field.half ? b.half : ""}>{field.label}{field.optional && <span className={b.optional}> (optional)</span>}<input type={field.kind} name={field.label} required={!field.optional} /></label>;
-    })}
+  return <form className={b.panel} onSubmit={onSubmit}>
+    <div className={b.panelHeading}>Your details</div>
+    <div className={b.fields}>
+      {block.fields.map((field) => {
+        if (field.kind === "checks") {
+          return <fieldset key={field.label} className={b.full}><legend className={b.label}>{field.label}</legend>
+            <div className={b.checks}>{field.options.map((option) => <label key={option} className={b.check}><input type="checkbox" name={field.label} value={option} />{option}</label>)}</div>
+          </fieldset>;
+        }
+        const className = field.kind === "textarea" || !("half" in field && field.half) ? b.full : "";
+        const optional = "optional" in field && field.optional;
+        return <label key={field.label} className={className}>
+          <span className={b.label}>{field.label}{optional ? " (optional)" : ""}</span>
+          {field.kind === "select"
+            ? <select className={b.field} name={field.label} defaultValue=""><option value="" disabled>Select</option>{field.options.map((option) => <option key={option}>{option}</option>)}</select>
+            : field.kind === "textarea"
+              ? <textarea className={`${b.field} ${b.textarea}`} name={field.label} required={!optional} />
+              : <input className={b.field} type={field.kind} name={field.label} required={!optional} />}
+        </label>;
+      })}
+    </div>
     {block.consent && <p className={b.consent}>{block.consent}</p>}
-    {sent ? <p className={b.success} role="status">{block.success}</p> : <button className={b.submit} type="submit">{block.submit}</button>}
+    <div className={b.actions}>
+      {sent ? <p className={b.sent} role="status">{block.success}</p> : <button className={b.continue} type="submit">{block.submit}</button>}
+    </div>
   </form>;
-
-  if (!block.aside) return form;
-  return <div className={b.formLayout}>
-    {form}
-    <aside className={b.aside}><h3>{block.aside.title}</h3>{block.aside.lines.map((line) => <p key={line}>{line}</p>)}</aside>
-  </div>;
 }
