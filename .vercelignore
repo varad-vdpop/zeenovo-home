@@ -1,0 +1,4 @@
+# Never upload local secrets or build output with a CLI deployment.
+.env*
+.next
+node_modules
