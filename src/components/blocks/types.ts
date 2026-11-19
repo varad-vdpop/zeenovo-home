@@ -27,6 +27,8 @@ export type SolutionHeroBlock = {
   title: Heading;
   description: string;
   primary: Link;
+  /** Outline button beside the primary one. */
+  secondary?: Link;
   person: PersonKey;
   /** Large white card, top right. */
   liveCard: { label: string; chip: string; title: string; itemTitle: string; itemText: string };
@@ -39,7 +41,10 @@ export type CardsBlock = {
   eyebrow: string;
   title: Heading;
   side?: string;
+  /** Three, four or five cards render in one balanced grid (five as 3 + 2). */
   items: { title: string; text: string; icon: IconKey; href?: string }[];
+  /** Button under the cards. */
+  action?: Link;
 };
 
 export type RealityBlock = {
@@ -61,6 +66,8 @@ export type FeaturesBlock = {
   description: string;
   /** Exactly three rows, as designed. */
   rows: { title: string; text: string; icon: IconKey }[];
+  /** Text link under the rows. */
+  link?: Link;
   art: ArtKey;
   artAlt: string;
 };
@@ -89,11 +96,25 @@ export type StepsBlock = {
   side: string;
   /** Four or five cards. */
   items: { title: string; text: string; icon: IconKey }[];
+  /** Button under the cards. */
+  action?: Link;
 };
 
 export type ProductsGridBlock = { type: "productsGrid"; title?: string };
 
-export type CtaBlock = { type: "cta"; eyebrow: string; title: Heading; action: Link };
+export type CtaBlock = { type: "cta"; eyebrow: string; title: Heading; /** One line under the heading. */ text?: string; action: Link };
+
+/** Full-width pastel panel (the approved pricing "Included with every plan" panel): a short statement, optional
+    checklist pills and one button. Used for notes that sit between sections: a status, a download, a limit. */
+export type CalloutBlock = {
+  type: "callout";
+  eyebrow: string;
+  title: Heading;
+  text: string;
+  chips?: string[];
+  action?: Link;
+  tone?: "aqua" | "lavender" | "mint" | "peach";
+};
 
 export type CtaSplitBlock = {
   type: "ctaSplit";
@@ -176,7 +197,7 @@ export type FeatureIndexBlock = {
 
 export type Block =
   | HeroBlock | SolutionHeroBlock | CardsBlock | RealityBlock | FeaturesBlock | TwoCardBlock | WaveBlock | StepsBlock
-  | ProductsGridBlock | CtaBlock | CtaSplitBlock | FaqBlock | PricingBlock | FactsBlock | FormBlock | ListBlock | LegalBlock | TableBlock | RoiBlock | FeatureIndexBlock;
+  | ProductsGridBlock | CtaBlock | CalloutBlock | CtaSplitBlock | FaqBlock | PricingBlock | FactsBlock | FormBlock | ListBlock | LegalBlock | TableBlock | RoiBlock | FeatureIndexBlock;
 
 export type PageContent = {
   meta: { title: string; description: string };

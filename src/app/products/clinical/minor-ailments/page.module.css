@@ -13,6 +13,10 @@
 .heroDescription { max-width: 540px; margin-top: 17px; color: rgb(22 19 58 / 74%); font-family: var(--font-manrope), Arial, sans-serif; font-size: 18px; line-height: 29px; }
 .heroButton { display: inline-flex; height: 52px; align-items: center; justify-content: center; gap: 12px; margin-top: 18px; padding: 0 32px 0 20px; border-radius: 13px; color: #fff; background: #2b108e; font-size: 16px; font-weight: 600; }
 .heroButton img { width: 24px; height: 24px; transform: rotate(135deg); }
+/* Second hero button: the outline style of the Clinical hero. */
+.heroActions { display: flex; flex-wrap: wrap; column-gap: 14px; }
+.heroOutline { border: 1px solid #2b108e; background: transparent; color: #2b108e; }
+.heroActions.heroEnter { animation-delay: 400ms; }
 .heroWoman { position: absolute; z-index: 3; right: 137px; bottom: 0; width: 401px; height: 500px; max-width: none; object-fit: contain; transform: scaleX(-1); }
 .heroAssessment { position: absolute; z-index: 2; top: 152px; right: 74px; width: 286px; height: 180px; max-width: none; }
 .heroRecord { position: absolute; z-index: 4; top: 523px; left: 774px; width: 238px; height: 91px; max-width: none; }

@@ -18,7 +18,6 @@ built_routes = {
     "clinicalFeatures": "/products/clinical",
     "minorAilmentsFeatures": "/products/clinical/minor-ailments",
     "incidentReportingFeatures": "/products/assure/incident-reporting",
-    "independentPharmaciesFeatures": "/solutions/independent-pharmacies",
 }
 
 def record(route: str, text: str) -> None:
@@ -54,7 +53,7 @@ for product in dict.fromkeys(f["product"] for f in catalogue.values()):
         pages = ", ".join(f"`{r}`" for r in used[fid]) or "**not on any page**"
         lines.append(f"| {feature['title']} | {feature['text']} | {feature['source']} | {pages} |")
     lines.append("")
-lines += ["Source codes: OLD = zeenovo.com, STG = staging build, ENT = Enterprise Module proposal, DES = approved design, DUMMY = placeholder.", ""]
+lines += ["Source codes: OLD = zeenovo.com, STG = staging build, ENT = Enterprise Module proposal, DES = approved design, PDF = ZeeNovo website content (Nov 2026), DUMMY = placeholder.", ""]
 (root / "content/09-features.md").write_text("\n".join(lines))
 
 print(f"{len(catalogue)} features, {len(catalogue) - len(missing)} on the site")

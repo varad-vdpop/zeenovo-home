@@ -76,7 +76,10 @@ function SolutionHero({ block }: { block: T.SolutionHeroBlock }) {
       <p className={i.eyebrow}>{block.eyebrow}</p>
       <h1>{lines(block.title)}</h1>
       <p className={i.heroDescription}>{block.description}</p>
-      <Link data-cta className={i.primaryButton} href={block.primary.href}><span data-cta-icon aria-hidden="true">↗</span>{block.primary.label}</Link>
+      <div className={b.solutionActions}>
+        <Link data-cta className={i.primaryButton} href={block.primary.href}><span data-cta-icon aria-hidden="true">↗</span>{block.primary.label}</Link>
+        {block.secondary && <Link data-cta className={`${i.primaryButton} ${b.solutionSecondary}`} href={block.secondary.href}><span data-cta-icon aria-hidden="true">↗</span>{block.secondary.label}</Link>}
+      </div>
     </div>
     <Image className={i.heroPharmacist} src={person.src} alt="Pharmacist" width={person.width} height={person.height} priority sizes="(max-width: 760px) 78vw, 390px" />
     <article className={i.liveAssessment}>
@@ -102,8 +105,15 @@ const tones = [m.intake, m.safety, m.treatment, m.record];
 type CardItem = { title: string; text: string; src: string; href?: string };
 
 /** Approved capability cards (Minor Ailments "Four jobs handled"). */
-function CardsView({ eyebrow, title, side, items }: { eyebrow: string; title: string; side?: string; items: CardItem[] }) {
-  const columns = items.length === 4 ? 4 : items.length === 2 ? 2 : 3;
+function BlockAction({ action }: { action?: T.Link }) {
+  if (!action) return null;
+  return <div className={b.blockAction}><Link data-cta className={c.primaryButton} href={action.href}><Arrow tone="white" />{action.label}</Link></div>;
+}
+
+function CardsView({ eyebrow, title, side, items, action }: { eyebrow: string; title: string; side?: string; items: CardItem[]; action?: T.Link }) {
+  // Five cards sit on a six-column grid as 3 + 2, so the second row fills the width instead of leaving a gap.
+  const five = items.length === 5;
+  const columns = five ? 6 : items.length === 4 ? 4 : items.length === 2 ? 2 : 3;
   return <section className={`${m.capabilities} ${b.cardsSection}`}>
     <div className={`${m.sectionInner} ${b.rail}`}>
       <ScrollFade as="div" className={m.sectionHeading}>
@@ -117,18 +127,19 @@ function CardsView({ eyebrow, title, side, items }: { eyebrow: string; title: st
             <span className={b.cardIcon}><Image src={item.src} alt="" width={40} height={40} /></span>
             <div><h3>{item.title}</h3><p>{item.text}</p></div>
           </>;
-          const className = `${m.capabilityCard} ${tones[index % tones.length]} ${b.cardAuto}`;
+          const className = `${m.capabilityCard} ${tones[index % tones.length]} ${b.cardAuto} ${five ? (index < 3 ? b.span2 : b.span3) : ""}`;
           return item.href
             ? <ScrollFade as="a" href={item.href} className={className} delay={(index % columns) * 60} responsiveDelay key={item.title}>{content}</ScrollFade>
             : <ScrollFade as="article" className={className} delay={(index % columns) * 60} responsiveDelay key={item.title}>{content}</ScrollFade>;
         })}
       </div>
+      <BlockAction action={action} />
     </div>
   </section>;
 }
 
 function Cards({ block }: { block: T.CardsBlock }) {
-  return <CardsView eyebrow={block.eyebrow} title={block.title} side={block.side} items={block.items.map((item) => ({ ...item, src: icons[item.icon] }))} />;
+  return <CardsView eyebrow={block.eyebrow} title={block.title} side={block.side} action={block.action} items={block.items.map((item) => ({ ...item, src: icons[item.icon] }))} />;
 }
 
 function Reality({ block }: { block: T.RealityBlock }) {
@@ -167,6 +178,7 @@ function Features({ block }: { block: T.FeaturesBlock }) {
           <h2>{lines(block.title)}</h2>
           <p className={c.followupDescription}>{block.description}</p>
           <div className={c.followupFeatures}><FeatureRows rows={block.rows} /></div>
+          {block.link && <Link className={`${s.textLink} ${b.featureLink}`} href={block.link.href}>{block.link.label} <span aria-hidden="true">↗</span></Link>}
         </ScrollFade>
       </div>
     </section>;
@@ -182,6 +194,7 @@ function Features({ block }: { block: T.FeaturesBlock }) {
         <h2>{lines(block.title)}</h2>
         <p className={c.workflowDescription}>{block.description}</p>
         <div className={c.workflowFeatures}><FeatureRows rows={block.rows} /></div>
+        {block.link && <Link className={`${s.textLink} ${b.featureLink}`} href={block.link.href}>{block.link.label} <span aria-hidden="true">↗</span></Link>}
       </ScrollFade>
       <div className={c.workflowArt}>
         <div className={c.workflowForm}><Image src={visual.src} alt={block.artAlt} width={visual.width} height={visual.height} style={{ width: "100%", height: "auto" }} /></div>
@@ -230,7 +243,7 @@ function Wave({ block }: { block: T.WaveBlock }) {
 }
 
 /** Approved step cards (Independent Pharmacies "A better week"). */
-function StepsView({ eyebrow, title, side, items }: { eyebrow: string; title: string; side?: string; items: CardItem[] }) {
+function StepsView({ eyebrow, title, side, items, action }: { eyebrow: string; title: string; side?: string; items: CardItem[]; action?: T.Link }) {
   return <section className={`${i.betterWeek} ${b.stepsSection}`}>
     <div className={`${i.sectionRail} ${b.rail}`}>
       <div className={i.weekHeading}>
@@ -244,12 +257,13 @@ function StepsView({ eyebrow, title, side, items }: { eyebrow: string; title: st
           <div><h3>{item.title}</h3><p>{item.text}</p></div>
         </article>)}
       </div>
+      <BlockAction action={action} />
     </div>
   </section>;
 }
 
 function Steps({ block }: { block: T.StepsBlock }) {
-  return <StepsView eyebrow={block.eyebrow} title={block.title} side={block.side} items={block.items.map((item) => ({ ...item, src: icons[item.icon] }))} />;
+  return <StepsView eyebrow={block.eyebrow} title={block.title} side={block.side} action={block.action} items={block.items.map((item) => ({ ...item, src: icons[item.icon] }))} />;
 }
 
 function CtaSplit({ block }: { block: T.CtaSplitBlock }) {
@@ -325,6 +339,24 @@ function FeatureIndex({ block }: { block: T.FeatureIndexBlock }) {
     <div className={b.rail}>
       <SectionHead eyebrow={block.eyebrow} title={block.title} side={block.side} />
       <FeatureTabs groups={groups.map((group) => ({ ...group, items: group.items.map((feature) => ({ title: feature.title, text: feature.text, src: tileIcons[feature.icon] })) }))} />
+    </div>
+  </section>;
+}
+
+const calloutTones = { aqua: s.toneAqua, lavender: s.toneLavender, mint: s.toneMint, peach: s.tonePeach } as const;
+
+/** The approved "Included with every plan" panel, as a standalone note between sections. */
+function Callout({ block }: { block: T.CalloutBlock }) {
+  return <section className={`${s.section} ${s.calloutSection}`}>
+    <div className={b.rail}>
+      <ScrollFade as="div" className={`${s.included} ${s.callout} ${calloutTones[block.tone ?? "aqua"]}`}>
+        <Image className={s.includedWave} src="/assets/clinical/booking-wave.svg" alt="" width={684} height={246} />
+        <p className={s.eyebrow}>{block.eyebrow}</p>
+        <h2>{lines(block.title)}</h2>
+        <p>{block.text}</p>
+        {block.chips && <div className={s.pills}>{block.chips.map((chip) => <span className={s.pill} key={chip}><i aria-hidden="true" />{chip}</span>)}</div>}
+        {block.action && <Link className={s.textLink} href={block.action.href}>{block.action.label} <span aria-hidden="true">↗</span></Link>}
+      </ScrollFade>
     </div>
   </section>;
 }
@@ -465,7 +497,8 @@ function renderBlock(block: T.Block, index: number) {
     case "wave": return <Wave block={block} key={index} />;
     case "steps": return <Steps block={block} key={index} />;
     case "productsGrid": return <HomeProductCards title={block.title} key={index} />;
-    case "cta": return <div className={c.ctaWrap} key={index}><FinalCta animated id={`cta-${index}`} variant="clinical" eyebrow={block.eyebrow} heading={lines(block.title)} actionLabel={block.action.label} actionHref={block.action.href} /></div>;
+    case "cta": return <div className={c.ctaWrap} key={index}><FinalCta animated id={`cta-${index}`} variant="clinical" eyebrow={block.eyebrow} heading={lines(block.title)} text={block.text} actionLabel={block.action.label} actionHref={block.action.href} /></div>;
+    case "callout": return <Callout block={block} key={index} />;
     case "ctaSplit": return <CtaSplit block={block} key={index} />;
     case "faq": return <Faq block={block} key={index} />;
     case "pricing": return <Pricing block={block} key={index} />;

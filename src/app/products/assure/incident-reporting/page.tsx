@@ -1,5 +1,7 @@
+import { shareMeta } from "@/lib/metadata";
 import type { Metadata } from "next";
 import { BlockList } from "@/components/blocks/BlockPage";
+import type { Block } from "@/components/blocks/types";
 import { incidentReportingFeatures } from "@/content/featureSections";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,10 +13,18 @@ import IncidentDashboard from "./IncidentDashboard";
 
 const pageAsset = asset.incidentReporting;
 
-export const metadata: Metadata = {
-  title: "Incident Reporting | ZeeNovo Assure",
+export const metadata: Metadata = shareMeta({
+  title: "Medication incident and near-miss reporting | ZeeNovo Assure",
   description:
-    "Guided incident and near-miss reporting, root cause analysis, action plans and live safety dashboards for Canadian pharmacies.",
+    "Guided incident and near-miss reporting with contributing factors, corrective actions and CQI links. Trends ready for your next meeting.",
+});
+
+// The bento keeps its features from featureSections.ts. Its eyebrow differs from the "Beyond the report"
+// section above, and its side line carries the national reporting row, which has no card of its own.
+const caseFeatures: Block = {
+  ...incidentReportingFeatures,
+  eyebrow: "Case management",
+  side: "Each incident is analysed, assigned and closed in the same place.",
 };
 
 function Arrow() {
@@ -33,11 +43,11 @@ function Hero() {
       </div>
       <div className={styles.heroCopy}>
         <p className={styles.eyebrow}>ZeeNovo Assure</p>
-        <h1 id="incident-title">Never miss an<br />important safety<br />insight.</h1>
-        <p className={styles.heroDescription}>Guided incident and near-miss reporting, root cause analysis, action plans and live trend dashboards, with anonymised peer benchmarking.</p>
+        <h1 id="incident-title">Record the close call.<br />Follow it through<br />to the fix.</h1>
+        <p className={styles.heroDescription}>Guided incident and near-miss reporting, with the learning, the corrective action and the CQI follow-up on one record.</p>
         <div className={styles.heroActions}>
-          <Link data-cta className={styles.primaryButton} href="/book-a-demo"><Arrow />Get Started</Link>
-          <Link data-cta className={styles.secondaryButton} href="/book-a-demo"><Arrow />Book a Demo</Link>
+          <Link data-cta className={styles.primaryButton} href="/book-a-demo"><Arrow />Book an Assure Demo</Link>
+          <Link data-cta className={styles.secondaryButton} href="https://auth.zeenovo.com/signup"><Arrow />Start Free Trial</Link>
         </div>
       </div>
       <div className={styles.heroDashboardShell}>
@@ -51,8 +61,8 @@ function Analytics() {
   return (
     <section className={styles.analytics} aria-labelledby="analytics-title">
       <div className={styles.splitHeading}>
-        <div><p>Analytics</p><h2 id="analytics-title">Four ways analytics works<br />harder for you.</h2></div>
-        <span>Every report reaches the dashboard as soon as it is submitted. No spreadsheet in between.</span>
+        <div><p>Analytics</p><h2 id="analytics-title">Four views your CQI<br />meeting needs.</h2></div>
+        <span>Every report reaches the dashboard when it is submitted. No spreadsheet in between.</span>
       </div>
       <IncidentAnalyticsPanels />
     </section>
@@ -63,8 +73,8 @@ function Compliance() {
   return (
     <section className={styles.compliance} aria-labelledby="compliance-title">
       <div className={styles.splitHeading}>
-        <div><p>What you can see</p><h2 id="compliance-title">Compliance data that talks back.</h2></div>
-        <span>Every view can be cut by store, region, staff member, medication and time of day.</span>
+        <div><p>What you can see</p><h2 id="compliance-title">Find where the<br />process breaks down.</h2></div>
+        <span>Filter incidents by degree of harm, contributing factor, medication, process stage and discovery.</span>
       </div>
       <div className={styles.complianceBody}>
         <Image src={pageAsset.complianceList} alt="Incident reporting analytics categories" width={637} height={483} />
@@ -77,29 +87,31 @@ function Compliance() {
 function AfterVisit() {
   return (
     <section className={styles.afterVisit} aria-labelledby="after-visit-title">
-      <div className={styles.sectionHeading}><p>Beyond the report</p><h2 id="after-visit-title">Share the results with the people who need them.</h2></div>
+      <div className={styles.sectionHeading}><p>Beyond the report</p><h2 id="after-visit-title">Evidence ready for<br />the CQI meeting.</h2></div>
       <AfterVisitPanels />
     </section>
   );
 }
 
 function Process() {
-  const steps = ["Collect", "Detect", "Compare", "Report", "Act"];
+  // The copy has four steps; the wave was drawn for five, so the grid is set to four columns here.
+  // Icons by index into pageAsset.processIcons: collect, detect, act, report.
+  const steps = [["Capture", 0], ["Learn", 1], ["Act", 4], ["Review", 3]] as const;
 
   return (
     <section className={styles.process} aria-labelledby="process-title">
       <div className={styles.processHeading}>
         <Tag>From data to decision</Tag>
-        <h2 id="process-title">Collect, detect, compare, report<br />and act, without a spreadsheet.</h2>
-        <p>Each incident follows the same five steps, from the first report to the action that prevents a repeat.</p>
+        <h2 id="process-title">Capture, learn, act, review.</h2>
+        <p>Each incident follows the same four steps, from the first report to the change that prevents a repeat.</p>
       </div>
       <div className={styles.processTrack}>
         <Image className={styles.processWave} src={pageAsset.processWave} alt="" width={1440} height={181} />
         <Image className={`${styles.processWave} ${styles.processWaveTrace}`} src={pageAsset.processWave} alt="" aria-hidden="true" width={1440} height={181} />
-        <div className={styles.processSteps}>
-          {steps.map((step, index) => (
+        <div className={styles.processSteps} style={{ gridTemplateColumns: `repeat(${steps.length}, 1fr)` }}>
+          {steps.map(([step, icon]) => (
             <article className={styles.processStep} key={step}>
-              <Image src={pageAsset.processIcons[index]} alt="" width={44} height={44} />
+              <Image src={pageAsset.processIcons[icon]} alt="" width={44} height={44} />
               <h3>{step}</h3>
             </article>
           ))}
@@ -109,6 +121,15 @@ function Process() {
   );
 }
 
+const nationalReporting: Block = {
+  type: "callout",
+  eyebrow: "National reporting",
+  title: "Submitted to ISMP Canada, / with no extra data entry.",
+  text: "Incident data from ZeeNovo Assure goes to ISMP Canada's National Incident Data Repository (NIDR), so your pharmacy contributes to national medication safety learning.",
+  tone: "mint",
+  action: { label: "Learn About NIDR", href: "https://ismpcanada.ca/resource/nidr/" },
+};
+
 function Cta() {
   return (
     <section className={styles.cta} aria-labelledby="incident-cta-title">
@@ -116,7 +137,7 @@ function Cta() {
       <div className={styles.ctaHeading}>
         <Tag>Built for pharmacy safety</Tag>
         <h2 id="incident-cta-title">Report in minutes.<br />Improve every month.</h2>
-        <Link data-cta href="/book-a-demo"><Arrow />Book a Demo</Link>
+        <Link data-cta href="/book-a-demo"><Arrow />Book an Assure Demo</Link>
       </div>
       <Image className={styles.reminders} src={pageAsset.doseReminders} alt="Dose reminders module" width={415} height={290} />
       <Image className={styles.ctaPerson} src={pageAsset.ctaPerson} alt="Pharmacist reviewing ZeeNovo on a tablet" width={319} height={382} />
@@ -126,5 +147,5 @@ function Cta() {
 }
 
 export default function IncidentReportingPage() {
-  return <main className={styles.page}><Hero /><Analytics /><Compliance /><AfterVisit /><Process /><div style={{ "--block-gutter": "60px" } as React.CSSProperties}><BlockList blocks={[incidentReportingFeatures]} /></div><Cta /></main>;
+  return <main className={styles.page}><Hero /><Analytics /><Compliance /><AfterVisit /><Process /><div style={{ "--block-gutter": "60px" } as React.CSSProperties}><BlockList blocks={[caseFeatures, nationalReporting]} /></div><Cta /></main>;
 }

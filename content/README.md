@@ -4,6 +4,24 @@ Working copy for every page in the approved sitemap (YBM-08476). This folder is 
 
 Sources used: current zeenovo.com, the client-coded staging build, the Enterprise Module proposal and the website quote. Where those sources disagree, or where a claim needs evidence, the line is marked `[CONFIRM]` and listed under open items.
 
+## Copy v2 (Nov 2026)
+
+Every page now carries ZeeNovo's website content (`ZeeNovo-Website-Content-Final.pdf`), rewritten in a tactical, value-first voice and fitted to the built sections.
+- The rewrite deck, the layout cross-check and the difference report are in `copy-v2/`.
+- Claims awaiting ZeeNovo sign-off and sections still waiting on design are in `open-items-v2.md`.
+- The page files in `src/` are current. The `0x-*.md` drafts below describe v1.
+
+New routes in v2:
+- `/products/clinical/follow-up-and-reminders`
+- `/products/clinical/forms`
+- `/products/assure/sops-and-training`
+- `/products/zeenovo-central`
+- `/solutions/inspection-readiness`
+- `/platform` and its four pages: `why-zeenovo`, `clinical-content`, `integrations`, `switching-to-zeenovo`
+- `/resources/roadmap`
+
+Magistral now uses real scope. Open item 5 below is resolved.
+
 ## Files
 
 | File | Pages |

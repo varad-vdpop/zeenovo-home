@@ -44,7 +44,11 @@ export function HeroMenuPreview() {
   const [activeIndex, setActiveIndex] = useState(0);
   const inView = useInView(panelRef, { amount: 0.25 });
   const reduceMotion = useReducedMotion();
-  const selectedIndex = reduceMotion ? 1 : activeIndex;
+  // The server cannot know the visitor's motion setting, so it renders the first item. Apply the reduced-motion
+  // selection only after hydration, so the first client render matches the server HTML.
+  const [hydrated, setHydrated] = useState(false);
+  useEffect(() => setHydrated(true), []);
+  const selectedIndex = hydrated && reduceMotion ? 1 : activeIndex;
 
   useEffect(() => {
     if (!inView || reduceMotion) return;

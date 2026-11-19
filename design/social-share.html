@@ -1,0 +1,65 @@
+<!doctype html>
+<!-- Source for src/app/opengraph-image.png and twitter-image.png (1200 x 630).
+     Render it at 1200 x 630 in Chrome and save the screenshot over both files. Fonts and art come from /public. -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<style>
+  @font-face { font-family: "Jakarta"; src: url("../public/fonts/plus-jakarta-sans-400.ttf"); font-weight: 400; }
+  @font-face { font-family: "Jakarta"; src: url("../public/fonts/plus-jakarta-sans-500.ttf"); font-weight: 500; }
+  @font-face { font-family: "Jakarta"; src: url("../public/fonts/plus-jakarta-sans-600.ttf"); font-weight: 600; }
+  @font-face { font-family: "Jakarta"; src: url("../public/fonts/plus-jakarta-sans-700.ttf"); font-weight: 700; }
+  @font-face { font-family: "Manrope"; src: url("../public/fonts/manrope-500.ttf"); font-weight: 500; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { position: relative; background: linear-gradient(112deg, #dce7ff 0%, #e9eefe 48%, #f5f0fb 100%); color: #16133a; font-family: "Jakarta", Arial, sans-serif; }
+  /* Dotted texture used on the approved heroes. */
+  body::before { position: absolute; inset: 0; background-image: radial-gradient(rgb(79 67 171 / 13%) .6px, transparent .8px); background-size: 4px 4px; content: ""; }
+  .wave { position: absolute; top: -40px; right: 150px; width: 380px; height: 710px; opacity: .9; }
+  .ellipse { position: absolute; right: -170px; bottom: -260px; width: 620px; height: 620px; border-radius: 50%; background: #d7e3f9; }
+  .logo { position: absolute; top: 56px; left: 64px; width: 182px; height: auto; }
+  .copy { position: absolute; top: 150px; left: 64px; width: 650px; }
+  h1 { font-size: 64px; font-weight: 400; letter-spacing: -2px; line-height: 1.12; }
+  h1 strong { color: #2b108e; font-weight: 600; }
+  p { margin-top: 24px; width: 560px; color: rgb(22 19 58 / 74%); font: 500 22px/1.5 "Manrope", Arial, sans-serif; }
+  .pills { position: absolute; left: 64px; bottom: 54px; display: flex; gap: 10px; }
+  .pill { display: inline-flex; align-items: center; height: 42px; padding: 0 18px; border-radius: 40px; background: #fff; color: #2b108e; font-size: 16px; font-weight: 600; }
+  .card { position: absolute; z-index: 2; top: 150px; right: 64px; width: 330px; padding: 22px 24px 24px; border-radius: 22px; background: #fff; box-shadow: 0 18px 50px rgb(43 16 142 / 12%); }
+  .card small { display: block; color: #2b0b91; font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: uppercase; }
+  .chip { position: absolute; top: 16px; right: 18px; padding: 8px 12px; border-radius: 17px; background: #ddf5ee; color: #1c0868; font-size: 12px; font-weight: 600; }
+  .card strong { display: block; margin-top: 22px; font-size: 22px; font-weight: 600; }
+  .row { display: flex; align-items: center; gap: 14px; margin-top: 18px; padding: 16px; border-radius: 16px; background: #ffeac8; }
+  .row i { display: grid; width: 42px; height: 42px; flex: none; place-items: center; border-radius: 12px; background: #4a2cb4; }
+  .row b { display: block; font-size: 17px; }
+  .row span { display: block; margin-top: 4px; color: #414141; font-size: 13px; }
+  .note { position: absolute; z-index: 3; right: 196px; bottom: 120px; width: 270px; padding: 20px 20px 18px 62px; border-radius: 18px; background: #1c0868; color: #fff; }
+  .note img { position: absolute; top: 20px; left: 20px; width: 26px; height: 26px; }
+  .note b { display: block; font-size: 16px; }
+  .note span { display: block; margin-top: 8px; color: #d4cdf5; font-size: 13px; line-height: 1.35; }
+</style>
+</head>
+<body>
+  <img class="wave" src="../public/assets/clinical/hero-wave.svg" alt="">
+  <div class="ellipse"></div>
+  <img class="logo" src="../public/assets/zeenovo-navbar-logo.svg" alt="ZeeNovo">
+  <div class="copy">
+    <h1>Clinical Services,<br>Safety and Booking.<br><strong>One Platform.</strong></h1>
+    <p>Guided visits, incident reporting and a booking website for Canadian pharmacies.</p>
+  </div>
+  <article class="card">
+    <small>This month</small>
+    <span class="chip">Up on last month</span>
+    <strong>Clinical services</strong>
+    <div class="row">
+      <i><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 12.5 9.5 17 19 7" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></i>
+      <div><b>186 delivered</b><span>Minor ailments and vaccines</span></div>
+    </div>
+  </article>
+  <article class="note">
+    <img src="../public/assets/independent-pharmacies-document.svg" alt="">
+    <b>Record ready</b>
+    <span>Assessment, outcome and physician note.</span>
+  </article>
+  <div class="pills"><span class="pill">Clinical</span><span class="pill">Assure</span><span class="pill">Magistral</span><span class="pill">Sites</span><span class="pill">Patient Portal</span></div>
+</body>
+</html>

@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
+import { shareMeta } from "@/lib/metadata";
 import type { CSSProperties } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { asset } from "@/lib/assets";
+import { BlockList } from "@/components/blocks/BlockPage";
+import { ontario } from "@/content/pages/provinces";
 import styles from "../page.module.css";
 import OntarioMotion from "../OntarioMotion";
 import OntarioMapTrace from "../OntarioMapTrace";
@@ -10,23 +12,12 @@ import OntarioMapTrace from "../OntarioMapTrace";
 const pageAsset = asset.provinces;
 
 const realities = [
-  { number: "01", title: "Care rarely arrives one lane at a time.", body: "Minor ailments, MedsCheck reviews and immunizations all compete for the same team and the same day." },
-  { number: "02", title: "Every service carries documentation.", body: "The assessment is only complete when the rationale, outcome and follow-up are recorded clearly." },
-  { number: "03", title: "Readiness is part of the work.", body: "OCP expectations need to be visible in the workflow, not reconstructed when an inspection arrives." },
+  { number: "01", title: "Services compete for one team.", body: "Minor ailments, MedsCheck and immunization share the same staff and hours." },
+  { number: "02", title: "A visit isn't billable until it's documented.", body: "Decision, outcome and follow-up must be on file." },
+  { number: "03", title: "Assessment evidence should already exist.", body: "Records built after notice are incomplete records." },
 ];
 
-const programs = [
-  "Minor ailments, end to end",
-  "MedsCheck ready reviews",
-  "UIIP and public immunization",
-  "OCP inspection readiness",
-];
-
-export const metadata: Metadata = {
-  title: "Ontario Pharmacies | ZeeNovo",
-  description:
-    "Assessment, documentation and clinical workflows for Ontario pharmacies, aligned with OCP expectations.",
-};
+export const metadata = shareMeta(ontario.meta);
 
 function Arrow() {
   return <span data-cta-icon aria-hidden="true">↗</span>;
@@ -44,17 +35,17 @@ function Hero() {
       </div>
       <div className={styles.heroCopy} data-reveal>
         <p className={styles.eyebrow}>Ontario · Canada</p>
-        <h1 id="provinces-title">ZeeNovo for<br />Ontario pharmacies.</h1>
-        <p className={styles.heroDescription}>Assessment flows, documentation and terminology for Ontario&apos;s pharmacist minor ailments program, MedsCheck reviews and publicly funded immunization, aligned with OCP documentation expectations.</p>
+        <h1 id="provinces-title">Built in Ontario,<br />for Ontario pharmacies.</h1>
+        <p className={styles.heroDescription}>Minor ailment visits, flu and COVID-19 clinics and MedsCheck reviews, with the correct billing PIN on every visit and safety records ready for your next OCP assessment.</p>
         <div className={styles.heroActions}>
-          <Link data-cta className={styles.primaryButton} href="/register-pharmacy"><Arrow />Register Pharmacy</Link>
-          <Link data-cta className={styles.secondaryButton} href="/book-a-demo"><Arrow />Book a Demo</Link>
+          <Link data-cta className={styles.primaryButton} href="/book-a-demo"><Arrow />Book a Demo</Link>
+          <Link data-cta className={styles.secondaryButton} href="https://auth.zeenovo.com/signup"><Arrow />Start Free Trial</Link>
         </div>
       </div>
       <div className={styles.heroSignal} data-reveal>
-        <div><span>Ontario workflow</span><strong>Minor ailments</strong></div>
+        <div><span>Ontario practice</span><strong>Minor ailments</strong></div>
         <p>Assessment → documentation → follow-up</p>
-        <em>OCP aligned</em>
+        <em>Ontario billing PINs</em>
       </div>
       <div className={styles.ontarioMapFrame} data-reveal>
         <div className={styles.ontarioMapVisual}>
@@ -74,7 +65,7 @@ function Reality() {
           <p>Ontario practice</p>
           <h2 id="reality-title">The week-to-week reality.</h2>
         </div>
-        <span>Pharmacy work rarely arrives one role—or one program—at a time.</span>
+        <span>Pharmacy work rarely arrives one role, or one program, at a time.</span>
       </div>
       <div className={styles.realityGrid}>
         {realities.map((item, index) => (
@@ -90,52 +81,13 @@ function Reality() {
   );
 }
 
-function OntarioProgram() {
-  return (
-    <section className={styles.program} aria-labelledby="program-title">
-      <div className={styles.splitHeading} data-reveal>
-        <div>
-          <p>A better week</p>
-          <h2 id="program-title">Less admin around<br />Ontario care.</h2>
-        </div>
-        <span>ZeeNovo runs quietly around the pharmacy&apos;s real work—with Ontario-ready workflows and connected records.</span>
-      </div>
-      <div className={styles.programCardsViewport} role="list" aria-label="Ontario pharmacy workflows">
-        {programs.map((program, index) => (
-          <div className={styles.programCard} role="listitem" key={program} data-reveal style={{ "--card-index": index, "--delay": `${index * 70}ms` } as CSSProperties}>
-            <Image className={styles.programCardStrip} src={pageAsset.programCards} alt="" width={1302} height={358} />
-            <span className={styles.srOnly}>{program}</span>
-          </div>
-        ))}
-      </div>
-    </section>
-  );
-}
-
-function Outcomes() {
-  return (
-    <section className={styles.outcomes} aria-labelledby="outcomes-title">
-      <div className={styles.outcomesHeading} data-reveal>
-        <Tag>With ZeeNovo</Tag>
-        <h2 id="outcomes-title">What Ontario pharmacies<br />run on ZeeNovo</h2>
-      </div>
-      <div className={styles.outcomesViewport} data-reveal>
-        <div className={styles.outcomesWaveLayer}>
-          <Image className={styles.outcomesWave} src={pageAsset.outcomesWave} alt="Care plans and follow ups, injection and dose series, immunization programs and medication reviews" width={1440} height={222} />
-          <Image className={`${styles.outcomesWave} ${styles.outcomesWaveTrace}`} src={pageAsset.outcomesWave} alt="" aria-hidden="true" width={1440} height={222} />
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function Cta() {
   return (
     <section className={styles.cta} aria-labelledby="provinces-cta-title" data-reveal>
       <Image className={styles.ctaWaves} src={pageAsset.ctaWaves} alt="" width={1290} height={369} />
       <div className={styles.ctaHeading}>
         <Tag>Get started</Tag>
-        <h2 id="provinces-cta-title">See ZeeNovo with<br />your own services.</h2>
+        <h2 id="provinces-cta-title">See ZeeNovo with your{" "}<br />own Ontario services.</h2>
         <Link data-cta href="/book-a-demo"><Arrow />Book a Demo</Link>
       </div>
       <Image className={styles.reminders} src={pageAsset.doseReminders} alt="Dose reminders module" width={415} height={290} />
@@ -146,5 +98,6 @@ function Cta() {
 }
 
 export default function ProvincesPage() {
-  return <main className={styles.page} data-ontario-page><OntarioMotion /><Hero /><Reality /><OntarioProgram /><Outcomes /><Cta /></main>;
+  // The reused blocks align to the 77px edge of the approved hero and reality cards, as on the province template.
+  return <main className={styles.page} data-ontario-page style={{ "--block-gutter": "77px" } as CSSProperties}><OntarioMotion /><Hero /><Reality /><BlockList blocks={ontario.blocks} /><Cta /></main>;
 }

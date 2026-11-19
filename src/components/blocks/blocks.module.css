@@ -71,12 +71,34 @@ a.cardAuto:hover { transform: translateY(-3px); }
 .resultTotal dt { color: #0f172a; font-weight: 600; }
 .resultTotal dd { color: #21058f; font-size: 26px; }
 
+/* Five capability cards: a six-column grid, three cards on the first row and two on the second. */
+.span2 { grid-column: span 2; }
+.span3 { grid-column: span 3; }
+
+/* A button under a cards or steps grid, using the approved Clinical hero primary button. */
+.blockAction { display: flex; justify-content: flex-start; margin-top: 40px; }
+
+/* Text link under feature rows, spaced like the rows themselves. */
+.featureLink { margin-top: 28px; }
+
+/* Solution hero with a second, outline button (values from the Clinical hero outline button). */
+.solutionActions { display: flex; flex-wrap: wrap; align-items: center; column-gap: 14px; }
+.solutionSecondary { border: 1px solid #2b108e; background: transparent; color: #2b108e; }
+
 @media (max-width: 1199px) {
   .rail { width: calc(100% - 72px); }
   .alignCopy { left: 36px; }
   .panelInner { grid-template-columns: 1fr 1fr; }
   .panelCopy { padding-inline: 36px; }
   .panelArt { padding-inline: 20px; }
+}
+
+/* Narrow tablet: four or five cards side by side get too thin for their headings; use two columns. */
+@media (min-width: 761px) and (max-width: 900px) {
+  .stepGrid,
+  .cardGrid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .span2,
+  .span3 { grid-column: auto; }
 }
 
 @media (max-width: 760px) {
@@ -87,6 +109,11 @@ a.cardAuto:hover { transform: translateY(-3px); }
   .cardsSection, .stepsSection, .twoCardSection, .listSection { padding: 56px 0; }
   .cardsSection { background: linear-gradient(to top, #f7f9fe 0 160px, #fff 0); }
   .cardGrid { grid-template-columns: 1fr !important; margin-top: 40px; }
+  .span2,
+  .span3 { grid-column: auto; }
+  .blockAction { margin-top: 28px; }
+  .solutionActions { column-gap: 10px; }
+  .solutionActions > a { padding: 0 18px 0 14px; }
   .cardAuto { min-height: 0; padding-top: 96px; }
   .cardIcon { top: 20px; left: 14px; width: 54px; height: 54px; }
   .cardIcon img { width: 32px; height: 32px; }

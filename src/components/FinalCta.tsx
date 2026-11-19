@@ -12,6 +12,8 @@ type FinalCtaProps = {
   eyebrow?: string;
   heading?: React.ReactNode;
   actionLabel?: string;
+  /** One line under the heading. The visuals move down to make room. */
+  text?: string;
   variant?: "default" | "clinical";
   animated?: boolean;
 };
@@ -22,6 +24,7 @@ export default function FinalCta({
   eyebrow = "Get started",
   heading = <>See ZeeNovo with<br className={styles.desktopBreak} /> your own services.</>,
   actionLabel = "Book a Demo",
+  text,
   variant = "default",
   animated = false,
 }: FinalCtaProps) {
@@ -30,13 +33,14 @@ export default function FinalCta({
       <div className={styles.heading} data-reveal="fade">
         <span className={styles.tag}><span aria-hidden="true">★</span> {eyebrow}</span>
         <h2 id={`${id}-heading`}>{heading}</h2>
+        {text && <p className={styles.text}>{text}</p>}
         <a data-cta className={styles.action} href={actionHref}><Image data-cta-icon className={styles.actionArrow} src="/assets/zeenovo-nav-arrow-primary.svg" alt="" aria-hidden="true" width={24} height={24} />{actionLabel}</a>
       </div>
       <div className={styles.reminders} data-reveal="rise" style={{ "--sequence-delay": "120ms" } as CSSProperties}><DoseRemindersPreview /></div>
       <Image className={styles.pharmacist} data-reveal="rise" style={{ "--sequence-delay": "60ms" } as CSSProperties} src={asset.ctaDoctor} alt="Pharmacist using a tablet" width={319} height={382} />
       <div className={styles.stats} data-reveal="rise" style={{ "--sequence-delay": "180ms" } as CSSProperties}><PharmacyMetricsPreview /></div>
   </>;
-  const className = `${styles.cta} ${variant === "clinical" ? styles.clinical : ""}`;
+  const className = `${styles.cta} ${variant === "clinical" ? styles.clinical : ""} ${text ? styles.withText : ""}`;
   return animated
     ? <RevealSequence as="section" className={className} id={id} aria-labelledby={`${id}-heading`}>{content}</RevealSequence>
     : <ScrollFade as="section" className={className} id={id} aria-labelledby={`${id}-heading`}>{content}</ScrollFade>;

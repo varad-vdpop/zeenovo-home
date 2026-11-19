@@ -106,11 +106,21 @@
 .includedWave { position: absolute; top: 0; right: 0; width: 684px; height: 246px; pointer-events: none; }
 .included h3 { position: relative; font-size: 28px; font-weight: 600; line-height: 34px; }
 .included > p { position: relative; margin-top: 10px; color: #64748b; font-size: 15px; line-height: 23px; }
+.calloutSection { padding: 40px 0; }
+.callout { margin-top: 0; }
+.callout .eyebrow,
+.callout h2 { position: relative; }
+.callout > .eyebrow { margin-top: 0; color: #2b108e; font-size: 12px; line-height: 16px; }
+.callout h2 { max-width: 760px; margin-top: 14px; font-size: 32px; font-weight: 600; letter-spacing: -.32px; line-height: 40px; }
+.callout > p:not(.eyebrow) { max-width: 720px; }
+.callout .textLink { position: relative; }
 .pills { position: relative; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .pill { display: inline-flex; height: 54px; align-items: center; gap: 12px; padding: 0 20px 0 9px; border-radius: 40px; background: #fff; font-size: 14px; font-weight: 600; white-space: nowrap; }
 .pill i { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 50%; background: #e8eaff; }
 .pill i::before { width: 16px; height: 16px; background: no-repeat center / contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.4 6.4 11.5 13 4.5' stroke='%232b108e' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); content: ""; }
 .addons { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; margin-top: 24px; }
+/* Three add-ons sit in one row; two keep the approved two-column layout. */
+.addons:has(> :nth-child(3)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .addon { display: flex; flex-direction: column; align-items: flex-start; padding: 32px; border-radius: 28px; }
 .addon h3 { font-size: 22px; font-weight: 600; line-height: 28px; }
 .addon p { margin-top: 8px; color: #64748b; font-size: 15px; line-height: 23px; }
@@ -227,10 +237,14 @@ a.article:hover { transform: translateY(-3px); }
   .plans,
   .addons,
   .articles { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .addons:has(> :nth-child(3)) { grid-template-columns: minmax(0, 1fr); }
   .plan { padding: 28px 24px; border-radius: 24px; }
   .planPrice { font-size: 50px; }
   .included { padding: 28px 22px; border-radius: 24px; }
   .included h3 { font-size: 24px; line-height: 30px; }
+  .calloutSection { padding: 28px 0; }
+  .callout h2 { font-size: 26px; line-height: 32px; }
+  .pill { white-space: normal; height: auto; min-height: 48px; padding-block: 6px; }
   .pill { height: 48px; font-size: 13px; }
   .addon { padding: 26px 22px; border-radius: 24px; }
   .faq { display: block; }
@@ -244,3 +258,12 @@ a.article:hover { transform: translateY(-3px); }
   .table th,
   .table td { padding: 16px 18px; white-space: nowrap; }
 }
+
+/* Feature tabs on narrow tablets: the intro sits above the card so the card keeps its two readable columns. */
+@media (min-width: 761px) and (max-width: 1023px) {
+  .tabPanel { display: block; min-height: 0; }
+  .panelFrame { margin-top: 28px; }
+}
+/* Long unbroken words (web addresses) wrap inside their card. */
+.panelItem p,
+.bentoCard p { overflow-wrap: anywhere; }

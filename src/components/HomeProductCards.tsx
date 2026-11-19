@@ -14,6 +14,13 @@ function Button({ children, href }: { children: React.ReactNode; href: string })
   );
 }
 
+// Compact cards in the third row: no photos, line art reused from the larger cards above.
+const compactProducts = [
+  { key: "sites", name: "Sites & Patient Portal", text: "Your pharmacy website with live booking, plus a patient login to manage visits.", href: "/products/sites", lines: asset.clinicalCardLines, width: 476, height: 307 },
+  { key: "enterprise", name: "Enterprise", status: "Launching soon", text: "Branded booking, network dashboards and one inbox for every member pharmacy.", href: "/solutions/multi-location-groups", lines: asset.intelligenceCardLines, width: 465, height: 326 },
+  { key: "central", name: "Central", status: "Launching soon", text: "Patients find every ZeeNovo pharmacy by location and service, then book.", href: "/products/zeenovo-central", lines: asset.magistralCardLinesB, width: 491, height: 326 },
+] as const;
+
 function Cover({ src, alt }: { src: string; alt: string }) {
   return <Image src={src} alt={alt} fill sizes="(max-width: 760px) 100vw, 50vw" />;
 }
@@ -26,12 +33,12 @@ export default function HomeProductCards({ title = "Our Products" }: { title?: s
         <div className="product-row product-row-top">
           <ScrollFade as="article" className="product-card clinical">
             <Image className="clinical-lines" src={asset.clinicalCardLines} alt="" width={476} height={307} />
-            <div className="card-copy"><h3>ZeeNovo <b>Clinical</b></h3><p>Clinical services, appointments<br />and follow-up</p><Button href="/products/clinical">Explore</Button></div>
+            <div className="card-copy"><h3>ZeeNovo <b>Clinical</b></h3><p>Minor ailments, vaccines and injections,<br />documented and billed on one record.</p><Button href="/products/clinical">Explore</Button></div>
             <div className="clinical-doctor"><Cover src={asset.clinicalDoctor} alt="Smiling pharmacist" /></div>
           </ScrollFade>
           <ScrollFade as="article" className="product-card assure" delay={60} responsiveDelay>
             <Image className="assure-lines" src={asset.assureCardLines} alt="" width={763} height={430} />
-            <div className="card-copy"><h3>ZeeNovo <b>Assure</b></h3><p>Incident reporting, self-assessment and<br />quality analytics for your pharmacy.</p><Button href="/products/assure">Explore</Button></div>
+            <div className="card-copy"><h3>ZeeNovo <b>Assure</b></h3><p>Incident reporting, CQI, SOP sign-off and<br />staff competency in one place.</p><Button href="/products/assure">Explore</Button></div>
             <Image className="assure-dashboard-frame" src={asset.assureGlassFrame} alt="" width={582} height={272} />
             <AssureDashboardPreview />
           </ScrollFade>
@@ -40,15 +47,29 @@ export default function HomeProductCards({ title = "Our Products" }: { title?: s
           <ScrollFade as="article" className="product-card magistral">
             <Image className="magistral-lines magistral-lines-a" src={asset.magistralCardLinesA} alt="" width={628} height={262} />
             <Image className="magistral-lines magistral-lines-b" src={asset.magistralCardLinesB} alt="" width={491} height={326} />
-            {/* Magistral copy is placeholder until ZeeNovo confirms the product scope: see content/README.md, open item 5. */}
-            <div className="card-copy"><h3>ZeeNovo <b>Magistral</b></h3><p>Compounding formulas and batch records</p><Button href="/products/magistral">Explore</Button></div>
+            <div className="card-copy"><h3>ZeeNovo <b>Magistral</b></h3><p>Early access.<br />Non-sterile compounding with formula maths,<br />signed batch records and lot traceability.</p><Button href="/products/magistral">Explore</Button></div>
             <div className="magistral-doctor"><Cover src={asset.magistralDoctor} alt="Pharmacist" /></div>
           </ScrollFade>
           <ScrollFade as="article" className="product-card intelligence" delay={60} responsiveDelay>
             <Image className="intelligence-lines" src={asset.intelligenceCardLines} alt="" width={465} height={326} />
-            <div className="card-copy"><h3>ZeeNovo <b>Intelligence</b></h3><p>Voice-based appointment<br />booking for your patients</p><Button href="/products/voice-based-appointment-booking">Explore</Button></div>
-            <Image className="phone" src={asset.intelligencePhoneIllustration} alt="ZeeNovo Intelligence mobile interface" width={363} height={301} />
+            <div className="card-copy"><h3>Voice <b>Booking</b></h3><p>Patients book by speaking. Bookings<br />go straight into your calendar.</p><Button href="/products/voice-based-appointment-booking">Explore</Button></div>
+            <Image className="phone" src={asset.intelligencePhoneIllustration} alt="Voice booking mobile interface" width={363} height={301} />
           </ScrollFade>
+        </div>
+        <div className="product-row product-row-compact">
+          {compactProducts.map((product, index) => (
+            <ScrollFade as="article" key={product.key} className={`product-card product-card-compact compact-${product.key}`} delay={index * 60} responsiveDelay>
+              <Image className="compact-lines" src={product.lines} alt="" width={product.width} height={product.height} />
+              <div className="card-copy">
+                <h3>ZeeNovo <b>{product.name}</b></h3>
+                <p>{product.text}</p>
+                <div className="compact-actions">
+                  <Button href={product.href}>Explore</Button>
+                  {"status" in product && <span className="tag compact-status">{product.status}</span>}
+                </div>
+              </div>
+            </ScrollFade>
+          ))}
         </div>
       </div>
     </section>

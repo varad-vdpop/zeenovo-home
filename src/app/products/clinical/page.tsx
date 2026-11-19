@@ -1,5 +1,7 @@
+import { shareMeta } from "@/lib/metadata";
 import type { Metadata } from "next";
 import { BlockList } from "@/components/blocks/BlockPage";
+import type { Block } from "@/components/blocks/types";
 import { clinicalFeatures } from "@/content/featureSections";
 import Image from "next/image";
 import FinalCta from "@/components/FinalCta";
@@ -11,19 +13,20 @@ import styles from "./page.module.css";
 
 const a = (name: string) => `/assets/clinical/${name}`;
 
-export const metadata: Metadata = {
-  title: "ZeeNovo Clinical | Clinical services software for pharmacies",
-  description: "Minor ailments, vaccinations, injections, prescriptions and medication reviews in one guided workflow, with documentation and follow-up built in.",
-};
+export const metadata: Metadata = shareMeta({
+  title: "ZeeNovo Clinical | Pharmacy clinical services software",
+  description: "Minor ailments, vaccines, injections and prescription requests on one record, with physician fax, automated follow-up and billing PINs.",
+});
 
-const services = [
+// `badge` is an availability label, shown beside the tile number.
+const services: readonly { title: string; icon: string; tone: "purple" | "lavender" | "peach" | "aqua"; badge?: string }[] = [
   { title: "Minor Ailments", icon: "service-minor.svg", tone: "purple" },
   { title: "Vaccinations", icon: "service-vaccination.svg", tone: "lavender" },
   { title: "Injections", icon: "service-injection.svg", tone: "peach" },
-  { title: "Prescriptions", icon: "service-prescription.svg", tone: "aqua" },
-  { title: "Medication Review", icon: "service-review.svg", tone: "purple" },
-  { title: "Point of Care Testing", icon: "service-testing.svg", tone: "peach" },
-] as const;
+  { title: "Prescription Requests", icon: "service-prescription.svg", tone: "aqua" },
+  { title: "Medication Review", icon: "service-review.svg", tone: "purple", badge: "Early access" },
+  { title: "Point-of-Care Testing", icon: "service-testing.svg", tone: "peach", badge: "Early access" },
+];
 
 const conditions = [
   { title: "Acne", icon: "condition-acne.svg" },
@@ -39,7 +42,7 @@ const conditions = [
 const prescriptions = [
   { title: "Refill Prescription", detail: "Most requested", icon: "prescription-refill.svg" },
   { title: "New Prescription", detail: "Open workflow", icon: "prescription-new.svg" },
-  { title: "Repeat Prescription", detail: "Open workflow", icon: "prescription-repeat.svg" },
+  { title: "Renew Prescription", detail: "Open workflow", icon: "prescription-repeat.svg" },
   { title: "Transfer Prescription", detail: "Open workflow", icon: "prescription-transfer.svg" },
 ] as const;
 
@@ -51,9 +54,9 @@ const bookingFeatures = [
 ] as const;
 
 const workflowFeatures = [
-  { title: "Adaptive assessment", description: "Questions adapt to each answer and to provincial rules.", icon: "workflow-assessment.svg" },
-  { title: "Clinical safeguards", description: "Health flags and red flags are raised during the assessment.", icon: "workflow-safeguards.svg" },
-  { title: "Guided next steps", description: "Treatment and self-care options are suggested by condition.", icon: "workflow-steps.svg" },
+  { title: "Adaptive screening", description: "Questions branch on each answer, the patient's sex and your province's list.", icon: "workflow-assessment.svg" },
+  { title: "Clinical safeguards", description: "Health flags, red flags with referral criteria, and stop flags that end the visit and record why.", icon: "workflow-safeguards.svg" },
+  { title: "Saved directions", description: "Pick the medicine and directions from your pharmacy's presets. You confirm or change every step.", icon: "workflow-steps.svg" },
 ] as const;
 
 const patientFeatures = [
@@ -71,9 +74,9 @@ const documentFeatures = [
 ] as const;
 
 const followupFeatures = [
-  { title: "Track patient progress", description: "See follow-up status and treatment outcomes at a glance.", icon: "followup-progress.svg" },
-  { title: "Record outcomes", description: "Log recovery, persistent symptoms and other treatment results.", icon: "followup-outcomes.svg" },
-  { title: "Plan the next step", description: "Schedule follow-ups and keep ongoing care organised.", icon: "followup-plan.svg" },
+  { title: "Automatic follow-up", description: "Patients answer by secure email link. Only flagged responses reach a pharmacist.", icon: "followup-progress.svg" },
+  { title: "Recorded outcomes", description: "Resolved, improved, unchanged or worse, on the original visit.", icon: "followup-outcomes.svg" },
+  { title: "Dose-series reminders", description: "Second doses and boosters trigger a reminder with a booking link.", icon: "followup-plan.svg" },
 ] as const;
 
 const connectedSteps = [
@@ -95,11 +98,12 @@ function Hero() {
     <Image className={styles.heroWave} src={a("hero-wave.svg")} alt="" width={480} height={819} priority />
     <Image className={styles.heroEllipse} src={a("hero-ellipse.svg")} alt="" width={619} height={619} priority />
     <div className={styles.heroCopy}>
-      <h1 className={styles.heroEnter} id="clinical-title">Clinical services,<br /> booking to follow-up.</h1>
-      <p className={`${styles.heroEnter} ${styles.heroDescription}`}>Minor ailments, vaccinations, injections, prescriptions and medication reviews in one guided workflow.</p>
+      <div className={`${styles.eyebrow} ${styles.heroEnter}`}>ZeeNovo Clinical</div>
+      <h1 className={styles.heroEnter} id="clinical-title">Every clinical service,<br /> booking to follow-up.</h1>
+      <p className={`${styles.heroEnter} ${styles.heroDescription}`}>One calendar for walk-ins and online bookings. Guided screening, generated documents, physician fax and automated follow-up. The pharmacist makes every decision.</p>
       <div className={`${styles.heroActions} ${styles.heroEnter}`}>
-        <a data-cta className={styles.primaryButton} href="#clinical-services"><Arrow tone="white" />Get Started</a>
-        <a data-cta className={styles.outlineButton} href="#clinical-cta"><Arrow />Book a Demo</a>
+        <a data-cta className={styles.primaryButton} href="/book-a-demo"><Arrow tone="white" />Book a Clinical Demo</a>
+        <a data-cta className={styles.outlineButton} href="https://auth.zeenovo.com/signup"><Arrow />Start Free Trial</a>
       </div>
     </div>
     <div className={styles.heroVisual}>
@@ -115,12 +119,12 @@ function ClinicalServices() {
   return <section className={styles.services} id="clinical-services" aria-labelledby="clinical-services-title">
     <div className={styles.sectionInner}>
       <ScrollFade as="div" className={styles.splitHeading}>
-        <div><p className={styles.eyebrow}>Clinical Services</p><h2 id="clinical-services-title">Six ways to extend clinical care.</h2></div>
-        <p>Choose a service. Intake, assessment and documentation follow the same structure every time.</p>
+        <div><p className={styles.eyebrow}>Clinical Services</p><h2 id="clinical-services-title">Six services.<br /> One structured workflow.</h2></div>
+        <p>Intake, assessment, documentation and billing work the same way for every service.</p>
       </ScrollFade>
       <div className={styles.serviceGrid}>
         {services.map((service, index) => <ScrollFade as="article" className={`${styles.serviceCard} ${styles[service.tone]}`} delay={index * 60} responsiveDelay key={service.title}>
-          <div className={styles.serviceTop}><span>{String(index + 1).padStart(2, "0")}</span><span className={styles.serviceArrow}><Arrow /></span></div>
+          <div className={styles.serviceTop}><span>{String(index + 1).padStart(2, "0")}{service.badge && ` · ${service.badge}`}</span><span className={styles.serviceArrow}><Arrow /></span></div>
           <div className={styles.serviceBottom}><Image src={a(service.icon)} alt="" width={48} height={48} /><h3>{service.title}</h3></div>
         </ScrollFade>)}
       </div>
@@ -133,8 +137,8 @@ function MinorAilments() {
     <Image className={styles.minorWave} src={a("minor-wave.svg")} alt="" width={1440} height={395} />
     <div className={styles.minorInner}>
       <ScrollFade as="div" className={styles.splitHeading}>
-        <div><p className={styles.eyebrow}>Minor Ailments</p><h2 id="minor-title">Structured consultations,<br /> without the clinical guesswork.</h2></div>
-        <p>Assessments follow your province&apos;s program, with questions, red flags and treatment paths in one record.</p>
+        <div><p className={styles.eyebrow}>Minor Ailments</p><h2 id="minor-title">28 conditions,<br /> one consistent assessment.</h2></div>
+        <p>Screening follows your province&apos;s list. Red flags, outcome, prescription and physician notification sit on one record.</p>
       </ScrollFade>
       <div className={styles.minorBody}>
         <ScrollFade as="div" className={styles.minorPhoto}><Image src={a("minor-editorial.png")} alt="Medication and a glass of water during a clinical consultation" fill sizes="(max-width: 760px) 100vw, 444px" /></ScrollFade>
@@ -159,7 +163,7 @@ function MoreServices() {
       <div className={styles.moreCards}>
         <ScrollFade as="article" className={styles.vaccinationCard}>
           <Image className={styles.vaccinationEllipse} src={a("vaccination-ellipse.svg")} alt="" width={612} height={612} />
-          <h3>Vaccinations</h3><p>COVID-19, flu and other publicly funded vaccine programs.</p>
+          <h3>Vaccinations</h3><p>Flu, COVID-19 and other vaccines, with Quick Complete for public immunization and automatic dose reminders.</p>
           <div className={styles.vaccinePills}>
             <span><i><Image src={a("vaccine-covid.svg")} alt="" width={24} height={24} /></i>COVID-19 Vaccine<Arrow tone="dark" /></span>
             <span><i><Image src={a("vaccine-syringe.svg")} alt="" width={24} height={24} /></i>Flu Vaccine<Arrow tone="dark" /></span>
@@ -168,7 +172,7 @@ function MoreServices() {
           <Image className={styles.vaccinationPerson} src={a("vaccination-pharmacist.png")} alt="Pharmacist working on a laptop" width={310} height={413} />
         </ScrollFade>
         <ScrollFade as="article" className={styles.prescriptionCard} delay={60} responsiveDelay>
-          <h3>Prescriptions</h3><p>Refill, new, repeat and transfer requests in one trackable queue.</p>
+          <h3>Prescriptions</h3><p>New, refill, renewal and transfer requests in one queue.</p>
           <div className={styles.prescriptionList}>{prescriptions.map((item) => <div className={styles.prescriptionRow} key={item.title}>
             <span className={styles.prescriptionIcon}><Image src={a(item.icon)} alt="" width={18} height={18} /></span><strong>{item.title}</strong><Arrow tone="dark" /><small>{item.detail}</small>
           </div>)}</div>
@@ -176,7 +180,7 @@ function MoreServices() {
       </div>
       <ScrollFade as="article" className={styles.bookingCard}>
         <Image className={styles.bookingWave} src={a("booking-wave.svg")} alt="" width={684} height={246} />
-        <h3>Appointment booking that flexes with the day.</h3>
+        <h3>Appointments</h3>
         <p>Walk-ins, scheduled visits, waitlists and group bookings on one calendar.</p>
         <div className={styles.bookingFeatures}>{bookingFeatures.map((item, index) => <span className={index === 0 ? styles.bookingActive : ""} key={item.title}>
           <i><Image src={a(item.icon)} alt="" width={18} height={18} /></i>{item.title}
@@ -195,7 +199,7 @@ function ClinicalWorkflow() {
     <div className={styles.workflowInner}>
       <ScrollFade as="div" className={styles.workflowCopy}>
         <p className={styles.eyebrow}>Clinical Workflow</p>
-        <h2 id="workflow-title">Clinical decisions,<br /> made easier to follow.</h2>
+        <h2 id="workflow-title">Risk shown at the<br /> point of decision.</h2>
         <p className={styles.workflowDescription}>Questionnaires, health flags and province-specific logic work together so each consultation moves forward with context.</p>
         <div className={styles.workflowFeatures}>{workflowFeatures.map((item) => <div className={styles.featureRow} key={item.title}>
           <span className={styles.featureIcon}><Image src={a(item.icon)} alt="" width={39} height={39} /></span>
@@ -220,16 +224,16 @@ function AfterAssessment() {
     <div className={styles.sectionInner}>
       <ScrollFade as="div">
         <p className={styles.eyebrow}>After the Assessment</p>
-        <h2 id="after-assessment-title">Keep care moving after the visit.</h2>
+        <h2 id="after-assessment-title">Documents and fax,<br /> done before the patient leaves.</h2>
       </ScrollFade>
       <div className={styles.assessmentCards}>
         <ScrollFade as="article" className={styles.patientCard}>
-          <h3>Patient Management</h3><p>Patient history, follow-up dates and dose reminders stay on the same record.</p>
+          <h3>Patient Management</h3><p>Family physician on file, visit history and dose reminders on one record.</p>
           <ul>{patientFeatures.map((item) => <li key={item.title}><i><Image src={a(item.icon)} alt="" width={17} height={17} /></i>{item.title}</li>)}</ul>
           <Image className={styles.remindersImage} src={a("patient-reminders.svg")} alt="Dose reminders for two patients" width={579} height={404} />
         </ScrollFade>
         <ScrollFade as="article" className={styles.documentationCard} delay={60} responsiveDelay>
-          <h3>Documentation</h3><p>The clinical record is written as the consultation happens.</p>
+          <h3>Documentation</h3><p>Prescription, assessment and physician notification PDFs, generated from the visit and faxed with status tracking.</p>
           <div className={styles.documentFeatures}>{documentFeatures.map((item) => <div key={item.title}><i><Image src={a(item.icon)} alt="" width={17} height={17} /></i><strong>{item.title}</strong></div>)}</div>
           <Image className={styles.sopImage} src={a("documentation-sop.svg")} alt="ZeeNovo Assure SOP table" width={549} height={328} />
           <Image className={styles.efaxImage} src={a("documentation-efax-notice.svg")} alt="eFax sent; record updated" width={202} height={86} />
@@ -245,7 +249,7 @@ function FollowUp() {
       <RevealSequence as="div" className={styles.followupVisual} duration={500}><Image data-reveal="fade" src={a("followup-panel.svg")} alt="ZeeNovo Clinical follow-up panel showing patient progress and outcomes" width={622} height={421} /></RevealSequence>
       <ScrollFade as="div" className={styles.followupCopy} delay={60} responsiveDelay>
         <p className={styles.eyebrow}>Clinical Follow-up</p>
-        <h2 id="followup-title">Follow-up care,<br /> without losing context.</h2>
+        <h2 id="followup-title">Follow-up by exception.</h2>
         <p className={styles.followupDescription}>Patients receive follow-up questions automatically. Only the cases that need a pharmacist are flagged.</p>
         <div className={styles.followupFeatures}>{followupFeatures.map((item) => <div className={styles.featureRow} key={item.title}>
           <span className={styles.featureIcon}><Image src={a(item.icon)} alt="" width={39} height={39} /></span>
@@ -262,7 +266,7 @@ function ConnectedWorkflow() {
     <div className={styles.sectionInner}>
       <ScrollFade as="div">
         <p className={styles.eyebrow}>One Connected Clinical Workflow</p>
-        <h2 id="connected-title">Bring booking, intake, assessment,<br /> documentation, communication and<br /> follow-up together.</h2>
+        <h2 id="connected-title">Booking, intake, assessment,<br /> documentation, communication and<br /> follow-up on one record.</h2>
       </ScrollFade>
       <div className={styles.connectedSteps}>{connectedSteps.map((step, index) => <ScrollFade as="div" className={styles.stepWrap} delay={index * 60} responsiveDelay key={step.title}>
         <div className={`${styles.connectedStep} ${styles[`step${index + 1}`]}`}><i><Image src={a(step.icon)} alt="" width={22} height={22} /></i><strong>{step.title}</strong></div>
@@ -271,6 +275,58 @@ function ConnectedWorkflow() {
     </div>
   </section>;
 }
+
+// Tab summaries from the copy rewrite, value first. The tabs and their feature ids stay in featureSections.ts.
+const tabText: Record<string, string> = {
+  Assessment: "Screening that adapts to every answer.",
+  Safety: "Risk shown where the decision is made.",
+  Prescribing: "Your directions, your decision.",
+  Scheduling: "Every bookable minute is a real one.",
+  Bookings: "Control what patients can book.",
+  "Follow-up": "No call list.",
+  "Patient record": "Captured once, reused every visit.",
+  Documentation: "The record is complete when the visit ends.",
+};
+
+// Catalogue lines that the rewrite corrects (no suggested treatment; renewal, not repeat).
+const rewriteWording: Record<string, string> = {
+  medicineSig: "Pick the medicine and directions from your pharmacy's saved presets. You confirm or change every step.",
+  rxRequests: "New, refill, renewal and transfer requests arrive in one queue, each with a clear status.",
+  customDrug: "Choose any medicine and directions when your saved presets don't fit the patient.",
+};
+
+const allFeatures: Block = {
+  ...clinicalFeatures,
+  groups: clinicalFeatures.groups.map((group) => ({ ...group, text: tabText[group.title] ?? group.text })),
+  wording: { ...clinicalFeatures.wording, ...rewriteWording },
+};
+
+const beyondTheCounter: Block = {
+  type: "callout",
+  eyebrow: "Coming soon",
+  title: "The paperwork beyond / the counter.",
+  text: "Daily operational records that sit outside the clinical visit, signed and kept in ZeeNovo.",
+  chips: ["Fridge temperature log", "OAT dosing roster", "Compliance pack schedules", "Narcotic destruction, loss and theft forms"],
+  tone: "lavender",
+  action: { label: "See the Roadmap", href: "/resources/roadmap" },
+};
+
+const limitsAndQuestions: Block[] = [
+  { type: "cards", eyebrow: "What it does not do", title: "Clear limits.", items: [
+    { title: "No Diagnosis or Prescribing", text: "It doesn't diagnose, prescribe or recommend treatment. The pharmacist decides.", icon: "pharmacist" },
+    { title: "No Claim Submission", text: "It doesn't submit claims to OHIP, ODB or other payers.", icon: "revenue" },
+    { title: "No Live PMS Connection", text: "It doesn't connect live to your pharmacy management system.", icon: "noIt" },
+    { title: "No Immunization Reporting", text: "It doesn't report immunizations to Panorama or COVaxON.", icon: "vaccination" },
+  ] },
+  { type: "faq", eyebrow: "FAQ", title: "Common questions.", items: [
+    { q: "Who makes the clinical decision?", a: "The pharmacist, always. ZeeNovo guides the screening, shows the information you need and records your decision. It doesn't diagnose or prescribe." },
+    { q: "Can walk-ins and booked visits share the calendar?", a: "Yes. Walk-ins join the same queue as online bookings." },
+    { q: "Does ZeeNovo submit claims to OHIP or ODB?", a: "No. ZeeNovo shows the correct billing PIN for each visit, and you submit the claim through your pharmacy system." },
+    { q: "Does it connect to Kroll or our pharmacy system?", a: "ZeeNovo isn't connected to your pharmacy management system. For medication reviews, you can import a Kroll medication history PDF (early access)." },
+    { q: "How do patients get follow-up questions?", a: "By secure email link. SMS is used only for sign-in codes and appointment status." },
+    { q: "Is ZeeNovo available in French?", a: "The interface is in English today." },
+  ] },
+];
 
 export default function ClinicalPage() {
   return <main className={styles.page}>
@@ -283,7 +339,7 @@ export default function ClinicalPage() {
     <FollowUp />
     <ConnectedWorkflow />
     {/* The Clinical page's own sections sit on a 56px edge; align the feature sections to it. */}
-    <div style={{ "--block-gutter": "56px" } as React.CSSProperties}><BlockList blocks={[clinicalFeatures]} /></div>
-    <div className={styles.ctaWrap}><FinalCta animated id="clinical-cta" variant="clinical" eyebrow="Built for clinical care" heading={<>Deliver more clinical services<br />with less administrative work.</>} actionLabel="Book a Demo" actionHref="/book-a-demo" /></div>
+    <div style={{ "--block-gutter": "56px" } as React.CSSProperties}><BlockList blocks={[allFeatures, beyondTheCounter, ...limitsAndQuestions]} /></div>
+    <div className={styles.ctaWrap}><FinalCta animated id="clinical-cta" variant="clinical" eyebrow="Built for clinical care" heading={<>Deliver more clinical services<br />without adding admin.</>} actionLabel="Book a Clinical Demo" actionHref="/book-a-demo" /></div>
   </main>;
 }

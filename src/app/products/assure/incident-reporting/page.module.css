@@ -470,3 +470,33 @@
   .heroDashboardShell::after,
   .visitUiCard::after { display: none; }
 }
+
+/* Phone: copy in normal flow, the dashboard in its own band below it, so the heading never runs under it.
+   Two buttons wrap onto two lines when they don't fit side by side. */
+.heroActions { flex-wrap: wrap; row-gap: 12px; }
+@media (max-width: 760px) {
+  .hero { height: auto; padding: 112px 0 600px; }
+  .heroCopy { position: relative; top: auto; right: auto; left: auto; padding: 0 25px; }
+  .heroDashboardShell { bottom: 45px; }
+}
+
+/* Narrow tablet (761-960px): the analytics and after-visit cards use the one-column phone layout; side by side,
+   the fixed-width first column pushed the second card past the screen edge. */
+@media (min-width: 761px) and (max-width: 960px) {
+  .analytics { height: auto; }
+  .analyticsGrid { position: relative; top: auto; grid-template-columns: 1fr; grid-template-rows: repeat(4, 433px); gap: 20px; margin-top: 40px; }
+  .trendPanel,
+  .insightPanel,
+  .trackPanel,
+  .reportPanel { grid-column: 1; }
+  .discoveryShell { left: 9%; width: 82%; }
+  .metricShell { left: 5%; width: 90%; }
+  .reportForm { left: 7%; width: 86%; }
+  .visitCards { grid-template-columns: 1fr; gap: 20px; }
+  .afterVisit { height: auto; padding-bottom: 20px; }
+  .afterVisit .sectionHeading { height: auto; }
+}
+
+/* The two-line "Beyond the report" heading is taller than the original fixed 84px; let the section follow it. */
+.afterVisit { height: auto; }
+.afterVisit .sectionHeading { height: auto; }

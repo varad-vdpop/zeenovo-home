@@ -75,19 +75,19 @@ export default function IncidentAnalyticsPanels() {
   return (
     <div className={styles.analyticsGrid}>
       <article className={`${styles.analyticsPanel} ${styles.trendPanel}`}>
-        <div className={styles.panelCopy}><h3>Trend dashboards</h3><p>Error patterns, timing and<br />medications, visible in real time.</p></div>
+        <div className={styles.panelCopy}><h3>Trend dashboards</h3><p>Incidents by degree of harm, medication,<br />process stage and discovery.</p></div>
         <TrendChart />
       </article>
 
       <article className={`${styles.analyticsPanel} ${styles.insightPanel}`}>
         <Image className={styles.insightLines} src={nodeAsset("insight-lines.svg")} alt="" width={940} height={758} />
-        <div className={styles.panelCopy}><h3>Insight surfacing</h3><p>Spikes, drops and emerging patterns are flagged for you.</p></div>
+        <div className={styles.panelCopy}><h3>Contributing factors</h3><p>See which human, system and environmental factors repeat.</p></div>
         <div className={styles.discoveryShell}><DiscoveryChart /></div>
       </article>
 
       <article className={`${styles.analyticsPanel} ${styles.trackPanel}`}>
         <Image className={styles.trackLines} src={nodeAsset("track-lines.svg")} alt="" width={1052} height={758} />
-        <div className={styles.panelCopy}><h3>Track What Matters</h3><p>See productivity, follow-ups, and pharmacy<br />performance at a glance.</p></div>
+        <div className={styles.panelCopy}><h3>Compliance dashboard</h3><p>Open incidents, overdue SOP sign-offs<br />and CQI follow-ups.</p></div>
         <div className={styles.metricShell}>
           <Donut kind="followup" value="75%" label="Follow-up Success Rate" />
           <Donut kind="safety" value="46/100" label="Pharmacy Safety Score" />
@@ -96,7 +96,7 @@ export default function IncidentAnalyticsPanels() {
 
       <article className={`${styles.analyticsPanel} ${styles.reportPanel}`}>
         <Image className={styles.cardOrbit} src={nodeAsset("card-orbit.svg")} alt="" width={1165} height={1025} />
-        <div className={styles.panelCopy}><h3>Scheduled reports</h3><p>Reports for your team, board or inspector, on a<br />schedule or on demand.</p></div>
+        <div className={styles.panelCopy}><h3>Case list</h3><p>Every report with its current status.</p></div>
         <div className={styles.reportForm}>
           <div className={styles.reportFormTitle}>Incident Details</div>
           <div className={styles.reportFormBody}>

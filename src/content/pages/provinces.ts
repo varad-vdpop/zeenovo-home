@@ -1,142 +1,89 @@
-import type { PageContent } from "@/components/blocks/types";
+import type { Block, PageContent } from "@/components/blocks/types";
 import type { ProvinceContent } from "@/app/provinces/ProvincePage";
 
-// Program names, regulators and availability need sign-off from ZeeNovo's clinical lead
-// (content/README.md, open items 6 and 14).
-const status = "Availability to confirm";
+// One template for the six province pages outside Ontario. Availability and clinical scope per province
+// need sign-off from ZeeNovo (content/README.md, open items 6 and 14), so pages make no college or
+// program-readiness claims and the signal card asks about availability.
+const status = "Ask about availability";
+
+function province(name: string): ProvinceContent {
+  return {
+    name,
+    status,
+    title: `ZeeNovo for / ${name} pharmacies.`,
+    description: `Online booking, guided clinical visits, vaccine records, physician fax and follow-up, with billing PINs and services set up for ${name}.`,
+    signal: { label: `${name} workflow`, title: "Guided clinical visits", flow: "Assessment → documentation → follow-up", badge: status },
+    reality: [
+      { title: "Services compete for one team.", text: "Assessments, immunization and dispensing share the same day." },
+      { title: "Every service needs a complete record.", text: "Decision, outcome and physician communication must be on file." },
+      { title: "Standards apply daily, not at inspection.", text: "Records should be produced by the workflow, not rebuilt for an assessment." },
+    ],
+    programs: [
+      { title: "Online booking", text: "On your own pharmacy website.", icon: "storefront" },
+      { title: "Guided clinical visits", text: "For the services your pharmacy offers, with physician fax and follow-up from the record.", icon: "redFlag" },
+      { title: "Vaccine clinics", text: "Lot and expiry capture, dose reminders.", icon: "vaccination" },
+      { title: "Safety program", text: "Incident reporting, CQI meetings, self-assessment and SOP sign-off.", icon: "safety" },
+      { title: "Billing PINs", text: `Set up for ${name}.`, icon: "province" },
+      { title: "Provincial forms", text: "Coming soon.", icon: "record" },
+    ],
+  };
+}
 
 export const provincePages: Record<string, ProvinceContent> = {
-  alberta: {
-    name: "Alberta",
-    status,
-    title: "ZeeNovo for / Alberta pharmacies.",
-    description: "Assessment and prescribing workflows, care plan documentation and publicly funded immunization, structured to Alberta College of Pharmacy standards.",
-    signal: { label: "Alberta workflow", title: "Assess and prescribe", flow: "Assessment → documentation → follow-up", badge: "ACP ready" },
-    reality: [
-      { title: "Broad scope, more to record.", text: "Prescribing authority means every decision needs a clear rationale on file." },
-      { title: "Care plans take time.", text: "Medication management assessments and care plans compete with dispensing." },
-      { title: "Readiness is ongoing.", text: "ACP standards need to be visible in daily work, not rebuilt for an assessment." },
-    ],
-    programs: [
-      { title: "Assess and prescribe", text: "Guided assessments with prescribing rationale recorded.", icon: "prescription" },
-      { title: "Care plans", text: "Medication management assessments and follow-up dates on one record.", icon: "record" },
-      { title: "Publicly funded immunization", text: "Influenza and COVID-19 bookings and records.", icon: "vaccination" },
-      { title: "ACP readiness", text: "Self-assessment and exports for practice visits.", icon: "safety" },
-    ],
-  },
-  "british-columbia": {
-    name: "British Columbia",
-    status,
-    title: "ZeeNovo for / BC pharmacies.",
-    description: "Assessment flows for BC's Minor Ailments and Contraception Service, medication reviews and publicly funded immunization, structured to CPBC expectations.",
-    signal: { label: "BC workflow", title: "Minor ailments and contraception", flow: "Assessment → documentation → follow-up", badge: "CPBC ready" },
-    reality: [
-      { title: "A wider service list.", text: "Minor ailments and contraception arrive alongside dispensing and immunization." },
-      { title: "Every assessment is recorded.", text: "Rationale, outcome and physician notification are part of the service." },
-      { title: "Readiness is part of the work.", text: "CPBC expectations need to be met in the workflow, not after it." },
-    ],
-    programs: [
-      { title: "Minor ailments and contraception", text: "Guided assessments for the conditions BC pharmacists can treat.", icon: "redFlag" },
-      { title: "Medication reviews", text: "Structured reviews with care plans and follow-up.", icon: "record" },
-      { title: "Publicly funded immunization", text: "Seasonal vaccine bookings and records.", icon: "vaccination" },
-      { title: "CPBC readiness", text: "Self-assessment and audit-ready records.", icon: "safety" },
-    ],
-  },
-  saskatchewan: {
-    name: "Saskatchewan",
-    status,
-    title: "ZeeNovo for / Saskatchewan pharmacies.",
-    description: "Minor ailments prescribing, medication assessments and publicly funded immunization, structured to Saskatchewan College of Pharmacy Professionals standards.",
-    signal: { label: "Saskatchewan workflow", title: "Minor ailments", flow: "Assessment → documentation → follow-up", badge: "SCPP ready" },
-    reality: [
-      { title: "Rural and urban demand.", text: "Patients rely on the pharmacy where a clinic is far away." },
-      { title: "Every service carries documentation.", text: "The record is part of the service, not an extra." },
-      { title: "Readiness is part of the work.", text: "SCPP standards need to be visible in daily practice." },
-    ],
-    programs: [
-      { title: "Minor ailments, end to end", text: "Guided assessments and prescribing records.", icon: "redFlag" },
-      { title: "Medication assessments", text: "Reviews with care plans and follow-up.", icon: "record" },
-      { title: "Publicly funded immunization", text: "Influenza and COVID-19 bookings and records.", icon: "vaccination" },
-      { title: "SCPP readiness", text: "Self-assessment and exports.", icon: "safety" },
-    ],
-  },
-  "nova-scotia": {
-    name: "Nova Scotia",
-    status,
-    title: "ZeeNovo for / Nova Scotia pharmacies.",
-    description: "Assessment and prescribing workflows for Nova Scotia's publicly funded pharmacy services and immunization, structured to Nova Scotia College of Pharmacists standards.",
-    signal: { label: "Nova Scotia workflow", title: "Pharmacist assessments", flow: "Assessment → documentation → follow-up", badge: "NSCP ready" },
-    reality: [
-      { title: "Primary care at the counter.", text: "Patients come to the pharmacy first for more conditions each year." },
-      { title: "Every service carries documentation.", text: "Assessments, outcomes and physician communication need a clear record." },
-      { title: "Readiness is part of the work.", text: "NSCP standards are easier to meet when the workflow records them." },
-    ],
-    programs: [
-      { title: "Pharmacist assessments", text: "Guided assessments for publicly funded conditions.", icon: "redFlag" },
-      { title: "Prescribing records", text: "Rationale and outcome on every visit.", icon: "prescription" },
-      { title: "Publicly funded immunization", text: "Seasonal vaccine bookings and records.", icon: "vaccination" },
-      { title: "NSCP readiness", text: "Self-assessment and audit-ready records.", icon: "safety" },
-    ],
-  },
-  "new-brunswick": {
-    name: "New Brunswick",
-    status,
-    title: "ZeeNovo for / New Brunswick pharmacies.",
-    description: "Minor ailments assessments, prescribing records and publicly funded immunization, structured to New Brunswick College of Pharmacists standards.",
-    signal: { label: "New Brunswick workflow", title: "Minor ailments", flow: "Assessment → documentation → follow-up", badge: "NBCP ready" },
-    reality: [
-      { title: "More patients, same team.", text: "Expanded scope brings more visits to the same staff." },
-      { title: "Every service carries documentation.", text: "The assessment is complete only when it is recorded." },
-      { title: "Readiness is part of the work.", text: "NBCP standards need to show in daily practice." },
-    ],
-    programs: [
-      { title: "Minor ailments, end to end", text: "Guided assessments and prescribing records.", icon: "redFlag" },
-      { title: "Medication reviews", text: "Reviews with care plans and follow-up.", icon: "record" },
-      { title: "Publicly funded immunization", text: "Seasonal vaccine bookings and records.", icon: "vaccination" },
-      { title: "NBCP readiness", text: "Self-assessment and exports.", icon: "safety" },
-    ],
-  },
-  manitoba: {
-    name: "Manitoba",
-    status,
-    title: "ZeeNovo for / Manitoba pharmacies.",
-    description: "Minor ailments assessments, prescribing records and publicly funded immunization, structured to College of Pharmacists of Manitoba standards.",
-    signal: { label: "Manitoba workflow", title: "Minor ailments", flow: "Assessment → documentation → follow-up", badge: "CPhM ready" },
-    reality: [
-      { title: "Care rarely arrives one lane at a time.", text: "Assessments, immunization and dispensing share the same day." },
-      { title: "Every service carries documentation.", text: "Rationale, outcome and follow-up need to be on file." },
-      { title: "Readiness is part of the work.", text: "CPhM standards are easier to meet when the workflow records them." },
-    ],
-    programs: [
-      { title: "Minor ailments, end to end", text: "Guided assessments and prescribing records.", icon: "redFlag" },
-      { title: "Medication reviews", text: "Reviews with care plans and follow-up.", icon: "record" },
-      { title: "Publicly funded immunization", text: "Seasonal vaccine bookings and records.", icon: "vaccination" },
-      { title: "CPhM readiness", text: "Self-assessment and exports.", icon: "safety" },
-    ],
-  },
+  alberta: province("Alberta"),
+  "british-columbia": province("British Columbia"),
+  saskatchewan: province("Saskatchewan"),
+  "nova-scotia": province("Nova Scotia"),
+  "new-brunswick": province("New Brunswick"),
+  manitoba: province("Manitoba"),
 };
 
-export const provinceMeta: Record<string, { title: string; description: string }> = {
-  alberta: { title: "Alberta Pharmacies | ZeeNovo", description: "Assessment, prescribing and care plan documentation for Alberta pharmacists, structured to Alberta College of Pharmacy expectations." },
-  "british-columbia": { title: "British Columbia Pharmacies | ZeeNovo", description: "Minor ailments and contraception assessments, medication reviews and immunization for BC pharmacists, structured to CPBC expectations." },
-  saskatchewan: { title: "Saskatchewan Pharmacies | ZeeNovo", description: "Minor ailments prescribing, medication assessments and immunization for Saskatchewan pharmacists, structured to SCPP expectations." },
-  "nova-scotia": { title: "Nova Scotia Pharmacies | ZeeNovo", description: "Pharmacist assessments, prescribing and immunization for Nova Scotia pharmacies, structured to NSCP expectations." },
-  "new-brunswick": { title: "New Brunswick Pharmacies | ZeeNovo", description: "Minor ailments assessments, prescribing and immunization for New Brunswick pharmacists, structured to NBCP expectations." },
-  manitoba: { title: "Manitoba Pharmacies | ZeeNovo", description: "Minor ailments assessments, prescribing and immunization for Manitoba pharmacists, structured to CPhM expectations." },
+const meta = (name: string) => ({
+  title: `Pharmacy software for ${name} pharmacies | ZeeNovo`,
+  description: `Online booking, guided clinical visits, vaccine records, physician fax, follow-up and a safety program, set up for ${name} community pharmacies.`,
+});
+
+export const provinceMeta: Record<string, { title: string; description: string }> = Object.fromEntries(
+  Object.entries(provincePages).map(([slug, page]) => [slug, meta(page.name)]),
+);
+
+// Ontario keeps its approved custom hero, reality cards and CTA (src/app/provinces/ontario/page.tsx).
+// The blocks below replace the old program-card artwork and outcomes wave, whose labels were baked into images.
+export const ontario: { meta: PageContent["meta"]; blocks: Block[] } = {
+  meta: { title: "Pharmacy software for Ontario pharmacies | ZeeNovo", description: "Minor ailments, flu and COVID-19 clinics, MedsCheck with Ontario forms, billing PINs on every visit and a safety program for OCP assessments." },
+  blocks: [
+    { type: "cards", eyebrow: "Funded services", title: "Get paid for the clinical / work you already do.", items: [
+      { title: "Minor ailments", text: "Every assessment documented with its outcome. Billing PIN shown for the visit mode and whether you prescribed.", icon: "redFlag" },
+      { title: "MedsCheck", text: "Queue of due patients, automatic invitations and Ontario forms filled in. Early access.", icon: "record" },
+      { title: "Flu and COVID-19", text: "Group bookings fill clinic days. Every dose recorded with DIN, lot and expiry.", icon: "vaccination" },
+      { title: "Safety program", text: "Incident data submitted to ISMP Canada, plus CQI and SOP records for OCP assessments.", icon: "safety" },
+    ], action: { label: "Estimate Your Pharmacy's Numbers", href: "/pricing/roi-calculator" } },
+    { type: "table", eyebrow: "With ZeeNovo", title: "What Ontario pharmacies / run on ZeeNovo", columns: ["Program", "On ZeeNovo"], rows: [
+      ["Minor ailments", "Guided visits for the conditions Ontario pharmacists can assess."],
+      ["Publicly funded flu and COVID-19", "Group bookings, lot and expiry capture, dose reminders."],
+      ["MedsCheck · Early access", "Annual, Follow-up, Diabetes and At Home, with Ontario forms filled in."],
+      ["Billing PINs", "By service, visit mode and outcome."],
+      ["Ontario forms · Coming soon", "OHIP+ attestation, frequency of dispensing, smoking cessation, narcotic destruction, loss/theft and more."],
+      ["Incident reporting", "Near misses and incidents, submitted to ISMP Canada."],
+    ] },
+    { type: "faq", eyebrow: "Questions", title: "Common questions.", items: [
+      { q: "Is ZeeNovo approved by OCP?", a: "No. OCP doesn't approve or endorse software. ZeeNovo keeps the records your practice needs." },
+    ] },
+  ],
 };
 
 export const provincesOverview: PageContent = {
-  meta: { title: "ZeeNovo by Province | Canadian pharmacy software", description: "Assessment logic, terminology and documentation set up for each province's pharmacy programs." },
+  meta: { title: "ZeeNovo by province | Canadian pharmacy software", description: "Services, billing PINs and forms set up for the province you practise in. Ontario, Alberta, BC, Saskatchewan, Nova Scotia, New Brunswick, Manitoba." },
   blocks: [
-    { type: "hero", eyebrow: "Canada", title: "Set up for your / province's programs.", description: "Pharmacist scope is different in every province. ZeeNovo's assessments, terminology and documentation follow the rules where you practise.", primary: { label: "Register Pharmacy", href: "https://auth.zeenovo.com/signup" }, secondary: { label: "Book a Demo", href: "/book-a-demo" } },
-    { type: "cards", eyebrow: "Explore by province", title: "Choose your province.", side: "Each page lists the programs ZeeNovo supports there today.", items: [
-      { title: "Ontario", text: "Minor ailments, MedsCheck reviews and immunization.", icon: "province", href: "/provinces/ontario" },
-      { title: "Alberta", text: "Assess and prescribe, care plans and immunization.", icon: "province", href: "/provinces/alberta" },
-      { title: "British Columbia", text: "Minor ailments and contraception, reviews and immunization.", icon: "province", href: "/provinces/british-columbia" },
-      { title: "Saskatchewan", text: "Minor ailments prescribing, assessments and immunization.", icon: "province", href: "/provinces/saskatchewan" },
-      { title: "Nova Scotia", text: "Pharmacist assessments, prescribing and immunization.", icon: "province", href: "/provinces/nova-scotia" },
-      { title: "New Brunswick", text: "Minor ailments, medication reviews and immunization.", icon: "province", href: "/provinces/new-brunswick" },
-      { title: "Manitoba", text: "Minor ailments, medication reviews and immunization.", icon: "province", href: "/provinces/manitoba" },
+    { type: "hero", eyebrow: "Canada", title: "Set up for your / province's programs.", description: "Pharmacist scope differs by province. ZeeNovo's services, billing PINs and forms follow the province you practise in.", primary: { label: "Book a Demo", href: "/book-a-demo" }, secondary: { label: "Start Free Trial", href: "https://auth.zeenovo.com/signup" } },
+    { type: "cards", eyebrow: "Explore by province", title: "Choose your province.", side: "Each page lists what ZeeNovo supports there today.", items: [
+      { title: "Ontario", text: "Minor ailments, MedsCheck, flu and COVID-19 clinics, and billing PINs.", icon: "province", href: "/provinces/ontario" },
+      ...Object.entries(provincePages).map(([slug, page]) => ({
+        title: page.name,
+        text: "Online booking, guided visits, vaccine records and billing PINs set up for the province.",
+        icon: "province" as const,
+        href: `/provinces/${slug}`,
+      })),
     ] },
     { type: "cta", eyebrow: "Get started", title: "See ZeeNovo with / your own services.", action: { label: "Book a Demo", href: "/book-a-demo" } },
   ],

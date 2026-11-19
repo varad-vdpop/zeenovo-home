@@ -11,6 +11,7 @@ import OntarioMotion from "./OntarioMotion";
 // Province template. Same layout and motion as the approved Ontario page.
 // The Ontario-only map and program-card artwork are swapped for the Canada map
 // and native program cards, so no artwork carries another province's text.
+// The signal card badge states availability. It never names a college or claims readiness.
 
 export type ProvinceContent = {
   name: string;
@@ -30,12 +31,11 @@ export default function ProvincePage({ province }: { province: ProvinceContent }
   const map = art.canadaMap;
   const programs: CardsBlock = {
     type: "cards",
-    eyebrow: "A better week",
-    title: `Less admin around / ${province.name} care.`,
-    side: `ZeeNovo runs quietly around the pharmacy's real work, with ${province.name}-ready workflows and connected records.`,
+    eyebrow: "On ZeeNovo",
+    title: `What ${province.name} pharmacies / run on ZeeNovo`,
     items: province.programs,
   };
-  const cta: CtaBlock = { type: "cta", eyebrow: "Get started", title: "See ZeeNovo with / your own services.", action: { label: "Book a Demo", href: "/book-a-demo" } };
+  const cta: CtaBlock = { type: "cta", eyebrow: "Get started", title: `Ask what's available / in ${province.name}.`, action: { label: "Book a Demo", href: "/book-a-demo" } };
 
   // The approved province hero and reality cards sit on a 77px edge; align the reused blocks to it.
   return <main className={styles.page} data-ontario-page style={{ "--block-gutter": "77px" } as CSSProperties}>
@@ -49,8 +49,8 @@ export default function ProvincePage({ province }: { province: ProvinceContent }
         <h1 id="province-title">{lines(province.title)}</h1>
         <p className={styles.heroDescription}>{province.description}</p>
         <div className={styles.heroActions}>
-          <Link data-cta className={styles.primaryButton} href="https://auth.zeenovo.com/signup"><Arrow />Register Pharmacy</Link>
-          <Link data-cta className={styles.secondaryButton} href="/book-a-demo"><Arrow />Book a Demo</Link>
+          <Link data-cta className={styles.primaryButton} href="/book-a-demo"><Arrow />Book a Demo</Link>
+          <Link data-cta className={styles.secondaryButton} href="https://auth.zeenovo.com/signup"><Arrow />Start Free Trial</Link>
         </div>
       </div>
       <div className={styles.heroSignal} data-reveal>
@@ -80,21 +80,6 @@ export default function ProvincePage({ province }: { province: ProvinceContent }
       </div>
     </section>
 
-    <BlockList blocks={[programs]} />
-
-    <section className={styles.outcomes}>
-      <div className={styles.outcomesHeading} data-reveal>
-        <p className={styles.tag}><span aria-hidden="true">★</span>With ZeeNovo</p>
-        <h2>What {province.name} pharmacies<br />run on ZeeNovo</h2>
-      </div>
-      <div className={styles.outcomesViewport} data-reveal>
-        <div className={styles.outcomesWaveLayer}>
-          <Image className={styles.outcomesWave} src={asset.provinces.outcomesWave} alt="Care plans and follow ups, injection and dose series, immunization programs and medication reviews" width={1440} height={222} />
-          <Image className={`${styles.outcomesWave} ${styles.outcomesWaveTrace}`} src={asset.provinces.outcomesWave} alt="" aria-hidden="true" width={1440} height={222} />
-        </div>
-      </div>
-    </section>
-
-    <BlockList blocks={[cta]} />
+    <BlockList blocks={[programs, cta]} />
   </main>;
 }

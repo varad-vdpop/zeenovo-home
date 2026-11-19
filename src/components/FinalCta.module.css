@@ -47,6 +47,13 @@
 
 .tag span { color: #2b108e; font-size: 19px; line-height: 1; }
 
+.text { max-width: 560px; margin: -2px 0 3px; color: rgb(22 19 58 / 74%); font-size: 17px; line-height: 1.55; }
+/* With a body line the heading grows by about 40px; the cards and portrait move down and the band grows to match. */
+.withText { height: 672px; }
+.withText .reminders,
+.withText .pharmacist,
+.withText .stats { margin-top: 40px; }
+
 .heading h2 {
   max-width: 630px;
   color: #16133a;
@@ -98,6 +105,8 @@
   .heading h2 { max-width: 360px; font-size: clamp(27px, 7.4vw, 35px); line-height: 1.2; }
   .desktopBreak { display: none; }
   .action { height: 42px; font-size: 14px; }
+  .text { max-width: 340px; font-size: 15px; }
+  .withText { height: 610px; }
   .lines { bottom: 0; width: 100%; height: auto; }
   .reminders,
   .stats { display: none; }

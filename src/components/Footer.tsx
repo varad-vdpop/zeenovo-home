@@ -4,10 +4,10 @@ import { asset } from "@/lib/assets";
 import styles from "./Footer.module.css";
 
 const footerGroups = [
-  { heading: "Our Products", items: ["ZeeNovo Clinical", "ZeeNovo Assure", "ZeeNovo Magistral", "ZeeNovo Sites", "ZeeNovo Intelligence"] },
+  { heading: "Our Products", items: ["ZeeNovo Clinical", "ZeeNovo Assure", "ZeeNovo Magistral", "ZeeNovo Sites", "Patient Portal", "Voice Booking"] },
   { heading: "Company", items: ["About", "Pricing", "Blog", "Contact Us"] },
-  { heading: "Logins", items: ["Register Pharmacy", "Patient Login", "Assure Login", "Clinical Login"] },
-  { heading: "Legal", items: ["Privacy Policy", "Terms & Conditions", "Security & Compliance", "Accessibility"] },
+  { heading: "Logins", items: ["Start Free Trial", "Patient Login", "Clinical Login", "Assure Login"] },
+  { heading: "Legal", items: ["Privacy Policy", "Terms & Conditions", "Security & Privacy", "Accessibility"] },
 ] as const;
 
 const footerHrefs: Record<string, string> = {
@@ -15,18 +15,19 @@ const footerHrefs: Record<string, string> = {
   "ZeeNovo Assure": "/products/assure",
   "ZeeNovo Magistral": "/products/magistral",
   "ZeeNovo Sites": "/products/sites",
-  "ZeeNovo Intelligence": "/products/voice-based-appointment-booking",
+  "Patient Portal": "/products/patient-portal",
+  "Voice Booking": "/products/voice-based-appointment-booking",
   About: "/company/about",
   Pricing: "/pricing",
   Blog: "/blog",
   "Contact Us": "/company/contact",
-  "Register Pharmacy": "https://auth.zeenovo.com/signup",
+  "Start Free Trial": "https://auth.zeenovo.com/signup",
   "Patient Login": "https://patient.zeenovo.com/login",
   "Assure Login": "https://assure.zeenovo.com/login",
   "Clinical Login": "https://pharmacy.zeenovo.com/login",
   "Privacy Policy": "/trust/privacy-policy",
   "Terms & Conditions": "/trust/terms-and-conditions",
-  "Security & Compliance": "/trust/security-and-compliance",
+  "Security & Privacy": "/trust/security-and-compliance",
   Accessibility: "/trust/accessibility",
 };
 

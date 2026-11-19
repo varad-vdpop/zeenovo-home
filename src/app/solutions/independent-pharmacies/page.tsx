@@ -1,41 +1,39 @@
-import type { Metadata } from "next";
+import { shareMeta } from "@/lib/metadata";
 import Image from "next/image";
 import Link from "next/link";
 import { asset } from "@/lib/assets";
 import { BlockList } from "@/components/blocks/BlockPage";
-import { independentPharmaciesFeatures } from "@/content/featureSections";
+import { solutionPages } from "@/content/pages/solutions";
+import blocks from "@/components/blocks/blocks.module.css";
 import styles from "./page.module.css";
 
 const pageAsset = asset.independentPharmacies;
 
-export const metadata: Metadata = {
-  title: "Independent Pharmacies | ZeeNovo",
-  description:
-    "Clinical workflows, incident reporting, a booking website and patient reminders for independent pharmacies. Set up in a day.",
-};
+const page = solutionPages["/solutions/independent-pharmacies"];
+export const metadata = shareMeta(page.meta);
 
 const realityCards = [
   {
     number: "01",
-    title: "Every hat is your hat",
-    body: "Owner, pharmacist, marketer and IT department, with no time left to grow clinical services.",
+    title: "Clinical time is capped by admin",
+    body: "Booking, documentation, fax and follow-up are done by hand, so fewer funded services get delivered.",
   },
   {
     number: "02",
-    title: "Banners out-market you",
-    body: "Chains have booking apps and reminder systems. Patients notice.",
+    title: "Chains have booking and reminders. Most independents don't.",
+    body: "Patients book where booking is easiest.",
   },
   {
     number: "03",
-    title: "Paperwork eats the margin",
-    body: "Every assessment brings documentation, faxing and follow up. Done by hand, the margin disappears.",
+    title: "Manual paperwork erodes service margin",
+    body: "Each assessment adds documentation, a physician fax and a follow-up call.",
   },
 ] as const;
 
 const changes = [
-  { label: "Automation as staff", icon: pageAsset.automation },
-  { label: "Competing storefront", icon: pageAsset.storefront },
-  { label: "Clinical revenue growth", icon: pageAsset.revenue },
+  { label: "Admin automated", icon: pageAsset.automation },
+  { label: "Online storefront", icon: pageAsset.storefront },
+  { label: "Clinical revenue tracked", icon: pageAsset.revenue },
   { label: "No IT project", icon: pageAsset.noIt },
 ] as const;
 
@@ -43,27 +41,27 @@ const week = [
   {
     number: "01",
     title: "Services published",
-    body: "Your storefront shows available clinical care.",
+    body: "Your website lists every service you offer, with live booking.",
   },
   {
     number: "02",
     title: "Bookings organised",
-    body: "Patients choose the right service and time.",
+    body: "Patients choose the service and time. Walk-ins join the same queue.",
   },
   {
     number: "03",
     title: "Visits guided",
-    body: "Assessment and documentation stay connected.",
+    body: "Screening, red flags and documents are produced during the visit.",
   },
   {
     number: "04",
     title: "Follow-ups sent",
-    body: "Only exceptions return to the team.",
+    body: "Email follow-up runs automatically. Only flagged responses return to the team.",
   },
   {
     number: "05",
-    title: "Revenue visible",
-    body: "Delivered services stay easy to track.",
+    title: "Billing ready",
+    body: "The billing PIN for the service, mode and outcome is shown on every visit.",
   },
 ] as const;
 
@@ -80,9 +78,12 @@ function Hero() {
 
       <div className={styles.heroCopy}>
         <p className={styles.eyebrow}>Independent pharmacies</p>
-        <h1 id="independent-pharmacies-title">Big pharmacy tools,<br />for a pharmacy with<br />one front door.</h1>
-        <p className={styles.heroDescription}>Clinical workflows, incident reporting, a booking website and patient reminders, sized for one location and set up in a day.</p>
-        <Link data-cta className={styles.primaryButton} href="/book-a-demo"><Arrow />Get Started</Link>
+        <h1 id="independent-pharmacies-title">Big pharmacy tools,{" "}<br />for a pharmacy with{" "}<br />one front door.</h1>
+        <p className={styles.heroDescription}>Online and voice booking, guided clinical services, automated follow-up and a safety program. No per-user fees. No IT project. Set up in about a day.</p>
+        <div className={blocks.solutionActions}>
+          <Link data-cta className={styles.primaryButton} href="/book-a-demo"><Arrow />Book a Demo</Link>
+          <Link data-cta className={`${styles.primaryButton} ${blocks.solutionSecondary}`} href="https://auth.zeenovo.com/signup"><Arrow />Start Free Trial</Link>
+        </div>
       </div>
 
       <Image
@@ -189,7 +190,7 @@ function Cta() {
         <p>Built for independent pharmacy</p>
         <h2 id="cta-title">Keep the independence.<br />Lose the operational drag.</h2>
         <span>Start with your services, your patients and the systems you already use.</span>
-        <div><Link data-cta href="/book-a-demo">Book a Demo <Arrow /></Link><Link data-cta href="/book-a-demo">Get Started <Arrow /></Link></div>
+        <div><Link data-cta href="/book-a-demo">Book a Demo <Arrow /></Link><Link data-cta href="https://auth.zeenovo.com/signup">Start Free Trial <Arrow /></Link></div>
       </div>
       <div className={styles.ctaPhoto}>
         <Image src={pageAsset.cta} alt="Gloved pharmacist preparing a syringe" fill sizes="440px" />
@@ -200,5 +201,5 @@ function Cta() {
 }
 
 export default function IndependentPharmaciesPage() {
-  return <main className={styles.page}><Hero /><Reality /><PictureChanges /><BetterWeek /><BlockList blocks={[independentPharmaciesFeatures]} /><Cta /></main>;
+  return <main className={styles.page}><Hero /><Reality /><PictureChanges /><BetterWeek /><BlockList blocks={page.blocks} /><Cta /></main>;
 }

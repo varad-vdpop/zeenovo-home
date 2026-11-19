@@ -151,7 +151,7 @@ export default function Navbar() {
         </span>
         <span data-cta className={styles.register}>
           <FigmaArrow primary />
-          <span>Register Pharmacy</span>
+          <span>Start Free Trial</span>
         </span>
       </div>
 
@@ -192,7 +192,7 @@ export default function Navbar() {
                     <div className={styles.menuSection} key={section.label}>
                       <h2>{section.label}</h2>
                       <div className={styles.sectionLinks}>
-                        {section.links.map((link) => <Link href={link.href} key={link.href}>{link.label}</Link>)}
+                        {section.links.map((link) => <Link href={link.href} key={`${section.label}-${link.href}`}>{link.label}{link.badge && <span className={styles.badge}>{link.badge}</span>}</Link>)}
                       </div>
                     </div>
                   ))}
@@ -223,7 +223,7 @@ export default function Navbar() {
                 {mobileMenu.sections.map((section) => (
                   <div className={styles.mobileSection} key={section.label}>
                     <h3>{section.label}</h3>
-                    {section.links.map((link) => <Link href={link.href} key={link.href} onClick={closeMobile}>{link.label}</Link>)}
+                    {section.links.map((link) => <Link href={link.href} key={`${section.label}-${link.href}`} onClick={closeMobile}>{link.label}{link.badge && <span className={styles.badge}>{link.badge}</span>}</Link>)}
                   </div>
                 ))}
               </div>
@@ -242,7 +242,7 @@ export default function Navbar() {
                 <div className={styles.mobileActions}>
                   <span>Patient Login</span>
                   <span>Pharmacy Login</span>
-                  <span>Register Pharmacy</span>
+                  <span>Start Free Trial</span>
                 </div>
               </div>
             )}

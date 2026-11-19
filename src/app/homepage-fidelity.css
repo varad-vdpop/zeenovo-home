@@ -343,7 +343,7 @@
 .team-photo { top: 98px; right: 23px; bottom: auto; width: 380px; height: 402px; }
 .team-wave { top: 245px; bottom: auto; left: 0; width: 787px; height: 181px; max-width: none; opacity: 1; }
 
-@media (min-width: 761px) {
+@media (min-width: 961px) {
   .feature-grid { grid-template-columns: 482fr 266fr 481fr; }
   .report-grid { grid-template-columns: 482fr 266fr 470fr; }
   .feature-appointments,
@@ -356,7 +356,7 @@
   .social-proof { top: 177px; }
 }
 
-@media (max-width: 1100px) and (min-width: 761px) {
+@media (max-width: 1100px) and (min-width: 961px) {
   .hero-menu { left: 52%; }
   .hero-chart { right: 25px; width: 280px; }
   .product-row-top { grid-template-columns: minmax(0, 39fr) minmax(0, 61fr); }
@@ -376,7 +376,7 @@
   .bars { left: 9%; width: 84%; }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 960px) {
   .philosophy-band { margin-top: 80px; }
   .trusted { width: 100%; }
   .logo-ticker-group { gap: 34px; padding-right: 34px; }
@@ -475,4 +475,68 @@
   .team .button { position: relative; z-index: 2; }
   .team-photo { position: relative; top: auto; right: auto; bottom: auto; align-self: flex-end; width: min(52%, 200px); height: auto; aspect-ratio: 675 / 1000; margin: 16px 0 -24px; }
   .team-wave { top: auto; bottom: 0; left: 0; width: 100%; height: auto; }
+}
+
+/* "Our Products": third row of compact cards (no photos) */
+.product-row-compact { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.product-card.product-card-compact { display: flex; height: auto; min-height: 236px; border-radius: 28px; }
+.product-card-compact .card-copy { display: flex; flex: 1; flex-direction: column; align-items: flex-start; padding: 28px 30px; }
+.product-card-compact h3 { font-size: 24px; letter-spacing: -1px; line-height: 1.3; }
+.product-card-compact p { margin: 8px 0 20px; }
+.compact-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-top: auto; }
+.product-card-compact .button { margin-top: 0; }
+.compact-status { border-color: rgb(43 16 142 / 18%); background: rgb(255 255 255 / 62%); color: #2b108e; font-weight: 600; }
+.compact-lines { position: absolute; top: 0; right: 0; display: block; max-width: none; height: auto; pointer-events: none; }
+.compact-sites { background: linear-gradient(#e4f8fa, #ddf5ee); }
+.compact-sites .compact-lines { top: auto; bottom: 0; right: -120px; width: 476px; }
+.compact-enterprise { background: linear-gradient(#e8ebff, #f9f8ff); }
+.compact-enterprise .compact-lines { width: 465px; }
+.compact-central { background: linear-gradient(#fde8d3, #ffeedd); }
+.compact-central .compact-lines { width: 491px; }
+
+/* "A Day With ZeeNovo": role tabs between Values and Clinical features */
+.day-with { padding-top: 104px; }
+.day-with > h2 { margin-top: 14px; }
+
+@media (max-width: 1100px) and (min-width: 961px) {
+  .product-card-compact .card-copy { padding: 26px 24px; }
+  .compact-actions { gap: 10px; }
+}
+
+@media (max-width: 960px) {
+  .product-card.product-card-compact { min-height: 0; }
+  .product-card-compact .card-copy { padding: 21px; }
+  .product-card-compact h3 { font-size: 21px; }
+  .product-card-compact p { margin: 6px 0 16px; }
+  .compact-actions { gap: 10px; }
+  .day-with { padding-top: 76px; }
+  .day-with > h2 br { display: none; }
+  /* Let the scrolling tab row run to the home page's 17px mobile gutter, not past it. */
+  .day-with [role="tablist"] { margin-inline: -17px; padding-inline: 17px; }
+  .product-row-compact { grid-template-columns: minmax(0, 1fr); gap: 15px; }
+}
+
+
+/* Values wave: the strip is drawn for 1440px. Below that it fits the screen, so the outer labels are never cut. */
+@media (min-width: 961px) and (max-width: 1439px) {
+  .values-track { width: calc(100% - 32px); }
+  .values-track > img,
+  .values-list { width: 100%; }
+}
+@media (min-width: 761px) and (max-width: 960px) {
+  .values-track { overflow: hidden; }
+  .values-track > img,
+  .values-list { width: 100%; }
+  .values-list > div { width: 20%; }
+  .values-list > div:nth-child(2) { left: 20%; }
+  .values-list > div:nth-child(3) { left: 40%; }
+  .values-list > div:nth-child(4) { left: 60%; }
+  .values-list > div:nth-child(5) { left: 80%; }
+}
+
+/* Phone and narrow tablet hero: the copy sits in normal flow under the social proof chip, and the portrait with
+   the revenue card fills a reserved band below it, so a longer heading never runs under the card. */
+@media (max-width: 960px) {
+  .hero { height: auto; padding: 162px 0 420px; }
+  .hero-content { position: relative; top: auto; right: auto; left: auto; padding: 0 22px; }
 }

@@ -32,7 +32,7 @@ export default function AfterVisitPanels() {
     <div className={styles.visitCards}>
       <article className={`${styles.visitUiCard} ${styles.crossProductCard}`}>
         <Image className={styles.afterOrbit} src={nodeAsset("after-orbit.svg")} alt="" width={638} height={524} />
-        <div className={styles.visitPanelCopy}><h3>Cross product insight</h3><p>Clinical volume, website bookings and safety trends side by side.</p></div>
+        <div className={styles.visitPanelCopy}><h3>Linked to CQI</h3><p>Attach incidents to a meeting and check progress at the next one.</p></div>
         <div className={styles.incidentList}>
           <div className={styles.incidentListHeader}>
             <div><strong>Incident Reports</strong><span>Last 30 days</span></div>
@@ -53,7 +53,7 @@ export default function AfterVisitPanels() {
       </article>
 
       <article className={`${styles.visitUiCard} ${styles.exportCard}`}>
-        <div className={styles.visitPanelCopy}><h3>Exports for everyone</h3><p>One click reports in the format your board, banner or college expects.</p></div>
+        <div className={styles.visitPanelCopy}><h3>Corrective actions</h3><p>Owner, due date and status on every action.</p></div>
         <div className={styles.exportStage}>
           <Image className={styles.exportOrbit} src={nodeAsset("export-orbit.svg")} alt="" width={638} height={638} />
           <div className={styles.exportReport}>

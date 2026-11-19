@@ -38,7 +38,15 @@ const geistFooter = localFont({
 
 const feedbackProject = process.env.NEXT_PUBLIC_FEEDBACK_PROJECT;
 
+// Absolute base for share-image and canonical URLs. Set NEXT_PUBLIC_SITE_URL on review hosts.
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://zeenovo.com";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
+  // Share cards: the image comes from app/opengraph-image.png and app/twitter-image.png for every page.
+  // Pages set their own title and description; these site-wide values only fill what pages leave out.
+  openGraph: { siteName: "ZeeNovo", type: "website", locale: "en_CA" },
+  twitter: { card: "summary_large_image" },
   title: "ZeeNovo | Clinical, compliance and booking software for Canadian pharmacies",
   description:
     "Guided clinical workflows, incident reporting, a booking website and patient self-service for Canadian pharmacies. One platform, one login.",

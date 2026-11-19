@@ -73,7 +73,18 @@
   white-space: nowrap;
 }
 
-.columnDivider {
+/* Column dividers run the full height of the tallest column, so longer link lists never outrun them. */
+.columnDivider { display: none; }
+.group:not(:last-child)::after {
+  position: absolute;
+  top: 0;
+  right: -31px;
+  bottom: 0;
+  width: 1px;
+  background: rgb(255 255 255 / 15%);
+  content: "";
+}
+.columnDividerUnused {
   position: absolute;
   top: 84px;
   right: -84px;
@@ -143,8 +154,8 @@
     position: absolute;
     top: 0;
     right: -12px;
+    bottom: 0;
     width: 1px;
-    height: 169px;
     background: rgb(255 255 255 / 15%);
     content: "";
   }

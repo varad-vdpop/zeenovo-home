@@ -252,10 +252,53 @@
   .timeReturned { left: auto; right: 30%; }
 }
 
+/* Tablet, side by side: keep both floating cards in the right-hand column so they never cover the copy. */
+@media (min-width: 901px) and (max-width: 1199px) {
+  .heroCopy { width: 50%; }
+  .heroDescription { width: auto; }
+  .heroPharmacist { width: 340px; height: 454px; top: auto; bottom: 17px; }
+  .recordReady { top: auto; right: 4%; bottom: 64px; }
+  /* Closing CTA: a smaller photo in the right half, the note card over its lower edge. */
+  .ctaCopy { width: 50%; }
+  .ctaPhoto { top: 70px; right: 4%; left: auto; width: 360px; height: 360px; }
+  .timeReturned { top: auto; right: 7%; bottom: 36px; left: auto; }
+}
+
+/* Narrow tablet and phone: the copy sits in normal flow and the portrait with its two cards fills a reserved
+   band below it, so longer copy or a second button can never run under them. */
+@media (max-width: 900px) {
+  .hero { height: auto; padding: 136px 0 560px; }
+  .heroArt { top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; object-position: 58% center; }
+  .heroCopy { position: relative; top: auto; right: auto; left: auto; width: auto; padding: 0 44px; }
+  .heroDescription { width: auto; max-width: 600px; }
+  .heroPharmacist { top: auto; right: 10%; bottom: 17px; left: auto; width: 360px; height: 480px; }
+  .liveAssessment { top: auto; right: 5%; bottom: 330px; left: auto; }
+  .recordReady { top: auto; right: auto; bottom: 120px; left: 6%; }
+  /* Reality cards: one column, heights follow the text. */
+  .reality { height: auto; padding: 60px 0; }
+  .realityCards { display: grid; height: auto; margin-top: 35px; gap: 16px; }
+  .realityCards article,
+  .realityCards article:nth-child(1),
+  .realityCards article:nth-child(2),
+  .realityCards article:nth-child(3) { position: relative; inset: auto; width: 100%; height: auto; min-height: 240px; }
+  .realityCards article > div { position: static; padding: 138px 24px 28px; }
+  .realityCards article:nth-child(2) > img,
+  .realityCards article:nth-child(3) > img { top: 50px; }
+  .weekCards { grid-template-columns: repeat(2, 1fr) !important; }
+  .weekCards article:nth-child(n) { margin-top: 0; }
+  .betterWeek { height: auto; padding-bottom: 72px; }
+  /* Closing CTA: copy in flow, the photo and note card in a band below it. */
+  .cta { width: calc(100% - 40px); height: auto; padding: 48px 0 400px; }
+  .ctaCopy { position: relative; top: auto; right: auto; left: auto; width: auto; padding: 0 32px; transform: none; }
+  .ctaPhoto { top: auto; right: 50%; bottom: 28px; left: auto; width: 340px; height: 340px; transform: translateX(50%); }
+  .ctaCircle { top: auto; bottom: -620px; left: 0; width: 900px; height: 986px; }
+  .timeReturned { top: auto; right: 24px; bottom: 44px; left: auto; }
+}
+
 @media (max-width: 760px) {
-  .hero { height: 820px; }
+  .hero { height: auto; padding: 108px 0 470px; }
+  .heroCopy { top: auto; right: auto; left: auto; padding: 0 28px; }
   .heroBackdrop { inset: 8px 10px 12px; border-radius: 20px; }
-  .heroCopy { top: 120px; right: 28px; left: 28px; width: auto; }
   .eyebrow { margin-bottom: 12px; font-size: 12px; }
   .hero h1 { font-size: clamp(39px, 11.2vw, 58px); line-height: 1.08; letter-spacing: -1.8px; }
   .hero h1 br:nth-child(1) { display: none; }
@@ -287,8 +330,8 @@
   .realityCards article,
   .realityCards article:nth-child(1),
   .realityCards article:nth-child(2),
-  .realityCards article:nth-child(3) { position: relative; inset: auto; width: 100%; height: 255px; }
-  .realityCards article > div { top: 138px; bottom: auto; }
+  .realityCards article:nth-child(3) { position: relative; inset: auto; width: 100%; height: auto; min-height: 0; }
+  .realityCards article > div { position: static; padding: 128px 20px 24px; }
   .realityCards article:nth-child(2) > img,
   .realityCards article:nth-child(3) > img { top: 58px; }
 
@@ -303,7 +346,7 @@
   .changeIcon { width: 58px; height: 58px; }
 
   .betterWeek { height: auto; margin-top: 60px; padding: 60px 0; }
-  .weekCards { display: grid; grid-template-columns: 1fr; width: 100%; height: auto; margin-top: 38px; gap: 16px; }
+  .weekCards { display: grid; grid-template-columns: 1fr !important; width: 100%; height: auto; margin-top: 38px; gap: 16px; }
   .weekCards article,
   .weekCards article:nth-child(2),
   .weekCards article:nth-child(4) { height: 230px; margin-top: 0; }
@@ -311,14 +354,14 @@
   .weekCards article:nth-child(n) { height: auto; min-height: 0; }
   .weekCards article > div:last-child { padding-top: 128px; }
 
-  .cta { width: calc(100% - 40px); height: 680px; margin: 60px auto 50px; }
-  .ctaCopy { top: 48px; right: 24px; left: 24px; width: auto; transform: none; }
+  .cta { width: calc(100% - 40px); height: auto; margin: 60px auto 50px; padding: 44px 0 380px; }
+  .ctaCopy { padding: 0 24px; }
   .ctaCopy h2 { font-size: 31px; line-height: 1.28; }
   .ctaCopy > span { margin-top: 12px; font-size: 14px; line-height: 1.5; }
   .ctaCopy > div { gap: 10px; margin-top: 16px; }
   .ctaCopy a,
   .ctaCopy a:last-child { width: auto; min-width: 0; flex: 1; font-size: 13px; }
   .ctaPhoto { top: auto; right: 50%; bottom: 22px; width: 330px; height: 330px; transform: translateX(50%); }
-  .ctaCircle { top: 270px; left: 0; width: 900px; height: 986px; }
+  .ctaCircle { top: auto; bottom: -640px; left: 0; width: 900px; height: 986px; }
   .timeReturned { top: auto; right: 20px; bottom: 38px; width: 205px; height: 80px; padding: 16px; }
 }

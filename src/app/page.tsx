@@ -6,6 +6,8 @@ import ResultsCounters from "@/components/ResultsCounters";
 import HeroPattern from "@/components/HeroPattern";
 import ScrollFade from "@/components/ScrollFade";
 import RevealSequence from "@/components/RevealSequence";
+import FeatureTabs, { type TabGroup } from "@/components/blocks/FeatureTabs";
+import { tileIcons } from "@/components/blocks/media";
 import type { CSSProperties } from "react";
 import { HeroMenuPreview, HeroRevenuePreview } from "@/components/HeroVisuals";
 import { TreatmentPreview, AppointmentPreview, PatientFlagsPreview, ReportingTimerPreview, AnalyticsPreview } from "@/components/ProductUiPreviews";
@@ -62,12 +64,12 @@ function Hero() {
           <Image src={asset.heroAvatar2} alt="" width={37} height={37} />
           <Image src={asset.heroStar} alt="" width={37} height={37} />
         </span>
-        <span>50+ Pharmacies &amp; counting</span>
+        <span>50+ Pharmacies on ZeeNovo</span>
       </div>
       <div className="hero-content">
         <h1 className="hero-enter hero-enter-heading">Clinical Services,<br />Safety and Booking.<br /><strong>One Platform.</strong></h1>
-        <p className="hero-enter hero-enter-description">Guided clinical workflows, incident reporting, a booking website and patient self-service for Canadian pharmacies.</p>
-        <Button className="hero-enter hero-enter-cta" href="https://auth.zeenovo.com/signup">Sign Up</Button>
+        <p className="hero-enter hero-enter-description">Online booking, guided clinical visits, automated follow-up and a complete safety program for Canadian pharmacies. Unlimited users. Website included.</p>
+        <Button className="hero-enter hero-enter-cta" href="https://auth.zeenovo.com/signup">Start Free Trial</Button>
       </div>
       <HeroMenuPreview />
       <HeroRevenuePreview />
@@ -104,31 +106,58 @@ function Trust() {
 }
 
 const values = [
-  ["PHIPA, PIPEDA and HIPAA aligned", asset.valueIcon1],
-  ["Designed with practising pharmacists", asset.valueIcon2],
-  ["Province-specific clinical logic", asset.valueIcon3],
-  ["Booking to follow-up in one record", asset.valueIcon4],
+  ["The pharmacist makes every decision", asset.valueIcon1],
+  ["Patient records stored in Canada", asset.valueIcon2],
+  ["Province-specific billing PINs and services", asset.valueIcon3],
+  ["One record, booking to follow-up", asset.valueIcon4],
   ["Pharmacy website included", asset.valueIcon5],
 ] as const;
 
 function Values() {
-  return <section className="values" id="why-zeenovo"><Tag>You can trust us</Tag><h2>Your pharmacy is in good hands.</h2><div className="values-track"><Image src={asset.valuesCompleteWave} alt="" width={1440} height={181} /><div className="values-list">{values.map(([label, icon], index)=><ScrollFade as="div" key={label} distance={12} duration={450} delay={index * 60} responsiveDelay><p>{label}</p><Image src={icon} alt="" width={50} height={50} /></ScrollFade>)}</div></div></section>;
+  return <section className="values" id="why-zeenovo"><Tag>Why ZeeNovo</Tag><h2>Built Around Pharmacy Practice.</h2><div className="values-track"><Image src={asset.valuesCompleteWave} alt="" width={1440} height={181} /><div className="values-list">{values.map(([label, icon], index)=><ScrollFade as="div" key={label} distance={12} duration={450} delay={index * 60} responsiveDelay><p>{label}</p><Image src={icon} alt="" width={50} height={50} /></ScrollFade>)}</div></div></section>;
+}
+
+const roles: TabGroup[] = [
+  { title: "Technician", text: "Intake done before the pharmacist starts.", items: [
+    { title: "Walk-in queue", text: "Bring walk-ins into the same queue as online bookings.", src: tileIcons.waitlist },
+    { title: "Screening captured", text: "Complete the screening questions and mark the visit ready for the pharmacist.", src: tileIcons.screening },
+    { title: "Near misses logged", text: "Log a near miss at the final check, while it’s fresh.", src: tileIcons.flag },
+  ] },
+  { title: "Pharmacist", text: "Clinical judgement, without the admin.", items: [
+    { title: "Answers on screen", text: "Screening answers, health flags and allergies are ready when the visit opens.", src: tileIcons.profile },
+    { title: "Saved directions", text: "Pick the medicine and directions from your saved presets. You decide.", src: tileIcons.treatment },
+    { title: "Fax and billing PIN", text: "Fax the physician from the visit and see the billing PIN for the service.", src: tileIcons.docEfax },
+  ] },
+  { title: "Owner", text: "Monthly performance in one view.", items: [
+    { title: "Estimated revenue", text: "By service and by pharmacist, from completed visits.", src: tileIcons.trend },
+    { title: "Team productivity", text: "Staff productivity, follow-up status and top services.", src: tileIcons.group },
+    { title: "Safety actions", text: "Open incidents, overdue SOP sign-offs and CQI follow-ups.", src: tileIcons.shield },
+  ] },
+  { title: "Patient", text: "Book any time, by web or voice.", items: [
+    { title: "Online or voice booking", text: "Book for the whole family from the pharmacy website or by speaking.", src: tileIcons.calendar },
+    { title: "Questions before the visit", text: "Answer the screening questions online before arriving.", src: tileIcons.intake },
+    { title: "Follow-up and reminders", text: "Follow-up questions and next-dose reminders arrive by email.", src: tileIcons.followup },
+  ] },
+];
+
+function DayWithZeenovo() {
+  return <section className="section day-with" id="every-role"><Tag>Built For Every Role</Tag><ScrollFade as="h2">Every Person On Your Team,{" "}<br />One Platform.</ScrollFade><FeatureTabs groups={roles} /></section>;
 }
 
 function Features() {
   return <section className="section features" id="solutions"><Tag>ZeeNovo Clinical</Tag><ScrollFade as="h2">Guided Clinical Care,<br />From Intake to Follow-up.</ScrollFade><div className="feature-grid">
-    <ScrollFade as="article" className="feature-card feature-treatment"><Image className="feature-circle treatment-circle" src={asset.featureCircle} alt="" width={874} height={760} /><div className="feature-copy"><h3>Guided Treatment Paths</h3><p>Treatment and self-care options by condition.<br />The pharmacist confirms every recommendation.</p></div><TreatmentPreview /></ScrollFade>
-    <ScrollFade as="article" className="feature-card feature-provinces"><div className="feature-copy"><h3>Province-Specific Service Modules</h3><p>Assessments follow the scope and terminology<br />of each province&apos;s program.</p></div><ul>{["Ontario","Alberta","British Columbia","Saskatchewan","Nova Scotia","New Brunswick"].map(x=><li key={x}><Arrow />{x}</li>)}</ul><Image className="canada-map" src={asset.mapIcon} alt="" width={423} height={411} /></ScrollFade>
-    <ScrollFade as="article" className="feature-card feature-appointments"><div className="feature-copy"><h3>Minor Ailments Booking Flow</h3><p>Patients book online or walk in. Intake is<br />captured before the consultation starts.</p></div><a data-cta className="small-button" href="/products/clinical/minor-ailments"><Arrow /> Explore</a><AppointmentPreview animated /></ScrollFade>
-    <ScrollFade as="article" className="feature-card feature-flags"><Image className="feature-circle flags-circle" src={asset.featureCircle} alt="" width={874} height={760} /><div className="feature-copy"><h3>Red Flags</h3><p>Health flags and referral criteria appear<br />at the point the decision is made.</p></div><PatientFlagsPreview /></ScrollFade>
+    <ScrollFade as="article" className="feature-card feature-treatment"><Image className="feature-circle treatment-circle" src={asset.featureCircle} alt="" width={874} height={760} /><div className="feature-copy"><h3>Guided Screening</h3><p>Questions branch on every answer.<br />You confirm every treatment step.</p></div><TreatmentPreview /></ScrollFade>
+    <ScrollFade as="article" className="feature-card feature-provinces"><div className="feature-copy"><h3>Province-Aware Services</h3><p>Billing PINs, conditions and forms<br />follow your province.</p></div><ul>{["Ontario","Alberta","British Columbia","Saskatchewan","Nova Scotia","New Brunswick"].map(x=><li key={x}><Arrow />{x}</li>)}</ul><Image className="canada-map" src={asset.mapIcon} alt="" width={423} height={411} /></ScrollFade>
+    <ScrollFade as="article" className="feature-card feature-appointments"><div className="feature-copy"><h3>Intake Before the Visit</h3><p>Patients answer screening questions when they book.<br />Walk-ins join the same queue.</p></div><a data-cta className="small-button" href="/products/clinical/minor-ailments"><Arrow /> Explore</a><AppointmentPreview animated /></ScrollFade>
+    <ScrollFade as="article" className="feature-card feature-flags"><Image className="feature-circle flags-circle" src={asset.featureCircle} alt="" width={874} height={760} /><div className="feature-copy"><h3>Red Flags at the Decision Point</h3><p>Referral criteria appear where the decision is made.<br />Stop flags end the visit and record why.</p></div><PatientFlagsPreview /></ScrollFade>
   </div></section>;
 }
 
 const services = [
   ["Minor Ailments",asset.service1,"/products/clinical/minor-ailments"],
-  ["Vaccinations",asset.service2,"/products/clinical/vaccinations"],
-  ["Prescriptions",asset.service3,"/products/clinical/prescriptions-and-injections"],
-  ["Medication Review",asset.service4,"/products/clinical/medication-review"],
+  ["Vaccinations and Injections",asset.service2,"/products/clinical/vaccinations"],
+  ["Prescription Requests",asset.service3,"/products/clinical/prescriptions-and-injections"],
+  ["Medication Reviews · Early access",asset.service4,"/products/clinical/medication-review"],
 ] as const;
 
 function Services() {
@@ -136,26 +165,26 @@ function Services() {
 }
 
 function Philosophy() {
-  return <section className="philosophy-band"><div className="philosophy"><Tag dark>Our Philosophy</Tag><RevealSequence as="h2"><span data-reveal="rise">We believe every pharmacy</span>{" "}<span data-reveal="rise" style={{ "--sequence-delay": "80ms" } as CSSProperties}>should have the tools to deliver</span>{" "}<span data-reveal="rise" style={{ "--sequence-delay": "160ms" } as CSSProperties}>better care, <strong>every day.</strong></span></RevealSequence><ScrollFade as="div" className="philosophy-bottom" distance={12} duration={450} delay={240}><p>ZeeNovo builds the clinical, compliance and<br />patient tools a pharmacy needs to deliver<br />more care with the same team.</p><Button light href="/company/about">About ZeeNovo</Button></ScrollFade><Image className="philosophy-wave" src={asset.philosophyLines} alt="" width={181} height={643} /></div></section>;
+  return <section className="philosophy-band"><div className="philosophy"><Tag dark>Our Philosophy</Tag><RevealSequence as="h2"><span data-reveal="rise">The pharmacist decides.</span>{" "}<span data-reveal="rise" style={{ "--sequence-delay": "80ms" } as CSSProperties}>ZeeNovo guides</span>{" "}<span data-reveal="rise" style={{ "--sequence-delay": "160ms" } as CSSProperties}><strong>and records.</strong></span></RevealSequence><ScrollFade as="div" className="philosophy-bottom" distance={12} duration={450} delay={240}><p>Built by a practising Ontario pharmacist<br />and pharmacy owner. ZeeNovo never<br />makes a clinical decision.</p><Button light href="/company/about">About ZeeNovo</Button></ScrollFade><Image className="philosophy-wave" src={asset.philosophyLines} alt="" width={181} height={643} /></div></section>;
 }
 
 function CareBanner() {
-  return <ScrollFade as="section" className="care-banner"><Image className="care-background" src={asset.carePhoto} alt="Pharmacist preparing care" width={1204} height={602} /><Image className="care-overlay" src={asset.careOverlay} alt="" width={875} height={708} /><div className="care-label eye"><span className="care-label-icon"><Image src={asset.careEyeIcon} alt="" width={27} height={20} /></span>Conjunctivitis</div><div className="care-label bee"><span className="care-label-icon"><Image src={asset.careBeeIcon} alt="" width={23} height={23} /></span>Bee Sting</div><div className="care-copy"><h2>Making minor ailment care<br />quicker, simpler and more<br />accessible.</h2><p>Guided questions, red flag checks, treatment options and the physician notification, completed in one consultation.</p><Button href="/products/clinical/minor-ailments">See Minor Ailments</Button></div></ScrollFade>;
+  return <ScrollFade as="section" className="care-banner"><Image className="care-background" src={asset.carePhoto} alt="Pharmacist preparing care" width={1204} height={602} /><Image className="care-overlay" src={asset.careOverlay} alt="" width={875} height={708} /><div className="care-label eye"><span className="care-label-icon"><Image src={asset.careEyeIcon} alt="" width={27} height={20} /></span>Conjunctivitis</div><div className="care-label bee"><span className="care-label-icon"><Image src={asset.careBeeIcon} alt="" width={23} height={23} /></span>Insect Bites</div><div className="care-copy"><h2>Minor Ailment Visits,<br />Structured and<br />Fully Documented.</h2><p>Guided screening, red flags, saved directions, a generated prescription and physician fax in one visit. The pharmacist decides.</p><Button href="/products/clinical/minor-ailments">See Minor Ailments</Button></div></ScrollFade>;
 }
 
 function ReportCards() {
-  return <section className="section reporting" id="reporting"><Tag>ZeeNovo Assure</Tag><ScrollFade as="h2">Why Pharmacies Choose<br />ZeeNovo for Incident Reporting</ScrollFade><div className="report-grid">
-    <ScrollFade as="article" className="report-card fast"><h3>Fast &amp; Guided Reporting<br />Workflow</h3><p>Guided steps take a report from over<br />20 minutes to under 5.</p><ReportingTimerPreview /></ScrollFade>
-    <ScrollFade as="article" className="report-card analytics"><h3>Advanced Analytics &amp; Insights</h3><p>See error types, time-of-day patterns and the<br />medications involved as trends change.</p><AnalyticsPreview animated /></ScrollFade>
-    <ScrollFade as="article" className="report-card team"><h3>Multi-Pharmacy &amp; Team Support</h3><p>Track incidents by store, staff member, date<br />and severity in one dashboard.</p><Button href="/products/assure/incident-reporting">Explore</Button><Image className="team-wave" src={asset.reportingWave} alt="" width={787} height={181} /><div className="team-photo"><Cover src={asset.teamPhoto} alt="Healthcare team" /></div></ScrollFade>
-    <ScrollFade as="article" className="report-card nidr"><h3>NIDR-Aligned Reporting</h3><p>Built on National Incident Data Repository<br />fields and categories, ready for submission.</p><div className="nidr-logo"><Image src={asset.reportingLogo} alt="ISMP Canada" width={320} height={190} /></div></ScrollFade>
+  return <section className="section reporting" id="reporting"><Tag>ZeeNovo Assure</Tag><ScrollFade as="h2">A Safety Program<br />Your Team Will Use.</ScrollFade><div className="report-grid">
+    <ScrollFade as="article" className="report-card fast"><h3>Guided Incident<br />Reporting</h3><p>Structured fields for what happened, the process<br />stage, discovery and contributing factors.</p><ReportingTimerPreview /></ScrollFade>
+    <ScrollFade as="article" className="report-card analytics"><h3>CQI With a Paper Trail</h3><p>Link incidents, record the learning and give<br />every action an owner and a due date.</p><AnalyticsPreview animated /></ScrollFade>
+    <ScrollFade as="article" className="report-card team"><h3>SOPs and Staff Competency</h3><p>Assign the current SOP version, track sign-off<br />and assess staff by role.</p><Button href="/products/assure/incident-reporting">Explore</Button><Image className="team-wave" src={asset.reportingWave} alt="" width={787} height={181} /><div className="team-photo"><Cover src={asset.teamPhoto} alt="Healthcare team" /></div></ScrollFade>
+    <ScrollFade as="article" className="report-card nidr"><h3>Submitted to ISMP Canada</h3><p>Incident data goes to ISMP Canada&apos;s National<br />Incident Data Repository.</p><div className="nidr-logo"><Image src={asset.reportingLogo} alt="ISMP Canada" width={320} height={190} /></div></ScrollFade>
   </div></section>;
 }
 
 // Quotes supplied by ZeeNovo (staging build). Named contact, role and approval pending: see content/README.md, open item 4.
 const testimonials = [
-  { quote: "Since moving to ZeeNovo, our clinical and vaccination revenue has reached record levels, and the workflows run themselves.", name: "MapleMeds Pharmacies", role: "Ontario" },
-  { quote: "ZeeNovo made our day-to-day clinical operations much simpler, and our clinical revenue improved within weeks of going live.", name: "Oshawa Lakeview Pharmacy", role: "Ontario" },
+  { quote: "Since moving to ZeeNovo, our clinical and vaccination revenue has reached record levels.", name: "MapleMeds Pharmacies", role: "Ontario" },
+  { quote: "Our clinical revenue improved within weeks of going live.", name: "Oshawa Lakeview Pharmacy", role: "Ontario" },
 ] as const;
 
 function Testimonials() {
@@ -163,5 +192,5 @@ function Testimonials() {
 }
 
 export default function Home() {
-  return <main><Hero /><Trust /><HomeProductCards /><Values /><Features /><Services /><Philosophy /><CareBanner /><ReportCards /><Testimonials /><FinalCta animated /></main>;
+  return <main><Hero /><Trust /><HomeProductCards /><Values /><DayWithZeenovo /><Features /><Services /><Philosophy /><CareBanner /><ReportCards /><Testimonials /><FinalCta animated /></main>;
 }

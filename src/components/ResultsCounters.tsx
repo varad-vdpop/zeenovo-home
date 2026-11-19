@@ -5,12 +5,19 @@ import { animate, useInView, useReducedMotion } from "motion/react";
 import { counterTransition } from "@/lib/motion";
 import styles from "./ResultsCounters.module.css";
 
-const results = [
-  { value: 3, prefix: "", suffix: "×", label: "more clinical services billed" },
+// A result with `text` is a word, not a number: it is shown as is, without the count-up.
+type Result = { value: number; prefix: string; suffix: string; label: string; text?: string };
+
+const results: readonly Result[] = [
+  { value: 28, prefix: "", suffix: "", label: "minor ailments supported" },
+  { value: 1, prefix: "<", suffix: " day", label: "to set up" },
+  { value: 0, prefix: "", suffix: "", label: "users on every plan", text: "Unlimited" },
   { value: 15, prefix: "", suffix: " min", label: "saved per incident report" },
-  { value: 20, prefix: "", suffix: "+", label: "minor ailments supported" },
-  { value: 1, prefix: "<", suffix: " day", label: "average setup time" },
-] as const;
+];
+
+const display = (result: Result, progress = 1) => result.text ?? `${result.prefix}${Math.round(result.value * progress)}${result.suffix}`;
+// The word value is longer than the numbers, so it is set smaller to stay inside its column.
+const textStyle = { fontSize: "clamp(34px, 3.9vw, 56px)" } as const;
 
 export default function ResultsCounters() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -24,7 +31,7 @@ export default function ResultsCounters() {
       progress.current = value;
       results.forEach((result, index) => {
         const element = numberRefs.current[index];
-        if (element) element.textContent = `${result.prefix}${Math.round(result.value * value)}${result.suffix}`;
+        if (element) element.textContent = display(result, value);
       });
     }
 
@@ -48,8 +55,8 @@ export default function ResultsCounters() {
 
   return <section ref={sectionRef} className="stats" aria-label="ZeeNovo results">
     {results.map((result, index) => <div key={result.label}>
-      <b className={styles.number} aria-hidden="true" ref={element => { numberRefs.current[index] = element; }}>{result.prefix}{result.value}{result.suffix}</b>
-      <span className={styles.accessibleValue}>{result.prefix}{result.value}{result.suffix}</span>
+      <b className={styles.number} style={result.text ? textStyle : undefined} aria-hidden="true" ref={element => { numberRefs.current[index] = element; }}>{display(result)}</b>
+      <span className={styles.accessibleValue}>{display(result)}</span>
       <span>{result.label}</span>
     </div>)}
   </section>;

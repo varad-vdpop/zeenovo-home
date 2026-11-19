@@ -173,7 +173,7 @@
 .heroSignal span { color: var(--purple); font-size: 10px; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
 .heroSignal strong { font-size: 20px; letter-spacing: -.02em; }
 .heroSignal p { margin-top: 15px; color: #686471; font-size: 12px; line-height: 1.45; }
-.heroSignal em { position: absolute; top: 17px; right: 16px; padding: 7px 10px; border-radius: 999px; background: #ddf5ee; color: #2b176f; font-size: 10px; font-style: normal; font-weight: 650; }
+.heroSignal em { position: static; display: inline-flex; margin-top: 12px; padding: 7px 10px; border-radius: 999px; background: #ddf5ee; color: #2b176f; font-size: 10px; font-style: normal; font-weight: 650; }
 
 .ontarioMapFrame {
   position: absolute;
@@ -451,7 +451,6 @@
   .primaryButton,
   .secondaryButton { height: 46px; padding: 0 14px; font-size: 12px; }
   .heroSignal { top: auto; right: 24px; bottom: 244px; width: min(294px, calc(100% - 48px)); padding: 16px; }
-  .heroSignal em { top: 13px; right: 13px; }
   .ontarioMapFrame { top: auto; right: 28px; bottom: 31px; width: 205px; }
 
   .reality { width: calc(100% - 20px); margin-top: 55px; padding: 58px 20px 64px; border-radius: 22px; }
