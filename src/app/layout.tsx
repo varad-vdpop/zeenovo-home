@@ -36,6 +36,8 @@ const geistFooter = localFont({
   display: "swap",
 });
 
+const feedbackProject = process.env.NEXT_PUBLIC_FEEDBACK_PROJECT;
+
 export const metadata: Metadata = {
   title: "ZeeNovo | Clinical, compliance and booking software for Canadian pharmacies",
   description:
@@ -51,8 +53,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
           {children}
           <Footer />
         </div>
-        {/* YBM feedback widget, for review comments on every page. */}
-        <Script src="https://feedback.ybmos.app/widget.js" data-project="zeenovo-v2" />
+        {/* YBM feedback widget for review comments. It loads only where NEXT_PUBLIC_FEEDBACK_PROJECT is set
+            (the review site), never on the production site. next.config.ts allows its origin on the same condition. */}
+        {feedbackProject && <Script src="https://feedback.ybmos.app/widget.js" data-project={feedbackProject} />}
       </body>
     </html>
   );
