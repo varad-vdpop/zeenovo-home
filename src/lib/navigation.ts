@@ -20,7 +20,7 @@ export type NavigationMenu = {
 
 export const navigationMenus: readonly NavigationMenu[] = [
   {
-    label: "Products",
+    label: "Platform",
     href: "/products",
     sections: [
       {
@@ -60,13 +60,13 @@ export const navigationMenus: readonly NavigationMenu[] = [
         ],
       },
       {
-        label: "Solutions",
+        label: "About the Platform",
         links: [
-          { label: "Independent Pharmacies", href: "/solutions/independent-pharmacies" },
-          { label: "Pharmacy Owners", href: "/solutions/pharmacy-owners" },
-          { label: "Pharmacists", href: "/solutions/pharmacists" },
-          { label: "Patients", href: "/solutions/patients" },
-          { label: "Inspection Readiness", href: "/solutions/inspection-readiness" },
+          { label: "Platform Overview", href: "/platform" },
+          { label: "Why ZeeNovo", href: "/platform/why-zeenovo" },
+          { label: "Clinical Content We Maintain", href: "/platform/clinical-content" },
+          { label: "Integrations", href: "/platform/integrations" },
+          { label: "Switching to ZeeNovo", href: "/platform/switching-to-zeenovo" },
         ],
       },
     ],
@@ -84,21 +84,6 @@ export const navigationMenus: readonly NavigationMenu[] = [
           { label: "Patients", href: "/solutions/patients" },
           { label: "Inspection Readiness", href: "/solutions/inspection-readiness" },
           { label: "Multi-Location Groups", href: "/solutions/multi-location-groups", badge: "Launching soon" },
-        ],
-      },
-    ],
-  },
-  {
-    label: "Platform",
-    href: "/platform",
-    sections: [
-      {
-        label: "Platform",
-        links: [
-          { label: "Why ZeeNovo", href: "/platform/why-zeenovo" },
-          { label: "Clinical Content We Maintain", href: "/platform/clinical-content" },
-          { label: "Integrations", href: "/platform/integrations" },
-          { label: "Switching to ZeeNovo", href: "/platform/switching-to-zeenovo" },
         ],
       },
     ],

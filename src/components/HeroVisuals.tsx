@@ -15,7 +15,7 @@ const menuItems = [
 ] as const;
 
 const rowStep = 45.36486;
-const revenue = 285700;
+const revenue = 30700;
 const currency = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
@@ -118,7 +118,7 @@ export function HeroRevenuePreview() {
 
   return (
     <div className="hero-chart">
-      <div ref={panelRef} className={styles.chartPanel} role="img" aria-label="Monthly total revenue: $285,700, with an upward revenue trend">
+      <div ref={panelRef} className={styles.chartPanel} role="img" aria-label="Monthly total revenue: $30,700, with an upward revenue trend">
         <p className={styles.revenueLabel}>Total Revenue</p>
         <div className={styles.revenueAmount} aria-hidden="true">
           <div ref={amountRef} className={styles.counterMotion}>$0</div>

@@ -16,7 +16,7 @@
 .logo-ticker-track {
   display: flex;
   width: max-content;
-  animation: logo-ticker 34s linear infinite;
+  animation: logo-ticker 50s linear infinite;
   will-change: transform;
 }
 .logo-ticker-group {
@@ -28,12 +28,10 @@
 }
 .partner-logo { flex: 0 0 auto; height: 58px; min-width: 0; }
 .partner-logo:nth-child(1) { width: 226px; }
-.partner-logo:nth-child(2) { width: 160px; }
-.partner-logo:nth-child(3) { width: 205px; }
-.partner-logo:nth-child(4) { width: 156px; }
-.partner-logo:nth-child(5) { width: 190px; }
-.partner-logo:nth-child(6) { width: 152px; }
-.partner-logo:nth-child(7) { width: 124px; }
+.partner-logo:nth-child(2) { width: 205px; }
+.partner-logo:nth-child(3) { width: 190px; }
+.partner-logo:nth-child(4) { width: 152px; }
+.partner-logo:nth-child(5) { width: 124px; }
 .partner-logo img { object-fit: contain; }
 
 @keyframes logo-ticker {
@@ -540,3 +538,7 @@
   .hero { height: auto; padding: 162px 0 420px; }
   .hero-content { position: relative; top: auto; right: auto; left: auto; padding: 0 22px; }
 }
+
+/* National reporting card: generic submission list in place of the partner logo. */
+.nidr-logo { container-type: size; }
+.nidr-logo > [role="img"] { width: min(88cqw, 132cqh, 380px); }

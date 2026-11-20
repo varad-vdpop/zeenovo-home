@@ -10,7 +10,7 @@ import FeatureTabs, { type TabGroup } from "@/components/blocks/FeatureTabs";
 import { tileIcons } from "@/components/blocks/media";
 import type { CSSProperties } from "react";
 import { HeroMenuPreview, HeroRevenuePreview } from "@/components/HeroVisuals";
-import { TreatmentPreview, AppointmentPreview, PatientFlagsPreview, ReportingTimerPreview, AnalyticsPreview } from "@/components/ProductUiPreviews";
+import { TreatmentPreview, AppointmentPreview, PatientFlagsPreview, ReportingTimerPreview, AnalyticsPreview, NationalReportingPreview } from "@/components/ProductUiPreviews";
 
 function Arrow({ light = false }: { light?: boolean }) {
   return <span data-cta-icon aria-hidden="true" className={light ? "arrow arrow-light" : "arrow"}>↗</span>;
@@ -78,8 +78,10 @@ function Hero() {
   );
 }
 
-const logos = [asset.logo1, asset.logo2, asset.logo3, asset.logo4, asset.logo5, asset.logo6, asset.logo7];
-const logoNames = ["PharmaChoice", "Rexall", "OnPharm United", "Costco Pharmacy", "Whole Health", "Remedy’sRx", "IDA"];
+const logos = [asset.logo1, asset.logo3, asset.logo5, asset.logo6, asset.logo7];
+const logoNames = ["PharmaChoice", "OnPharm United", "Whole Health", "Remedy’sRx", "IDA"];
+// Four copies of the set so the track always covers the strip while it moves by two of them.
+const tickerCopies = [false, true, true, true];
 
 function Trust() {
   return (
@@ -88,8 +90,8 @@ function Trust() {
         <p>TRUSTED BY 50+ PHARMACIES</p>
         <div className="logo-strip">
           <div className="logo-ticker-track">
-            {[false, true].map((duplicate) => (
-              <div className="logo-ticker-group" aria-hidden={duplicate || undefined} key={duplicate ? "duplicate" : "original"}>
+            {tickerCopies.map((duplicate, copy) => (
+              <div className="logo-ticker-group" aria-hidden={duplicate || undefined} key={copy}>
                 {logos.map((src, index) => (
                   <div className="partner-logo" key={src}>
                     <Image src={src} alt={duplicate ? "" : logoNames[index]} fill sizes="(max-width: 760px) 220px, 260px" />
@@ -177,7 +179,7 @@ function ReportCards() {
     <ScrollFade as="article" className="report-card fast"><h3>Guided Incident<br />Reporting</h3><p>Structured fields for what happened, the process<br />stage, discovery and contributing factors.</p><ReportingTimerPreview /></ScrollFade>
     <ScrollFade as="article" className="report-card analytics"><h3>CQI With a Paper Trail</h3><p>Link incidents, record the learning and give<br />every action an owner and a due date.</p><AnalyticsPreview animated /></ScrollFade>
     <ScrollFade as="article" className="report-card team"><h3>SOPs and Staff Competency</h3><p>Assign the current SOP version, track sign-off<br />and assess staff by role.</p><Button href="/products/assure/incident-reporting">Explore</Button><Image className="team-wave" src={asset.reportingWave} alt="" width={787} height={181} /><div className="team-photo"><Cover src={asset.teamPhoto} alt="Healthcare team" /></div></ScrollFade>
-    <ScrollFade as="article" className="report-card nidr"><h3>Submitted to ISMP Canada</h3><p>Incident data goes to ISMP Canada&apos;s National<br />Incident Data Repository.</p><div className="nidr-logo"><Image src={asset.reportingLogo} alt="ISMP Canada" width={320} height={190} /></div></ScrollFade>
+    <ScrollFade as="article" className="report-card nidr"><h3>Submitted to ISMP Canada</h3><p>Incident data goes to ISMP Canada&apos;s National<br />Incident Data Repository.</p><div className="nidr-logo"><NationalReportingPreview /></div></ScrollFade>
   </div></section>;
 }
 

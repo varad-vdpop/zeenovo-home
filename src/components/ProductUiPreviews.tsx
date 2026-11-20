@@ -77,6 +77,27 @@ function StatusIcon({ completed = false }: { completed?: boolean }) {
   </svg>;
 }
 
+// Generic stand-in for the national reporting card: a submission list, no third-party logo.
+const submissions = [
+  { type: "Near miss", detail: "Wrong strength caught at final check", sent: true },
+  { type: "Incident", detail: "Label directions corrected", sent: true },
+  { type: "Near miss", detail: "Look-alike product selected", sent: false },
+];
+
+export function NationalReportingPreview() {
+  return <div className={styles.submitPanel} role="img" aria-label="Incident reports with patient details removed, sent for national reporting"><div className={styles.submitCard}>
+    <div className={styles.submitHeader}>
+      <div><div className={styles.submitHeading}>National reporting</div><div className={styles.submitSubtitle}>Patient details removed before sending</div></div>
+      <span className={styles.submitBadge}>Anonymised</span>
+    </div>
+    <div className={styles.submitRows}>{submissions.map(item => <div className={styles.submitRow} key={item.detail}>
+      <span className={`${styles.submitStatus} ${item.sent ? "" : styles.submitQueued}`}><StatusIcon completed={item.sent} /></span>
+      <div className={styles.submitText}><b>{item.type}</b><span>{item.detail}</span></div>
+      <span className={`${styles.submitPill} ${item.sent ? "" : styles.submitPillQueued}`}>{item.sent ? "Sent" : "Queued"}</span>
+    </div>)}</div>
+  </div></div>;
+}
+
 export function DoseRemindersPreview() {
   return <div className={styles.remindersPanel} role="img" aria-label="Dose reminders: Sarah Johnson, Amoxicillin 500mg, 1 tablet due today at 2 PM. Emily Rodriguez, Metformin 500mg, 2 tablets due tomorrow at 9 AM.">
     <div className={styles.reminderHeader}><div><div className={styles.reminderHeading}>Dose Reminders</div><div className={styles.reminderSubtitle}>Upcoming medication schedules</div></div><div className={styles.viewAll}>View All</div></div>
@@ -93,9 +114,9 @@ export function DoseRemindersPreview() {
 }
 
 export function PharmacyMetricsPreview() {
-  return <div className={styles.metricsPanel} role="img" aria-label="Total revenue $285,640, up 12 percent versus last month. Active patients 1,243, up 8 percent this month.">
+  return <div className={styles.metricsPanel} role="img" aria-label="Total revenue $30,640, up 12 percent versus last month. Active patients 1,243, up 8 percent this month.">
     {[
-      { label: "Total Revenue", value: "$285,640", growth: "+12%", period: "vs last month", icon: "dollar" },
+      { label: "Total Revenue", value: "$30,640", growth: "+12%", period: "vs last month", icon: "dollar" },
       { label: "Active Patients", value: "1,243", growth: "+8%", period: "this month", icon: "patients" },
     ].map(item => <div className={styles.metricCard} key={item.label}>
       <div className={styles.metricLabel}>{item.label}<Icon name={item.icon} /></div>

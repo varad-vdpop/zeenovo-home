@@ -4,7 +4,7 @@ import { asset } from "@/lib/assets";
 import styles from "./Footer.module.css";
 
 const footerGroups = [
-  { heading: "Our Products", items: ["ZeeNovo Clinical", "ZeeNovo Assure", "ZeeNovo Magistral", "ZeeNovo Sites", "Patient Portal", "Voice Booking"] },
+  { heading: "Our Platform", items: ["ZeeNovo Clinical", "ZeeNovo Assure", "ZeeNovo Magistral", "ZeeNovo Sites", "Patient Portal", "Voice Booking"] },
   { heading: "Company", items: ["About", "Pricing", "Blog", "Contact Us"] },
   { heading: "Logins", items: ["Start Free Trial", "Patient Login", "Clinical Login", "Assure Login"] },
   { heading: "Legal", items: ["Privacy Policy", "Terms & Conditions", "Security & Privacy", "Accessibility"] },
