@@ -7,6 +7,8 @@ import { art } from "@/components/blocks/media";
 import type { CardsBlock, CtaBlock } from "@/components/blocks/types";
 import styles from "./page.module.css";
 import OntarioMotion from "./OntarioMotion";
+import Icon from "@/components/Icon";
+import { Fragment } from "react";
 
 // Province template. Same layout and motion as the approved Ontario page.
 // The Ontario-only map and program-card artwork are swapped for the Canada map
@@ -24,7 +26,7 @@ export type ProvinceContent = {
 };
 
 function Arrow() {
-  return <span data-cta-icon aria-hidden="true">↗</span>;
+  return <span data-cta-icon aria-hidden="true"><Icon /></span>;
 }
 
 export default function ProvincePage({ province }: { province: ProvinceContent }) {
@@ -45,7 +47,7 @@ export default function ProvincePage({ province }: { province: ProvinceContent }
         <Image className={styles.heroArt} src={asset.provinces.heroArt} alt="" width={574} height={816} priority />
       </div>
       <div className={styles.heroCopy} data-reveal>
-        <p className={styles.eyebrow}>{province.name} · Canada</p>
+        <span className="tag hero-pill"><span aria-hidden="true">★</span>{province.name} · Canada</span>
         <h1 id="province-title">{lines(province.title)}</h1>
         <p className={styles.heroDescription}>{province.description}</p>
         <div className={styles.heroActions}>
@@ -55,7 +57,7 @@ export default function ProvincePage({ province }: { province: ProvinceContent }
       </div>
       <div className={styles.heroSignal} data-reveal>
         <div><span>{province.signal.label}</span><strong>{province.signal.title}</strong></div>
-        <p>{province.signal.flow}</p>
+        <p>{province.signal.flow.split(" → ").map((step, index) => <Fragment key={step}>{index > 0 && <Icon name="arrowRight" style={{ margin: "0 4px" }} />}{step}</Fragment>)}</p>
         <em>{province.signal.badge}</em>
       </div>
       <div className={styles.ontarioMapFrame} data-reveal>

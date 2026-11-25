@@ -1,0 +1,9 @@
+.art { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+/* The home card's arcs, scaled to cover the frame from its bottom-right corner. They are whole ellipses drawn past
+   their box (overflow visible), so moving them down with --arcs-shift never leaves a straight cut edge: the curves
+   simply start lower, and only the frame's own edges clip them. */
+.arcs { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; transform: translateY(var(--arcs-shift, 0px)); fill: none; stroke: rgb(255 255 255 / 24%); stroke-width: 1; }
+.dark .arcs { stroke: rgb(1 52 63 / 18%); }
+/* The phone on the right, sitting on the bottom edge and cut off just below the spoken request ("Hey, can you
+   book..."), about two thirds of the way down the image, so the time and date chips stay out of view. */
+.phone { position: absolute; right: var(--phone-right, -24px); bottom: 0; width: var(--phone-width, 58%); height: auto; transform: translateY(29.2%); }

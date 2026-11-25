@@ -1,10 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { animate, motion, useInView, useReducedMotion } from "motion/react";
 import { counterTransition } from "@/lib/motion";
-import { clinicalTimerArc } from "./ClinicalHeroRing";
 import styles from "./ClinicalHeroVisuals.module.css";
 
 const flags = [
@@ -51,13 +50,14 @@ export function ClinicalHeroFlags() {
 }
 
 const timerTransition = { ...counterTransition, delay: 0.3 };
-const elapsedSeconds = 4 * 60 + 53;
+// Time per appointment drops from 15 minutes to 3: the ring empties to 3/15 while the minutes count down.
+const fromMinutes = 15;
+const toMinutes = 3;
 
 export function ClinicalHeroTimer() {
   const ref = useRef<HTMLDivElement>(null);
   const valueRef = useRef<HTMLSpanElement>(null);
-  const progress = useRef(0);
-  const id = useId();
+  const progress = useRef(fromMinutes);
   const inView = useInView(ref, { once: true, amount: 0.25 });
   const reduceMotion = useReducedMotion();
   const reveal = inView || !!reduceMotion;
@@ -66,35 +66,31 @@ export function ClinicalHeroTimer() {
     if (!inView || !valueRef.current) return;
     const update = (value: number) => {
       progress.current = value;
-      const seconds = Math.round(value);
-      if (valueRef.current) valueRef.current.textContent = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+      if (valueRef.current) valueRef.current.textContent = String(Math.round(value));
     };
-    if (reduceMotion || progress.current === elapsedSeconds) {
-      update(elapsedSeconds);
+    if (reduceMotion || progress.current === toMinutes) {
+      update(toMinutes);
       return;
     }
-    const controls = animate(progress.current, elapsedSeconds, {
+    const controls = animate(progress.current, toMinutes, {
       ...timerTransition,
       onUpdate: update,
-      onComplete: () => update(elapsedSeconds),
+      onComplete: () => update(toMinutes),
     });
     return () => controls.stop();
   }, [inView, reduceMotion]);
 
-  return <div ref={ref} className={styles.timerPanel} role="img" aria-label="Fast and guided reporting workflow: 4 minutes 53 seconds">
-    <div className={styles.timerHeading}>Fast &amp; Guided<br />Reporting Workflow</div>
-    <svg className={styles.timerSvg} viewBox="0 375 129.756 163.5" fill="none" aria-hidden="true">
-      <defs>
-        <linearGradient id={`${id}-gradient`} x1="60.797" y1="437.469" x2="86.3299" y2="475.43" gradientUnits="userSpaceOnUse"><stop stopColor="#e5ecff" stopOpacity="0" /><stop offset="1" stopColor="#e5ecff" /></linearGradient>
-        <mask id={`${id}-sweep`} maskUnits="userSpaceOnUse" x="0" y="425" width="115" height="105">
-          <motion.path className={styles.sweep} d="M58.6514 436.2543A39.1757 39.1757 0 1 1 31.8338 503.988" stroke="white" strokeWidth="12" strokeLinecap="round"
-            initial={{ pathLength: 0 }} animate={{ pathLength: reveal ? 1 : 0 }}
-            transition={reduceMotion ? { duration: 0 } : timerTransition} />
-        </mask>
-      </defs>
-      <circle cx="58.6514" cy="475.43" r="39.1757" stroke="#7f74e1" strokeWidth="6.8132" />
-      <path d={clinicalTimerArc} fill={`url(#${id}-gradient)`} mask={`url(#${id}-sweep)`} />
+  return <div ref={ref} className={styles.timerPanel} role="img" aria-label={`Time per appointment reduced from ${fromMinutes} minutes to ${toMinutes} minutes`}>
+    <div className={styles.timerHeading}>Time per<br />appointment</div>
+    <svg className={styles.timerSvg} viewBox="0 0 129.756 163.5" fill="none" aria-hidden="true">
+      <circle cx="64.878" cy="100.43" r="39.1757" stroke="#7f74e1" strokeWidth="6.8132" />
+      <motion.circle className={styles.timerRing} cx="64.878" cy="100.43" r="39.1757" stroke="#e5ecff" strokeWidth="6.8132" strokeLinecap="round"
+        initial={{ pathLength: 1 }} animate={{ pathLength: reveal ? toMinutes / fromMinutes : 1 }}
+        transition={reduceMotion ? { duration: 0 } : timerTransition} />
     </svg>
-    <div className={styles.timerValue} aria-hidden="true"><span className={styles.counterMotion} ref={valueRef}>0:00</span><span className={styles.counterStatic}>4:53</span></div>
+    <div className={styles.timerValue} aria-hidden="true">
+      <span className={styles.timerMinutes}><span className={styles.counterMotion} ref={valueRef}>{fromMinutes}</span><span className={styles.counterStatic}>{toMinutes}</span><small>min</small></span>
+      <span className={styles.timerWas}>from {fromMinutes} min</span>
+    </div>
   </div>;
 }

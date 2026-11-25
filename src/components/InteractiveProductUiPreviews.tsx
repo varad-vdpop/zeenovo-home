@@ -4,29 +4,32 @@ import Image from "next/image";
 import { useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import styles from "./ProductUiPreviews.module.css";
+import LineIcon from "@/components/Icon";
 
 function Icon({ name }: { name: string }) {
   return <Image className={styles.icon} src={`/assets/ui-previews/${name}.svg`} alt="" width={24} height={24} />;
 }
 
+// The pharmacy's own Assure workspace: SOPs assigned by role, with sign-off progress.
 const sopRows = [
-  ["Medication Dispensing", "Dispensing", "All Pharmacies", "v2"],
-  ["Controlled Substance Handling", "Compliance", "Ontario", "v1"],
-  ["Patient Counselling", "Clinical", "All Pharmacies", "v3"],
-  ["Compounding Safety Standards", "Safety", "Ontario", "v1"],
+  ["Medication Dispensing", "All staff", "12 / 12", "v2"],
+  ["Controlled Substance Handling", "Pharmacists", "4 / 5", "v1"],
+  ["Patient Counselling", "Pharmacists", "5 / 5", "v3"],
+  ["Compounding Safety Standards", "Technicians", "3 / 6", "v1"],
 ];
 const sidebarRows = [
-  ["Pharmacies", "/assets/hero-ui/pharmacies.svg"],
-  ["SOP Templates", "/assets/hero-ui/document.svg"],
-  ["Medicines", "/assets/hero-ui/medicines.svg"],
-  ["Drugs", "/assets/hero-ui/drugs.svg"],
-  ["Doctors", "/assets/hero-ui/doctor.svg"],
+  ["Incident Reports", "/assets/hero-ui/flag.svg"],
+  ["SOP Library", "/assets/hero-ui/document.svg"],
+  ["CQI Actions", "/assets/hero-ui/check.svg"],
+  ["Staff Assessments", "/assets/hero-ui/users.svg"],
+  ["Self-Assessment", "/assets/hero-ui/clipboard.svg"],
   ["Analytics", "/assets/ui-previews/analytics.svg"],
-  ["Pending Approvals", "/assets/ui-previews/clock.svg"],
-  ["Category Settings", "/assets/ui-previews/settings.svg"],
+  ["Pending Sign-offs", "/assets/ui-previews/clock.svg"],
+  ["Settings", "/assets/ui-previews/settings.svg"],
 ];
 
-export function AssureDashboardPreview() {
+/** `inline` drops the homepage product-card frame so the panel can sit inside other layouts (the feature bento). */
+export function AssureDashboardPreview({ inline = false }: { inline?: boolean } = {}) {
   const [activeRow, setActiveRow] = useState(1);
   const [instant, setInstant] = useState(false);
   const [query, setQuery] = useState("");
@@ -34,11 +37,11 @@ export function AssureDashboardPreview() {
   const reducedMotion = useReducedMotion();
   const visibleRows = sopRows.filter(row => row.join(" ").toLowerCase().includes(query.trim().toLowerCase()));
 
-  return <div className="assure-dashboard">
+  return <div className={inline ? styles.sopInline : "assure-dashboard"}>
     <div className={styles.sopPanel} role="group" aria-label="ZeeNovo Assure dashboard preview">
       <div className={styles.sopHeader}>
         <Image className={styles.sopLogo} src="/assets/ui-previews/assure-logo.png" alt="" width={119} height={36} />
-        <div className={styles.breadcrumb}>Home <span>›</span><b>SOP Templates</b></div>
+        <div className={styles.breadcrumb}>Home <span><LineIcon name="chevronRight" /></span><b>SOP Library</b></div>
       </div>
       <div className={styles.sopSidebar}>
         <motion.div className={styles.sopIndicator} aria-hidden="true" initial={false}
@@ -56,16 +59,16 @@ export function AssureDashboardPreview() {
       <div className={styles.sopContent}>
         <div className={styles.sopSearch}>
           <button type="button" className={styles.searchButton} aria-label="Focus SOP search" onClick={() => searchRef.current?.focus()}><Icon name="search" /></button>
-          <input ref={searchRef} type="search" aria-label="Search SOP templates" placeholder="Search SOP templates..." value={query} onChange={event => setQuery(event.target.value)} />
+          <input ref={searchRef} type="search" aria-label="Search SOPs" placeholder="Search SOPs..." value={query} onChange={event => setQuery(event.target.value)} />
         </div>
         <div className={styles.sopFilters}>
           <div className={styles.filterSelected}><Icon name="filter" />View Filters</div>
-          <div>Category - Dispensing</div><div>Province - Ontario</div>
+          <div>Role - All staff</div><div>Due - This month</div>
         </div>
         <table className={styles.sopTable}>
-          <thead><tr>{["SOP title", "Category", "Province", "Latest version"].map(label => <th key={label}>{label}</th>)}</tr></thead>
+          <thead><tr>{["SOP title", "Assigned to", "Signed off", "Version"].map(label => <th key={label}>{label}</th>)}</tr></thead>
           <tbody>{visibleRows.map(row => <tr key={row[0]}>{row.map((value, index) => <td key={index}>{value}</td>)}</tr>)}
-            {visibleRows.length === 0 && <tr><td colSpan={4}>No matching templates</td></tr>}
+            {visibleRows.length === 0 && <tr><td colSpan={4}>No matching SOPs</td></tr>}
           </tbody>
         </table>
         <div className={styles.sopPagination}>10 <span>50</span> 100</div>

@@ -35,19 +35,20 @@
 .tag {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  height: 33px;
+  gap: 7px;
+  height: 30px;
   padding: 0 12px;
-  border: 1px solid #e0e0e0;
+  border: 1px solid #dedee3;
   border-radius: 40px;
   color: #16133a;
   font-size: 12px;
   font-weight: 500;
+  line-height: 1;
 }
 
-.tag span { color: #2b108e; font-size: 19px; line-height: 1; }
+.tag span { font-size: 15px; line-height: 1; }
 
-.text { max-width: 560px; margin: -2px 0 3px; color: rgb(22 19 58 / 74%); font-size: 17px; line-height: 1.55; }
+.text { max-width: 560px; margin: -2px 0 3px; color: rgb(22 19 58 / 74%); font-size: 17px; line-height: 1.55; text-wrap: balance; }
 /* With a body line the heading grows by about 40px; the cards and portrait move down and the band grows to match. */
 .withText { height: 672px; }
 .withText .reminders,

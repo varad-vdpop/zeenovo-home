@@ -1,72 +1,80 @@
 import Image from "next/image";
 import Link from "next/link";
 import { asset } from "@/lib/assets";
+import { navigationMenus, type NavigationLink } from "@/lib/navigation";
 import styles from "./Footer.module.css";
+import Icon from "@/components/Icon";
 
-const footerGroups = [
-  { heading: "Our Platform", items: ["ZeeNovo Clinical", "ZeeNovo Assure", "ZeeNovo Magistral", "ZeeNovo Sites", "Patient Portal", "Voice Booking"] },
-  { heading: "Company", items: ["About", "Pricing", "Blog", "Contact Us"] },
-  { heading: "Logins", items: ["Start Free Trial", "Patient Login", "Clinical Login", "Assure Login"] },
-  { heading: "Legal", items: ["Privacy Policy", "Terms & Conditions", "Security & Privacy", "Accessibility"] },
-] as const;
+type Group = { heading: string; links: readonly NavigationLink[] };
 
-const footerHrefs: Record<string, string> = {
-  "ZeeNovo Clinical": "/products/clinical",
-  "ZeeNovo Assure": "/products/assure",
-  "ZeeNovo Magistral": "/products/magistral",
-  "ZeeNovo Sites": "/products/sites",
-  "Patient Portal": "/products/patient-portal",
-  "Voice Booking": "/products/voice-based-appointment-booking",
-  About: "/company/about",
-  Pricing: "/pricing",
-  Blog: "/blog",
-  "Contact Us": "/company/contact",
-  "Start Free Trial": "https://auth.zeenovo.com/signup",
-  "Patient Login": "https://patient.zeenovo.com/login",
-  "Assure Login": "https://assure.zeenovo.com/login",
-  "Clinical Login": "https://pharmacy.zeenovo.com/login",
-  "Privacy Policy": "/trust/privacy-policy",
-  "Terms & Conditions": "/trust/terms-and-conditions",
-  "Security & Privacy": "/trust/security-and-compliance",
-  Accessibility: "/trust/accessibility",
+// Every link in the main navigation, grouped the same way. A menu with one section takes the menu's name
+// ("Solutions", not "Solutions for"); menus without a dropdown (Pricing) join the Company group.
+const topLevelLinks = navigationMenus.filter(menu => menu.sections.length === 0).map(menu => ({ label: menu.label, href: menu.href }));
+const navGroups: Group[] = navigationMenus.flatMap(menu => menu.sections.map(section => {
+  const heading = menu.sections.length === 1 ? menu.label : section.label;
+  return { heading, links: heading === "Company" ? [...section.links, ...topLevelLinks] : section.links };
+}));
+
+const logins: Group = {
+  heading: "Logins",
+  links: [
+    { label: "Start Free Trial", href: "https://auth.zeenovo.com/signup" },
+    { label: "Patient Login", href: "https://patient.zeenovo.com/login" },
+    { label: "Pharmacy Login", href: "https://pharmacy.zeenovo.com/login" },
+    { label: "Assure Login", href: "https://assure.zeenovo.com/login" },
+  ],
 };
+
+// One grid cell per group, in navigation order: each row of headings lines up across the footer.
+const groups: Group[] = [...navGroups, logins];
+
+function FooterLink({ link }: { link: NavigationLink }) {
+  return link.href.startsWith("http")
+    ? <a href={link.href}>{link.label}</a>
+    : <Link href={link.href}>{link.label}</Link>;
+}
 
 export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
         <div className={styles.top}>
-          <div className={styles.brand} aria-label="ZeeNovo">
-            <span className={styles.markFrame} aria-hidden="true">
-              <Image src={asset.footerMark} alt="" width={42.5759} height={39.1346} />
-            </span>
-            <span>ZeeNovo</span>
+          <div>
+            <Link className={styles.brand} href="/" aria-label="ZeeNovo home">
+              <span className={styles.markFrame} aria-hidden="true">
+                <Image src={asset.footerMark} alt="" width={42.5759} height={39.1346} />
+              </span>
+              <span aria-hidden="true">ZeeNovo</span>
+            </Link>
+            <p className={styles.tagline}>Clinical services, safety and booking software for Canadian pharmacies.</p>
           </div>
+          <div className={styles.contact}>
+            <a data-cta className={styles.demo} href="/book-a-demo">
+              Book a Demo<Icon name="arrowRight" size={18} />
+            </a>
+            <a className={styles.email} href="mailto:contact@zeenovo.com">contact@zeenovo.com</a>
+          </div>
+        </div>
 
-          <div className={styles.groups}>
-            {footerGroups.map((group, index) => (
-              <div className={styles.group} key={group.heading}>
-                <h2>{group.heading}</h2>
-                <div className={styles.items}>
-                  {group.items.map((item) => <Link href={footerHrefs[item] ?? "#"} key={item}><span>{item}</span></Link>)}
-                </div>
-                {index < footerGroups.length - 1 && (
-                  <Image className={styles.columnDivider} src={asset.footerColumnDivider} alt="" width={169} height={1.24242} />
-                )}
-              </div>
-            ))}
-          </div>
+        <nav className={styles.groups} aria-label="Footer">
+          {groups.map(group => (
+            <div className={styles.group} key={group.heading}>
+              <h2>{group.heading}</h2>
+              <ul className={styles.items}>
+                {group.links.map(link => <li key={link.href + link.label}><FooterLink link={link} /></li>)}
+              </ul>
+            </div>
+          ))}
+        </nav>
+
+        <div className={styles.bar}>
+          <p>© 2026 ZeeNovo Health Inc. All rights reserved.</p>
         </div>
       </div>
 
-      {/* The divider, wordmark and copyright follow the link columns, so longer columns never run into them. */}
-      <div className={styles.bottom}>
-        <div className={styles.dividerFrame} aria-hidden="true">
-          <Image src={asset.footerDivider} alt="" width={1195} height={1.24242} />
-        </div>
-        <span className={styles.wordmark} aria-hidden="true">ZeeNovo</span>
-        <p className={styles.copyright}>Copyright © 2026 ZeeNovo Health Inc.</p>
-      </div>
+      {/* Oversized white wordmark, as wide as the content (so it stops growing at the content's max width),
+          cropped by the bottom edge of the footer. */}
+      <div className={styles.wordmarkFrame} aria-hidden="true"><span className={styles.wordmark}>ZeeNovo</span></div>
     </footer>
   );
 }

@@ -10,6 +10,7 @@ import styles from "./page.module.css";
 import IncidentAnalyticsPanels from "./IncidentAnalyticsPanels";
 import AfterVisitPanels from "./AfterVisitPanels";
 import IncidentDashboard from "./IncidentDashboard";
+import Icon from "@/components/Icon";
 
 const pageAsset = asset.incidentReporting;
 
@@ -28,7 +29,7 @@ const caseFeatures: Block = {
 };
 
 function Arrow() {
-  return <span data-cta-icon aria-hidden="true">↗</span>;
+  return <span data-cta-icon aria-hidden="true"><Icon /></span>;
 }
 
 function Tag({ children }: { children: React.ReactNode }) {
@@ -42,7 +43,7 @@ function Hero() {
         <Image className={styles.heroArt} src={pageAsset.heroArt} alt="" fill sizes="(max-width: 760px) 100vw, 1406px" priority />
       </div>
       <div className={styles.heroCopy}>
-        <p className={styles.eyebrow}>ZeeNovo Assure</p>
+        <span className="tag hero-pill"><span aria-hidden="true">★</span>ZeeNovo Assure</span>
         <h1 id="incident-title">Record the close call.<br />Follow it through<br />to the fix.</h1>
         <p className={styles.heroDescription}>Guided incident and near-miss reporting, with the learning, the corrective action and the CQI follow-up on one record.</p>
         <div className={styles.heroActions}>
@@ -130,22 +131,9 @@ const nationalReporting: Block = {
   action: { label: "Learn About NIDR", href: "https://ismpcanada.ca/resource/nidr/" },
 };
 
-function Cta() {
-  return (
-    <section className={styles.cta} aria-labelledby="incident-cta-title">
-      <Image className={styles.ctaWaves} src={pageAsset.ctaWaves} alt="" width={1290} height={369} />
-      <div className={styles.ctaHeading}>
-        <Tag>Built for pharmacy safety</Tag>
-        <h2 id="incident-cta-title">Report in minutes.<br />Improve every month.</h2>
-        <Link data-cta href="/book-a-demo"><Arrow />Book an Assure Demo</Link>
-      </div>
-      <Image className={styles.reminders} src={pageAsset.doseReminders} alt="Dose reminders module" width={415} height={290} />
-      <Image className={styles.ctaPerson} src={pageAsset.ctaPerson} alt="Pharmacist reviewing ZeeNovo on a tablet" width={319} height={382} />
-      <Image className={styles.metrics} src={pageAsset.metrics} alt="Pharmacy revenue and active patient metrics" width={231} height={278} />
-    </section>
-  );
-}
+// Closing call to action: the site's shared CTA block, like every other page.
+const closingCta: Block = { type: "cta", eyebrow: "Built for pharmacy safety", title: "Report in minutes. / Improve every month.", action: { label: "Book an Assure Demo", href: "/book-a-demo" } };
 
 export default function IncidentReportingPage() {
-  return <main className={styles.page}><Hero /><Analytics /><Compliance /><AfterVisit /><Process /><div style={{ "--block-gutter": "60px" } as React.CSSProperties}><BlockList blocks={[caseFeatures, nationalReporting]} /></div><Cta /></main>;
+  return <main className={styles.page}><Hero /><Analytics /><Compliance /><AfterVisit /><Process /><div style={{ "--block-gutter": "60px" } as React.CSSProperties}><BlockList blocks={[caseFeatures, nationalReporting, closingCta]} /></div></main>;
 }

@@ -1,0 +1,29 @@
+.art {
+  display: block;
+  overflow: hidden;
+  pointer-events: none;
+  contain: layout paint;
+}
+
+/* A faint copy of each line stays still behind the moving one. Its opacity is set per artwork with --line-base. */
+.art :global(.la-base) { opacity: var(--line-base, 0.3); }
+
+/* The line on top is drawn in full apart from a short break (3% of the line, about 80px) that travels along it. pathLength="100"
+   makes the pattern a share of that line's own length; --dur (set from the line's length, so every break moves at the
+   same pace) and --d (where in the loop each line starts) come from LineArt.tsx and the generated markup. */
+.art :global(.la-line) {
+  stroke-dasharray: 100 3;
+  animation: line-art-gap var(--dur, 20s) linear infinite;
+  animation-delay: calc(var(--d) * var(--dur, 20s) * -1);
+  animation-play-state: paused;
+}
+.art[data-running="true"] :global(.la-line) { animation-play-state: running; }
+
+@keyframes line-art-gap {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -103; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .art :global(.la-line) { animation: none; stroke-dasharray: none; }
+}

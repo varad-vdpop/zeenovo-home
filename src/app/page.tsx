@@ -4,16 +4,23 @@ import FinalCta from "@/components/FinalCta";
 import HomeProductCards from "@/components/HomeProductCards";
 import ResultsCounters from "@/components/ResultsCounters";
 import HeroPattern from "@/components/HeroPattern";
+import LineArt from "@/components/LineArt";
+import { valuesWave } from "@/components/lineArt/valuesWave";
+import { philosophyLines } from "@/components/lineArt/philosophyLines";
 import ScrollFade from "@/components/ScrollFade";
 import RevealSequence from "@/components/RevealSequence";
-import FeatureTabs, { type TabGroup } from "@/components/blocks/FeatureTabs";
+import type { TabGroup } from "@/components/blocks/FeatureTabs";
+import RoleShowcase from "@/components/RoleShowcase";
 import { tileIcons } from "@/components/blocks/media";
 import type { CSSProperties } from "react";
 import { HeroMenuPreview, HeroRevenuePreview } from "@/components/HeroVisuals";
+import { PoctScene, FormsScene } from "@/components/ServiceScenes";
+import { AssignSopScene, TeamAssessmentScene, SafetyScoreScene } from "@/components/AssureProgramScenes";
 import { TreatmentPreview, AppointmentPreview, PatientFlagsPreview, ReportingTimerPreview, AnalyticsPreview, NationalReportingPreview } from "@/components/ProductUiPreviews";
+import Icon from "@/components/Icon";
 
 function Arrow({ light = false }: { light?: boolean }) {
-  return <span data-cta-icon aria-hidden="true" className={light ? "arrow arrow-light" : "arrow"}>↗</span>;
+  return <span data-cta-icon aria-hidden="true" className={light ? "arrow arrow-light" : "arrow"}><Icon /></span>;
 }
 
 function Button({
@@ -67,7 +74,7 @@ function Hero() {
         <span>50+ Pharmacies on ZeeNovo</span>
       </div>
       <div className="hero-content">
-        <h1 className="hero-enter hero-enter-heading">Clinical Services,<br />Safety and Booking.<br /><strong>One Platform.</strong></h1>
+        <h1 className="hero-enter hero-enter-heading">Helping Pharmacies<br />Deliver Better Care,<br /><strong>Every Day.</strong></h1>
         <p className="hero-enter hero-enter-description">Online booking, guided clinical visits, automated follow-up and a complete safety program for Canadian pharmacies. Unlimited users. Website included.</p>
         <Button className="hero-enter hero-enter-cta" href="https://auth.zeenovo.com/signup">Start Free Trial</Button>
       </div>
@@ -116,26 +123,26 @@ const values = [
 ] as const;
 
 function Values() {
-  return <section className="values" id="why-zeenovo"><Tag>Why ZeeNovo</Tag><h2>Built Around Pharmacy Practice.</h2><div className="values-track"><Image src={asset.valuesCompleteWave} alt="" width={1440} height={181} /><div className="values-list">{values.map(([label, icon], index)=><ScrollFade as="div" key={label} distance={12} duration={450} delay={index * 60} responsiveDelay><p>{label}</p><Image src={icon} alt="" width={50} height={50} /></ScrollFade>)}</div></div></section>;
+  return <section className="values" id="why-zeenovo"><Tag>Why ZeeNovo</Tag><h2>Built Around Pharmacy Practice.</h2><div className="values-track"><LineArt art={valuesWave} className="values-wave" /><div className="values-list">{values.map(([label, icon], index)=><ScrollFade as="div" key={label} distance={12} duration={450} delay={index * 60} responsiveDelay><p>{label}</p><Image src={icon} alt="" width={50} height={50} /></ScrollFade>)}</div></div></section>;
 }
 
 const roles: TabGroup[] = [
-  { title: "Technician", text: "Intake done before the pharmacist starts.", items: [
+  { title: "Technician", text: "Walk-ins and online bookings share one queue, and screening is captured before the pharmacist starts.", items: [
     { title: "Walk-in queue", text: "Bring walk-ins into the same queue as online bookings.", src: tileIcons.waitlist },
     { title: "Screening captured", text: "Complete the screening questions and mark the visit ready for the pharmacist.", src: tileIcons.screening },
     { title: "Near misses logged", text: "Log a near miss at the final check, while it’s fresh.", src: tileIcons.flag },
   ] },
-  { title: "Pharmacist", text: "Clinical judgement, without the admin.", items: [
+  { title: "Pharmacist", text: "Screening answers, flags and saved directions are ready when the visit opens. You make every clinical decision.", items: [
     { title: "Answers on screen", text: "Screening answers, health flags and allergies are ready when the visit opens.", src: tileIcons.profile },
     { title: "Saved directions", text: "Pick the medicine and directions from your saved presets. You decide.", src: tileIcons.treatment },
     { title: "Fax and billing PIN", text: "Fax the physician from the visit and see the billing PIN for the service.", src: tileIcons.docEfax },
   ] },
-  { title: "Owner", text: "Monthly performance in one view.", items: [
+  { title: "Owner", text: "Revenue by service and pharmacist, team productivity and open safety actions, together in one monthly view.", items: [
     { title: "Estimated revenue", text: "By service and by pharmacist, from completed visits.", src: tileIcons.trend },
     { title: "Team productivity", text: "Staff productivity, follow-up status and top services.", src: tileIcons.group },
     { title: "Safety actions", text: "Open incidents, overdue SOP sign-offs and CQI follow-ups.", src: tileIcons.shield },
   ] },
-  { title: "Patient", text: "Book any time, by web or voice.", items: [
+  { title: "Patient", text: "Book for the whole family online or by voice, answer questions before arriving and get follow-ups by email.", items: [
     { title: "Online or voice booking", text: "Book for the whole family from the pharmacy website or by speaking.", src: tileIcons.calendar },
     { title: "Questions before the visit", text: "Answer the screening questions online before arriving.", src: tileIcons.intake },
     { title: "Follow-up and reminders", text: "Follow-up questions and next-dose reminders arrive by email.", src: tileIcons.followup },
@@ -143,7 +150,7 @@ const roles: TabGroup[] = [
 ];
 
 function DayWithZeenovo() {
-  return <section className="section day-with" id="every-role"><Tag>Built For Every Role</Tag><ScrollFade as="h2">Every Person On Your Team,{" "}<br />One Platform.</ScrollFade><FeatureTabs groups={roles} /></section>;
+  return <section className="section day-with" id="every-role"><Tag>Built For Every Role</Tag><ScrollFade as="h2">Every Person On Your Team,{" "}<br />One Platform.</ScrollFade><ScrollFade as="p" className="day-with-lede">Technicians, pharmacists, owners and patients each get the part of ZeeNovo they need, all working from the same patient record. Intake, the clinical visit, follow-up and reporting connect, so nothing is typed twice.</ScrollFade><RoleShowcase groups={roles} /></section>;
 }
 
 function Features() {
@@ -152,6 +159,8 @@ function Features() {
     <ScrollFade as="article" className="feature-card feature-provinces"><div className="feature-copy"><h3>Province-Aware Services</h3><p>Billing PINs, conditions and forms<br />follow your province.</p></div><ul>{["Ontario","Alberta","British Columbia","Saskatchewan","Nova Scotia","New Brunswick"].map(x=><li key={x}><Arrow />{x}</li>)}</ul><Image className="canada-map" src={asset.mapIcon} alt="" width={423} height={411} /></ScrollFade>
     <ScrollFade as="article" className="feature-card feature-appointments"><div className="feature-copy"><h3>Intake Before the Visit</h3><p>Patients answer screening questions when they book.<br />Walk-ins join the same queue.</p></div><a data-cta className="small-button" href="/products/clinical/minor-ailments"><Arrow /> Explore</a><AppointmentPreview animated /></ScrollFade>
     <ScrollFade as="article" className="feature-card feature-flags"><Image className="feature-circle flags-circle" src={asset.featureCircle} alt="" width={874} height={760} /><div className="feature-copy"><h3>Red Flags at the Decision Point</h3><p>Referral criteria appear where the decision is made.<br />Stop flags end the visit and record why.</p></div><PatientFlagsPreview /></ScrollFade>
+    <ScrollFade as="article" className="feature-card feature-poct"><div className="feature-copy"><h3>Point-of-Care Testing</h3><p>Test results recorded on the visit, with a physician report to fax.</p><div className="feature-actions"><a data-cta className="small-button" href="/products/clinical/point-of-care-testing"><Arrow /> Explore</a><span className="tag feature-status">Early access</span></div></div><PoctScene /></ScrollFade>
+    <ScrollFade as="article" className="feature-card feature-forms"><div className="feature-copy"><h3>Pharmacy Forms</h3><p>27 national and provincial forms, pre-filled from the patient record, signed and sent.</p><div className="feature-actions"><a data-cta className="small-button" href="/products/clinical/forms"><Arrow /> Explore</a><span className="tag feature-status">Coming soon</span></div></div><FormsScene /></ScrollFade>
   </div></section>;
 }
 
@@ -163,11 +172,11 @@ const services = [
 ] as const;
 
 function Services() {
-  return <section className="section services" id="services"><Tag>ZeeNovo Clinical</Tag><ScrollFade as="h2">Services You Can Deliver</ScrollFade><div className="service-grid">{services.map(([title,src,href])=><ScrollFade as="a" href={href} key={title}><div className="service-photo"><Cover src={src} alt={title} /></div><b>{title} <span>↗</span></b></ScrollFade>)}</div></section>;
+  return <section className="section services" id="services"><Tag>ZeeNovo Clinical</Tag><ScrollFade as="h2">Services You Can Deliver</ScrollFade><div className="service-grid">{services.map(([title,src,href])=><ScrollFade as="a" href={href} key={title}><div className="service-photo"><Cover src={src} alt={title} /></div><b>{title} <span><Icon /></span></b></ScrollFade>)}</div></section>;
 }
 
 function Philosophy() {
-  return <section className="philosophy-band"><div className="philosophy"><Tag dark>Our Philosophy</Tag><RevealSequence as="h2"><span data-reveal="rise">The pharmacist decides.</span>{" "}<span data-reveal="rise" style={{ "--sequence-delay": "80ms" } as CSSProperties}>ZeeNovo guides</span>{" "}<span data-reveal="rise" style={{ "--sequence-delay": "160ms" } as CSSProperties}><strong>and records.</strong></span></RevealSequence><ScrollFade as="div" className="philosophy-bottom" distance={12} duration={450} delay={240}><p>Built by a practising Ontario pharmacist<br />and pharmacy owner. ZeeNovo never<br />makes a clinical decision.</p><Button light href="/company/about">About ZeeNovo</Button></ScrollFade><Image className="philosophy-wave" src={asset.philosophyLines} alt="" width={181} height={643} /></div></section>;
+  return <section className="philosophy-band"><div className="philosophy"><Tag dark>Our Philosophy</Tag><RevealSequence as="h2"><span data-reveal="rise">The pharmacist decides.</span>{" "}<span data-reveal="rise" style={{ "--sequence-delay": "80ms" } as CSSProperties}>ZeeNovo guides</span>{" "}<span data-reveal="rise" style={{ "--sequence-delay": "160ms" } as CSSProperties}><strong>and records.</strong></span></RevealSequence><ScrollFade as="div" className="philosophy-bottom" distance={12} duration={450} delay={240}><p>Built by a practising Ontario pharmacist<br />and pharmacy owner. ZeeNovo never<br />makes a clinical decision.</p><Button light href="/company/about">About ZeeNovo</Button></ScrollFade><LineArt art={philosophyLines} className="philosophy-wave" /></div></section>;
 }
 
 function CareBanner() {
@@ -180,6 +189,12 @@ function ReportCards() {
     <ScrollFade as="article" className="report-card analytics"><h3>CQI With a Paper Trail</h3><p>Link incidents, record the learning and give<br />every action an owner and a due date.</p><AnalyticsPreview animated /></ScrollFade>
     <ScrollFade as="article" className="report-card team"><h3>SOPs and Staff Competency</h3><p>Assign the current SOP version, track sign-off<br />and assess staff by role.</p><Button href="/products/assure/incident-reporting">Explore</Button><Image className="team-wave" src={asset.reportingWave} alt="" width={787} height={181} /><div className="team-photo"><Cover src={asset.teamPhoto} alt="Healthcare team" /></div></ScrollFade>
     <ScrollFade as="article" className="report-card nidr"><h3>Submitted to ISMP Canada</h3><p>Incident data goes to ISMP Canada&apos;s National<br />Incident Data Repository.</p><div className="nidr-logo"><NationalReportingPreview /></div></ScrollFade>
+  </div>
+  {/* SOPs, role-based staff assessments and the pharmacy self-assessment, each with its Assure screen. */}
+  <div className="report-grid-more">
+    <ScrollFade as="article" className="report-card program-card program-assign"><h3>Assign SOPs by Role</h3><p>Send the current SOP version to a role or a person, set a deadline and record every sign-off.</p><AssignSopScene /></ScrollFade>
+    <ScrollFade as="article" className="report-card program-card program-team" delay={60} responsiveDelay><h3>Staff Assessments</h3><p>Scored by module across four roles, with 43 modules and 258 questions. Low scores point to the SOP or refresher to assign.</p><TeamAssessmentScene /></ScrollFade>
+    <ScrollFade as="article" className="report-card program-card program-score" delay={120} responsiveDelay><h3>Pharmacy Self-Assessment</h3><p>63 questions across six safety domains, with a Pharmacy Safety Score and the gaps by domain.</p><SafetyScoreScene /></ScrollFade>
   </div></section>;
 }
 

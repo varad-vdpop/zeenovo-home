@@ -1,5 +1,6 @@
 import Image from "next/image";
 import styles from "./page.module.css";
+import Icon from "@/components/Icon";
 
 const nodeAsset = (name: string) => `/assets/incident-reporting/nodes/${name}`;
 
@@ -10,7 +11,7 @@ export default function IncidentDashboard() {
   return (
     <div className={styles.dashboardFrame} aria-label="ZeeNovo Assure analytics dashboard">
       <div className={styles.dashboardWindow}>
-        <div className={styles.dashboardHeader}><strong>⌁ ZeeNovo<sup>®</sup></strong><span>Home　›　Analytics</span></div>
+        <div className={styles.dashboardHeader}><strong>ZeeNovo<sup>®</sup></strong><span>Home <Icon name="chevronRight" style={{ margin: "0 4px" }} /> Analytics</span></div>
         <aside className={styles.dashboardNav}>{navItems.map(item => <span className={item === "Analytics" ? styles.activeNav : ""} key={item}>{item}</span>)}</aside>
         <div className={styles.dashboardMain}>
           <strong className={styles.overviewLabel}>Overview</strong>

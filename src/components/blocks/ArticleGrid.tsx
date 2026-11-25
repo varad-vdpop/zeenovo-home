@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import s from "./sections.module.css";
+import Icon from "@/components/Icon";
 
 export type Article = { tag: string; title: string; text: string; meta?: string; href?: string };
 
@@ -23,7 +24,7 @@ export default function ArticleGrid({ filters, items, empty }: { filters?: strin
           <div className={s.articleTags}><span className={s.articleTag}>{category}</span>{notes.map((note) => <span className={s.articleNote} key={note}>{note}</span>)}</div>
           <h3>{item.title}</h3>
           <p>{item.text}</p>
-          {item.meta && (item.href ? <span className={s.articleLink}>{item.meta} <span aria-hidden="true">↗</span></span> : <span className={s.articleResult}>{item.meta}</span>)}
+          {item.meta && (item.href ? <span className={s.articleLink}>{item.meta} <span aria-hidden="true"><Icon /></span></span> : <span className={s.articleResult}>{item.meta}</span>)}
         </>;
         return item.href
           ? <Link className={s.article} href={item.href} key={item.title}>{content}</Link>

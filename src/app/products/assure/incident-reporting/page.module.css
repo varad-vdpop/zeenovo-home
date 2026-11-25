@@ -15,7 +15,7 @@
 .secondaryButton span,
 .ctaHeading a span { font-size: 23px; line-height: 1; }
 .secondaryButton { border: 1px solid #2b108e; background: #fff; color: #2b108e; }
-.heroDashboardShell { position: absolute; z-index: 3; top: 196px; left: calc(50% - 37px); width: 723px; overflow: hidden; border-radius: 20px; animation: dashboardDrift 6.8s ease-in-out infinite; }
+.heroDashboardShell { position: absolute; z-index: 3; top: 196px; left: calc(50% - 37px); width: 723px; overflow: hidden; border-radius: 20px; }
 .dashboardFrame { width: 723px; height: 529px; padding: 12px; overflow: hidden; border: 1px solid rgb(255 255 255 / 70%); border-radius: 27px; background: linear-gradient(123deg, rgb(255 255 255 / 47%), rgb(255 255 255 / 0%)); }
 .dashboardWindow { position: relative; width: 791px; height: 501px; overflow: hidden; border: 1px solid #9185ff; border-radius: 14px; background: #fff; color: #0a0a0a; font-family: Inter, Arial, sans-serif; }
 .dashboardHeader { position: absolute; top: 0; right: 0; left: 0; display: flex; align-items: center; gap: 36px; height: 35px; padding: 0 15px; border-bottom: 1px solid #e5e5e5; font-size: 8px; }
@@ -140,8 +140,6 @@
 .complianceBody { display: grid; grid-template-columns: 637px 611px; justify-content: space-between; align-items: end; width: min(1320px, 100%); height: 544px; margin: 56px auto 0; }
 .complianceBody img:first-child { width: 637px; height: 483px; }
 .complianceBody img:last-child { width: 611px; height: 544px; }
-.complianceBody img:first-child { animation: uiFloat 7.5s ease-in-out infinite; }
-.complianceBody img:last-child { animation: uiFloat 8s ease-in-out -3s infinite reverse; }
 
 .afterVisit { width: min(calc(100% - 120px), 1320px); height: 526px; margin: 56px auto 0; }
 .sectionHeading { height: 84px; }
@@ -242,8 +240,6 @@
 .reminders { position: absolute; z-index: 3; bottom: 45px; left: 16px; width: 415px; height: 290px; }
 .ctaPerson { position: absolute; z-index: 3; bottom: -1px; left: 50%; width: 319px; height: 382px; transform: translateX(-50%); }
 .metrics { position: absolute; z-index: 3; right: 229px; bottom: 31px; width: 231px; height: 278px; }
-.reminders { animation: uiFloat 7s ease-in-out infinite; }
-.metrics { animation: uiFloat 6.5s ease-in-out -3s infinite reverse; }
 
 @keyframes dashboardDrift {
   0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
@@ -500,3 +496,18 @@
 /* The two-line "Beyond the report" heading is taller than the original fixed 84px; let the section follow it. */
 .afterVisit { height: auto; }
 .afterVisit .sectionHeading { height: auto; }
+
+/* Desktop hero, same as every left-copy hero on the site: copy centred in the band between the floating navigation
+   and the bottom of the hero (bottom inset larger than zero lifts it slightly, so it reads as centred), and the home
+   hero's heading and description type (globals.css .hero h1, .hero-content > p). */
+@media (min-width: 1200px) {
+  .heroCopy { top: 109px; bottom: 40px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .hero h1 { font-size: clamp(46px, calc(7.5vw - 43px), 65px); font-weight: 400; letter-spacing: -2px; line-height: 1.245; }
+  .heroDescription { max-width: 543px; margin-top: 18px; color: #414349; font-family: var(--font-manrope), Arial, sans-serif; font-size: 18px; line-height: 1.62; }
+}
+
+/* Hero and CTA buttons: one spec across the site (matches the product heroes in clinical/page.module.css). */
+@media (min-width: 761px) {
+  .primaryButton, .secondaryButton { height: 52px; gap: 12px; padding: 0 24px 0 20px; border-radius: 13px; font-size: 16px; font-weight: 600; }
+  .primaryButton svg, .secondaryButton svg { width: 20px; height: 20px; }
+}

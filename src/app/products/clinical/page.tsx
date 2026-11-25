@@ -9,6 +9,8 @@ import ScrollFade from "@/components/ScrollFade";
 import RevealSequence from "@/components/RevealSequence";
 import { ClinicalHeroFlags, ClinicalHeroTimer } from "@/components/ClinicalHeroVisuals";
 import ClinicalProfilePreview from "@/components/ClinicalProfilePreview";
+import ClinicalFlowPreview from "@/components/ClinicalFlowPreview";
+import ClinicalFollowupPreview from "@/components/ClinicalFollowupPreview";
 import styles from "./page.module.css";
 
 const a = (name: string) => `/assets/clinical/${name}`;
@@ -74,9 +76,9 @@ const documentFeatures = [
 ] as const;
 
 const followupFeatures = [
-  { title: "Automatic follow-up", description: "Patients answer by secure email link. Only flagged responses reach a pharmacist.", icon: "followup-progress.svg" },
-  { title: "Recorded outcomes", description: "Resolved, improved, unchanged or worse, on the original visit.", icon: "followup-outcomes.svg" },
-  { title: "Dose-series reminders", description: "Second doses and boosters trigger a reminder with a booking link.", icon: "followup-plan.svg" },
+  { title: "Triggered by the service", description: "Each service sends its own follow-up automatically, by secure email link, on its own schedule.", icon: "followup-plan.svg" },
+  { title: "Up to three attempts", description: "If the patient doesn't answer, ZeeNovo sends it again, up to three attempts.", icon: "followup-progress.svg" },
+  { title: "Flagged for pharmacist review", description: "Answers that need a pharmacist are flagged. Every outcome is recorded on the original visit.", icon: "followup-outcomes.svg" },
 ] as const;
 
 const connectedSteps = [
@@ -85,7 +87,7 @@ const connectedSteps = [
   { title: "Assessment", icon: "connected-assessment.svg" },
   { title: "Documentation", icon: "connected-documentation.svg" },
   { title: "Communication", icon: "connected-communication.svg" },
-  { title: "Follow-up", icon: "connected-followup.svg" },
+  { title: "Patient Directed Follow-up", icon: "connected-followup.svg" },
 ] as const;
 
 function Arrow({ tone = "purple" }: { tone?: "purple" | "white" | "dark" }) {
@@ -98,9 +100,9 @@ function Hero() {
     <Image className={styles.heroWave} src={a("hero-wave.svg")} alt="" width={480} height={819} priority />
     <Image className={styles.heroEllipse} src={a("hero-ellipse.svg")} alt="" width={619} height={619} priority />
     <div className={styles.heroCopy}>
-      <div className={`${styles.eyebrow} ${styles.heroEnter}`}>ZeeNovo Clinical</div>
-      <h1 className={styles.heroEnter} id="clinical-title">Every clinical service,<br /> booking to follow-up.</h1>
-      <p className={`${styles.heroEnter} ${styles.heroDescription}`}>One calendar for walk-ins and online bookings. Guided screening, generated documents, physician fax and automated follow-up. The pharmacist makes every decision.</p>
+      <span className={`tag hero-pill ${styles.heroEnter}`}><span aria-hidden="true">★</span>From product to platform</span>
+      <h1 className={styles.heroEnter} id="clinical-title">Every clinical service,<br /> <span style={{ whiteSpace: "nowrap" }}>end-to-end</span> workflow.</h1>
+      <p className={`${styles.heroEnter} ${styles.heroDescription}`}>Minor ailments, vaccinations, injections and point-of-care testing on one calendar. Guided screening, generated documents, physician fax and automated follow-up. The pharmacist makes every decision.</p>
       <div className={`${styles.heroActions} ${styles.heroEnter}`}>
         <a data-cta className={styles.primaryButton} href="/book-a-demo"><Arrow tone="white" />Book a Clinical Demo</a>
         <a data-cta className={styles.outlineButton} href="https://auth.zeenovo.com/signup"><Arrow />Start Free Trial</a>
@@ -235,8 +237,7 @@ function AfterAssessment() {
         <ScrollFade as="article" className={styles.documentationCard} delay={60} responsiveDelay>
           <h3>Documentation</h3><p>Prescription, assessment and physician notification PDFs, generated from the visit and faxed with status tracking.</p>
           <div className={styles.documentFeatures}>{documentFeatures.map((item) => <div key={item.title}><i><Image src={a(item.icon)} alt="" width={17} height={17} /></i><strong>{item.title}</strong></div>)}</div>
-          <Image className={styles.sopImage} src={a("documentation-sop.svg")} alt="ZeeNovo Assure SOP table" width={549} height={328} />
-          <Image className={styles.efaxImage} src={a("documentation-efax-notice.svg")} alt="eFax sent; record updated" width={202} height={86} />
+          <div className={styles.flowPreview}><ClinicalFlowPreview /></div>
         </ScrollFade>
       </div>
     </div>
@@ -246,11 +247,11 @@ function AfterAssessment() {
 function FollowUp() {
   return <section className={styles.followup} aria-labelledby="followup-title">
     <div className={styles.followupInner}>
-      <RevealSequence as="div" className={styles.followupVisual} duration={500}><Image data-reveal="fade" src={a("followup-panel.svg")} alt="ZeeNovo Clinical follow-up panel showing patient progress and outcomes" width={622} height={421} /></RevealSequence>
+      <RevealSequence as="div" className={styles.followupVisual} duration={500}><div className={styles.followupPreview} data-reveal="fade"><ClinicalFollowupPreview /></div></RevealSequence>
       <ScrollFade as="div" className={styles.followupCopy} delay={60} responsiveDelay>
         <p className={styles.eyebrow}>Clinical Follow-up</p>
         <h2 id="followup-title">Follow-up by exception.</h2>
-        <p className={styles.followupDescription}>Patients receive follow-up questions automatically. Only the cases that need a pharmacist are flagged.</p>
+        <p className={styles.followupDescription}>Follow-ups go out and retry on their own, all automatically. Only the cases that need a pharmacist are flagged.</p>
         <div className={styles.followupFeatures}>{followupFeatures.map((item) => <div className={styles.featureRow} key={item.title}>
           <span className={styles.featureIcon}><Image src={a(item.icon)} alt="" width={39} height={39} /></span>
           <span><strong>{item.title}</strong><small>{item.description}</small></span>
@@ -276,16 +277,19 @@ function ConnectedWorkflow() {
   </section>;
 }
 
-// Tab summaries from the copy rewrite, value first. The tabs and their feature ids stay in featureSections.ts.
+// Area summaries, value first and two lines long like the Assure list. The areas and their feature ids stay in
+// featureSections.ts.
 const tabText: Record<string, string> = {
-  Assessment: "Screening that adapts to every answer.",
-  Safety: "Risk shown where the decision is made.",
-  Prescribing: "Your directions, your decision.",
-  Scheduling: "Every bookable minute is a real one.",
-  Bookings: "Control what patients can book.",
-  "Follow-up": "No call list.",
-  "Patient record": "Captured once, reused every visit.",
-  Documentation: "The record is complete when the visit ends.",
+  Assessment: "Screening that adapts to every answer, the patient's sex and your province's list of conditions.",
+  Safety: "Red flags, health flags and referral criteria, shown at the moment the pharmacist decides.",
+  Prescribing: "Saved directions for each condition. The pharmacist confirms or changes every one.",
+  Scheduling: "Walk-ins, booked visits, waitlists and group bookings on one calendar, with holidays blocked out.",
+  Bookings: "Choose which services patients can book online, and see where each booking came from.",
+  "Follow-up": "Follow-ups and dose reminders go out automatically. Only flagged answers reach a pharmacist.",
+  "Patient record": "Family physician, preferences and visit history, captured once and reused at every visit.",
+  Documentation: "Prescription, assessment and physician notification PDFs, written as the visit happens.",
+  "Revenue and billing": "The billing PIN on every visit, and estimated revenue by service and by pharmacist.",
+  Team: "Unlimited users, each with their own login and role permissions, set up in a day.",
 };
 
 // Catalogue lines that the rewrite corrects (no suggested treatment; renewal, not repeat).
@@ -297,7 +301,9 @@ const rewriteWording: Record<string, string> = {
 
 const allFeatures: Block = {
   ...clinicalFeatures,
+  side: "Ten areas of clinical work. Each one opens to show the features behind it.",
   groups: clinicalFeatures.groups.map((group) => ({ ...group, text: tabText[group.title] ?? group.text })),
+  split: true,
   wording: { ...clinicalFeatures.wording, ...rewriteWording },
 };
 

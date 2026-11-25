@@ -27,15 +27,19 @@
 .immunocompromised { background: #fffbeb; }
 .allergic { background: #ecfdf5; }
 
-.timerPanel { position: absolute; z-index: 2; top: 58.4112%; left: 0; width: 21.4473%; height: 25.4673%; border-radius: 1.66cqw; background: #3b309d; color: #e5ecff; font-family: Arial, sans-serif; }
-.timerHeading { position: absolute; top: 8.94%; left: 9.69%; font-size: 2.03cqw; font-weight: 500; line-height: 1.25; }
+.timerPanel { position: absolute; z-index: 2; top: 58.4112%; left: 0; width: 21.4473%; height: 25.4673%; border-radius: 1.66cqw; background: #3b309d; color: #e5ecff; font-family: var(--font-manrope), Arial, sans-serif; }
+.timerHeading { position: absolute; top: 8.94%; left: 9.69%; font-size: 2.03cqw; font-weight: 600; line-height: 1.25; }
 .timerSvg { position: absolute; inset: 0; width: 100%; height: 100%; }
-.timerValue { position: absolute; top: 52.05%; left: 10.46%; width: 69.48%; text-align: center; font-size: 3.69cqw; line-height: 1.25; font-variant-numeric: tabular-nums; }
+/* The ring starts at 12 o'clock and empties counter-clockwise as the minutes drop. */
+.timerRing { transform: rotate(-90deg) scaleY(-1); transform-box: fill-box; transform-origin: center; }
+.timerValue { position: absolute; top: 61.42%; left: 50%; display: grid; justify-items: center; transform: translate(-50%, -50%); line-height: 1; white-space: nowrap; }
+.timerMinutes { display: flex; align-items: baseline; gap: .35cqw; font-size: 4.7cqw; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.timerMinutes small { font-size: 2cqw; font-weight: 600; letter-spacing: 0; }
+.timerWas { margin-top: .6cqw; color: rgb(229 236 255 / 72%); font-size: 1.72cqw; font-weight: 500; text-decoration: line-through; text-decoration-color: rgb(229 236 255 / 50%); }
 .counterStatic { display: none; }
 
 @media (prefers-reduced-motion: reduce) {
   .highlight { transform: none !important; }
-  .sweep { stroke-dasharray: none !important; stroke-dashoffset: 0 !important; }
   .counterMotion { display: none; }
   .counterStatic { display: inline; }
 }

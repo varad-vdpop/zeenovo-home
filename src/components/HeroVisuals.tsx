@@ -6,12 +6,13 @@ import { animate, motion, useInView, useReducedMotion } from "motion/react";
 import { counterTransition } from "@/lib/motion";
 import styles from "./HeroVisuals.module.css";
 
+// The ZeeNovo platforms, in the order of the navigation's Platforms menu.
 const menuItems = [
-  { label: "Pharmacies", icon: "pharmacies", width: 13.9584, height: 12.6498 },
-  { label: "SOP Templates", icon: "document", width: 9.48736, height: 11.523 },
-  { label: "Medicines", icon: "medicines", width: 14.1416, height: 14.1416 },
-  { label: "Drugs", icon: "drugs", width: 14.7763, height: 14.6614 },
-  { label: "Doctors", icon: "doctor", width: 17.448, height: 17.448 },
+  { label: "Clinical", icon: "doctor", width: 17.448, height: 17.448 },
+  { label: "Assure", icon: "shield", width: 15, height: 15 },
+  { label: "Magistral", icon: "medicines", width: 14.1416, height: 14.1416 },
+  { label: "Sites", icon: "globe", width: 15, height: 15 },
+  { label: "Voice Booking", icon: "mic", width: 15, height: 15 },
 ] as const;
 
 const rowStep = 45.36486;
@@ -64,7 +65,7 @@ export function HeroMenuPreview() {
 
   return (
     <div className="hero-menu">
-      <div ref={panelRef} className={styles.menuPanel} role="img" aria-label="Pharmacy platform menu: Pharmacies, SOP Templates, Medicines, Drugs, Doctors">
+      <div ref={panelRef} className={styles.menuPanel} role="img" aria-label="ZeeNovo platforms: Clinical, Assure, Magistral, Sites, Voice Booking">
         <div className={styles.menuList}>
           <ul className={styles.menuRows}><MenuRows /></ul>
           <motion.div
@@ -129,17 +130,19 @@ export function HeroRevenuePreview() {
         </div>
         <svg className={styles.chartSvg} viewBox="0 0 329 237" aria-hidden="true">
           <defs>
-            <linearGradient id={gradientId} x1="18.1973" y1="92.9144" x2="18.1973" y2="221" gradientUnits="userSpaceOnUse">
+            <linearGradient id={gradientId} x1="0" y1="92.9144" x2="0" y2="215" gradientUnits="userSpaceOnUse">
               <stop offset="0.05" stopColor="#A5B4FC" stopOpacity="0.8" />
               <stop offset="0.95" stopColor="#A5B4FC" stopOpacity="0.1" />
             </linearGradient>
           </defs>
           {[87.6542, 115.694, 143.735, 171.775, 199.815].map(y => (
-            <line key={y} x1="48.4619" y1={y} x2="312.749" y2={y} stroke="#F4F4F5" strokeWidth="0.623693" strokeDasharray="1.87 1.87" />
+            <line key={y} x1="22" y1={y} x2="307" y2={y} stroke="#F4F4F5" strokeWidth="0.623693" strokeDasharray="1.87 1.87" />
           ))}
+          {/* The Figma curve ran 18.2 to 307 with uneven side gaps; scale it to a 22px inset on both sides. */}
+          <g transform="matrix(0.98683 0 0 1 4.0422 0)">
           <motion.path
             className={styles.chartArea}
-            d={`${revenueCurve}V221H18.1973Z`}
+            d={`${revenueCurve}V215H18.1973Z`}
             fill={`url(#${gradientId})`}
             fillOpacity="0.6"
             initial={{ clipPath: "inset(0 100% 0 0)" }}
@@ -156,6 +159,7 @@ export function HeroRevenuePreview() {
             animate={{ pathLength: reveal ? 1 : 0 }}
             transition={transition}
           />
+          </g>
         </svg>
       </div>
     </div>

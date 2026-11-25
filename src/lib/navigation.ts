@@ -20,7 +20,7 @@ export type NavigationMenu = {
 
 export const navigationMenus: readonly NavigationMenu[] = [
   {
-    label: "Platform",
+    label: "Platforms",
     href: "/products",
     sections: [
       {

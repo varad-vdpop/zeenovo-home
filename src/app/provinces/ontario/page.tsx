@@ -4,10 +4,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { asset } from "@/lib/assets";
 import { BlockList } from "@/components/blocks/BlockPage";
+import type { Block } from "@/components/blocks/types";
 import { ontario } from "@/content/pages/provinces";
 import styles from "../page.module.css";
 import OntarioMotion from "../OntarioMotion";
 import OntarioMapTrace from "../OntarioMapTrace";
+import Icon from "@/components/Icon";
 
 const pageAsset = asset.provinces;
 
@@ -20,11 +22,7 @@ const realities = [
 export const metadata = shareMeta(ontario.meta);
 
 function Arrow() {
-  return <span data-cta-icon aria-hidden="true">↗</span>;
-}
-
-function Tag({ children }: { children: React.ReactNode }) {
-  return <p className={styles.tag}><span aria-hidden="true">★</span>{children}</p>;
+  return <span data-cta-icon aria-hidden="true"><Icon /></span>;
 }
 
 function Hero() {
@@ -34,7 +32,7 @@ function Hero() {
         <Image className={styles.heroArt} src={pageAsset.heroArt} alt="" width={574} height={816} priority />
       </div>
       <div className={styles.heroCopy} data-reveal>
-        <p className={styles.eyebrow}>Ontario · Canada</p>
+        <span className="tag hero-pill"><span aria-hidden="true">★</span>Ontario · Canada</span>
         <h1 id="provinces-title">Built in Ontario,<br />for Ontario pharmacies.</h1>
         <p className={styles.heroDescription}>Minor ailment visits, flu and COVID-19 clinics and MedsCheck reviews, with the correct billing PIN on every visit and safety records ready for your next OCP assessment.</p>
         <div className={styles.heroActions}>
@@ -44,7 +42,7 @@ function Hero() {
       </div>
       <div className={styles.heroSignal} data-reveal>
         <div><span>Ontario practice</span><strong>Minor ailments</strong></div>
-        <p>Assessment → documentation → follow-up</p>
+        <p>Assessment <Icon name="arrowRight" style={{ margin: "0 4px" }} /> documentation <Icon name="arrowRight" style={{ margin: "0 4px" }} /> follow-up</p>
         <em>Ontario billing PINs</em>
       </div>
       <div className={styles.ontarioMapFrame} data-reveal>
@@ -81,23 +79,10 @@ function Reality() {
   );
 }
 
-function Cta() {
-  return (
-    <section className={styles.cta} aria-labelledby="provinces-cta-title" data-reveal>
-      <Image className={styles.ctaWaves} src={pageAsset.ctaWaves} alt="" width={1290} height={369} />
-      <div className={styles.ctaHeading}>
-        <Tag>Get started</Tag>
-        <h2 id="provinces-cta-title">See ZeeNovo with your{" "}<br />own Ontario services.</h2>
-        <Link data-cta href="/book-a-demo"><Arrow />Book a Demo</Link>
-      </div>
-      <Image className={styles.reminders} src={pageAsset.doseReminders} alt="Dose reminders module" width={415} height={290} />
-      <Image className={styles.ctaPerson} src={pageAsset.ctaPerson} alt="Pharmacist reviewing ZeeNovo on a tablet" width={319} height={402} />
-      <Image className={styles.metrics} src={pageAsset.metrics} alt="Pharmacy revenue and active patient metrics" width={231} height={278} />
-    </section>
-  );
-}
+// Closing call to action: the site's shared CTA block, like every other page.
+const closingCta: Block = { type: "cta", eyebrow: "Get started", title: "See ZeeNovo with your / own Ontario services.", action: { label: "Book a Demo", href: "/book-a-demo" } };
 
 export default function ProvincesPage() {
   // The reused blocks align to the 77px edge of the approved hero and reality cards, as on the province template.
-  return <main className={styles.page} data-ontario-page style={{ "--block-gutter": "77px" } as CSSProperties}><OntarioMotion /><Hero /><Reality /><BlockList blocks={ontario.blocks} /><Cta /></main>;
+  return <main className={styles.page} data-ontario-page style={{ "--block-gutter": "77px" } as CSSProperties}><OntarioMotion /><Hero /><Reality /><BlockList blocks={[...ontario.blocks, closingCta]} /></main>;
 }

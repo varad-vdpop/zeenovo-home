@@ -1,0 +1,79 @@
+/* Fills the card under its copy (the card is a flex column). The panel is flat, keeps equal side insets and runs
+   past the bottom edge, where the card crops it, like the other UI cards on the page. */
+.scene {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin-top: 28px;
+  font-family: var(--font-manrope), Arial, sans-serif;
+  color: #16133a;
+}
+.panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: -64px;
+  left: 0;
+  overflow: hidden;
+  padding: 20px;
+  border-radius: 16px;
+  background: #fff;
+}
+.panel p { margin: 0; }
+.panel svg { width: 15px; height: 15px; flex: none; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.title { display: block; font-size: 15px; font-weight: 600; letter-spacing: -0.01em; }
+
+/* Assign SOP */
+.head { display: flex; align-items: center; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid #f0f0f3; }
+.head b { display: block; font-size: 15px; font-weight: 600; }
+.head small { display: block; margin-top: 2px; color: #71717a; font-size: 12.5px; }
+.headIcon { display: grid; width: 34px; height: 34px; flex: none; place-items: center; border-radius: 9px; background: #eef0ff; color: #3b309d; }
+.panel .fieldLabel { margin-top: 14px; color: #52525b; font-size: 12.5px; font-weight: 500; }
+.field { display: flex; min-height: 38px; align-items: center; gap: 6px; margin-top: 6px; padding: 6px 10px; border: 1px solid #e4e4e7; border-radius: 9px; color: #71717a; }
+.chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 6px 3px 9px; border-radius: 6px; background: #eef0ff; color: #3b309d; font-size: 12.5px; font-weight: 600; white-space: nowrap; }
+.chip svg { width: 12px; height: 12px; }
+.fieldValue { flex: 1; color: #16133a; font-size: 13px; }
+.buttons { display: flex; justify-content: flex-end; gap: 8px; margin-top: 16px; }
+.buttons span { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 9px; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.secondary { border: 1px solid #e4e4e7; }
+.primary { background: #3b309d; color: #fff; }
+
+/* Team assessments */
+.headRow { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.cycle { padding: 3px 8px; border-radius: 6px; background: #f4f4f5; color: #52525b; font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+.people { display: grid; margin: 12px 0 0; padding: 0; list-style: none; }
+.people li { display: flex; align-items: flex-start; gap: 11px; padding: 12px 0; border-top: 1px solid #f0f0f3; }
+.avatar { display: grid; width: 32px; height: 32px; flex: none; place-items: center; border-radius: 50%; background: #eef0ff; color: #3b309d; font-size: 11.5px; font-weight: 700; }
+.person { flex: 1; min-width: 0; }
+.personTop { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.personTop b { overflow: hidden; font-size: 13.5px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.person small { display: block; margin-top: 2px; color: #71717a; font-size: 12px; }
+.status { padding: 2px 7px; border-radius: 6px; font-size: 11.5px; font-weight: 600; white-space: nowrap; }
+.ok { background: #e4f6ec; color: #12814a; }
+.info { background: #e8edff; color: #3950d3; }
+.idle { background: #f4f4f5; color: #52525b; }
+.bar { position: relative; display: block; height: 5px; overflow: hidden; border-radius: 3px; background: #f0f0f3; }
+.person .bar { margin-top: 8px; }
+.bar i { position: absolute; inset: 0 auto 0 0; border-radius: inherit; background: #3b309d; }
+.bar .barLow { background: #e08a12; }
+.panel .footnote { margin-top: 4px; padding-top: 12px; border-top: 1px solid #f0f0f3; color: #71717a; font-size: 12px; }
+.panel .footnote b { color: #16133a; font-weight: 600; }
+
+/* Safety score */
+.scoreRow { display: flex; align-items: center; gap: 16px; margin-top: 14px; padding-bottom: 14px; border-bottom: 1px solid #f0f0f3; }
+.gauge { position: relative; width: 112px; flex: none; }
+.gauge svg { display: block; width: 100%; height: auto; stroke-width: 9; }
+.gaugeTrack { stroke: #f0f0f3; }
+.gaugeFill { stroke: #3b309d; }
+.score { position: absolute; right: 0; bottom: -2px; left: 0; font-size: 26px; font-weight: 700; letter-spacing: -0.02em; text-align: center; }
+.scoreCopy { display: grid; justify-items: start; gap: 6px; }
+.scoreCopy small { color: #71717a; font-size: 12px; }
+.domains { display: grid; gap: 11px; margin: 14px 0 0; padding: 0; list-style: none; }
+.domains li { display: grid; grid-template-columns: minmax(0, 1fr) 70px 34px; align-items: center; gap: 10px; font-size: 12.5px; }
+.domains li > span:first-child { overflow: hidden; color: #52525b; text-overflow: ellipsis; white-space: nowrap; }
+.domains b { font-weight: 600; text-align: right; }
+
+@media (max-width: 960px) {
+  .scene { flex: none; height: 270px; margin-top: 20px; }
+  .panel { padding: 16px; }
+}

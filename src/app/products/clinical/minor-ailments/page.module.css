@@ -9,7 +9,7 @@
 .heroSmallEllipse { position: absolute; top: 458px; left: 697px; width: 87px; height: 87px; }
 .heroCopy { position: absolute; z-index: 5; top: 190px; left: 41px; width: 650px; }
 .heroEyebrow { color: #2b108e; font-size: 16px; font-weight: 600; line-height: 22px; letter-spacing: -.32px; }
-.heroCopy h1 { margin-top: 18px; font-size: 65px; font-weight: 400; letter-spacing: -2px; line-height: 75px; }
+.heroCopy h1 { margin-top: 0; font-size: 65px; font-weight: 400; letter-spacing: -2px; line-height: 75px; }
 .heroDescription { max-width: 540px; margin-top: 17px; color: rgb(22 19 58 / 74%); font-family: var(--font-manrope), Arial, sans-serif; font-size: 18px; line-height: 29px; }
 .heroButton { display: inline-flex; height: 52px; align-items: center; justify-content: center; gap: 12px; margin-top: 18px; padding: 0 32px 0 20px; border-radius: 13px; color: #fff; background: #2b108e; font-size: 16px; font-weight: 600; }
 .heroButton img { width: 24px; height: 24px; transform: rotate(135deg); }
@@ -24,7 +24,7 @@
 .heroRecord { aspect-ratio: 238 / 91; }
 
 /* Start the pharmacist with the text, then reveal the two UI cards in order. */
-.heroEnter { animation: heroEnter 500ms cubic-bezier(0.23, 1, 0.32, 1) 100ms both; }
+.heroEnter { animation: heroEnter 500ms cubic-bezier(0.23, 1, 0.32, 1) 100ms backwards; }
 .heroHeading.heroEnter { animation-delay: 200ms; }
 .heroDescription.heroEnter { animation-delay: 300ms; }
 .heroButton.heroEnter { animation-delay: 400ms; }
@@ -154,7 +154,7 @@
   .heroPattern { right: -400px; width: 900px; height: auto; }
   .heroCopy { top: 128px; right: 20px; left: 20px; width: auto; }
   .heroEyebrow { font-size: 13px; }
-  .heroCopy h1 { max-width: 450px; margin-top: 13px; font-size: clamp(36px, 9.2vw, 48px); letter-spacing: -1.2px; line-height: 1.13; }
+  .heroCopy h1 { max-width: 450px; margin-top: 0; font-size: clamp(36px, 9.2vw, 48px); letter-spacing: -1.2px; line-height: 1.13; }
   .heroCopy h1 br { display: none; }
   .heroDescription { max-width: 390px; margin-top: 13px; font-size: 13px; line-height: 21px; }
   .heroButton { height: 46px; margin-top: 16px; padding: 0 20px 0 14px; font-size: 13px; }
@@ -199,10 +199,12 @@
   .assessmentFeature img { width: 31px; height: 31px; }
   .assessmentFeature h3 { font-size: 13px; }
   .assessmentFeature p { font-size: 11px; line-height: 16px; }
-  .assessmentArt { position: relative; inset: auto; height: clamp(470px, calc(90vw + 90px), 780px); background: #3b309d; }
-  .assessmentArt::before { top: 35px; left: 3%; width: 94%; height: calc(90vw + 20px); }
+  /* The frame grows with the screening preview instead of holding a fixed height. */
+  .assessmentArt { position: relative; inset: auto; height: auto; padding: 45px 5% 50px; background: #3b309d; }
+  .assessmentArt::before { top: 35px; left: 3%; width: 94%; height: calc(100% - 75px); }
   .assessmentPattern { top: -110px; left: -220px; }
-  .assessmentPanel { top: 45px; left: 5%; width: 90%; height: auto; }
+  .assessmentPanel { position: relative; top: auto; left: auto; width: 100%; height: auto; }
+  .nativeAssessment { aspect-ratio: auto; height: auto; }
 
   .connectedCare { min-height: 0; padding: 65px 0 80px; }
   .connectedHeading { padding: 0 20px; }
@@ -228,4 +230,13 @@
   .heroAssessment { bottom: 245px; }
   .heroRecord { bottom: 80px; }
   .conditionCard li { font-size: 10px; }
+}
+
+/* Desktop hero, same as every left-copy hero on the site: copy centred in the band between the floating navigation
+   and the bottom of the hero (bottom inset larger than zero lifts it slightly, so it reads as centred), and the home
+   hero's heading and description type (globals.css .hero h1, .hero-content > p). */
+@media (min-width: 1200px) {
+  .heroCopy { top: 95px; bottom: 40px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .heroCopy h1 { margin-top: 0; font-size: clamp(46px, calc(7.5vw - 43px), 65px); font-weight: 400; letter-spacing: -2px; line-height: 1.245; }
+  .heroDescription { max-width: 543px; margin-top: 18px; color: #414349; font-family: var(--font-manrope), Arial, sans-serif; font-size: 18px; line-height: 1.62; }
 }

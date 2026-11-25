@@ -5,7 +5,7 @@ import { useInView } from "motion/react";
 import styles from "./ScrollFade.module.css";
 
 type ScrollFadeProps = HTMLAttributes<HTMLElement> & {
-  as: "h2" | "article" | "section" | "a" | "div";
+  as: "h2" | "p" | "article" | "section" | "a" | "div";
   href?: string;
   distance?: number;
   duration?: number;

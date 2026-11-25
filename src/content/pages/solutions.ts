@@ -94,7 +94,7 @@ export const solutionPages: Record<string, PageContent> = {
         { q: "Can we use our own domain?", a: "Yes. Start on a ZeeNovo subdomain and point your domain to it when ready." },
         { q: "How do groups buy?", a: "Through an enterprise agreement. Book a call to scope it." },
       ] },
-      { type: "ctaSplit", eyebrow: "Built for pharmacy groups", title: "One view of the network. / One voice to every store.", text: "Send us your member list. We handle the invitations.", primary: { label: "Join Early Access", href: "/book-a-demo" }, secondary: { label: "Talk to Us", href: "/company/contact" }, note: { title: "Network onboarding", text: "Invitations sent from your member list." } },
+      { type: "cta", eyebrow: "Built for pharmacy groups", title: "One view of the network. / One voice to every store.", text: "Send us your member list. We handle the invitations.", action: { label: "Join Early Access", href: "/book-a-demo" } },
     ],
   },
 
@@ -123,7 +123,7 @@ export const solutionPages: Record<string, PageContent> = {
         { title: "Revenue reported", text: "Estimated revenue by service and pharmacist, every month.", icon: "dayRevenue" },
       ], action: { label: "Open the ROI Calculator", href: "/pricing/roi-calculator" } },
       {"type": "featureIndex", "eyebrow": "Features for owners", "title": "The numbers and controls / owners ask for.", "side": "ZeeNovo estimates revenue and shows billing PINs. It doesn't submit claims.", "art": "analyticsChart", "artAlt": "Pharmacy performance chart", "groups": [{"title": "Visibility", "ids": ["performanceView", "billingPins", "followupTracking", "correctiveActions", "unlimitedUsers", "quickSetup"]}], "wording": {"performanceView": "Estimated revenue by service and pharmacist, calculated per completed visit from your province's fees. Staff productivity and top services on the same view.", "followupTracking": "Follow-up status across your patients.", "correctiveActions": "Open incidents, overdue SOP sign-offs and CQI follow-ups.", "unlimitedUsers": "No per-seat fees.", "quickSetup": "Import patients, choose services, start booking."}},
-      { type: "ctaSplit", eyebrow: "Built for pharmacy owners", title: "Know what your pharmacy / delivered this month.", text: "Start with the services you offer today.", primary: demo, secondary: { label: "See Pricing", href: "/pricing" }, note: { title: "Revenue visible", text: "Estimated revenue, by service and pharmacist." } },
+      { type: "cta", eyebrow: "Built for pharmacy owners", title: "Know what your pharmacy / delivered this month.", text: "Start with the services you offer today.", action: demo },
     ],
   },
 
@@ -151,7 +151,7 @@ export const solutionPages: Record<string, PageContent> = {
         { title: "Record generated", text: "Documents and the physician fax are produced from the visit.", icon: "dayRevenue" },
         { title: "PIN shown, follow-up sent", text: "No billing lookup. Only patients who need you come back.", icon: "dayFollowups" },
       ] },
-      { type: "ctaSplit", eyebrow: "Built with pharmacists", title: "Practise to your full / scope, with support.", text: "See a guided assessment from start to finish.", primary: demo, secondary: { label: "See Minor Ailments", href: "/products/clinical/minor-ailments" }, note: { title: "Time returned to care", text: "The record is generated as you work." } },
+      { type: "cta", eyebrow: "Built with pharmacists", title: "Practise to your full / scope, with support.", text: "See a guided assessment from start to finish.", action: demo },
     ],
   },
 

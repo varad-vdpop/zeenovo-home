@@ -13,13 +13,27 @@ import s from "./sections.module.css";
 import { art, icons, people, tileIcons, type TileIconKey } from "./media";
 import featureData from "@/content/features.json";
 import ArticleGrid from "./ArticleGrid";
-import FeatureTabs from "./FeatureTabs";
+import RoleShowcase from "@/components/RoleShowcase";
+import SitesPreview from "@/components/SitesPreview";
+import SceneBento from "@/components/SceneBento";
+import VoicePhoneArt from "@/components/VoicePhoneArt";
+import ClinicalFollowupPreview from "@/components/ClinicalFollowupPreview";
+import LineArt from "@/components/LineArt";
+import { changeWave } from "@/components/lineArt/changeWave";
+import { valuesWave } from "@/components/lineArt/valuesWave";
+import FaqList from "./FaqList";
 import FormView from "./FormView";
 import { lines } from "./lines";
 import RoiCalculator from "./RoiCalculator";
 import type * as T from "./types";
+import Icon from "@/components/Icon";
 
 export { lines };
+
+/** Section label: the same star pill as the home page, used by every block heading. */
+function Tag({ children }: { children: string }) {
+  return <span className={`tag ${b.sectionTag}`}><span aria-hidden="true">★</span>{children}</span>;
+}
 
 function Arrow({ tone = "purple" }: { tone?: "purple" | "white" }) {
   const src = tone === "white" ? "/assets/zeenovo-nav-arrow-primary.svg" : "/assets/zeenovo-nav-arrow-outline.svg";
@@ -32,7 +46,7 @@ function PageHeader({ block }: { block: T.HeroBlock }) {
     <Image className={s.headerWave} src="/assets/clinical/hero-wave.svg" alt="" width={480} height={819} priority />
     <Image className={s.headerEllipse} src="/assets/clinical/hero-ellipse.svg" alt="" width={619} height={619} priority />
     <div className={s.headerCopy}>
-      {block.eyebrow && <p className={`${s.eyebrow} ${c.heroEnter}`}>{block.eyebrow}</p>}
+      {block.eyebrow && <span className={`tag ${b.sectionTag} ${b.heroEyebrow} ${c.heroEnter}`}><span aria-hidden="true">★</span>{block.eyebrow}</span>}
       <h1 className={c.heroEnter}>{lines(block.title)}</h1>
       <p className={`${c.heroEnter} ${c.heroDescription}`}>{block.description}</p>
       {block.primary && <div className={`${c.heroActions} ${c.heroEnter}`}>
@@ -51,7 +65,7 @@ function Hero({ block }: { block: T.HeroBlock }) {
     <Image className={c.heroWave} src="/assets/clinical/hero-wave.svg" alt="" width={480} height={819} priority />
     <Image className={c.heroEllipse} src="/assets/clinical/hero-ellipse.svg" alt="" width={619} height={619} priority />
     <div className={c.heroCopy}>
-      {block.eyebrow && <p className={`${c.eyebrow} ${b.heroEyebrow} ${c.heroEnter}`}>{block.eyebrow}</p>}
+      {block.eyebrow && <span className={`tag ${b.sectionTag} ${b.heroEyebrow} ${c.heroEnter}`}><span aria-hidden="true">★</span>{block.eyebrow}</span>}
       <h1 className={c.heroEnter}>{lines(block.title)}</h1>
       <p className={`${c.heroEnter} ${c.heroDescription}`}>{block.description}</p>
       <div className={`${c.heroActions} ${c.heroEnter}`}>
@@ -73,12 +87,12 @@ function SolutionHero({ block }: { block: T.SolutionHeroBlock }) {
   return <section className={i.hero}>
     <div className={i.heroBackdrop}><Image className={i.heroArt} src="/assets/independent-pharmacies-hero-art.svg" alt="" width={1362} height={819} priority /></div>
     <div className={i.heroCopy}>
-      <p className={i.eyebrow}>{block.eyebrow}</p>
+      <span className="tag hero-pill"><span aria-hidden="true">★</span>{block.eyebrow}</span>
       <h1>{lines(block.title)}</h1>
       <p className={i.heroDescription}>{block.description}</p>
       <div className={b.solutionActions}>
-        <Link data-cta className={i.primaryButton} href={block.primary.href}><span data-cta-icon aria-hidden="true">↗</span>{block.primary.label}</Link>
-        {block.secondary && <Link data-cta className={`${i.primaryButton} ${b.solutionSecondary}`} href={block.secondary.href}><span data-cta-icon aria-hidden="true">↗</span>{block.secondary.label}</Link>}
+        <Link data-cta className={i.primaryButton} href={block.primary.href}><span data-cta-icon aria-hidden="true"><Icon /></span>{block.primary.label}</Link>
+        {block.secondary && <Link data-cta className={`${i.primaryButton} ${b.solutionSecondary}`} href={block.secondary.href}><span data-cta-icon aria-hidden="true"><Icon /></span>{block.secondary.label}</Link>}
       </div>
     </div>
     <Image className={i.heroPharmacist} src={person.src} alt="Pharmacist" width={person.width} height={person.height} priority sizes="(max-width: 760px) 78vw, 390px" />
@@ -116,8 +130,8 @@ function CardsView({ eyebrow, title, side, items, action }: { eyebrow: string; t
   const columns = five ? 6 : items.length === 4 ? 4 : items.length === 2 ? 2 : 3;
   return <section className={`${m.capabilities} ${b.cardsSection}`}>
     <div className={`${m.sectionInner} ${b.rail}`}>
-      <ScrollFade as="div" className={m.sectionHeading}>
-        <div><p className={m.eyebrow}>{eyebrow}</p><h2>{lines(title)}</h2></div>
+      <ScrollFade as="div" className={`${m.sectionHeading} ${b.blockHead}`}>
+        <div><Tag>{eyebrow}</Tag><h2>{lines(title)}</h2></div>
         {side && <p>{side}</p>}
       </ScrollFade>
       <div className={`${m.capabilityGrid} ${b.cardGrid}`} style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}>
@@ -160,9 +174,9 @@ function Reality({ block }: { block: T.RealityBlock }) {
   </section>;
 }
 
-function FeatureRows({ rows }: { rows: T.FeaturesBlock["rows"] }) {
+function FeatureRows({ rows, purple = false }: { rows: T.FeaturesBlock["rows"]; purple?: boolean }) {
   return <>{rows.map((row) => <div className={c.featureRow} key={row.title}>
-    <span className={c.featureIcon}><Image src={icons[row.icon]} alt="" width={39} height={39} /></span>
+    <span className={`${c.featureIcon} ${purple ? b.featureIconPurple : ""}`}><Image src={icons[row.icon]} alt="" width={39} height={39} /></span>
     <span><strong>{row.title}</strong><small>{row.text}</small></span>
   </div>)}</>;
 }
@@ -172,32 +186,38 @@ function Features({ block }: { block: T.FeaturesBlock }) {
   if (block.variant === "followup") {
     return <section className={`${c.followup} ${b.leadFollowup}`}>
       <div className={c.followupInner}>
-        <div className={c.followupVisual}><Image src={visual.src} alt={block.artAlt} width={visual.width} height={visual.height} /></div>
+        {block.ui === "followup"
+          ? <div className={c.followupVisual}><div className={c.followupPreview}><ClinicalFollowupPreview /></div></div>
+          : block.art === "voicePhone"
+          ? <div className={`${c.followupVisual} ${b.voiceVisual}`}><VoicePhoneArt label={block.artAlt} tone="dark" /></div>
+          : <div className={c.followupVisual}><Image src={visual.src} alt={block.artAlt} width={visual.width} height={visual.height} /></div>}
         <ScrollFade as="div" className={c.followupCopy} delay={60} responsiveDelay>
           <p className={c.eyebrow}>{block.eyebrow}</p>
           <h2>{lines(block.title)}</h2>
           <p className={c.followupDescription}>{block.description}</p>
-          <div className={c.followupFeatures}><FeatureRows rows={block.rows} /></div>
-          {block.link && <Link className={`${s.textLink} ${b.featureLink}`} href={block.link.href}>{block.link.label} <span aria-hidden="true">↗</span></Link>}
+          <div className={c.followupFeatures}><FeatureRows rows={block.rows} purple={block.art === "voicePhone"} /></div>
+          {block.link && <Link className={`${s.textLink} ${b.featureLink}`} href={block.link.href}>{block.link.label} <span aria-hidden="true"><Icon /></span></Link>}
         </ScrollFade>
       </div>
     </section>;
   }
-  return <section className={c.workflow}>
-    <div className={c.workflowPatterns} aria-hidden="true">
+  return <section className={`${c.workflow} ${block.reverse ? b.workflowReverse : ""}`}>
+    <div className={`${c.workflowPatterns} ${b.wfPatterns}`} aria-hidden="true">
       <Image className={c.workflowLines} src="/assets/clinical/workflow-lines.svg" alt="" width={939.707} height={757.707} />
       <Image className={c.workflowBottomLines} src="/assets/clinical/workflow-lines.svg" alt="" width={939.707} height={757.707} />
     </div>
     <div className={c.workflowInner}>
-      <ScrollFade as="div" className={`${c.workflowCopy} ${b.alignCopy}`}>
+      <ScrollFade as="div" className={`${c.workflowCopy} ${b.alignCopy} ${b.wfCopy}`}>
         <p className={c.eyebrow}>{block.eyebrow}</p>
         <h2>{lines(block.title)}</h2>
         <p className={c.workflowDescription}>{block.description}</p>
         <div className={c.workflowFeatures}><FeatureRows rows={block.rows} /></div>
-        {block.link && <Link className={`${s.textLink} ${b.featureLink}`} href={block.link.href}>{block.link.label} <span aria-hidden="true">↗</span></Link>}
+        {block.link && <Link className={`${s.textLink} ${b.featureLink}`} href={block.link.href}>{block.link.label} <span aria-hidden="true"><Icon /></span></Link>}
       </ScrollFade>
-      <div className={c.workflowArt}>
-        <div className={c.workflowForm}><Image src={visual.src} alt={block.artAlt} width={visual.width} height={visual.height} style={{ width: "100%", height: "auto" }} /></div>
+      <div className={`${c.workflowArt} ${b.wfArt}`}>
+        <div className={`${c.workflowForm} ${b.wfForm} ${block.ui ? b.workflowUi : ""}`}>
+          {block.ui === "sites" ? <SitesPreview plain /> : <Image src={visual.src} alt={block.artAlt} width={visual.width} height={visual.height} style={{ width: "100%", height: "auto" }} />}
+        </div>
       </div>
     </div>
   </section>;
@@ -226,19 +246,28 @@ function TwoCard({ block }: { block: T.TwoCardBlock }) {
 
 function Wave({ block }: { block: T.WaveBlock }) {
   return <section className={`${i.changes} ${b.waveSection}`}>
-    <div className={i.changesHeading}>
-      <span><Image src="/assets/independent-pharmacies-star.svg" alt="" width={20} height={20} />{block.tag}</span>
+    <div className={`${i.changesHeading} ${b.waveHead}`}>
+      <Tag>{block.tag}</Tag>
       <h2>{lines(block.title)}</h2>
       {block.description && <p>{block.description}</p>}
     </div>
-    <div className={`${i.changeTrack} ${b.waveTrack}`} style={{ gridTemplateColumns: `repeat(${block.items.length}, 1fr)` }}>
-      <Image className={i.changeArt} src="/assets/independent-pharmacies-change-art.svg" alt="" width={1440} height={240} />
-      <Image className={`${i.changeArt} ${i.changeArtTrace}`} src="/assets/independent-pharmacies-change-art.svg" alt="" aria-hidden="true" width={1440} height={240} />
+    {block.items.length === 5
+      // Five items use the home "Built Around Pharmacy Practice" strip: one icon in each of its five loops, labels
+      // alternating above and below.
+      ? <div className={b.fiveTrack}>
+        <LineArt art={valuesWave} className={b.fiveArt} />
+        <div className={b.fiveList}>{block.items.map((item) => <div key={item.label}>
+          <Image src={icons[item.icon]} alt="" width={50} height={50} />
+          <h3>{item.label}</h3>
+        </div>)}</div>
+      </div>
+      : <div className={`${i.changeTrack} ${b.waveTrack}`} style={{ gridTemplateColumns: `repeat(${block.items.length}, 1fr)` }}>
+      <LineArt art={changeWave} className={`${i.changeArt} ${b.waveArt}`} />
       {block.items.map((item) => <article key={item.label}>
         <Image className={i.changeIcon} src={icons[item.icon]} alt="" width={50} height={50} />
         <h3>{item.label}</h3>
       </article>)}
-    </div>
+    </div>}
   </section>;
 }
 
@@ -246,8 +275,8 @@ function Wave({ block }: { block: T.WaveBlock }) {
 function StepsView({ eyebrow, title, side, items, action }: { eyebrow: string; title: string; side?: string; items: CardItem[]; action?: T.Link }) {
   return <section className={`${i.betterWeek} ${b.stepsSection}`}>
     <div className={`${i.sectionRail} ${b.rail}`}>
-      <div className={i.weekHeading}>
-        <div><p>{eyebrow}</p><h2>{lines(title)}</h2></div>
+      <div className={`${i.weekHeading} ${b.blockHead}`}>
+        <div><Tag>{eyebrow}</Tag><h2>{lines(title)}</h2></div>
         {side && <p>{side}</p>}
       </div>
       <div className={`${i.weekCards} ${b.stepGrid}`} style={{ gridTemplateColumns: `repeat(${items.length}, 1fr)` }}>
@@ -266,64 +295,29 @@ function Steps({ block }: { block: T.StepsBlock }) {
   return <StepsView eyebrow={block.eyebrow} title={block.title} side={block.side} action={block.action} items={block.items.map((item) => ({ ...item, src: icons[item.icon] }))} />;
 }
 
-function CtaSplit({ block }: { block: T.CtaSplitBlock }) {
-  return <section className={i.cta}>
-    <Image className={i.ctaCircle} src="/assets/independent-pharmacies-cta-circle.svg" alt="" width={1491} height={1634} />
-    <div className={i.ctaCopy}>
-      <p>{block.eyebrow}</p>
-      <h2>{lines(block.title)}</h2>
-      <span>{block.text}</span>
-      <div><Link data-cta href={block.primary.href}>{block.primary.label} <span data-cta-icon aria-hidden="true">↗</span></Link><Link data-cta href={block.secondary.href}>{block.secondary.label} <span data-cta-icon aria-hidden="true">↗</span></Link></div>
-    </div>
-    <div className={i.ctaPhoto}><Image src="/assets/independent-pharmacies-cta.png" alt="Pharmacist preparing a syringe" fill sizes="440px" /></div>
-    <article className={i.timeReturned}><strong>{block.note.title}</strong><span>{block.note.text}</span></article>
-  </section>;
-}
-
 type Feature = { title: string; text: string; icon: TileIconKey };
 const featureCatalogue = featureData.features as Record<string, Feature>;
 
 function SectionHead({ eyebrow, title, side }: { eyebrow: string; title: string; side?: string }) {
-  return <ScrollFade as="div" className={s.head}>
-    <div><p className={s.eyebrow}>{eyebrow}</p><h2>{lines(title)}</h2></div>
+  return <ScrollFade as="div" className={`${s.head} ${b.blockHead}`}>
+    <div><Tag>{eyebrow}</Tag><h2>{lines(title)}</h2></div>
     {side && <p>{side}</p>}
   </ScrollFade>;
 }
 
-const bentoTones = [s.toneLavender, s.tonePeach, s.toneMint, s.toneAqua];
-
-/** Bento grid: a lead card with a product visual, and the other features as pastel cards. Takes 3 to 7 features. */
+/** Bento grid: every card shows the screen it describes (SceneBento, screens in sceneScreens.tsx). Takes 4 to 7
+    features; the first is the purple lead card. */
 function FeatureBento({ block, features }: { block: T.FeatureIndexBlock; features: Feature[] }) {
-  const [lead, ...rest] = features;
-  const visual = block.art ? art[block.art] : undefined;
-  const span = (index: number) => {
-    if (rest.length <= 2) return s.span2;
-    if (rest.length === 3 && index === 2) return s.span2;
-    if (rest.length === 5 && index === 4) return `${s.span4} ${s.bentoWide}`;
-    if (rest.length === 6 && index >= 4) return s.span2;
-    return "";
-  };
   return <section className={s.section}>
     <div className={b.rail}>
       <SectionHead eyebrow={block.eyebrow} title={block.title} side={block.side} />
-      <div className={s.bento}>
-        <ScrollFade as="article" className={s.bentoLead}>
-          <Image className={s.bentoLines} src="/assets/clinical/workflow-lines.svg" alt="" width={940} height={758} />
-          <span className={s.bentoLabel}>{block.groups[0].title}</span>
-          <h3>{lead.title}</h3>
-          <p>{lead.text}</p>
-          {visual && <div className={s.bentoArtWrap}><div className={s.bentoArt}><Image src={visual.src} alt={block.artAlt ?? ""} width={visual.width} height={visual.height} /></div></div>}
-        </ScrollFade>
-        {rest.map((feature, index) => <ScrollFade as="article" className={`${s.bentoCard} ${bentoTones[index % bentoTones.length]} ${span(index)}`} delay={(index % 2) * 60} responsiveDelay key={feature.title}>
-          <span className={s.bentoIcon}><Image src={tileIcons[feature.icon]} alt="" width={26} height={26} /></span>
-          <div><h3>{feature.title}</h3><p>{feature.text}</p></div>
-        </ScrollFade>)}
-      </div>
+      <SceneBento label={block.groups[0].title} features={features.map((feature, index) => ({ id: block.groups[0].ids[index], title: feature.title, text: feature.text }))} />
     </div>
   </section>;
 }
 
-/** Features from features.json. One group renders as a bento grid; several groups render as a tabbed explorer. */
+/** Features from features.json. One group renders as a bento grid; several groups render as the auto-advancing list
+    from the home page ("Built for every role"): group headings on the left, the open group's features on the right. */
 function FeatureIndex({ block }: { block: T.FeatureIndexBlock }) {
   const groups = block.groups.map((group) => ({
     title: group.title,
@@ -335,10 +329,15 @@ function FeatureIndex({ block }: { block: T.FeatureIndexBlock }) {
     }),
   }));
   if (groups.length === 1) return <FeatureBento block={block} features={groups[0].items} />;
+  const showcaseGroups = groups.map((group) => ({ ...group, items: group.items.map((feature) => ({ title: feature.title, text: feature.text, src: tileIcons[feature.icon] })) }));
+  const half = Math.ceil(showcaseGroups.length / 2);
   return <section className={s.section}>
     <div className={b.rail}>
       <SectionHead eyebrow={block.eyebrow} title={block.title} side={block.side} />
-      <FeatureTabs groups={groups.map((group) => ({ ...group, items: group.items.map((feature) => ({ title: feature.title, text: feature.text, src: tileIcons[feature.icon] })) }))} />
+      {block.split ? <>
+        <RoleShowcase groups={showcaseGroups.slice(0, half)} feature />
+        <RoleShowcase groups={showcaseGroups.slice(half)} reverse feature />
+      </> : <RoleShowcase groups={showcaseGroups} feature />}
     </div>
   </section>;
 }
@@ -355,7 +354,7 @@ function Callout({ block }: { block: T.CalloutBlock }) {
         <h2>{lines(block.title)}</h2>
         <p>{block.text}</p>
         {block.chips && <div className={s.pills}>{block.chips.map((chip) => <span className={s.pill} key={chip}><i aria-hidden="true" />{chip}</span>)}</div>}
-        {block.action && <Link className={s.textLink} href={block.action.href}>{block.action.label} <span aria-hidden="true">↗</span></Link>}
+        {block.action && <Link className={s.textLink} href={block.action.href}>{block.action.label} <span aria-hidden="true"><Icon /></span></Link>}
       </ScrollFade>
     </div>
   </section>;
@@ -366,15 +365,12 @@ function Faq({ block }: { block: T.FaqBlock }) {
   return <section className={`${s.section} ${s.surface}`}>
     <div className={`${b.rail} ${s.faq}`}>
       <ScrollFade as="div" className={s.faqIntro}>
-        <p className={s.eyebrow}>{block.eyebrow}</p>
+        <Tag>{block.eyebrow}</Tag>
         <h2>{lines(block.title)}</h2>
         <p>Have a question that is not here? Ask our team.</p>
-        <Link className={s.textLink} href="/company/contact">Contact us <span aria-hidden="true">↗</span></Link>
+        <Link data-cta className={`${c.outlineButton} ${b.faqButton}`} href="/company/contact"><Arrow />Contact us</Link>
       </ScrollFade>
-      <div className={s.faqList}>{block.items.map((item, index) => <details className={s.faqItem} key={item.q} open={index === 0}>
-        <summary>{item.q}</summary>
-        <p>{item.a}</p>
-      </details>)}</div>
+      <FaqList items={block.items} />
     </div>
   </section>;
 }
@@ -404,7 +400,7 @@ function Pricing({ block }: { block: T.PricingBlock }) {
       <div className={s.addons}>{block.addons.map((addon, index) => <ScrollFade as="article" className={`${s.addon} ${index % 2 ? s.tonePeach : s.toneLavender}`} delay={index * 60} responsiveDelay key={addon.title}>
         <h3>{addon.title}</h3>
         <p>{addon.text}</p>
-        <Link className={s.textLink} href={addon.action.href}>{addon.action.label} <span aria-hidden="true">↗</span></Link>
+        <Link className={s.textLink} href={addon.action.href}>{addon.action.label} <span aria-hidden="true"><Icon /></span></Link>
       </ScrollFade>)}</div>
     </div>
   </section>;
@@ -443,6 +439,25 @@ function Legal({ block }: { block: T.LegalBlock }) {
         </section>)}
         {block.note && <p className={s.note}>{block.note}</p>}
       </div>
+    </div>
+  </section>;
+}
+
+/** Heading and description on the left; on the right, one panel holding a card per item (icon, title, text). */
+function Compare({ block }: { block: T.CompareBlock }) {
+  return <section className={s.section}>
+    <div className={`${b.rail} ${b.compare}`}>
+      <ScrollFade as="div" className={b.compareIntro}>
+        <Tag>{block.eyebrow}</Tag>
+        <h2>{lines(block.title)}</h2>
+        {block.description && <p>{block.description}</p>}
+      </ScrollFade>
+      <ScrollFade as="div" className={b.comparePanel}>
+        {block.items.map((item) => <article className={b.compareItem} key={item.title}>
+          <span className={b.compareIcon}><Image src={tileIcons[item.icon]} alt="" width={22} height={22} /></span>
+          <div><h3>{item.title}</h3><p>{item.text}</p></div>
+        </article>)}
+      </ScrollFade>
     </div>
   </section>;
 }
@@ -499,7 +514,6 @@ function renderBlock(block: T.Block, index: number) {
     case "productsGrid": return <HomeProductCards title={block.title} key={index} />;
     case "cta": return <div className={c.ctaWrap} key={index}><FinalCta animated id={`cta-${index}`} variant="clinical" eyebrow={block.eyebrow} heading={lines(block.title)} text={block.text} actionLabel={block.action.label} actionHref={block.action.href} /></div>;
     case "callout": return <Callout block={block} key={index} />;
-    case "ctaSplit": return <CtaSplit block={block} key={index} />;
     case "faq": return <Faq block={block} key={index} />;
     case "pricing": return <Pricing block={block} key={index} />;
     case "facts": return <Facts block={block} key={index} />;
@@ -507,6 +521,7 @@ function renderBlock(block: T.Block, index: number) {
     case "list": return <List block={block} key={index} />;
     case "legal": return <Legal block={block} key={index} />;
     case "table": return <Table block={block} key={index} />;
+    case "compare": return <Compare block={block} key={index} />;
     case "featureIndex": return <FeatureIndex block={block} key={index} />;
     case "roi": return <RoiCalculator key={index} />;
   }

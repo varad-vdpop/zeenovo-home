@@ -16,8 +16,6 @@ const results: readonly Result[] = [
 ];
 
 const display = (result: Result, progress = 1) => result.text ?? `${result.prefix}${Math.round(result.value * progress)}${result.suffix}`;
-// The word value is longer than the numbers, so it is set smaller to stay inside its column.
-const textStyle = { fontSize: "clamp(34px, 3.9vw, 56px)" } as const;
 
 export default function ResultsCounters() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -55,7 +53,7 @@ export default function ResultsCounters() {
 
   return <section ref={sectionRef} className="stats" aria-label="ZeeNovo results">
     {results.map((result, index) => <div key={result.label}>
-      <b className={styles.number} style={result.text ? textStyle : undefined} aria-hidden="true" ref={element => { numberRefs.current[index] = element; }}>{display(result)}</b>
+      <b aria-hidden="true" ref={element => { numberRefs.current[index] = element; }}>{display(result)}</b>
       <span className={styles.accessibleValue}>{display(result)}</span>
       <span>{result.label}</span>
     </div>)}

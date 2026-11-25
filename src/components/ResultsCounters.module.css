@@ -1,2 +1,2 @@
-.number { font-variant-numeric: tabular-nums; }
+/* Values share one size and sit on a common baseline (see .stats in globals.css); proportional figures keep "<1 day" evenly spaced. */
 .accessibleValue { position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }

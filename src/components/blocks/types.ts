@@ -1,4 +1,4 @@
-import type { ArtKey, IconKey, PersonKey } from "./media";
+import type { ArtKey, IconKey, PersonKey, TileIconKey } from "./media";
 
 // Page content schema. Every block renders with an approved section from the built pages.
 // No block introduces its own visual language: see BlockPage.tsx for the mapping.
@@ -70,6 +70,11 @@ export type FeaturesBlock = {
   link?: Link;
   art: ArtKey;
   artAlt: string;
+  /** Live product UI in the art panel instead of `art`. "sites" = the pharmacy website from the home Sites card.
+      "followup" = the follow-ups screen from the Clinical page (ClinicalFollowupPreview). */
+  ui?: "sites" | "followup";
+  /** "workflow" only: the purple art panel on the left and the copy on the right. */
+  reverse?: boolean;
 };
 
 export type TwoCardBlock = {
@@ -114,16 +119,6 @@ export type CalloutBlock = {
   chips?: string[];
   action?: Link;
   tone?: "aqua" | "lavender" | "mint" | "peach";
-};
-
-export type CtaSplitBlock = {
-  type: "ctaSplit";
-  eyebrow: string;
-  title: Heading;
-  text: string;
-  primary: Link;
-  secondary: Link;
-  note: { title: string; text: string };
 };
 
 // Blocks below render with sections designed for them in the same visual language (sections.module.css):
@@ -176,6 +171,8 @@ export type LegalBlock = {
 };
 
 export type TableBlock = { type: "table"; eyebrow: string; title: Heading; columns: string[]; rows: string[][]; note?: string };
+/** Heading and description on the left, one card per item on the right. Icons come from tileIcons. */
+export type CompareBlock = { type: "compare"; eyebrow: string; title: Heading; description?: string; items: { title: string; text: string; icon: TileIconKey }[] };
 
 export type RoiBlock = { type: "roi" };
 
@@ -190,6 +187,8 @@ export type FeatureIndexBlock = {
   art?: ArtKey;
   artAlt?: string;
   groups: { title: string; text?: string; ids: string[] }[];
+  /** Several groups: show them as two lists of equal size, the second mirrored (panel on the left). */
+  split?: boolean;
   /** Description to show instead of the catalogue text, by feature id, when the page speaks to a different
       audience (for example the Patients page says "your"). */
   wording?: Record<string, string>;
@@ -197,7 +196,7 @@ export type FeatureIndexBlock = {
 
 export type Block =
   | HeroBlock | SolutionHeroBlock | CardsBlock | RealityBlock | FeaturesBlock | TwoCardBlock | WaveBlock | StepsBlock
-  | ProductsGridBlock | CtaBlock | CalloutBlock | CtaSplitBlock | FaqBlock | PricingBlock | FactsBlock | FormBlock | ListBlock | LegalBlock | TableBlock | RoiBlock | FeatureIndexBlock;
+  | ProductsGridBlock | CtaBlock | CalloutBlock | FaqBlock | PricingBlock | FactsBlock | FormBlock | ListBlock | LegalBlock | TableBlock | CompareBlock | RoiBlock | FeatureIndexBlock;
 
 export type PageContent = {
   meta: { title: string; description: string };

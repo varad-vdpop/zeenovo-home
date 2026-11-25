@@ -201,7 +201,7 @@ export const companyPages: Record<string, PageContent> = {
   "/company/about": {
     meta: { title: "About ZeeNovo Health | Built by a Canadian pharmacist", description: "ZeeNovo Health builds clinical, safety and compounding software for Canadian pharmacies. Founded by a practising Ontario pharmacist and pharmacy owner." },
     blocks: [
-      { type: "hero", eyebrow: "About", title: "Pharmacy software built by / a practising pharmacist-owner.", description: "ZeeNovo puts clinical services, safety records and compounding in one system. Booking, documentation, physician fax, follow-up and inspection records are kept in one place, so pharmacists spend their time on patients.", primary: demo, secondary: contact, person: "followupPharmacist" },
+      { type: "hero", eyebrow: "About", title: "Pharmacy software / built by a practising / pharmacist-owner.", description: "ZeeNovo puts clinical services, safety records and compounding in one system. Booking, documentation, physician fax, follow-up and inspection records are kept in one place, so pharmacists spend their time on patients.", primary: demo, secondary: contact, person: "followupPharmacist" },
       {
         type: "cards", eyebrow: "How we work", title: "Three rules for / what we build.", side: "These set what goes into the product and what stays out.", items: [
           { title: "The pharmacist decides", text: "ZeeNovo guides and records. It does not diagnose, prescribe or recommend treatment.", icon: "pharmacist" },

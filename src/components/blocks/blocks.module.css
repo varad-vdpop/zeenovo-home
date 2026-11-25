@@ -13,31 +13,33 @@
 .heroEyebrow { margin-bottom: 18px; }
 
 /* Capability cards with variable content. Icon sits in the white circle used by the approved step cards. */
-.cardsSection { min-height: 0; padding: 80px 0; background: linear-gradient(to top, #f7f9fe 0 240px, #fff 0); }
-.stepsSection { height: auto; margin-top: 0; padding: 80px 0; }
+.cardsSection.cardsSection { min-height: 0; padding: 80px 0; background: #fff; }
+.stepsSection.stepsSection { height: auto; margin-top: 0; padding: 80px 0; }
 /* Step cards pin their text to the bottom of a fixed 275px card; let longer copy grow the card instead of
    running into the icon circle. */
-.stepGrid { height: auto; align-items: start; }
-.stepGrid article { display: flex; height: auto; min-height: 275px; flex-direction: column; }
-.stepGrid article > div:last-child { position: static; margin-top: auto; padding-top: 136px; }
-.cardGrid { margin-top: 84px; }
-.cardAuto { height: auto; min-height: 255px; padding-top: 122px; }
-.cardAuto h3 { font-size: 22px; line-height: 27px; }
-.cardIcon { position: absolute; top: 30px; left: 24px; display: grid; width: 68px; height: 68px; place-items: center; border-radius: 50%; background: #fff; }
-.cardIcon img { width: 40px; height: 40px; object-fit: contain; }
-a.cardAuto { transition: transform .2s ease; }
-a.cardAuto:hover { transform: translateY(-3px); }
+.stepGrid.stepGrid { height: auto; align-items: start; }
+.stepGrid.stepGrid article { display: flex; height: auto; min-height: 275px; flex-direction: column; }
+.stepGrid.stepGrid article > div:last-child { position: static; margin-top: auto; padding-top: 136px; }
+.cardGrid.cardGrid { margin-top: 84px; }
+/* Doubled class: these must beat the approved card's own padding however the stylesheets are ordered (client-side
+   navigation can load the page module after this one, which used to put the copy on top of the icon). */
+.cardAuto.cardAuto { height: auto; min-height: 255px; padding-top: 122px; }
+.cardAuto.cardAuto h3 { font-size: 22px; line-height: 27px; }
+.cardIcon.cardIcon { position: absolute; top: 30px; left: 24px; display: grid; width: 68px; height: 68px; place-items: center; border-radius: 50%; background: #fff; }
+.cardIcon.cardIcon img { width: 40px; height: 40px; object-fit: contain; }
+a.cardAuto.cardAuto { transition: box-shadow .2s ease; }
+@media (hover: hover) and (pointer: fine) { a.cardAuto:hover { box-shadow: inset 0 0 0 1px rgb(49 20 154 / 22%); } }
 
 /* Two-card section with content-led heights. */
-.twoCardSection { height: auto; padding: 80px 0; }
-.twoCardSection .twoCardItem { height: auto; padding-bottom: 36px; }
+.twoCardSection.twoCardSection { height: auto; padding: 80px 0; }
+.twoCardSection.twoCardSection .twoCardItem.twoCardItem { height: auto; padding-bottom: 36px; }
 
 /* Wave and step tracks with four or five items. */
-.waveTrack { width: min(1380px, 100%); }
+.waveTrack.waveTrack { width: min(1380px, 100%); }
 
 /* Follow-up section with content-led height: the copy needs its own bottom padding once the fixed height is gone. */
-.leadFollowup { height: auto; min-height: 646px; margin-top: 0; }
-.leadFollowup > div > div:last-child { padding-bottom: 79px; }
+.leadFollowup.leadFollowup { height: auto; min-height: 646px; margin-top: 0; }
+.leadFollowup.leadFollowup > div > div:last-child { padding-bottom: 79px; }
 
 /* Clinical workflow section holding a real form or calculator. */
 .panelSection { height: auto; min-height: 744px; }
@@ -95,35 +97,34 @@ a.cardAuto:hover { transform: translateY(-3px); }
 
 /* Narrow tablet: four or five cards side by side get too thin for their headings; use two columns. */
 @media (min-width: 761px) and (max-width: 900px) {
-  .stepGrid,
-  .cardGrid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .stepGrid.stepGrid,
+  .cardGrid.cardGrid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
   .span2,
   .span3 { grid-column: auto; }
 }
 
 @media (max-width: 760px) {
-  .leadFollowup { min-height: 0; }
-  .leadFollowup > div > div:last-child { padding-bottom: 60px; }
+  .leadFollowup.leadFollowup { min-height: 0; }
+  .leadFollowup.leadFollowup > div > div:last-child { padding-bottom: 60px; }
   .rail { width: calc(100% - 40px); }
   .alignCopy { left: auto; }
-  .cardsSection, .stepsSection, .twoCardSection, .listSection { padding: 56px 0; }
-  .cardsSection { background: linear-gradient(to top, #f7f9fe 0 160px, #fff 0); }
-  .cardGrid { grid-template-columns: 1fr !important; margin-top: 40px; }
+  .cardsSection.cardsSection, .stepsSection.stepsSection, .twoCardSection.twoCardSection, .listSection { padding: 56px 0; }
+  .cardGrid.cardGrid { grid-template-columns: 1fr !important; margin-top: 40px; }
   .span2,
   .span3 { grid-column: auto; }
   .blockAction { margin-top: 28px; }
   .solutionActions { column-gap: 10px; }
   .solutionActions > a { padding: 0 18px 0 14px; }
-  .cardAuto { min-height: 0; padding-top: 96px; }
-  .cardIcon { top: 20px; left: 14px; width: 54px; height: 54px; }
-  .cardIcon img { width: 32px; height: 32px; }
+  .cardAuto.cardAuto { min-height: 0; padding-top: 96px; }
+  .cardIcon.cardIcon { top: 20px; left: 14px; width: 54px; height: 54px; }
+  .cardIcon.cardIcon img { width: 32px; height: 32px; }
   /* The approved strip has a fixed 690px height for four labels; let it grow for five. */
-  .waveSection { height: auto; padding-bottom: 8px; }
-  .waveTrack { position: static; margin-top: 32px; grid-template-columns: repeat(2, 1fr) !important; }
-  .stepGrid { grid-template-columns: 1fr !important; }
-  .stepGrid article,
-  .stepGrid article:nth-child(n) { height: auto; min-height: 0; }
-  .stepGrid article > div:last-child { padding-top: 128px; }
+  .waveSection.waveSection { height: auto; padding-bottom: 8px; }
+  .waveTrack.waveTrack { position: static; margin-top: 32px; grid-template-columns: repeat(2, 1fr) !important; }
+  .stepGrid.stepGrid { grid-template-columns: 1fr !important; }
+  .stepGrid.stepGrid article,
+  .stepGrid.stepGrid article:nth-child(n) { height: auto; min-height: 0; }
+  .stepGrid.stepGrid article > div:last-child { padding-top: 128px; }
   .panelInner { display: flex; flex-direction: column; }
   .panelCopy { padding: 56px 20px 40px; }
   /* The approved section paints its purple band as a fixed 450px strip on mobile; let it follow the form instead. */
@@ -132,4 +133,159 @@ a.cardAuto:hover { transform: translateY(-3px); }
   .panelArt { height: auto; padding: 40px 12px 50px; background: #3b309d; }
   .fields { grid-template-columns: 1fr; }
   .full { grid-column: auto; }
+}
+
+/* ---- Shared heading for every block: star pill label, heading, side text bottom-aligned to the heading ---- */
+/* One label size everywhere: matches the home page tags (globals.css .tag) and the CTA tag. */
+.sectionTag.sectionTag { display: inline-flex; height: 30px; align-items: center; align-self: flex-start; gap: 7px; padding: 0 12px; border: 1px solid #dedee3; border-radius: 40px; background: transparent; color: #16133a; font-size: 12px; font-weight: 500; line-height: 1; text-transform: none; white-space: nowrap; }
+.sectionTag.sectionTag > span { font-size: 15px; line-height: 1; }
+.waveSection.waveSection .sectionTag.sectionTag { align-self: center; }
+.heroEyebrow.sectionTag { display: inline-flex; }
+.blockHead.blockHead { display: flex; align-items: flex-end; justify-content: space-between; gap: 44px; }
+.blockHead.blockHead > div { display: flex; flex-direction: column; align-items: flex-start; }
+.blockHead.blockHead h2 { margin-top: 18px; font-size: 42px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.24; }
+.blockHead.blockHead > p { width: 480px; max-width: 100%; margin: 0; padding-bottom: 6px; color: #64748b; font-size: 16px; line-height: 1.65; }
+
+/* Capability cards: copy starts right under the icon, so titles line up across a row. */
+.cardAuto.cardAuto > div { margin-top: 0; }
+
+/* Step cards: one height for all five; copy starts under the icon. */
+.stepGrid.stepGrid article { height: auto; min-height: 0; padding-bottom: 26px; }
+.stepGrid.stepGrid article > div:last-child { margin-top: 0; padding-top: 128px; }
+
+/* Wave strip: animated line art with a still copy behind it, fading out at both ends. */
+.waveArt {
+  --line-base: 0.3;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.faqButton { height: 48px; margin-top: 24px; font-size: 15px; }
+
+/* Compare: heading on the left, one panel of item cards on the right. */
+.compare { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); align-items: center; gap: 64px; }
+.compareIntro { display: flex; flex-direction: column; align-items: flex-start; }
+.compareIntro.compareIntro h2 { margin-top: 18px; font-size: 42px; font-weight: 500; letter-spacing: -0.02em; line-height: 1.24; }
+.compareIntro.compareIntro > p { max-width: 440px; margin-top: 16px; color: #64748b; font-size: 16px; line-height: 1.65; }
+.comparePanel { display: grid; gap: 12px; padding: 12px; border-radius: 28px; background: #f3f4fb; }
+.compareItem { display: flex; align-items: flex-start; gap: 18px; padding: 24px 26px; border-radius: 18px; background: #fff; }
+.compareIcon { display: grid; width: 48px; height: 48px; flex: none; place-items: center; border-radius: 50%; background: #e8eaff; }
+.compareIcon img { width: 22px; height: 22px; object-fit: contain; }
+.compareItem h3 { font-size: 18px; font-weight: 600; line-height: 1.35; }
+.compareItem p { margin-top: 4px; color: #64748b; font-size: 15px; line-height: 1.55; }
+
+@media (max-width: 1100px) {
+  .stepGrid.stepGrid article { height: auto; min-height: 0; }
+}
+@media (max-width: 960px) {
+  .blockHead.blockHead { display: block; }
+  .blockHead.blockHead h2, .compareIntro.compareIntro h2 { font-size: clamp(30px, 7.8vw, 38px); line-height: 1.2; }
+  .blockHead.blockHead > p { width: auto; margin-top: 16px; font-size: 15px; }
+  .compare { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .compareItem { padding: 20px; }
+}
+@media (max-width: 760px) {
+  .stepGrid.stepGrid article { height: auto; min-height: 0; }
+  /* Phones show the four steps as cards; the line strip is for wider screens only. */
+  .waveArt.waveArt { display: none; }
+}
+
+/* Workflow section, mirrored ("reverse"): the purple art panel fills the left half and the copy sits in the right
+   half, so the two halves are equal. */
+@media (min-width: 761px) {
+  .workflowReverse::before,
+  .workflowReverse .wfPatterns { inset: 0 50% 0 0; }
+  .workflowReverse .wfArt { inset: 0 50% 0 0; }
+  .workflowReverse .wfCopy { right: var(--block-gutter, 64px); left: calc(50% + 72px); width: auto; }
+  .workflowReverse .wfForm { right: 54px; left: auto; }
+}
+@media (min-width: 761px) and (max-width: 1199px) {
+  .workflowReverse .wfCopy { right: 36px; left: calc(50% + 40px); }
+  .workflowReverse .wfForm { right: 20px; }
+}
+/* Live product UI in the art panel sits centred in it, whole, inside the panel's glass frame. */
+.workflowUi.workflowUi { top: 50%; right: auto; left: 50%; width: min(640px, calc(100% - 80px)); transform: translate(-50%, -50%); }
+@media (max-width: 1199px) {
+  .workflowUi.workflowUi { width: calc(100% - 56px); }
+}
+@media (max-width: 760px) {
+  .workflowUi.workflowUi { width: calc(100% - 40px); }
+}
+
+/* Wave strip heading: centred, on the same type scale as every other block heading, with the line art laid out
+   under it rather than at a fixed 210px, so a two-line heading and its description never run into the lines. */
+.waveHead.waveHead h2 { margin-top: 18px; letter-spacing: -0.02em; line-height: 1.24; text-align: center; text-wrap: balance; }
+.waveHead.waveHead > p { width: 560px; margin-top: 16px; color: #64748b; line-height: 1.65; text-wrap: pretty; }
+@media (min-width: 761px) {
+  .waveSection.waveSection { height: auto; padding-bottom: 24px; }
+  .waveHead.waveHead h2 { font-size: 42px; }
+  .waveTrack.waveTrack { position: relative; top: auto; left: auto; height: 291px; margin: 36px auto 0; transform: none; }
+  .waveTrack.waveTrack .waveArt.waveArt { top: 0; }
+  .waveTrack.waveTrack > article { margin-top: 65px; }
+}
+
+/* Voice booking phone (VoicePhoneArt), placed as on the home "Voice Booking" card: arcs top right, the phone large on
+   the right and running off the bottom edge. */
+.voiceVisual { position: relative; overflow: hidden; --phone-right: 9%; --phone-width: 78%; }
+@media (max-width: 760px) {
+  .voiceVisual { min-height: 400px; --phone-right: -24px; --phone-width: 86%; }
+}
+
+/* Feature rows on a page whose icons are all purple: the circle behind them is lavender, not the section's teal. */
+.featureIconPurple.featureIconPurple { background: #e8eaff; }
+
+/* Wave strip with five items: the home values art (1440 x 181, five loops). Positions are proportional so the strip
+   scales below 1440px; icons sit in the middle of each loop, labels alternate above and below it. */
+.fiveTrack { position: relative; width: min(1440px, 100%); aspect-ratio: 1440 / 181; margin: 96px auto 88px; }
+.fiveArt {
+  --line-base: 0.3;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+.fiveList { position: absolute; inset: 0; }
+.fiveList > div { position: absolute; top: 0; bottom: 0; width: 20%; }
+.fiveList > div:nth-child(2) { left: 20%; }
+.fiveList > div:nth-child(3) { left: 40%; }
+.fiveList > div:nth-child(4) { left: 60%; }
+.fiveList > div:nth-child(5) { left: 80%; }
+.fiveList img { position: absolute; top: 50%; left: 50%; width: clamp(36px, 3.5vw, 50px); height: auto; transform: translate(-50%, -50%); }
+.fiveList h3 { position: absolute; bottom: calc(100% + 18px); left: 0; width: 100%; padding: 0 8px; color: #16133a; font-size: 15px; font-weight: 500; line-height: 1.35; text-align: center; }
+.fiveList > div:nth-child(even) h3 { top: calc(100% + 18px); bottom: auto; }
+@media (max-width: 760px) {
+  .fiveTrack { width: calc(100% - 40px); aspect-ratio: auto; margin: 32px auto 8px; }
+  .fiveTrack .fiveArt { display: none; }
+  .fiveList { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+  .fiveList > div,
+  .fiveList > div:nth-child(n) { position: static; display: grid; width: auto; height: 160px; place-content: center; justify-items: center; gap: 14px; border-radius: 24px; background: #f7f8fc; }
+  .fiveList img { position: static; width: 48px; transform: none; }
+  .fiveList h3,
+  .fiveList > div:nth-child(even) h3 { position: static; padding: 0 12px; font-size: 14px; }
+  .fiveList > div:last-child { grid-column: 1 / -1; }
+}
+
+/* Card rows (3 or 4 cards side by side): each card is as tall as its content, and every card in a row shares the
+   tallest card's height, so there is no empty band under short copy. */
+.cardAuto.cardAuto { min-height: 0; padding-bottom: 28px; }
+@media (min-width: 761px) {
+  /* Step cards keep their stagger as a visual offset, so the row can stretch every card to one height. */
+  .stepGrid.stepGrid { align-items: stretch; padding-bottom: 74px; }
+  .stepGrid.stepGrid article:nth-child(even) { margin-top: 0; transform: translateY(74px); }
+}
+
+/* Two-card section, left card: its points sit in a 2 x 2 grid with larger icons. */
+/* The grid sits in the middle of the space under the copy, so a short list doesn't leave an empty band below it. */
+.twoCardItem.twoCardItem { display: flex; flex-direction: column; }
+.twoCardItem.twoCardItem ul { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px 20px; margin: auto 0; padding-top: 26px; }
+.twoCardItem.twoCardItem li { gap: 14px; font-size: 15px; line-height: 1.3; }
+.twoCardItem.twoCardItem li i { width: 52px; height: 52px; }
+.twoCardItem.twoCardItem li img { width: 24px; height: 24px; }
+@media (max-width: 760px) {
+  .twoCardItem.twoCardItem ul { gap: 14px 12px; padding-top: 20px; }
+  .twoCardItem.twoCardItem li { gap: 10px; font-size: 13px; }
+  .twoCardItem.twoCardItem li i { width: 42px; height: 42px; }
+  .twoCardItem.twoCardItem li img { width: 20px; height: 20px; }
 }

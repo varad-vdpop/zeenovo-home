@@ -1,0 +1,63 @@
+/* Drawn on a 560-unit grid (--u is one unit) so the panel keeps its proportions at every card width. */
+.frame { container-type: inline-size; }
+.panel {
+  --u: calc(100cqw / 560);
+  display: grid;
+  grid-template-columns: calc(var(--u) * 196) minmax(0, 1fr);
+  gap: calc(var(--u) * 12);
+  padding: calc(var(--u) * 12);
+  border-radius: calc(var(--u) * 20);
+  background: #fff;
+  color: #16133a;
+  font-family: var(--font-manrope), Arial, sans-serif;
+  text-align: left;
+}
+.panel p { margin: 0; }
+.panel svg { width: calc(var(--u) * 11); height: calc(var(--u) * 11); flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+/* Left: the visit's steps, as in the product's appointment stepper. */
+.steps { display: grid; margin: 0; padding: calc(var(--u) * 14) calc(var(--u) * 16); list-style: none; border: 1px solid #ececf3; border-radius: calc(var(--u) * 12); }
+.steps li { position: relative; display: flex; height: calc(var(--u) * 36); align-items: center; gap: calc(var(--u) * 10); color: #27272a; font-size: calc(var(--u) * 11.5); font-weight: 500; white-space: nowrap; }
+.steps li:not(:last-child)::after {
+  position: absolute;
+  top: calc(50% + var(--u) * 11);
+  left: calc(var(--u) * 10.25);
+  width: calc(var(--u) * 1.5);
+  height: calc(var(--u) * 14);
+  border-radius: 1px;
+  background: #e4e4ec;
+  content: "";
+}
+.steps li.done:not(:last-child)::after { background: #3f51d8; }
+.dot { display: grid; width: calc(var(--u) * 22); height: calc(var(--u) * 22); flex: none; place-items: center; border: calc(var(--u) * 1.5) solid #dcdce4; border-radius: 50%; background: #fff; color: #71717a; font-size: calc(var(--u) * 9.5); font-weight: 600; }
+.done .dot { border-color: #3f51d8; background: #3f51d8; color: #fff; }
+.done .dot svg { width: calc(var(--u) * 12); height: calc(var(--u) * 12); stroke-width: 2.6; }
+.current { color: #3f51d8; font-weight: 600; }
+.current .dot { border-color: #3f51d8; color: #3f51d8; box-shadow: 0 0 0 calc(var(--u) * 3) #e8ebff; }
+
+/* Right: the Communication step, faxing each document the visit produced. */
+.detail { display: flex; flex-direction: column; }
+.fax { overflow: hidden; border: 1px solid #ececf3; border-radius: calc(var(--u) * 12); }
+.panel .faxHead { padding: calc(var(--u) * 11) calc(var(--u) * 14); background: #f3f5ff; color: #3f51d8; font-size: calc(var(--u) * 11.5); font-weight: 600; }
+.docs { display: grid; gap: calc(var(--u) * 8); margin: 0; padding: calc(var(--u) * 10); list-style: none; }
+.docs li { display: flex; align-items: center; gap: calc(var(--u) * 7); padding: calc(var(--u) * 10) calc(var(--u) * 8); border: 1px solid #ececf3; border-radius: calc(var(--u) * 9); }
+.docIcon { display: grid; width: calc(var(--u) * 26); height: calc(var(--u) * 26); flex: none; place-items: center; border-radius: calc(var(--u) * 7); background: #f1f1f5; color: #52525b; }
+.docIcon svg { width: calc(var(--u) * 13); height: calc(var(--u) * 13); }
+.docName { flex: 1; min-width: 0; font-size: calc(var(--u) * 10.5); font-weight: 600; line-height: 1.25; }
+.recipient { display: grid; width: calc(var(--u) * 96); flex: none; padding: calc(var(--u) * 5) calc(var(--u) * 8); border-radius: calc(var(--u) * 6); background: #f4f4f6; font-size: calc(var(--u) * 10); font-weight: 600; white-space: nowrap; }
+.recipient small { overflow: hidden; color: #71717a; font-size: calc(var(--u) * 8.5); font-weight: 500; text-overflow: ellipsis; }
+.send { display: inline-flex; width: calc(var(--u) * 62); flex: none; align-items: center; justify-content: center; gap: calc(var(--u) * 4); padding: calc(var(--u) * 6) calc(var(--u) * 8); border: 1px solid #c9cff5; border-radius: calc(var(--u) * 6); background: #eef0ff; color: #3f51d8; font-size: calc(var(--u) * 9); font-weight: 600; white-space: nowrap; }
+.send svg { width: calc(var(--u) * 10); height: calc(var(--u) * 10); }
+.sent { border-color: #bfe6cf; background: #e4f6ec; color: #12814a; }
+.sent svg { stroke-width: 2.6; }
+.footer { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--u) * 8); margin-top: auto; padding: calc(var(--u) * 12) calc(var(--u) * 4) calc(var(--u) * 2); color: #71717a; font-size: calc(var(--u) * 9.5); }
+.button { display: inline-flex; align-items: center; gap: calc(var(--u) * 5); padding: calc(var(--u) * 7) calc(var(--u) * 12); border-radius: calc(var(--u) * 7); background: #3f51d8; color: #fff; font-size: calc(var(--u) * 10); font-weight: 600; white-space: nowrap; }
+
+/* Narrow cards: the steps sit above the documents in two columns, on a smaller grid so the type stays legible. */
+@container (max-width: 480px) {
+  .panel { --u: calc(100cqw / 330); grid-template-columns: minmax(0, 1fr); }
+  .steps { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(4, auto); grid-auto-flow: column; column-gap: calc(var(--u) * 12); padding: calc(var(--u) * 8) calc(var(--u) * 12); }
+  .steps li { height: calc(var(--u) * 30); font-size: calc(var(--u) * 10.5); }
+  .steps li:not(:last-child)::after { display: none; }
+  .dot { width: calc(var(--u) * 20); height: calc(var(--u) * 20); }
+}

@@ -1,10 +1,20 @@
+/* Every CTA: hover eases its opacity and any colour change the button defines. This rule outranks the buttons'
+   own `transition`, so it lists every property a CTA changes on hover. */
 [data-cta][data-cta] {
-  transition: opacity 300ms ease-in-out;
+  transition:
+    opacity 220ms ease,
+    background-color 220ms ease,
+    color 220ms ease,
+    border-color 220ms ease;
 }
 
 @media (hover: hover) and (pointer: fine) {
-  /* Override opacity retained by completed entrance keyframes. */
-  [data-cta][data-cta]:hover { opacity: 0.8 !important; }
+  /* !important outranks inline opacity left by scroll-in effects; the transition still runs. */
+  [data-cta][data-cta]:hover { opacity: 0.82 !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-cta][data-cta] { transition-duration: 0ms; }
 }
 
 a[data-cta]:focus-visible,

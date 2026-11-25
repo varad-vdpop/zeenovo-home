@@ -5,7 +5,8 @@ import type { Block } from "@/components/blocks/types";
 import { minorAilmentsFeatures } from "@/content/featureSections";
 import Image from "next/image";
 import ScrollFade from "@/components/ScrollFade";
-import { MinorHeroAssessment, MinorHeroRecord, MinorGuidedAssessment, MinorPhysicianHandoff, MinorFollowup } from "@/components/MinorAilmentsUi";
+import { MinorHeroAssessment, MinorHeroRecord, MinorPhysicianHandoff, MinorFollowup } from "@/components/MinorAilmentsUi";
+import MinorScreeningPreview from "@/components/MinorScreeningPreview";
 import styles from "./page.module.css";
 
 const asset = (name: string) => `/assets/minor-ailments/${name}`;
@@ -93,13 +94,14 @@ const assessmentFeatures = [
   { icon: "icon-pharmacist.svg", title: "Pharmacist controlled", description: "Reference notes support your judgement. They don't replace it." },
 ] as const;
 
-const trustSteps = [
-  ["Booking & intake", "trust-step-1.svg"],
-  ["Assessment", "trust-step-2.svg"],
-  ["Documentation", "trust-step-3.svg"],
-  ["Communication", "trust-step-4.svg"],
-  ["Follow-up", "trust-step-5.svg"],
-] as const;
+// One record: the site's shared wave strip (animated line art), like every other page.
+const oneRecord: Block = { type: "wave", tag: "One record", title: "Every step on the / same visit record.", description: "Booking, assessment, documentation, physician communication and follow-up share one record. Nothing is entered twice.", items: [
+  { label: "Booking & intake", icon: "shield" },
+  { label: "Assessment", icon: "calendarStar" },
+  { label: "Documentation", icon: "chartStar" },
+  { label: "Communication", icon: "grid" },
+  { label: "Follow-up", icon: "globe" },
+] };
 
 // The prescribing bento keeps its features from featureSections.ts. Its heading follows the copy rewrite:
 // the pharmacist picks from saved directions, nothing is suggested.
@@ -122,7 +124,7 @@ function Hero() {
     <Image className={styles.heroEllipse} src={asset("hero-ellipse.svg")} alt="" width={619} height={619} />
     <Image className={styles.heroSmallEllipse} src={asset("hero-small-ellipse.svg")} alt="" width={87} height={87} />
     <div className={styles.heroCopy}>
-      <p className={`${styles.heroEyebrow} ${styles.heroEnter}`}>ZeeNovo Clinical</p>
+      <span className={`tag hero-pill ${styles.heroEnter}`}><span aria-hidden="true">★</span>ZeeNovo Clinical</span>
       <h1 className={`${styles.heroHeading} ${styles.heroEnter}`} id="minor-title">Structured minor ailment visits.<br /> Fully documented.</h1>
       <p className={`${styles.heroDescription} ${styles.heroEnter}`}>Screening that branches on every answer, red flags at the decision point, and a complete record with physician notification before the patient leaves.</p>
       <div className={`${styles.heroActions} ${styles.heroEnter}`}>
@@ -189,24 +191,8 @@ function GuidedAssessment() {
       </ScrollFade>
       <div className={styles.assessmentArt}>
         <Image className={styles.assessmentPattern} src={asset("assessment-pattern.svg")} alt="" width={939} height={757} />
-        <div className={styles.assessmentPanel}><MinorGuidedAssessment className={styles.nativeAssessment} /></div>
+        <div className={styles.assessmentPanel}><MinorScreeningPreview className={styles.nativeAssessment} /></div>
       </div>
-    </div>
-  </section>;
-}
-
-function ConnectedCare() {
-  return <section className={styles.connectedCare} aria-labelledby="connected-care-title">
-    <ScrollFade as="div" className={styles.connectedHeading}>
-      <p className={styles.trustTag}><Image src={asset("trust-star.svg")} alt="" width={20} height={20} />One record</p>
-      <h2 id="connected-care-title">Every step on the same visit record.</h2>
-      <p>Booking, assessment, documentation, physician communication and follow-up share one record. Nothing is entered twice.</p>
-    </ScrollFade>
-    <div className={styles.trustJourney}>
-      <div className={styles.trustWaveMask} aria-hidden="true"><Image className={styles.trustWave} src={asset("trust-wave.svg")} alt="" width={1440} height={181} /></div>
-      <div className={styles.trustStepGrid}>{trustSteps.map(([label, icon], index) => <ScrollFade as="div" className={styles.trustStep} delay={index * 60} responsiveDelay key={label}>
-        <Image src={asset(icon)} alt="" width={40} height={42} /><span>{label}</span>
-      </ScrollFade>)}</div>
     </div>
   </section>;
 }
@@ -242,7 +228,7 @@ export default function MinorAilmentsPage() {
     <Capabilities />
     <Conditions />
     <GuidedAssessment />
-    <ConnectedCare />
+    <BlockList blocks={[oneRecord]} />
     <AfterVisit />
     <BlockList blocks={[prescribingFeatures, questions]} />
   </main>;

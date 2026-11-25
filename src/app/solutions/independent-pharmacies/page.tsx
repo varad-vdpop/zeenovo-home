@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { asset } from "@/lib/assets";
 import { BlockList } from "@/components/blocks/BlockPage";
+import type { Block } from "@/components/blocks/types";
 import { solutionPages } from "@/content/pages/solutions";
 import blocks from "@/components/blocks/blocks.module.css";
 import styles from "./page.module.css";
+import Icon from "@/components/Icon";
 
 const pageAsset = asset.independentPharmacies;
 
@@ -66,7 +68,7 @@ const week = [
 ] as const;
 
 function Arrow() {
-  return <span data-cta-icon aria-hidden="true">↗</span>;
+  return <span data-cta-icon aria-hidden="true"><Icon size={20} /></span>;
 }
 
 function Hero() {
@@ -77,7 +79,7 @@ function Hero() {
       </div>
 
       <div className={styles.heroCopy}>
-        <p className={styles.eyebrow}>Independent pharmacies</p>
+        <span className="tag hero-pill"><span aria-hidden="true">★</span>Independent pharmacies</span>
         <h1 id="independent-pharmacies-title">Big pharmacy tools,{" "}<br />for a pharmacy with{" "}<br />one front door.</h1>
         <p className={styles.heroDescription}>Online and voice booking, guided clinical services, automated follow-up and a safety program. No per-user fees. No IT project. Set up in about a day.</p>
         <div className={blocks.solutionActions}>
@@ -182,24 +184,9 @@ function BetterWeek() {
   );
 }
 
-function Cta() {
-  return (
-    <section className={styles.cta} aria-labelledby="cta-title">
-      <Image className={styles.ctaCircle} src={pageAsset.ctaCircle} alt="" width={1491} height={1634} />
-      <div className={styles.ctaCopy}>
-        <p>Built for independent pharmacy</p>
-        <h2 id="cta-title">Keep the independence.<br />Lose the operational drag.</h2>
-        <span>Start with your services, your patients and the systems you already use.</span>
-        <div><Link data-cta href="/book-a-demo">Book a Demo <Arrow /></Link><Link data-cta href="https://auth.zeenovo.com/signup">Start Free Trial <Arrow /></Link></div>
-      </div>
-      <div className={styles.ctaPhoto}>
-        <Image src={pageAsset.cta} alt="Gloved pharmacist preparing a syringe" fill sizes="440px" />
-      </div>
-      <article className={styles.timeReturned}><strong>Time returned to care</strong><span>Automation handles the repeat work.</span></article>
-    </section>
-  );
-}
+// Closing call to action: the site's shared CTA block, like every other page.
+const closingCta: Block = { type: "cta", eyebrow: "Built for independent pharmacy", title: "Keep the independence. / Lose the operational drag.", text: "Start with your services, your patients and the systems you already use.", action: { label: "Book a Demo", href: "/book-a-demo" } };
 
 export default function IndependentPharmaciesPage() {
-  return <main className={styles.page}><Hero /><Reality /><PictureChanges /><BetterWeek /><BlockList blocks={page.blocks} /><Cta /></main>;
+  return <main className={styles.page}><Hero /><Reality /><PictureChanges /><BetterWeek /><BlockList blocks={[...page.blocks, closingCta]} /></main>;
 }

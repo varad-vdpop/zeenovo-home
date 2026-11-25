@@ -187,7 +187,7 @@ export default function Navbar() {
                 exit={{ opacity: 0, transform: animateDesktop ? "translateY(-5px)" : "translateY(0px)" }}
                 transition={panelTransition}
               >
-                <div className={`${styles.menuColumns} ${selectedMenu.sections.length === 1 ? styles.singleSection : ""} ${selectedMenu.label === "Platform" ? styles.productColumns : ""}`}>
+                <div className={`${styles.menuColumns} ${selectedMenu.sections.length === 1 ? styles.singleSection : ""} ${selectedMenu.label === "Platforms" ? styles.productColumns : ""}`}>
                   {selectedMenu.sections.map((section) => (
                     <div className={styles.menuSection} key={section.label}>
                       <h2>{section.label}</h2>

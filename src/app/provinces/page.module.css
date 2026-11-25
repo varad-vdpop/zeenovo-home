@@ -33,8 +33,6 @@
 }
 
 .hero {
-  --pointer-x: 0;
-  --pointer-y: 0;
   position: relative;
   height: 820px;
   overflow: hidden;
@@ -67,8 +65,7 @@
   right: -2px;
   width: 590px;
   height: auto;
-  transform: translate3d(calc(var(--pointer-x) * -4px), calc(var(--pointer-y) * -4px), 0) scale(1.015);
-  transition: transform .5s cubic-bezier(.22, 1, .36, 1);
+  transform: scale(1.015);
 }
 
 .heroCopy {
@@ -185,7 +182,7 @@
   transition: filter .3s ease;
 }
 
-.ontarioMapVisual { position: relative; transform: translate3d(calc(var(--pointer-x) * 8px), calc(var(--pointer-y) * 8px), 0); transition: transform .3s ease-out; }
+.ontarioMapVisual { position: relative; }
 .ontarioMap { display: block; width: 100%; height: auto; }
 .ontarioMapTrace { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .ontarioMapTracePath { stroke-dasharray: 1; stroke-dashoffset: 1; stroke-opacity: 0; fill-opacity: 0; animation: ontarioTrace 9s ease-in-out infinite, ontarioFill 9s ease-in-out infinite; }
@@ -276,7 +273,6 @@
 .motionReady .realityCard[data-visible="true"]:hover {
   border-color: rgb(255 255 255 / 60%);
   box-shadow: 0 28px 58px rgb(20 11 73 / 25%);
-  transform: translateY(-7px);
 }
 
 .program {
@@ -318,13 +314,8 @@
 
 .motionReady .programCard[data-visible="true"]:hover {
   box-shadow: 0 25px 52px rgb(51 40 130 / 18%);
-  transform: translateY(-8px);
 }
 
-.motionReady .programCard[data-visible="true"]:hover .programCardStrip {
-  transform: translateX(calc(var(--card-index) * -25.625%)) scale(1.015);
-  filter: saturate(1.04);
-}
 
 .outcomes {
   position: relative;
@@ -360,12 +351,10 @@
 }
 
 .tag span { font-size: 15px; transition: transform .25s cubic-bezier(.22, 1, .36, 1); }
-.tag:hover span { transform: rotate(18deg) scale(1.08); }
 .outcomesHeading h2 { margin-top: 13px; font-size: clamp(38px, 3.1vw, 46px); font-weight: 500; letter-spacing: -.04em; line-height: 1.12; }
 .outcomesViewport { position: absolute; right: 0; bottom: -1px; left: 0; overflow: hidden; }
 .outcomesWaveLayer { position: relative; width: 1440px; margin-inline: auto; }
 .outcomesWave { display: block; width: 100%; max-width: none; height: auto; transition: transform .6s cubic-bezier(.22, 1, .36, 1); }
-.outcomes:hover .outcomesWave { transform: scale(1.008); }
 .outcomesWaveTrace {
   position: absolute;
   inset: 0;
@@ -412,10 +401,6 @@
 .reminders { position: absolute; z-index: 3; bottom: 45px; left: 16px; width: 415px; height: 290px; transition: transform .45s cubic-bezier(.22, 1, .36, 1); }
 .ctaPerson { position: absolute; z-index: 3; bottom: -20px; left: 50%; width: 319px; height: 402px; object-fit: cover; object-position: 50% 48%; transform: translateX(-50%); transition: transform .45s cubic-bezier(.22, 1, .36, 1); }
 .metrics { position: absolute; z-index: 3; right: 229px; bottom: 31px; width: 231px; height: 278px; transition: transform .45s cubic-bezier(.22, 1, .36, 1); }
-.cta:hover .ctaWaves { transform: scale(1.015); }
-.cta:hover .reminders { transform: translate3d(-3px, -5px, 0); }
-.cta:hover .ctaPerson { transform: translate3d(-50%, -4px, 0); }
-.cta:hover .metrics { transform: translate3d(3px, -7px, 0); }
 
 @media (max-width: 1199px) {
   .heroCopy { left: 44px; width: 52%; }
@@ -574,4 +559,19 @@
   .ontarioMapTracePath { animation: none; stroke-dashoffset: 0; stroke-opacity: .35; fill-opacity: .18; }
   .outcomesWaveTrace { animation: none; opacity: 0; }
   .ontarioMapVisual { transform: none; transition: none; }
+}
+
+/* Desktop hero, same as every left-copy hero on the site: copy centred in the band between the floating navigation
+   and the bottom of the hero (bottom inset larger than zero lifts it slightly, so it reads as centred), and the home
+   hero's heading and description type (globals.css .hero h1, .hero-content > p). */
+@media (min-width: 1200px) {
+  .heroCopy { top: 109px; bottom: 40px; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; }
+  .hero h1 { font-size: clamp(46px, calc(7.5vw - 43px), 65px); font-weight: 400; letter-spacing: -2px; line-height: 1.245; }
+  .heroDescription { max-width: 543px; margin-top: 18px; color: #414349; font-family: var(--font-manrope), Arial, sans-serif; font-size: 18px; line-height: 1.62; }
+}
+
+/* Hero and CTA buttons: one spec across the site (matches the product heroes in clinical/page.module.css). */
+@media (min-width: 761px) {
+  .primaryButton, .secondaryButton { height: 52px; gap: 12px; padding: 0 24px 0 20px; border-radius: 13px; font-size: 16px; font-weight: 600; }
+  .primaryButton svg, .secondaryButton svg { width: 20px; height: 20px; }
 }
