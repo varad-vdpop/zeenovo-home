@@ -1,0 +1,49 @@
+/* Drawn on an 880-unit grid (--u is one unit) so it keeps its proportions in the section's glass frame: a landscape
+   web-app screen with three columns of cards. Narrower frames switch to a 600-unit grid with two columns, and phones
+   to one column. */
+.panel { --u: calc(100cqw / 880); }
+
+.head { display: flex; align-items: flex-start; justify-content: space-between; gap: calc(var(--u) * 12); padding: calc(var(--u) * 16) calc(var(--u) * 18); border-radius: calc(var(--u) * 12); background: #fff; }
+.head b { display: block; font-size: calc(var(--u) * 17); font-weight: 700; letter-spacing: -0.02em; }
+.head small { display: block; margin-top: calc(var(--u) * 3); color: #71717a; font-size: calc(var(--u) * 11); }
+.select { display: inline-flex; flex: none; align-items: center; gap: calc(var(--u) * 6); padding: calc(var(--u) * 6) calc(var(--u) * 10); border: 1px solid #e4e4e7; border-radius: calc(var(--u) * 8); background: #fff; font-size: calc(var(--u) * 11); font-weight: 500; }
+.select svg:last-child { opacity: .5; }
+
+.toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: calc(var(--u) * 8); }
+.tabs { display: flex; padding: calc(var(--u) * 3); border-radius: calc(var(--u) * 9); background: #ececf2; }
+.tabs i { padding: calc(var(--u) * 6) calc(var(--u) * 12); border-radius: calc(var(--u) * 7); color: #71717a; font-size: calc(var(--u) * 11); font-style: normal; font-weight: 500; white-space: nowrap; }
+.tabs .tabOn { background: #fff; color: #16133a; font-weight: 600; }
+.chips { display: flex; gap: calc(var(--u) * 6); }
+.chips i { display: inline-flex; align-items: center; gap: calc(var(--u) * 4); padding: calc(var(--u) * 4) calc(var(--u) * 8); border: 1px solid #d9d4fb; border-radius: 999px; background: #efedff; color: #2b1f8f; font-size: calc(var(--u) * 10); font-style: normal; font-weight: 600; white-space: nowrap; }
+.chips svg { width: calc(var(--u) * 10); height: calc(var(--u) * 10); }
+
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 10); }
+.card { overflow: hidden; border: 1px solid #e6e6ee; border-radius: calc(var(--u) * 12); background: #fff; }
+.cardHead { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--u) * 8); padding: calc(var(--u) * 10) calc(var(--u) * 12); font-size: calc(var(--u) * 12); }
+.cardHead b { font-weight: 700; }
+.cardHead span { padding: calc(var(--u) * 3) calc(var(--u) * 8); border-radius: 999px; font-size: calc(var(--u) * 8.5); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
+.wait .cardHead { background: #efedff; }
+.wait .cardHead span { background: #3b309d; color: #fff; }
+.ok .cardHead { background: #ecf8f1; }
+.ok .cardHead span { background: #12814a; color: #fff; }
+.info .cardHead { background: #eef3ff; }
+.info .cardHead span { background: #3f51d8; color: #fff; }
+.card ul { display: grid; gap: calc(var(--u) * 6); margin: 0; padding: calc(var(--u) * 10) calc(var(--u) * 12) 0; list-style: none; }
+.card li { display: flex; align-items: center; gap: calc(var(--u) * 7); overflow: hidden; color: #52525b; font-size: calc(var(--u) * 10.5); text-overflow: ellipsis; white-space: nowrap; }
+.card li svg { color: #a1a1aa; }
+.card li:last-child { color: #16133a; font-weight: 500; }
+.card p { margin: 0; padding: calc(var(--u) * 8) calc(var(--u) * 12) calc(var(--u) * 12); color: #3b309d; font-size: calc(var(--u) * 10.5); font-weight: 600; }
+
+@container (max-width: 720px) {
+  .panel { --u: calc(100cqw / 600); }
+  .cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .cards > .card:nth-child(n + 5) { display: none; }
+}
+
+/* Narrow frames: one column of cards, on a smaller grid so the type stays legible. */
+@container (max-width: 460px) {
+  .panel { --u: calc(100cqw / 380); }
+  .cards { grid-template-columns: minmax(0, 1fr); }
+  .cards > .card:nth-child(n + 3) { display: none; }
+  .toolbar { flex-wrap: wrap; }
+}

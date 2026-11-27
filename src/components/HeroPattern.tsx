@@ -20,7 +20,9 @@ const patternPaths = [
   }
 ];
 
-export default function HeroPattern() {
+// `anchor="bottom"` keeps the lines on the panel's bottom edge, as on the home hero, when the panel is shorter than the
+// home hero; by default the artwork is cropped about its centre.
+export default function HeroPattern({ anchor = "center", className = "" }: { anchor?: "center" | "bottom"; className?: string } = {}) {
   const patternId = useId();
   const svgRef = useRef<SVGSVGElement>(null);
   const inView = useInView(svgRef, { amount: 0.05 });
@@ -37,7 +39,7 @@ export default function HeroPattern() {
   // opaque image covered it; each line is joined back to its own
   // continuation, so the set crosses over itself as drawn.
   return (
-    <svg ref={svgRef} className={styles.pattern} data-running={inView && pageVisible} viewBox="0 0 1406 819" preserveAspectRatio="xMidYMid slice" fill="none" stroke="#2034A5" aria-hidden="true" focusable="false">
+    <svg ref={svgRef} className={`${styles.pattern} ${className}`} data-running={inView && pageVisible} viewBox="0 0 1406 819" preserveAspectRatio={anchor === "bottom" ? "xMidYMax slice" : "xMidYMid slice"} fill="none" stroke="#2034A5" aria-hidden="true" focusable="false">
       <defs>
         {patternPaths.map((path, index) => (
           <path key={index} id={`${patternId}-path-${index}`} d={path.d} strokeWidth={path.width} />

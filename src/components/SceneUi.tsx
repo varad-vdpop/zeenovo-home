@@ -12,6 +12,7 @@ export { styles };
 export const inter = localFont({ src: "../../public/fonts/inter-variable.woff2", weight: "100 900", display: "swap", preload: false });
 
 export const icon = {
+  alert: "M12 4 2.5 20h19L12 4Zm0 6v4m0 3h.01",
   chevron: "m6 9 6 6 6-6",
   check: "M20 6 9 17l-5-5",
   left: "m15 18-6-6 6-6",

@@ -1,0 +1,52 @@
+/* Drawn on an 880-unit grid (--u is one unit): a landscape web-app screen. Narrower frames switch to a 640-unit grid,
+   phones to a 380-unit grid without the sidebar or the steps. */
+.panel { --u: calc(100cqw / 880); }
+
+.head { display: flex; align-items: center; gap: calc(var(--u) * 10); }
+.head > div { flex: 1; min-width: 0; }
+.head b { display: block; font-size: calc(var(--u) * 17); font-weight: 700; letter-spacing: -0.02em; }
+.head small { display: block; margin-top: calc(var(--u) * 3); color: #71717a; font-size: calc(var(--u) * 11); }
+.complete { display: inline-flex; flex: none; align-items: center; gap: calc(var(--u) * 5); padding: calc(var(--u) * 5) calc(var(--u) * 10); border-radius: 999px; background: #e3f6ea; color: #12814a; font-size: calc(var(--u) * 10.5); font-weight: 700; }
+.complete svg { stroke-width: 2.4; }
+
+.body { display: grid; grid-template-columns: calc(var(--u) * 190) minmax(0, 1fr); gap: calc(var(--u) * 12); align-items: start; }
+
+/* The visit's steps, as in the product's appointment stepper */
+.steps { display: grid; margin: 0; padding: calc(var(--u) * 10) calc(var(--u) * 12); border: 1px solid #e6e6ee; border-radius: calc(var(--u) * 12); background: #fff; list-style: none; }
+.steps li { position: relative; display: flex; height: calc(var(--u) * 34); align-items: center; gap: calc(var(--u) * 9); color: #71717a; font-size: calc(var(--u) * 10.5); font-weight: 500; white-space: nowrap; }
+.steps li:not(:last-child)::after { position: absolute; top: calc(50% + var(--u) * 10); left: calc(var(--u) * 9.25); width: calc(var(--u) * 1.5); height: calc(var(--u) * 14); border-radius: 1px; background: #e4e4ec; content: ""; }
+.dot { display: grid; flex: none; width: calc(var(--u) * 20); height: calc(var(--u) * 20); place-items: center; border-radius: 50%; background: #ececf2; color: #71717a; font-size: calc(var(--u) * 9); font-weight: 700; }
+.dot svg { width: calc(var(--u) * 11); height: calc(var(--u) * 11); stroke-width: 2.6; }
+.steps .done { color: #27272a; }
+.steps .done .dot { background: #e3f6ea; color: #12814a; }
+.steps .current { margin: 0 calc(var(--u) * -6); padding: 0 calc(var(--u) * 6); border-radius: calc(var(--u) * 8); background: #efedff; color: #2b1f8f; font-weight: 600; }
+.steps .current .dot { background: #3b309d; color: #fff; }
+
+/* Send fax: each document, its recipient, and the choice to fax or download it */
+.card { display: grid; align-content: start; gap: calc(var(--u) * 10); min-width: 0; padding: calc(var(--u) * 14); border: 1px solid #e6e6ee; border-radius: calc(var(--u) * 12); background: #fff; }
+.cardHead b { display: block; font-size: calc(var(--u) * 13); font-weight: 700; }
+.cardHead small { display: block; margin-top: calc(var(--u) * 2); color: #71717a; font-size: calc(var(--u) * 10.5); }
+.docs { display: grid; gap: calc(var(--u) * 8); margin: 0; padding: 0; list-style: none; }
+.docs li { display: grid; grid-template-columns: calc(var(--u) * 30) minmax(0, 1fr); column-gap: calc(var(--u) * 10); row-gap: calc(var(--u) * 8); padding: calc(var(--u) * 11) calc(var(--u) * 12); border: 1px solid #ececf1; border-radius: calc(var(--u) * 10); }
+.docIcon { display: grid; grid-row: span 2; align-self: start; width: calc(var(--u) * 30); height: calc(var(--u) * 30); place-items: center; border-radius: calc(var(--u) * 8); background: #efedff; color: #3b309d; }
+.docIcon svg { width: calc(var(--u) * 14); height: calc(var(--u) * 14); }
+.docText { min-width: 0; }
+.docText b { display: block; font-size: calc(var(--u) * 11.5); font-weight: 600; }
+.docText small { display: block; margin-top: calc(var(--u) * 2); overflow: hidden; color: #71717a; font-size: calc(var(--u) * 10); text-overflow: ellipsis; white-space: nowrap; }
+.actions { display: flex; flex-wrap: wrap; gap: calc(var(--u) * 6); }
+.actions i, .footer i { display: inline-flex; align-items: center; gap: calc(var(--u) * 5); padding: calc(var(--u) * 5) calc(var(--u) * 10); border-radius: calc(var(--u) * 7); font-size: calc(var(--u) * 10); font-style: normal; font-weight: 600; white-space: nowrap; }
+.actions svg, .footer svg { width: calc(var(--u) * 11); height: calc(var(--u) * 11); }
+.fax { background: #3b309d; color: #fff; }
+.sent { background: #e3f6ea; color: #12814a; }
+.download { border: 1px solid #e4e4e7; background: #fff; color: #27272a; }
+.footer { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--u) * 10); padding-top: calc(var(--u) * 10); border-top: 1px solid #f0f0f4; color: #71717a; font-size: calc(var(--u) * 10); }
+
+@container (max-width: 720px) {
+  .panel { --u: calc(100cqw / 640); }
+  .body { grid-template-columns: calc(var(--u) * 176) minmax(0, 1fr); }
+}
+@container (max-width: 460px) {
+  .panel { --u: calc(100cqw / 380); }
+  .complete, .steps { display: none; }
+  .body { grid-template-columns: minmax(0, 1fr); }
+}

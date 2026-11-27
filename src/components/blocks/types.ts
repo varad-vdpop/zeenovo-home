@@ -71,8 +71,9 @@ export type FeaturesBlock = {
   art: ArtKey;
   artAlt: string;
   /** Live product UI in the art panel instead of `art`. "sites" = the pharmacy website from the home Sites card.
-      "followup" = the follow-ups screen from the Clinical page (ClinicalFollowupPreview). */
-  ui?: "sites" | "followup";
+      "followup" = the follow-ups screen from the Clinical page (ClinicalFollowupPreview).
+      "appointments" = the Patient Portal appointments screen (AppointmentsPreview). */
+  ui?: "sites" | "followup" | "appointments" | "physician" | "recall" | "assureFilters" | "staffCompetency" | "clinicalFax" | "sopUpdate" | "medsImport" | "patientProfile" | "networkPrivacy";
   /** "workflow" only: the purple art panel on the left and the copy on the right. */
   reverse?: boolean;
 };
@@ -171,6 +172,11 @@ export type LegalBlock = {
 };
 
 export type TableBlock = { type: "table"; eyebrow: string; title: Heading; columns: string[]; rows: string[][]; note?: string };
+/** Two-column grid of cards, one per job: its title and a line about it, then what separate tools do and what ZeeNovo
+    does. */
+/** Two-column grid of question cards: what an assessor asks, the product that holds the evidence, and where it is. */
+export type EvidenceBlock = { type: "evidence"; eyebrow: string; title: Heading; side?: string; items: { question: string; product: "Assure" | "Clinical" | "Magistral"; answer: string }[]; note?: string };
+export type VersusBlock = { type: "versus"; eyebrow: string; title: Heading; side?: string; items: { title: string; text: string; before: string; after: string }[] };
 /** Heading and description on the left, one card per item on the right. Icons come from tileIcons. */
 export type CompareBlock = { type: "compare"; eyebrow: string; title: Heading; description?: string; items: { title: string; text: string; icon: TileIconKey }[] };
 
@@ -196,7 +202,7 @@ export type FeatureIndexBlock = {
 
 export type Block =
   | HeroBlock | SolutionHeroBlock | CardsBlock | RealityBlock | FeaturesBlock | TwoCardBlock | WaveBlock | StepsBlock
-  | ProductsGridBlock | CtaBlock | CalloutBlock | FaqBlock | PricingBlock | FactsBlock | FormBlock | ListBlock | LegalBlock | TableBlock | CompareBlock | RoiBlock | FeatureIndexBlock;
+  | ProductsGridBlock | CtaBlock | CalloutBlock | FaqBlock | PricingBlock | FactsBlock | FormBlock | ListBlock | LegalBlock | TableBlock | VersusBlock | EvidenceBlock | CompareBlock | RoiBlock | FeatureIndexBlock;
 
 export type PageContent = {
   meta: { title: string; description: string };

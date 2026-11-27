@@ -89,12 +89,12 @@ export const productPages: Record<string, PageContent> = {
         { title: "Recall queue", text: "See who is due, invited and booked, with automatic invitation emails.", icon: "calendarStar" },
         { title: "Provider fax", text: "Fax the notification from the review.", icon: "steps" },
       ] },
-      { type: "features", variant: "workflow", eyebrow: "Physician communication", title: "Keep the prescriber / in the loop.", description: "The provider notification is generated from the review and faxed from the same screen.", art: "physicianCard", artAlt: "Family physician details reused for fax", rows: [
+      { type: "features", variant: "workflow", eyebrow: "Physician communication", title: "Keep the prescriber / in the loop.", description: "The provider notification is generated from the review and faxed from the same screen.", art: "physicianCard", artAlt: "Family physician details reused for fax", ui: "physician", rows: [
         { title: "Physician on file", text: "Looked up once and reused.", icon: "assessment" },
         { title: "Provider notification", text: "Generated from the review.", icon: "steps" },
         { title: "Fax from the review", text: "Status shown in the log.", icon: "progress" },
       ] },
-      { type: "features", variant: "followup", eyebrow: "Recall", title: "Bring patients back / when they're due.", description: "The recall queue shows who is due, invited and booked for their next review.", art: "followupPanel", artAlt: "Follow-up panel with review status", rows: [
+      { type: "features", variant: "followup", eyebrow: "Recall", title: "Bring patients back / when they're due.", description: "The recall queue shows who is due, invited and booked for their next review.", art: "followupPanel", artAlt: "Follow-up panel with review status", ui: "recall", rows: [
         { title: "Due list", text: "See which patients are due for their next review.", icon: "plan" },
         { title: "Automatic invitations", text: "Email invitations from the queue.", icon: "progress" },
         { title: "Booked status", text: "Track who has booked.", icon: "outcomes" },
@@ -161,7 +161,7 @@ export const productPages: Record<string, PageContent> = {
         { title: "Visit modes", text: "In person, phone or virtual.", icon: "globe" },
         { title: "Group bookings", text: "Families and clinics in one appointment.", icon: "pharmacist" },
       ] },
-      { type: "features", variant: "workflow", eyebrow: "Service control", title: "Control what / patients can book.", description: "Turn services on or off, collect a waitlist when a service is full and share a link for each one.", art: "appointmentProfile", artAlt: "Appointment booking form", rows: [
+      { type: "features", variant: "workflow", eyebrow: "Service control", title: "Control what / patients can book.", description: "Turn services on or off, collect a waitlist when a service is full and share a link for each one.", art: "appointmentProfile", artAlt: "A patient's upcoming appointments and waitlist entries", ui: "appointments", rows: [
         { title: "Service on/off", text: "Turn online booking on or off per service.", icon: "safeguards" },
         { title: "Waitlist", text: "Full services collect a waitlist with a booking link.", icon: "plan" },
         { title: "Booking links and daily digest", text: "A direct link per service, and an email summary of upcoming appointments.", icon: "steps" },
@@ -181,7 +181,7 @@ export const productPages: Record<string, PageContent> = {
         { title: "Fax status log", text: "What was sent, when, and its status.", icon: "shield" },
         { title: "Stored in Canada", text: "Patient records in Canada, with role-based access.", icon: "safety" },
       ] },
-      { type: "features", variant: "workflow", eyebrow: "Fax", title: "Your choice on / every visit.", description: "Decide per visit where the documents go. No separate fax machine.", art: "sopTable", artAlt: "Document table in ZeeNovo", rows: [
+      { type: "features", variant: "workflow", eyebrow: "Fax", title: "Your choice on / every visit.", description: "Decide per visit where the documents go. No separate fax machine.", art: "sopTable", artAlt: "Document table in ZeeNovo", ui: "clinicalFax", rows: [
         { title: "Fax the physician", text: "The family physician receives the notification.", icon: "steps" },
         { title: "Download", text: "Keep a copy of every document for the visit.", icon: "plan" },
         { title: "Physician on file", text: "Details reused at every visit and fax.", icon: "assessment" },
@@ -279,7 +279,7 @@ export const productPages: Record<string, PageContent> = {
     blocks: [
       { type: "hero", eyebrow: "ZeeNovo Assure", title: "See the pattern / before it repeats.", description: "Incident trends by medication, process stage, contributing factor and discovery. The chart and the case sit in the same CQI discussion.", primary: assureDemo, secondary: trial, person: "independentPharmacist", extras: ["timer"] },
       {"type": "featureIndex", "eyebrow": "Analytics", "title": "What the dashboard / shows you.", "side": "Dashboards update as reports come in.", "groups": [{"title": "Analytics", "ids": ["trendDashboards", "contributingFactors", "discovery", "patientDemographics", "complianceDashboard"]}], "art": "analyticsChart", "artAlt": "Incident analytics chart", "wording": {"trendDashboards": "Incidents and near misses by degree of harm, medication and process stage.", "contributingFactors": "The human, system and environmental factors that keep repeating."}},
-      { type: "features", variant: "workflow", eyebrow: "What you can see", title: "Filter to the / cause, not the noise.", description: "Filter by degree of harm, medication, process stage, contributing factor and discovery.", art: "complianceList", artAlt: "Incident analytics categories", rows: [
+      { type: "features", variant: "workflow", eyebrow: "What you can see", title: "Filter to the / cause, not the noise.", description: "Filter by degree of harm, medication, process stage, contributing factor and discovery.", art: "complianceList", artAlt: "Incident analytics categories", ui: "assureFilters", rows: [
         { title: "Incidents and near misses", text: "By degree of harm, medication and stage.", icon: "progress" },
         { title: "Repeating factors", text: "The contributing factors that keep appearing.", icon: "outcomes" },
         { title: "Follow-through", text: "Corrective actions and CQI follow-ups, open or complete.", icon: "plan" },
@@ -298,7 +298,7 @@ export const productPages: Record<string, PageContent> = {
         { title: "Assign and confirm", text: "Set a due date. Marked complete only when the person acknowledges it.", icon: "dayBookings" },
         { title: "See who's done", text: "The compliance dashboard shows complete and overdue staff.", icon: "dayFollowups" },
       ] },
-      { type: "features", variant: "workflow", eyebrow: "Staff competency", title: "Assess staff on / the work they do.", description: "43 modules, 258 questions, scored by module. Managers see where a refresher is needed and assign the right SOP.", art: "sopDashboard", artAlt: "SOP and training dashboard", rows: [
+      { type: "features", variant: "workflow", eyebrow: "Staff competency", title: "Assess staff on / the work they do.", description: "43 modules, 258 questions, scored by module. Managers see where a refresher is needed and assign the right SOP.", art: "sopDashboard", artAlt: "SOP and training dashboard", ui: "staffCompetency", rows: [
         { title: "Pharmacists and managers", text: "Clinical decisions, medication safety, documentation, patient communication, incident management.", icon: "assessment" },
         { title: "Pharmacy technicians", text: "Dispensing accuracy, storage, workflow safety, SOP familiarity.", icon: "safeguards" },
         { title: "Pharmacy assistants", text: "Intake accuracy, privacy, workflow support, communication.", icon: "steps" },

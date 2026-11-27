@@ -15,9 +15,20 @@ import featureData from "@/content/features.json";
 import ArticleGrid from "./ArticleGrid";
 import RoleShowcase from "@/components/RoleShowcase";
 import SitesPreview from "@/components/SitesPreview";
+import AppointmentsPreview from "@/components/AppointmentsPreview";
 import SceneBento from "@/components/SceneBento";
 import VoicePhoneArt from "@/components/VoicePhoneArt";
 import ClinicalFollowupPreview from "@/components/ClinicalFollowupPreview";
+import MedsCheckProviderPreview from "@/components/MedsCheckProviderPreview";
+import MedsCheckRecallPreview from "@/components/MedsCheckRecallPreview";
+import AssureFiltersPreview from "@/components/AssureFiltersPreview";
+import StaffCompetencyPreview from "@/components/StaffCompetencyPreview";
+import ClinicalFaxPreview from "@/components/ClinicalFaxPreview";
+import SopUpdatePreview from "@/components/SopUpdatePreview";
+import MedsCheckImportPreview from "@/components/MedsCheckImportPreview";
+import PortalProfilePreview from "@/components/PortalProfilePreview";
+import NetworkPrivacyPreview from "@/components/NetworkPrivacyPreview";
+import HeroPattern from "@/components/HeroPattern";
 import LineArt from "@/components/LineArt";
 import { changeWave } from "@/components/lineArt/changeWave";
 import { valuesWave } from "@/components/lineArt/valuesWave";
@@ -42,9 +53,8 @@ function Arrow({ tone = "purple" }: { tone?: "purple" | "white" }) {
 
 /** Page header for utility pages: the hero panel and its texture, without the portrait. */
 function PageHeader({ block }: { block: T.HeroBlock }) {
-  return <section className={s.header}>
-    <Image className={s.headerWave} src="/assets/clinical/hero-wave.svg" alt="" width={480} height={819} priority />
-    <Image className={s.headerEllipse} src="/assets/clinical/hero-ellipse.svg" alt="" width={619} height={619} priority />
+  return <section className={`${s.header} ${b.headerCentered}`}>
+    <HeroPattern anchor="bottom" className={b.headerPattern} />
     <div className={s.headerCopy}>
       {block.eyebrow && <span className={`tag ${b.sectionTag} ${b.heroEyebrow} ${c.heroEnter}`}><span aria-hidden="true">★</span>{block.eyebrow}</span>}
       <h1 className={c.heroEnter}>{lines(block.title)}</h1>
@@ -188,6 +198,8 @@ function Features({ block }: { block: T.FeaturesBlock }) {
       <div className={c.followupInner}>
         {block.ui === "followup"
           ? <div className={c.followupVisual}><div className={c.followupPreview}><ClinicalFollowupPreview /></div></div>
+          : block.ui === "recall" || block.ui === "patientProfile" || block.ui === "networkPrivacy"
+          ? <div className={c.followupVisual}><div className={b.appGlass}>{block.ui === "recall" ? <MedsCheckRecallPreview /> : block.ui === "patientProfile" ? <PortalProfilePreview /> : <NetworkPrivacyPreview />}</div></div>
           : block.art === "voicePhone"
           ? <div className={`${c.followupVisual} ${b.voiceVisual}`}><VoicePhoneArt label={block.artAlt} tone="dark" /></div>
           : <div className={c.followupVisual}><Image src={visual.src} alt={block.artAlt} width={visual.width} height={visual.height} /></div>}
@@ -201,7 +213,7 @@ function Features({ block }: { block: T.FeaturesBlock }) {
       </div>
     </section>;
   }
-  return <section className={`${c.workflow} ${block.reverse ? b.workflowReverse : ""}`}>
+  return <section className={`${c.workflow} ${block.reverse ? b.workflowReverse : block.ui ? b.workflowHalf : ""}`}>
     <div className={`${c.workflowPatterns} ${b.wfPatterns}`} aria-hidden="true">
       <Image className={c.workflowLines} src="/assets/clinical/workflow-lines.svg" alt="" width={939.707} height={757.707} />
       <Image className={c.workflowBottomLines} src="/assets/clinical/workflow-lines.svg" alt="" width={939.707} height={757.707} />
@@ -215,8 +227,8 @@ function Features({ block }: { block: T.FeaturesBlock }) {
         {block.link && <Link className={`${s.textLink} ${b.featureLink}`} href={block.link.href}>{block.link.label} <span aria-hidden="true"><Icon /></span></Link>}
       </ScrollFade>
       <div className={`${c.workflowArt} ${b.wfArt}`}>
-        <div className={`${c.workflowForm} ${b.wfForm} ${block.ui ? b.workflowUi : ""}`}>
-          {block.ui === "sites" ? <SitesPreview plain /> : <Image src={visual.src} alt={block.artAlt} width={visual.width} height={visual.height} style={{ width: "100%", height: "auto" }} />}
+        <div className={`${c.workflowForm} ${b.wfForm} ${block.ui ? b.workflowUi : ""} ${block.ui === "appointments" || block.ui === "physician" || block.ui === "assureFilters" || block.ui === "staffCompetency" || block.ui === "clinicalFax" || block.ui === "sopUpdate" || block.ui === "medsImport" ? b.workflowWide : ""}`}>
+          {block.ui === "sites" ? <SitesPreview plain /> : block.ui === "appointments" ? <AppointmentsPreview /> : block.ui === "physician" ? <MedsCheckProviderPreview /> : block.ui === "assureFilters" ? <AssureFiltersPreview /> : block.ui === "staffCompetency" ? <StaffCompetencyPreview /> : block.ui === "clinicalFax" ? <ClinicalFaxPreview /> : block.ui === "sopUpdate" ? <SopUpdatePreview /> : block.ui === "medsImport" ? <MedsCheckImportPreview /> : <Image src={visual.src} alt={block.artAlt} width={visual.width} height={visual.height} style={{ width: "100%", height: "auto" }} />}
         </div>
       </div>
     </div>
@@ -354,7 +366,7 @@ function Callout({ block }: { block: T.CalloutBlock }) {
         <h2>{lines(block.title)}</h2>
         <p>{block.text}</p>
         {block.chips && <div className={s.pills}>{block.chips.map((chip) => <span className={s.pill} key={chip}><i aria-hidden="true" />{chip}</span>)}</div>}
-        {block.action && <Link className={s.textLink} href={block.action.href}>{block.action.label} <span aria-hidden="true"><Icon /></span></Link>}
+        {block.action && <Link className={s.textLink} href={block.action.href}><Icon size={18} />{block.action.label}</Link>}
       </ScrollFade>
     </div>
   </section>;
@@ -477,6 +489,49 @@ function Table({ block }: { block: T.TableBlock }) {
   </section>;
 }
 
+/** One card per assessor question: the product chip, the question, and where the evidence lives. */
+function Evidence({ block }: { block: T.EvidenceBlock }) {
+  return <section className={s.section}>
+    <div className={b.rail}>
+      <SectionHead eyebrow={block.eyebrow} title={block.title} side={block.side} />
+      <div className={b.evidenceGrid}>
+        {block.items.map((item) => <article key={item.question} className={b.evidenceCard}>
+          <span className={`${b.evidenceChip} ${b[`evidence${item.product}`]}`}>{item.product}</span>
+          <h3>{item.question}</h3>
+          <p><small>Where it lives</small>{item.answer}</p>
+        </article>)}
+      </div>
+      {block.note && <p className={s.tableNote}>{block.note}</p>}
+    </div>
+  </section>;
+}
+
+/** One card per job: the job and what it involves, then separate tools against ZeeNovo. An odd last card spans the
+    row. */
+function Versus({ block }: { block: T.VersusBlock }) {
+  return <section className={s.section}>
+    <div className={b.rail}>
+      <SectionHead eyebrow={block.eyebrow} title={block.title} side={block.side} />
+      <div className={b.versusGrid}>
+        {block.items.map((item) => <article key={item.title} className={b.versusCard}>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+          <div className={b.versusRows}>
+            <div className={b.versusBefore}>
+              <span className={b.versusMark} aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17" /></svg></span>
+              <div><small>Separate tools</small>{item.before}</div>
+            </div>
+            <div className={b.versusAfter}>
+              <span className={b.versusMark} aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m6 12.5 4 4 8-9" /></svg></span>
+              <div><small>ZeeNovo</small>{item.after}</div>
+            </div>
+          </div>
+        </article>)}
+      </div>
+    </div>
+  </section>;
+}
+
 /** Forms sit in the approved Clinical workflow section: copy on the left, the purple panel with the glass frame on the right. */
 function FormSection({ block }: { block: T.FormBlock }) {
   return <section className={`${c.workflow} ${b.panelSection}`}>
@@ -521,6 +576,8 @@ function renderBlock(block: T.Block, index: number) {
     case "list": return <List block={block} key={index} />;
     case "legal": return <Legal block={block} key={index} />;
     case "table": return <Table block={block} key={index} />;
+    case "versus": return <Versus block={block} key={index} />;
+    case "evidence": return <Evidence block={block} key={index} />;
     case "compare": return <Compare block={block} key={index} />;
     case "featureIndex": return <FeatureIndex block={block} key={index} />;
     case "roi": return <RoiCalculator key={index} />;

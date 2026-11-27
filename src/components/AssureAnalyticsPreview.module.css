@@ -1,0 +1,58 @@
+/* Drawn on an 880-unit grid (--u is one unit): a landscape web-app screen. Narrower frames switch to a 640-unit grid,
+   phones to a 380-unit grid without the sidebar. */
+.panel { --u: calc(100cqw / 880); --side: 178; }
+
+.title { font-size: calc(var(--u) * 15); font-weight: 700; }
+
+.stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: calc(var(--u) * 9); }
+.stat { display: grid; gap: calc(var(--u) * 6); padding: calc(var(--u) * 10) calc(var(--u) * 11); border: 1px solid #cdc8fb; border-radius: calc(var(--u) * 9); background: #f6f5ff; }
+.stat small { overflow: hidden; color: #52525b; font-size: calc(var(--u) * 9.5); text-overflow: ellipsis; white-space: nowrap; }
+.stat b { overflow: hidden; font-size: calc(var(--u) * 17); font-weight: 700; text-overflow: ellipsis; white-space: nowrap; }
+
+.card { display: grid; align-content: start; justify-items: center; gap: calc(var(--u) * 10); min-width: 0; padding: calc(var(--u) * 13) calc(var(--u) * 14); border: 1px solid #e6e6ee; border-radius: calc(var(--u) * 12); background: #fff; }
+.cardTitle { justify-self: start; font-size: calc(var(--u) * 11.5); font-weight: 700; }
+
+/* No. of incidents, by month */
+.chartHead { display: flex; justify-self: stretch; align-items: center; justify-content: space-between; gap: calc(var(--u) * 8); }
+.segment { display: flex; padding: calc(var(--u) * 2); border-radius: calc(var(--u) * 7); background: #f1f1f5; }
+.segment i { padding: calc(var(--u) * 3) calc(var(--u) * 9); border-radius: calc(var(--u) * 5); color: #71717a; font-size: calc(var(--u) * 9.5); font-style: normal; font-weight: 500; white-space: nowrap; }
+.segment .segmentOn { background: #fff; color: #16133a; font-weight: 600; }
+.plot { position: relative; justify-self: stretch; height: calc(var(--u) * 140); }
+.plot svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.dot { position: absolute; width: calc(var(--u) * 7); height: calc(var(--u) * 7); border: calc(var(--u) * 1.5) solid #3f51d8; border-radius: 50%; background: #fff; transform: translate(-50%, -50%); }
+.dotStart { top: calc(8 / 120 * 100%); left: 0; }
+.dotEnd { top: calc(104 / 120 * 100%); left: 100%; }
+.xAxis { display: flex; justify-self: stretch; justify-content: space-between; margin-top: calc(var(--u) * -4); color: #a1a1aa; font-size: calc(var(--u) * 9); }
+.xAxis i { font-style: normal; }
+
+/* Status, degree of harm and learnings */
+.row3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--u) * 10); }
+.donut { display: grid; width: calc(var(--u) * 84); height: calc(var(--u) * 84); place-items: center; border-radius: 50%; }
+.donut > span { display: grid; width: calc(var(--u) * 58); height: calc(var(--u) * 58); place-items: center; border-radius: 50%; background: #fff; }
+.donut b { font-size: calc(var(--u) * 13); font-weight: 700; }
+.statusDonut { background: conic-gradient(#4cc3c3 0 241deg, #dff4f4 241deg 360deg); }
+.harmDonut { background: conic-gradient(#3f51d8 0 180deg, #dfe3fb 180deg 360deg); }
+.learningRing { background: conic-gradient(#3f51d8 0 241deg, #ececf2 241deg 360deg); }
+.learningRing > span { width: calc(var(--u) * 68); height: calc(var(--u) * 68); }
+.legend { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: calc(var(--u) * 5); color: #52525b; font-size: calc(var(--u) * 9.5); }
+.legend i { width: calc(var(--u) * 7); height: calc(var(--u) * 7); border-radius: 50%; }
+.legend i + i, .legend b + i { margin-left: calc(var(--u) * 4); }
+.legend b { margin-left: calc(var(--u) * 6); color: #16133a; font-weight: 600; }
+.teal { background: #4cc3c3; }
+.blue { background: #3f51d8; }
+.lavender { background: #c9cff7; }
+.note { color: #52525b; font-size: calc(var(--u) * 9.5); text-align: center; }
+
+@container (max-width: 720px) {
+  .panel { --u: calc(100cqw / 640); }
+  .stats { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .stats > .stat:nth-child(n + 4) { display: none; }
+}
+@container (max-width: 460px) {
+  .panel { --u: calc(100cqw / 380); }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stats > .stat:nth-child(n + 3) { display: none; }
+  .segment i:not(.segmentOn) { display: none; }
+  .row3 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .row3 > .card:last-child { display: none; }
+}

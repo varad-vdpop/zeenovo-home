@@ -1,4 +1,5 @@
 import VoicePhoneArt from "./VoicePhoneArt";
+import { assurePattern, clinicalPattern, intelligencePattern, magistralBPattern, type CardPattern } from "./cardPatterns";
 import { inter, styles } from "./SceneUi";
 import { sceneLabels, scenes } from "./sceneScreens";
 import type { CSSProperties } from "react";
@@ -18,6 +19,25 @@ const layouts: Record<number, number[]> = {
 
 const tones = [styles.lavender, styles.peach, styles.mint, styles.aqua];
 
+// One line pattern from the home product cards on each card, behind the screen. It starts below the heading and
+// description (fading in, so it never runs into the copy or stops on a straight line) and is drawn at its original
+// size from the corner it sits in on the home page, its lines running on to the card's own edges. The purple lead card takes the Assure lines; the pastel cards take the Voice Booking
+// arcs, the Magistral lines and the Clinical arcs.
+type Placed = { pattern: CardPattern; corner: "topRight" | "bottomLeft" };
+const cardPatterns: Placed[] = [
+  { pattern: intelligencePattern, corner: "topRight" },
+  { pattern: magistralBPattern, corner: "topRight" },
+  { pattern: clinicalPattern, corner: "bottomLeft" },
+  { pattern: intelligencePattern, corner: "topRight" },
+];
+const leadPattern: Placed = { pattern: assurePattern, corner: "topRight" };
+
+function PatternLines({ pattern, corner }: Placed) {
+  return <svg className={`${styles.pattern} ${styles[corner]}`} width={pattern.width} height={pattern.height} viewBox={`0 0 ${pattern.width} ${pattern.height}`} fill="none" aria-hidden="true" focusable="false">
+    <path d={pattern.d} stroke={pattern.stroke} strokeOpacity={pattern.opacity} strokeWidth={pattern.strokeWidth} strokeLinecap="round" strokeLinejoin="round" />
+  </svg>;
+}
+
 export default function SceneBento({ label, features }: { label: string; features: SceneFeature[] }) {
   const spans = layouts[features.length] ?? features.map(() => 2);
   // Two columns on tablets: the lead card spans both, and so does the last card when it would sit alone.
@@ -28,6 +48,7 @@ export default function SceneBento({ label, features }: { label: string; feature
       const voice = lead && feature.id === "voiceBooking";
       const style = { "--span": spans[index], "--span-md": spanMd(index) } as CSSProperties;
       const className = [styles.card, lead ? styles.lead : tones[(index - 1) % tones.length], voice ? styles.leadVoice : "", voice && spans[0] === 2 ? styles.leadVoiceNarrow : ""].join(" ");
+      const placed = voice ? undefined : lead ? leadPattern : cardPatterns[(index - 1) % cardPatterns.length];
       return <article key={feature.id} className={className} style={style}>
         <div className={styles.copy}>
           {lead && <span className={styles.eyebrow}>{label}</span>}
@@ -36,7 +57,10 @@ export default function SceneBento({ label, features }: { label: string; feature
         </div>
         {voice
           ? <div className={styles.phone}><VoicePhoneArt /></div>
-          : <div className={`${styles.scene} ${inter.className}`} role="img" aria-label={sceneLabels[feature.id] ?? feature.title}>{scenes[feature.id]}</div>}
+          : <div className={`${styles.scene} ${inter.className}`} role="img" aria-label={sceneLabels[feature.id] ?? feature.title}>
+            {placed && <span className={styles.patternLayer}><PatternLines {...placed} /></span>}
+            {scenes[feature.id]}
+          </div>}
       </article>;
     })}
   </div>;

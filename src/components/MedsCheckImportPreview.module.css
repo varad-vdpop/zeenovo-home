@@ -1,0 +1,51 @@
+/* Drawn on an 880-unit grid (--u is one unit): a landscape web-app screen. Narrower frames switch to a 640-unit grid,
+   phones to a 380-unit grid without the sidebar or the database search. */
+.panel { --u: calc(100cqw / 880); }
+
+.head b { display: block; font-size: calc(var(--u) * 17); font-weight: 700; letter-spacing: -0.02em; }
+.head small { display: block; margin-top: calc(var(--u) * 3); color: #71717a; font-size: calc(var(--u) * 11); }
+
+.steps { display: flex; gap: calc(var(--u) * 6); margin: 0; padding: 0; overflow: hidden; list-style: none; }
+.steps li { display: flex; flex: none; align-items: center; gap: calc(var(--u) * 7); padding: calc(var(--u) * 5) calc(var(--u) * 11) calc(var(--u) * 5) calc(var(--u) * 5); border: 1px solid #e6e6ee; border-radius: 999px; background: #fff; color: #71717a; font-size: calc(var(--u) * 10.5); font-weight: 500; white-space: nowrap; }
+.dot { display: grid; width: calc(var(--u) * 18); height: calc(var(--u) * 18); place-items: center; border-radius: 50%; background: #ececf2; font-size: calc(var(--u) * 9); font-weight: 700; }
+.steps .current { border-color: #b4abf0; background: #efedff; color: #2b1f8f; font-weight: 600; }
+.steps .current .dot { background: #3b309d; color: #fff; }
+
+/* The imported history on the left; the database search runs on past the frame's edge on wide screens. */
+.body { display: grid; grid-template-columns: calc(var(--u) * 420) minmax(0, 1fr); gap: calc(var(--u) * 12); align-items: start; }
+.card { display: grid; align-content: start; gap: calc(var(--u) * 10); min-width: 0; padding: calc(var(--u) * 14); border: 1px solid #e6e6ee; border-radius: calc(var(--u) * 12); background: #fff; }
+.cardTitle { font-size: calc(var(--u) * 12); font-weight: 700; white-space: nowrap; }
+
+.file { display: flex; align-items: center; gap: calc(var(--u) * 10); padding: calc(var(--u) * 10) calc(var(--u) * 12); border: 1px dashed #b4abf0; border-radius: calc(var(--u) * 10); background: #faf9ff; }
+.file > span:nth-child(2) { flex: 1; min-width: 0; }
+.fileIcon { display: grid; flex: none; width: calc(var(--u) * 30); height: calc(var(--u) * 30); place-items: center; border-radius: calc(var(--u) * 8); background: #efedff; color: #3b309d; }
+.fileIcon svg { width: calc(var(--u) * 14); height: calc(var(--u) * 14); }
+.file b { display: block; overflow: hidden; font-size: calc(var(--u) * 11.5); font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.file small { display: block; color: #71717a; font-size: calc(var(--u) * 10); }
+
+.ok, .match { display: inline-flex; flex: none; align-items: center; gap: calc(var(--u) * 4); padding: calc(var(--u) * 3) calc(var(--u) * 8); border-radius: 999px; background: #e3f6ea; color: #12814a; font-size: calc(var(--u) * 9.5); font-style: normal; font-weight: 700; white-space: nowrap; }
+.ok svg, .match svg { width: calc(var(--u) * 10); height: calc(var(--u) * 10); stroke-width: 2.6; }
+
+.meds { display: grid; margin: 0; padding: 0; list-style: none; }
+.meds li { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--u) * 10); padding: calc(var(--u) * 8) 0; border-top: 1px solid #f0f0f4; }
+.meds li:first-child { border-top: 0; }
+.meds b, .results b { display: block; font-size: calc(var(--u) * 11); font-weight: 600; }
+.meds small, .results small { display: block; color: #71717a; font-size: calc(var(--u) * 9.5); }
+
+.search { display: flex; align-items: center; gap: calc(var(--u) * 7); padding: calc(var(--u) * 7) calc(var(--u) * 10); border: 1px solid #b4abf0; border-radius: calc(var(--u) * 8); box-shadow: 0 0 0 calc(var(--u) * 2.5) #efedff; font-size: calc(var(--u) * 11); }
+.search svg { color: #71717a; }
+.results { display: grid; gap: calc(var(--u) * 2); margin: 0; padding: 0; list-style: none; }
+.results li { padding: calc(var(--u) * 6) calc(var(--u) * 8); border-radius: calc(var(--u) * 7); white-space: nowrap; }
+.results li:first-child { background: #f3f2ff; }
+.sync { display: flex; align-items: center; gap: calc(var(--u) * 6); color: #71717a; font-size: calc(var(--u) * 10); white-space: nowrap; }
+
+@container (max-width: 720px) {
+  .panel { --u: calc(100cqw / 640); }
+  .body { grid-template-columns: calc(var(--u) * 380) minmax(0, 1fr); }
+}
+@container (max-width: 460px) {
+  .panel { --u: calc(100cqw / 380); }
+  .body { grid-template-columns: minmax(0, 1fr); }
+  .body > .card:last-child { display: none; }
+  .steps li:nth-child(n + 3) { display: none; }
+}

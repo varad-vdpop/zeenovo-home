@@ -3,17 +3,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { asset } from "@/lib/assets";
 import { BlockList, lines } from "@/components/blocks/BlockPage";
-import { art } from "@/components/blocks/media";
 import type { CardsBlock, CtaBlock } from "@/components/blocks/types";
 import styles from "./page.module.css";
 import OntarioMotion from "./OntarioMotion";
 import Icon from "@/components/Icon";
-import { Fragment } from "react";
+import ProvinceMapArt from "./ProvinceMapArt";
 
-// Province template. Same layout and motion as the approved Ontario page.
-// The Ontario-only map and program-card artwork are swapped for the Canada map
-// and native program cards, so no artwork carries another province's text.
-// The signal card badge states availability. It never names a college or claims readiness.
+// Province template. Same layout and motion as the approved Ontario page: the province's own map, drawn and traced
+// the way Ontario's is, and native program cards, so no artwork carries another province's text.
 
 export type ProvinceContent = {
   name: string;
@@ -30,7 +27,6 @@ function Arrow() {
 }
 
 export default function ProvincePage({ province }: { province: ProvinceContent }) {
-  const map = art.canadaMap;
   const programs: CardsBlock = {
     type: "cards",
     eyebrow: "On ZeeNovo",
@@ -55,14 +51,9 @@ export default function ProvincePage({ province }: { province: ProvinceContent }
           <Link data-cta className={styles.secondaryButton} href="https://auth.zeenovo.com/signup"><Arrow />Start Free Trial</Link>
         </div>
       </div>
-      <div className={styles.heroSignal} data-reveal>
-        <div><span>{province.signal.label}</span><strong>{province.signal.title}</strong></div>
-        <p>{province.signal.flow.split(" → ").map((step, index) => <Fragment key={step}>{index > 0 && <Icon name="arrowRight" style={{ margin: "0 4px" }} />}{step}</Fragment>)}</p>
-        <em>{province.signal.badge}</em>
-      </div>
       <div className={styles.ontarioMapFrame} data-reveal>
         <div className={styles.ontarioMapVisual}>
-          <Image className={styles.ontarioMap} src={map.src} alt="Map of Canada" width={map.width} height={map.height} priority />
+          <ProvinceMapArt slug={province.name.toLowerCase().replace(/ /g, "-")} name={province.name} />
         </div>
       </div>
     </section>

@@ -280,3 +280,82 @@
 .mailFrom > span:last-child { min-width: 0; }
 /* The panel's single column never grows past the panel, so long one-line text truncates instead of overflowing. */
 .panel:not(.twoCol):not(.physician) { grid-template-columns: minmax(0, 1fr); }
+
+/* Home product card line patterns behind each card (SceneBento): original size, drawn past their own frame so the
+   card's edge is the only crop. */
+.card { position: relative; }
+.pattern { position: absolute; z-index: 0; max-width: none; overflow: visible; pointer-events: none; }
+.topRight { top: 0; right: 0; }
+.bottomLeft { bottom: 0; left: 0; }
+.card > .copy,
+.card > .scene { position: relative; z-index: 1; }
+/* The pattern sits in the screen area, reaching out to the card's edges (--pad is the card padding), under the panel. */
+.card { --pad: 28px; }
+.patternLayer { position: absolute; z-index: 0; top: 0; right: calc(var(--pad) * -1); bottom: calc(var(--pad) * -1); left: calc(var(--pad) * -1); overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(to bottom, transparent, #000 56px); mask-image: linear-gradient(to bottom, transparent, #000 56px); }
+.scene > .panel { position: relative; z-index: 1; }
+@media (max-width: 760px) { .card { --pad: 22px; } }
+
+/* Two columns inside a panel: the source on the left, the result on the right (CSV import) */
+.split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 14px; }
+.splitCol { display: grid; align-content: start; gap: 8px; min-width: 0; }
+.colHead { display: flex; align-items: center; gap: 7px; min-width: 0; font-size: 13px; font-weight: 600; white-space: nowrap; }
+.colHead small { margin-left: auto; color: #71717a; font-size: 11.5px; font-weight: 500; }
+.colHead svg { color: #3b309d; }
+.uploadCol { grid-template-rows: auto 1fr; align-content: stretch; }
+.uploaded { display: grid; align-content: center; justify-items: center; gap: 3px; padding: 16px 12px; border: 1px dashed #b4abf0; border-radius: 10px; background: #faf9ff; text-align: center; }
+.uploaded b { margin-top: 8px; overflow: hidden; max-width: 100%; font-size: 13.5px; font-weight: 600; text-overflow: ellipsis; white-space: nowrap; }
+.uploaded > span:not(.uploadedMark) { color: #12814a; font-size: 12.5px; font-weight: 600; }
+.uploaded small { color: #71717a; font-size: 11.5px; }
+.uploadedMark { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 50%; background: #e3f6ea; color: #12814a; }
+.uploadedMark svg { width: 18px; height: 18px; stroke-width: 2.4; }
+@container (max-width: 480px) {
+  .split { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Root cause analysis, as on Assure's report screens: risk score and action plan on the left, the gaps the 5 Whys
+   found on the right. Stacks in narrow cards. */
+.rcaGrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 12px; }
+.rcaCol { display: grid; align-content: start; gap: 8px; min-width: 0; }
+.riskCard { display: grid; gap: 10px; padding: 12px; border: 1px solid #ececf1; border-radius: 10px; background: #fff; }
+.riskTop, .riskBottom { display: flex; align-items: center; gap: 8px; }
+.riskTop b, .actionRow b { font-size: 13.5px; font-weight: 600; }
+.riskIcon { display: grid; flex: none; width: 28px; height: 28px; place-items: center; border-radius: 8px; background: #fdecec; color: #c62828; }
+.score { flex: none; padding: 3px 9px; border: 1px solid #bfe6cf; border-radius: 8px; background: #eefaf3; color: #12814a; font-size: 12.5px; font-weight: 700; white-space: nowrap; }
+.actionRow { display: grid; gap: 8px; padding: 12px; border: 1px dashed #c9c4ef; border-radius: 10px; background: #faf9ff; }
+.actionRow b { display: block; }
+.actionRow small { display: block; color: #71717a; font-size: 11.5px; }
+.actionRow .button { gap: 6px; height: 32px; padding: 0 12px; font-size: 13px; }
+.gap { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: start; column-gap: 8px; row-gap: 2px; padding: 10px 12px; border: 1px solid #ececf1; border-radius: 10px; background: #fff; }
+.gap b { font-size: 13px; font-weight: 600; line-height: 1.35; }
+.gap small { grid-column: 1 / -1; color: #71717a; font-size: 11.5px; }
+@container (max-width: 480px) {
+  .rcaGrid { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* Assure Analytics charts: incidents by month, incident discovery, and the score rings */
+.chartTop { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.chartTop b, .chartTitle { font-size: 13.5px; font-weight: 600; }
+.chartTabs { display: flex; padding: 2px; border-radius: 8px; background: #f1f1f5; }
+.chartTabs i { padding: 4px 9px; border-radius: 6px; color: #71717a; font-size: 11.5px; font-style: normal; font-weight: 500; white-space: nowrap; }
+.chartTabs .chartTabOn { background: #fff; color: #16133a; font-weight: 600; }
+.trendPlot { display: grid; grid-template-columns: 14px minmax(0, 1fr); grid-template-rows: 150px auto; gap: 6px 8px; }
+.trendY { display: flex; flex-direction: column; justify-content: space-between; color: #a1a1aa; font-size: 11px; line-height: 1; text-align: right; }
+.trendY i, .trendX i, .discoveryAxis i { font-style: normal; }
+.trendY i:first-child { transform: translateY(-50%); }
+.trendY i:last-child { transform: translateY(50%); }
+.trendArea { position: relative; }
+.trendArea svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.trendDot { position: absolute; width: 8px; height: 8px; border: 1.5px solid #3f51d8; border-radius: 50%; background: #fff; transform: translate(-50%, -50%); }
+.trendX { display: flex; grid-column: 2; justify-content: space-between; color: #a1a1aa; font-size: 11px; }
+.chartTitle { text-align: center; }
+.discoveryPlot { display: grid; gap: 12px; }
+.discoveryRow { display: grid; grid-template-columns: 72px minmax(0, 1fr); align-items: center; gap: 10px; }
+.discoveryRow small { color: #52525b; font-size: 12px; text-align: right; }
+.discoveryRow > span { display: block; height: 22px; background: repeating-linear-gradient(to right, #ececf1 0 1px, transparent 1px 25%); }
+.discoveryRow i { display: block; height: 100%; border-radius: 4px; }
+.discoveryAxis { display: flex; justify-content: space-between; margin-left: 82px; color: #71717a; font-size: 11px; }
+.ringPanel { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; justify-items: center; }
+.ringMetric { display: grid; justify-items: center; gap: 12px; }
+.ringMetric small { color: #16133a; font-size: 12.5px; font-weight: 500; text-align: center; }
+.ring { display: grid; width: 96px; height: 96px; place-items: center; border-radius: 50%; }
+.ring b { display: grid; width: 74px; height: 74px; place-items: center; border-radius: 50%; background: #fff; color: #3b309d; font-size: 17px; font-weight: 700; }

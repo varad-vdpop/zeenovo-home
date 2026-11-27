@@ -91,11 +91,11 @@
 .assessmentFeature img { width: 39px; height: 39px; object-fit: contain; }
 .assessmentFeature h3 { font-size: 16px; font-weight: 600; line-height: 20px; }
 .assessmentFeature p { margin-top: 5px; color: #666474; font-size: 13px; line-height: 19px; }
-.assessmentArt { position: absolute; inset: 0 0 0 45.3%; overflow: hidden; }
-.assessmentArt::before { position: absolute; z-index: 1; top: 74px; left: 83px; width: 626px; height: 623px; border: 1px solid rgb(255 255 255 / 70%); border-radius: 26px; background: rgb(255 255 255 / 47%); content: ""; }
+/* The app screen runs off the right edge: the art clips its pattern above, below and to the left only. */
+.assessmentArt { position: absolute; inset: 0 0 0 45.3%; clip-path: inset(0 -100vw 0 0); }
 .assessmentPattern { position: absolute; top: -265px; left: -468px; width: 939px; height: 757px; max-width: none; }
-.assessmentPanel { position: absolute; z-index: 2; top: 84px; left: 95px; width: 600px; height: 600px; max-width: none; border-radius: 24px; }
-.nativeAssessment { width: 100%; aspect-ratio: 1; height: 100%; }
+.assessmentPanel { position: absolute; z-index: 2; top: 50%; left: 48px; width: 860px; max-width: none; padding: 12px; border: 1px solid rgb(255 255 255 / 70%); border-radius: 26px; background: linear-gradient(118.478deg, rgb(255 255 255 / 47%), rgb(255 255 255 / 0%) 110.84%); transform: translateY(-50%); backdrop-filter: blur(14.582px); }
+.nativeAssessment { width: 100%; }
 
 .connectedCare { min-height: 591px; padding-top: 70px; overflow: hidden; background: #fff; text-align: center; }
 .connectedHeading { position: relative; z-index: 2; }
@@ -135,7 +135,7 @@
   .conditionCard { padding-inline: 28px; }
   .conditionCard li { gap: 10px; font-size: 13px; }
   .assessmentCopy { left: 36px; width: 39%; }
-  .assessmentPanel { left: 5%; width: 88%; height: auto; }
+  .assessmentPanel { left: 28px; width: calc(100% - 56px); }
   .afterVisitCards { gap: 22px; }
 }
 
@@ -201,10 +201,8 @@
   .assessmentFeature p { font-size: 11px; line-height: 16px; }
   /* The frame grows with the screening preview instead of holding a fixed height. */
   .assessmentArt { position: relative; inset: auto; height: auto; padding: 45px 5% 50px; background: #3b309d; }
-  .assessmentArt::before { top: 35px; left: 3%; width: 94%; height: calc(100% - 75px); }
   .assessmentPattern { top: -110px; left: -220px; }
-  .assessmentPanel { position: relative; top: auto; left: auto; width: 100%; height: auto; }
-  .nativeAssessment { aspect-ratio: auto; height: auto; }
+  .assessmentPanel { position: relative; top: auto; left: auto; width: 100%; padding: 8px; border-radius: 18px; transform: none; }
 
   .connectedCare { min-height: 0; padding: 65px 0 80px; }
   .connectedHeading { padding: 0 20px; }

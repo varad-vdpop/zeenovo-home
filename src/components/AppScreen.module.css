@@ -1,0 +1,42 @@
+/* The app chrome. Sizes are in --u, set by the screen that uses it. Descendant SVG defaults use :where() so a screen's
+   own icon sizes always win, whatever order the stylesheets load in. */
+.frame { container-type: inline-size; }
+.screen {
+  display: grid;
+  grid-template-columns: calc(var(--u) * var(--side, 150)) minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  border: 1px solid #dcd9ef;
+  border-radius: calc(var(--u) * 16);
+  background: #f6f7fb;
+  color: #16133a;
+  font-family: var(--font-manrope), Arial, sans-serif;
+  text-align: left;
+}
+.screen :where(svg) { width: calc(var(--u) * 12); height: calc(var(--u) * 12); flex: none; fill: none; stroke: currentColor; stroke-width: 1.9; stroke-linecap: round; stroke-linejoin: round; }
+.screen :where(p) { margin: 0; }
+
+.topbar { display: flex; grid-column: 1 / -1; align-items: center; gap: calc(var(--u) * 16); padding: calc(var(--u) * 9) calc(var(--u) * 14); border-bottom: 1px solid #ececf1; background: #fff; }
+.menu { display: none; }
+.logo { width: calc(var(--u) * 78); height: auto; }
+.crumbs { display: inline-flex; align-items: center; gap: calc(var(--u) * 5); margin-left: calc(var(--u) * 46); color: #71717a; font-size: calc(var(--u) * 10); white-space: nowrap; }
+.crumbs > span { display: inline-flex; align-items: center; gap: calc(var(--u) * 5); }
+.crumbs b { color: #16133a; font-weight: 600; }
+.crumbs svg { width: calc(var(--u) * 10); height: calc(var(--u) * 10); }
+.avatar { display: grid; width: calc(var(--u) * 24); height: calc(var(--u) * 24); margin-left: auto; place-items: center; border-radius: 50%; background: #16133a; color: #fff; font-size: calc(var(--u) * 8.5); font-weight: 700; }
+
+.sidebar { display: flex; flex-direction: column; justify-content: space-between; gap: calc(var(--u) * 20); padding: calc(var(--u) * 16) calc(var(--u) * 12); border-right: 1px solid #ececf1; background: #fff; }
+.navTop, .navBottom { display: grid; align-content: start; gap: calc(var(--u) * 4); }
+.sidebar span span { display: flex; align-items: center; gap: calc(var(--u) * 7); padding: calc(var(--u) * 7) calc(var(--u) * 10); border-radius: calc(var(--u) * 7); color: #27272a; font-size: calc(var(--u) * 10); font-weight: 500; white-space: nowrap; }
+.sidebar svg { width: calc(var(--u) * 11); height: calc(var(--u) * 11); }
+.sidebar .navOn { background: #3f51d8; color: #fff; }
+
+.main { display: grid; align-content: start; gap: calc(var(--u) * 12); min-width: 0; padding: calc(var(--u) * 14); }
+
+@container (max-width: 460px) {
+  .screen { grid-template-columns: minmax(0, 1fr); }
+  .sidebar, .crumbs { display: none; }
+  .topbar { gap: calc(var(--u) * 10); }
+  .menu { display: grid; color: #16133a; }
+  .menu svg { width: calc(var(--u) * 16); height: calc(var(--u) * 16); }
+}

@@ -32,10 +32,6 @@ function Arrow() {
   return <span data-cta-icon aria-hidden="true"><Icon /></span>;
 }
 
-function Tag({ children }: { children: React.ReactNode }) {
-  return <p className={styles.tag}><span aria-hidden="true">★</span>{children}</p>;
-}
-
 function Hero() {
   return (
     <section className={styles.hero} aria-labelledby="incident-title">
@@ -44,7 +40,7 @@ function Hero() {
       </div>
       <div className={styles.heroCopy}>
         <span className="tag hero-pill"><span aria-hidden="true">★</span>ZeeNovo Assure</span>
-        <h1 id="incident-title">Record the close call.<br />Follow it through<br />to the fix.</h1>
+        <h1 id="incident-title">Record the<br />close call.<br />Follow it through<br />to the fix.</h1>
         <p className={styles.heroDescription}>Guided incident and near-miss reporting, with the learning, the corrective action and the CQI follow-up on one record.</p>
         <div className={styles.heroActions}>
           <Link data-cta className={styles.primaryButton} href="/book-a-demo"><Arrow />Book an Assure Demo</Link>
@@ -94,33 +90,20 @@ function AfterVisit() {
   );
 }
 
-function Process() {
-  // The copy has four steps; the wave was drawn for five, so the grid is set to four columns here.
-  // Icons by index into pageAsset.processIcons: collect, detect, act, report.
-  const steps = [["Capture", 0], ["Learn", 1], ["Act", 4], ["Review", 3]] as const;
-
-  return (
-    <section className={styles.process} aria-labelledby="process-title">
-      <div className={styles.processHeading}>
-        <Tag>From data to decision</Tag>
-        <h2 id="process-title">Capture, learn, act, review.</h2>
-        <p>Each incident follows the same four steps, from the first report to the change that prevents a repeat.</p>
-      </div>
-      <div className={styles.processTrack}>
-        <Image className={styles.processWave} src={pageAsset.processWave} alt="" width={1440} height={181} />
-        <Image className={`${styles.processWave} ${styles.processWaveTrace}`} src={pageAsset.processWave} alt="" aria-hidden="true" width={1440} height={181} />
-        <div className={styles.processSteps} style={{ gridTemplateColumns: `repeat(${steps.length}, 1fr)` }}>
-          {steps.map(([step, icon]) => (
-            <article className={styles.processStep} key={step}>
-              <Image src={pageAsset.processIcons[icon]} alt="" width={44} height={44} />
-              <h3>{step}</h3>
-            </article>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
+// The four steps on the site's four-loop wave (the same strip as the Assure overview): one icon in each loop, no motion
+// on the icons.
+const processWave: Block = {
+  type: "wave",
+  tag: "From data to decision",
+  title: "Capture, learn, act, review.",
+  description: "Each incident follows the same four steps, from the first report to the change that prevents a repeat.",
+  items: [
+    { label: "Capture", icon: "collect" },
+    { label: "Learn", icon: "detect" },
+    { label: "Act", icon: "act" },
+    { label: "Review", icon: "chartStar" },
+  ],
+};
 
 const nationalReporting: Block = {
   type: "callout",
@@ -135,5 +118,5 @@ const nationalReporting: Block = {
 const closingCta: Block = { type: "cta", eyebrow: "Built for pharmacy safety", title: "Report in minutes. / Improve every month.", action: { label: "Book an Assure Demo", href: "/book-a-demo" } };
 
 export default function IncidentReportingPage() {
-  return <main className={styles.page}><Hero /><Analytics /><Compliance /><AfterVisit /><Process /><div style={{ "--block-gutter": "60px" } as React.CSSProperties}><BlockList blocks={[caseFeatures, nationalReporting, closingCta]} /></div></main>;
+  return <main className={styles.page}><Hero /><Analytics /><Compliance /><AfterVisit /><div style={{ "--block-gutter": "60px" } as React.CSSProperties}><BlockList blocks={[processWave, caseFeatures, nationalReporting, closingCta]} /></div></main>;
 }

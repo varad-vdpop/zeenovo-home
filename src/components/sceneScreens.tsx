@@ -268,12 +268,25 @@ const testingScenes: Record<string, ReactNode> = {
 // Appointments ("Start with the patients you already have")
 const appointmentScenes: Record<string, ReactNode> = {
   csvImport: <div className={styles.panel}>
-    <span className={styles.upload}><Glyph name="file" />patients-export.csv<small>2,418 rows</small></span>
-    <Rows rows={[
-      { title: "First name → First name", status: "Matched", tone: "ok" },
-      { title: "DOB → Date of birth", status: "Matched", tone: "ok" },
-      { title: "HCN → Health card number", status: "Matched", tone: "ok" },
-    ]} />
+    <span className={styles.split}>
+      <span className={`${styles.splitCol} ${styles.uploadCol}`}>
+        <span className={styles.colHead}><Glyph name="upload" />Upload CSV<small>1 file</small></span>
+        <span className={styles.uploaded}>
+          <span className={styles.uploadedMark}><Glyph name="check" /></span>
+          <b>patients-export.csv</b>
+          <span>Uploaded successfully</span>
+          <small>2,418 rows · 312 KB</small>
+        </span>
+      </span>
+      <span className={styles.splitCol}>
+        <span className={styles.colHead}><Glyph name="check" />Matched to ZeeNovo<small>3 of 3</small></span>
+        <Rows rows={[
+          { title: "First name", detail: "from first_name", status: "Matched", tone: "ok" },
+          { title: "Date of birth", detail: "from dob", status: "Matched", tone: "ok" },
+          { title: "Health card number", detail: "from hcn", status: "Matched", tone: "ok" },
+        ]} />
+      </span>
+    </span>
     <Button>Import 2,418 patients</Button>
   </div>,
 
@@ -308,10 +321,24 @@ const appointmentScenes: Record<string, ReactNode> = {
 
 // Assure analytics ("What the dashboard shows you")
 const analyticsScenes: Record<string, ReactNode> = {
+  // Assure Analytics' own charts, as on the Incident Reporting page: incidents by month, discovery, and the
+  // follow-up and safety scores.
   trendDashboards: <div className={styles.panel}>
-    <Head title="Incidents and near misses" note="Last 6 months" />
-    <Segment options={["Harm", "Medication", "Stage"]} value="Harm" />
-    <Bars rows={[["No harm", 34], ["Mild", 12], ["Moderate", 4], ["Severe", 1]]} />
+    <span className={styles.chartTop}><b>No. of incidents</b><span className={styles.chartTabs}><i className={styles.chartTabOn}>Monthly</i><i>Time of Day</i><i>Day of Week</i></span></span>
+    <span className={styles.trendPlot}>
+      <span className={styles.trendY}><i>4</i><i>3</i><i>2</i><i>1</i><i>0</i></span>
+      <span className={styles.trendArea}>
+        <svg viewBox="0 0 400 160" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+          {[0, 40, 80, 120, 160].map((y) => <line key={y} x1="0" x2="400" y1={y} y2={y} stroke="#ececf1" strokeWidth="1" vectorEffect="non-scaling-stroke" />)}
+          <path d="M0 28 L200 80 L400 36 L400 160 L0 160 Z" fill="#3f51d8" fillOpacity=".1" stroke="none" />
+          <path d="M0 28 L200 80 L400 36" fill="none" stroke="#3f51d8" strokeWidth="2" vectorEffect="non-scaling-stroke" />
+        </svg>
+        <i className={styles.trendDot} style={{ left: "0%", top: "17.5%" }} />
+        <i className={styles.trendDot} style={{ left: "50%", top: "50%" }} />
+        <i className={styles.trendDot} style={{ left: "100%", top: "22.5%" }} />
+      </span>
+      <span className={styles.trendX}><i>Jul ’26</i><i>Aug ’26</i><i>Sep ’26</i></span>
+    </span>
   </div>,
 
   contributingFactors: <div className={styles.panel}>
@@ -320,12 +347,12 @@ const analyticsScenes: Record<string, ReactNode> = {
   </div>,
 
   discovery: <div className={styles.panel}>
-    <Head title="Who caught it" note="This quarter" />
-    <Rows rows={[
-      { title: "Pharmacist", detail: "At the final check", value: "18" },
-      { title: "Technician", detail: "During data entry", value: "9" },
-      { title: "Patient", detail: "At pickup", value: "3" },
-    ]} />
+    <b className={styles.chartTitle}>Incident Discovery</b>
+    <span className={styles.discoveryPlot}>
+      {([["Patient", 100, "#6366f1"], ["Pharmacist", 100, "#b9e8e6"], ["Nurse", 88, "#a99bf5"]] as const).map(([label, width, color]) =>
+        <span key={label} className={styles.discoveryRow}><small>{label}</small><span><i style={{ width: `${width}%`, background: color }} /></span></span>)}
+      <span className={styles.discoveryAxis}><i>0</i><i>0.25</i><i>0.5</i><i>0.75</i><i>1</i></span>
+    </span>
   </div>,
 
   patientDemographics: <div className={styles.panel}>
@@ -333,25 +360,34 @@ const analyticsScenes: Record<string, ReactNode> = {
     <Bars rows={[["Under 18", 4], ["18 to 44", 11], ["45 to 64", 15], ["65 and over", 20]]} />
   </div>,
 
-  complianceDashboard: <div className={styles.panel}>
-    <Head title="Compliance" note="Today" />
-    <Rows rows={[
-      { title: "Open incidents", value: "3" },
-      { title: "SOP sign-offs", detail: "12 of 14 complete", status: "2 overdue", tone: "danger" },
-      { title: "CQI follow-ups", detail: "5 of 5 complete", status: "Complete", tone: "ok" },
-    ]} />
+  complianceDashboard: <div className={`${styles.panel} ${styles.ringPanel}`}>
+    <span className={styles.ringMetric}><small>Follow-up Success Rate</small><span className={styles.ring} style={{ background: "conic-gradient(#3b309d 0 270deg, #d9d6fb 270deg 360deg)" }}><b>75%</b></span></span>
+    <span className={styles.ringMetric}><small>Pharmacy Safety Score</small><span className={styles.ring} style={{ background: "conic-gradient(#f6c592 0 166deg, #fde8d3 166deg 360deg)" }}><b>46/100</b></span></span>
   </div>,
 };
 
 // Incident reporting case management ("From the report to the fix")
 const incidentScenes: Record<string, ReactNode> = {
+  // Laid out like Assure's report screens: the risk score, the gaps the 5 Whys found, and the action plan they require.
   rca: <div className={styles.panel}>
-    <Head title="5 Whys · INC-0214" note="Wrong strength dispensed" />
-    <Rows rows={[
-      { title: "Why was the wrong strength picked?", detail: "Both strengths sit side by side" },
-      { title: "Why are they side by side?", detail: "Shelved alphabetically, no separation" },
-    ]} />
-    <Field label="Where the gap occurred"><Select value="Storage and selection" /></Field>
+    <Head title="INC-0214" note="Wrong strength dispensed" />
+    <span className={styles.rcaGrid}>
+      <span className={styles.rcaCol}>
+        <span className={styles.riskCard}>
+          <span className={styles.riskTop}><span className={styles.riskIcon}><Glyph name="alert" /></span><b>Risk score</b></span>
+          <span className={styles.riskBottom}><Badge tone="ok">Low risk</Badge><span className={styles.score}>Score: 6</span></span>
+        </span>
+        <span className={styles.actionRow}>
+          <span><b>Action plan</b><small>Required: gaps found</small></span>
+          <Button><Glyph name="plus" />Create action</Button>
+        </span>
+      </span>
+      <span className={styles.rcaCol}>
+        <span className={styles.colHead}>Gaps identified<small>From the 5 Whys</small></span>
+        <span className={styles.gap}><b>Both strengths shelved side by side</b><Badge tone="danger">Critical</Badge><small>Storage and selection</small></span>
+        <span className={styles.gap}><b>No alert label on look-alike stock</b><Badge tone="danger">Critical</Badge><small>Labelling</small></span>
+      </span>
+    </span>
   </div>,
 
   caseManagement: <div className={styles.panel}>
@@ -455,16 +491,22 @@ const ownerScenes: Record<string, ReactNode> = {
     <Stat label="Billing PIN" value="9858 2104" />
   </div>,
 
+  // From the Clinical follow-up panel: each follow-up's date, status and treatment outcome.
   followupTracking: <div className={styles.panel}>
-    <Head title="Follow-ups" note="This month" />
-    <Bars rows={[["Completed", 64], ["Awaiting answer", 12], ["Flagged for review", 3]]} />
+    <Head title="Follow up" note="Patient progress and outcomes" />
+    <Rows rows={[
+      { title: "23.04.12", detail: "Satisfactory", status: "Followup Scheduled", tone: "info" },
+      { title: "23.04.15", detail: "Satisfactory", status: "Recovered · Complete", tone: "ok" },
+      { title: "23.04.20", detail: "Requires attention", status: "Persistent Symptoms", tone: "warn" },
+    ]} />
   </div>,
 
+  // From the Assure dashboard's "Needs your attention" list.
   correctiveActions: <div className={styles.panel}>
+    <Head title="Needs your attention" note="2 open" />
     <Rows rows={[
-      { title: "Open incidents", value: "3" },
-      { title: "SOP sign-offs", detail: "Dispensing v2.1", status: "2 overdue", tone: "danger" },
-      { title: "CQI follow-ups", detail: "November meeting", status: "Complete", tone: "ok" },
+      { title: "Monthly CQI meeting", detail: "Follow-up not yet complete", status: "Overdue by 3 days", tone: "danger" },
+      { title: "Incident INC-0214", detail: "Draft report to complete", status: "No deadline", tone: "neutral" },
     ]} />
   </div>,
 
@@ -502,17 +544,17 @@ const moreLabels: Record<string, string> = {
   poctWorkflows: "The diabetes-enhanced testing workflow with its extra checks",
   poctPhysicianReport: "A physician report faxed from the test result",
   poctPatientReport: "The result email the patient receives: fasting blood glucose of 6.8 mmol/L, within the 4.0 to 7.0 target range",
-  csvImport: "Importing 2,418 patients from a CSV export with matched columns",
+  csvImport: "A CSV export of 2,418 patients uploaded successfully, with its columns matched to ZeeNovo and ready to import",
   familyDoctor: "Finding the family physician by name and saving them for future visits",
   preVisitQuestionnaire: "A patient answering intake questions before the visit",
   readyForPharmacist: "Intake complete and the visit marked ready for the pharmacist",
   voiceBooking: "A spoken request matched to a flu vaccine and booked for Saturday morning",
-  trendDashboards: "Incidents and near misses by degree of harm over six months",
+  trendDashboards: "The number of incidents by month from July to September",
   contributingFactors: "The contributing factors that come up most often",
-  discovery: "Who caught each incident, and at which stage",
+  discovery: "Incident discovery by patient, pharmacist and nurse",
   patientDemographics: "Patients involved in incidents, by age",
-  complianceDashboard: "Open incidents, SOP sign-offs and CQI follow-ups, complete or overdue",
-  rca: "A 5 Whys analysis finding where in the process the gap occurred",
+  complianceDashboard: "A follow-up success rate of 75% and a pharmacy safety score of 46 out of 100",
+  rca: "A root cause analysis for a wrong-strength incident: a low risk score of 6, two critical gaps found by the 5 Whys, and an action plan to create",
   caseManagement: "Incident cases with owners and statuses",
   actionPlans: "An action plan with three steps, two done",
   deidentify: "Patient and staff details hidden in shared reports",
@@ -525,8 +567,8 @@ const moreLabels: Record<string, string> = {
   privacyContext: "A completion rate shown with its numerator, denominator and response rate",
   performanceView: "Estimated revenue for the month by service",
   billingPins: "The billing PIN shown for a minor ailment visit in Ontario",
-  followupTracking: "Follow-up status across patients this month",
-  correctiveActions: "Open incidents, overdue SOP sign-offs and CQI follow-ups",
+  followupTracking: "Three follow-ups with their status and treatment outcome: scheduled, recovered and complete, and persistent symptoms",
+  correctiveActions: "Items needing attention: a monthly CQI meeting overdue by 3 days and a draft incident report",
   unlimitedUsers: "Team members with their roles and an invite button",
   quickSetup: "A three-step setup checklist, two steps done on day one",
 };

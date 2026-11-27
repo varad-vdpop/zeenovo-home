@@ -32,12 +32,6 @@ const realityCards = [
   },
 ] as const;
 
-const changes = [
-  { label: "Admin automated", icon: pageAsset.automation },
-  { label: "Online storefront", icon: pageAsset.storefront },
-  { label: "Clinical revenue tracked", icon: pageAsset.revenue },
-  { label: "No IT project", icon: pageAsset.noIt },
-] as const;
 
 const week = [
   {
@@ -140,28 +134,6 @@ function Reality() {
   );
 }
 
-function PictureChanges() {
-  return (
-    <section className={styles.changes} aria-labelledby="changes-title">
-      <div className={styles.changesHeading}>
-        <span><Image src={pageAsset.star} alt="" width={20} height={20} />With ZeeNovo</span>
-        <h2 id="changes-title">How the picture changes</h2>
-        <p>ZeeNovo takes on the repeat work, so the team can focus on clinical services.</p>
-      </div>
-      <div className={styles.changeTrack}>
-        <Image className={styles.changeArt} src={pageAsset.changeArt} alt="" width={1440} height={240} />
-        <Image className={`${styles.changeArt} ${styles.changeArtTrace}`} src={pageAsset.changeArt} alt="" aria-hidden="true" width={1440} height={240} />
-        {changes.map((item) => (
-          <article key={item.label}>
-            <Image className={styles.changeIcon} src={item.icon} alt="" width={50} height={50} />
-            <h3>{item.label}</h3>
-          </article>
-        ))}
-      </div>
-    </section>
-  );
-}
-
 function BetterWeek() {
   return (
     <section className={styles.betterWeek} aria-labelledby="better-week-title">
@@ -184,9 +156,17 @@ function BetterWeek() {
   );
 }
 
+// The four changes on the site's animated four-loop wave, like the other solution pages.
+const pictureChanges: Block = { type: "wave", tag: "With ZeeNovo", title: "How the picture changes", description: "ZeeNovo takes on the repeat work, so the team can focus on clinical services.", items: [
+  { label: "Admin automated", icon: "automation" },
+  { label: "Online storefront", icon: "storefront" },
+  { label: "Clinical revenue tracked", icon: "revenue" },
+  { label: "No IT project", icon: "noIt" },
+] };
+
 // Closing call to action: the site's shared CTA block, like every other page.
 const closingCta: Block = { type: "cta", eyebrow: "Built for independent pharmacy", title: "Keep the independence. / Lose the operational drag.", text: "Start with your services, your patients and the systems you already use.", action: { label: "Book a Demo", href: "/book-a-demo" } };
 
 export default function IndependentPharmaciesPage() {
-  return <main className={styles.page}><Hero /><Reality /><PictureChanges /><BetterWeek /><BlockList blocks={[...page.blocks, closingCta]} /></main>;
+  return <main className={styles.page}><Hero /><Reality /><BlockList blocks={[pictureChanges]} /><BetterWeek /><BlockList blocks={[...page.blocks, closingCta]} /></main>;
 }

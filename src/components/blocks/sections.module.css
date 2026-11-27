@@ -93,7 +93,7 @@
 .callout > .eyebrow { margin-top: 0; color: #2b108e; font-size: 12px; line-height: 16px; }
 .callout h2 { max-width: 760px; margin-top: 14px; font-size: 32px; font-weight: 600; letter-spacing: -.32px; line-height: 40px; }
 .callout > p:not(.eyebrow) { max-width: 720px; }
-.callout .textLink { position: relative; }
+.callout .textLink { position: relative; gap: 10px; padding: 0 22px 0 18px; }
 .pills { position: relative; display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
 .pill { display: inline-flex; height: 54px; align-items: center; gap: 12px; padding: 0 20px 0 9px; border-radius: 40px; background: #fff; font-size: 14px; font-weight: 600; white-space: nowrap; }
 .pill i { display: grid; width: 36px; height: 36px; place-items: center; border-radius: 50%; background: #e8eaff; }

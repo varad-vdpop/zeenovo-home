@@ -40,11 +40,6 @@ function Hero() {
           <Link data-cta className={styles.secondaryButton} href="https://auth.zeenovo.com/signup"><Arrow />Start Free Trial</Link>
         </div>
       </div>
-      <div className={styles.heroSignal} data-reveal>
-        <div><span>Ontario practice</span><strong>Minor ailments</strong></div>
-        <p>Assessment <Icon name="arrowRight" style={{ margin: "0 4px" }} /> documentation <Icon name="arrowRight" style={{ margin: "0 4px" }} /> follow-up</p>
-        <em>Ontario billing PINs</em>
-      </div>
       <div className={styles.ontarioMapFrame} data-reveal>
         <div className={styles.ontarioMapVisual}>
           <Image className={styles.ontarioMap} src={pageAsset.ontarioMap} alt="Map of Ontario" width={291} height={300} priority />
