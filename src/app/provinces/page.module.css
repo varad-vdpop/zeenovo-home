@@ -58,11 +58,12 @@
   pointer-events: none;
 }
 
-/* The line art stays centred on the map at every width: it follows the 1440px layout, not the card's right edge. */
+/* The line art stays centred on the map at every width: it follows the 1440px layout, not the card's right edge, and
+   sits 62px higher than its natural top so its waist (55% down the art) lands on the hero's centre, level with the map. */
 .heroArt {
   position: absolute;
   z-index: 1;
-  top: -4px;
+  top: -66px;
   right: max(-2px, calc(50vw - 722px));
   width: 590px;
   height: auto;
@@ -173,13 +174,13 @@
 .heroSignal p { margin-top: 15px; color: #686471; font-size: 12px; line-height: 1.45; }
 .heroSignal em { position: static; display: inline-flex; margin-top: 12px; padding: 7px 10px; border-radius: 999px; background: #ddf5ee; color: #2b176f; font-size: 10px; font-style: normal; font-weight: 650; }
 
-/* The map sits in a 316 x 330 frame, centred on the waist of the line art (55% down the art, 472px into the hero). */
+/* The map sits in a 360 x 376 frame, centred in the hero (410px down) and on the waist of the line art. */
 .ontarioMapFrame {
   position: absolute;
   z-index: 4;
-  top: 307px;
-  right: max(146px, calc((100vw - 1440px) / 2 + 146px));
-  width: 316px;
+  top: 222px;
+  right: max(124px, calc((100vw - 1440px) / 2 + 124px));
+  width: 360px;
 }
 
 .ontarioMapVisual { position: relative; display: grid; aspect-ratio: 316 / 330; place-items: center; }
@@ -406,7 +407,7 @@
 @media (max-width: 1199px) {
   .heroCopy { left: 44px; width: 52%; }
   .heroSignal { right: 45px; }
-  .ontarioMapFrame { right: 86px; }
+  .ontarioMapFrame { top: 238px; right: 70px; width: 330px; }
   .program { width: calc(100% - 80px); }
   .programCardsViewport { gap: 20px; }
   .reality { padding-inline: 40px; }
@@ -417,7 +418,7 @@
 @media (max-width: 900px) {
   .heroCopy { width: 57%; }
   .heroSignal { top: 172px; right: 28px; width: 280px; }
-  .ontarioMapFrame { top: 331px; right: 58px; width: 270px; }
+  .ontarioMapFrame { top: 248px; right: 38px; width: 310px; }
   .realityGrid { gap: 16px; }
   .realityCard { min-height: 305px; padding-inline: 20px; }
   .programCardsViewport { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 670px; margin-inline: auto; }
@@ -437,7 +438,7 @@
   .primaryButton,
   .secondaryButton { height: 46px; padding: 0 14px; font-size: 12px; }
   .heroSignal { top: auto; right: 24px; bottom: 244px; width: min(294px, calc(100% - 48px)); padding: 16px; }
-  .ontarioMapFrame { top: auto; right: 28px; bottom: 88px; width: 205px; }
+  .ontarioMapFrame { top: auto; right: 22px; bottom: 80px; width: 232px; }
 
   .reality { width: calc(100% - 20px); margin-top: 55px; padding: 58px 20px 64px; border-radius: 22px; }
   .realityHeading,

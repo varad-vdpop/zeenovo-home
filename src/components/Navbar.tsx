@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react";
 import { asset } from "@/lib/assets";
 import { navigationMenus, type NavigationMenu } from "@/lib/navigation";
@@ -41,6 +42,17 @@ export default function Navbar() {
     ? { duration: 0.2, ease: [0.23, 1, 0.32, 1] as const }
     : { duration: reduceMotion ? 0.1 : 0 };
   const selectedMenu = navigationMenus.find((menu) => menu.label === activeMenu && menu.sections.length > 0);
+  const pathname = usePathname();
+
+  // Choosing a page closes the mega menu, so the new page is in view straight away. The pointer is usually still over
+  // the panel when the link is clicked, so hovering alone would keep it open.
+  function closeDesktop() {
+    setActiveMenu(null);
+    if (document.activeElement instanceof HTMLElement) document.activeElement.blur();
+  }
+
+  // Also close it whenever the page changes some other way (back, forward, a link elsewhere on the page).
+  useEffect(() => { setActiveMenu(null); }, [pathname]);
 
   useEffect(() => {
     function closeOnOutsideClick(event: PointerEvent) {
@@ -192,7 +204,7 @@ export default function Navbar() {
                     <div className={styles.menuSection} key={section.label}>
                       <h2>{section.label}</h2>
                       <div className={styles.sectionLinks}>
-                        {section.links.map((link) => <Link href={link.href} key={`${section.label}-${link.href}`}>{link.label}{link.badge && <span className={styles.badge}>{link.badge}</span>}</Link>)}
+                        {section.links.map((link) => <Link href={link.href} key={`${section.label}-${link.href}`} onClick={closeDesktop}>{link.label}{link.badge && <span className={styles.badge}>{link.badge}</span>}</Link>)}
                       </div>
                     </div>
                   ))}
